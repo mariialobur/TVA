@@ -1,0 +1,44 @@
+name: Unpack TVA Academy project
+
+on:
+  push:
+    paths:
+      - 'bundle/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild and verify archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat bundle/part*.b64 | tr -d '\n\r' | base64 -d > /tmp/tva-academy.tar.xz
+          echo "0cedd89dacc0ca8494e6beccf7767e3cec2c8c2dfbf2a0d71fb9e117e309dce7  /tmp/tva-academy.tar.xz" | sha256sum -c -
+          mkdir -p /tmp/tva-academy
+          tar -xJf /tmp/tva-academy.tar.xz -C /tmp/tva-academy
+          cp -a /tmp/tva-academy/. .
+          rm -rf bundle
+
+      - name: Commit unpacked project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+            exit 0
+          fi
+          git commit -m "Publish TVA Academy project files"
+          git push
