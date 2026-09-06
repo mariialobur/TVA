@@ -3,7 +3,7 @@ name: Final QA M02
 on:
   push:
     paths:
-      - '.m02-final-qa-trigger'
+      - .m02-final-qa-trigger
 
 permissions:
   contents: write
@@ -14,171 +14,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply current-law corrections and final QA
+        with:
+          fetch-depth: 0
+      - name: Run final current-law patch
         run: |
+          git show c7960af01ebc22485993c0acad4f5f5f21140f9b:.github/workflows/m02-final-qa.yml > /tmp/m02-old-workflow.yml
           python3 - <<'PY'
           from pathlib import Path
-          import re
-
-          p = Path('m02-qualification-operations.html')
-          t = p.read_text(encoding='utf-8')
-          changes = []
-
-          def rep(old, new, label, count=0):
-              global t
-              n = t.count(old)
-              if not n:
-                  print('WARN missing:', label)
-                  return
-              t = t.replace(old, new, count if count else n)
-              changes.append(f'{label}:{min(n,count) if count else n}')
-
-          def sub(pattern, repl, label, count=1):
-              global t
-              t2, n = re.subn(pattern, repl, t, count=count, flags=re.S)
-              if not n:
-                  print('WARN regex missing:', label)
-                  return
-              t = t2
-              changes.append(f'{label}:{n}')
-
-          # Version
-          rep('<span class="sidebar-version">v4.8</span>', '<span class="sidebar-version">v4.9</span>', 'sidebar version', 1)
-          rep('<span class="version-badge">M02 v4.8</span>', '<span class="version-badge">M02 v4.9</span>', 'topbar version', 1)
-
-          # Art. 21: current-law framing and option exceptions
-          old = '''<p class="prose">L'<strong>art. 21 LTVA</strong> est structuré en 2 alinéas. <strong>Al. 1</strong> énonce le principe : les opérations exclues du champ sont celles énumérées à l'al. 2. <strong>Al. 2</strong> contient une liste exhaustive de prestations exclues. La numérotation peut évoluer avec les révisions légales : la version de travail actuelle va jusqu’au ch. 31 et comprend notamment le ch. 28bis. Conséquence fondamentale : <strong>pas de TVA facturée ET pas de droit de déduire l'impôt préalable</strong> (art. 29 al. 1 LTVA). La TVA sur les achats devient un coût définitif pour l'assujetti.</p>
-<p class="prose">Pour la plupart des catégories, l'assujetti peut <strong>opter pour l'imposition</strong> (art. 22 LTVA) afin de récupérer le DIP. Toutefois, certaines catégories sont <strong>strictement exclues sans option possible</strong> : assurances (ch. 18), opérations sur titres et capitaux (ch. 19), jeux d'argent (ch. 23), et la location à des fins d'habitation résidentielle (ch. 21).</p>'''
-          new = '''<p class="prose">L'<strong>art. 21 LTVA</strong> énumère les prestations exclues du champ de l'impôt. Elles restent des <strong>prestations relevant du système TVA</strong>, mais l'impôt n'est pas prélevé sur la prestation exclue; le DIP grevant les coûts qui lui sont liés est en principe exclu selon l'art. 29, sous réserve d'une option valable ou d'une règle particulière. La révision entrée en vigueur le 01.01.2025 a modifié plusieurs catégories : dans un dossier réel, contrôler la version Fedlex et la pratique AFC en vigueur avant de citer un chiffre d'alinéa ou de catégorie.</p>
-<p class="prose">L'<strong>option art. 22</strong> est admise en principe pour de nombreuses prestations exclues, mais pas dans tous les cas. Selon l'AFC, elle n'est notamment pas disponible pour certaines prestations d'assurance (art. 21 al. 2 ch. 18), diverses opérations des marchés monétaire et financier (ch. 19), certaines opérations de paris/loteries/jeux d'argent visées par la règle spéciale (ch. 23), ni pour les assujettis aux TDFN/TaF. Pour les transferts ou locations immobiliers visés aux ch. 20–21, l'option n'est pas admise lorsque le destinataire affecte le bien exclusivement à l'habitation privée.</p>'''
-          rep(old, new, 'art21 current law', 1)
-
-          # Art. 23: remove B2B foreign-service shortcut and terminology confusion
-          rep('Vous les rencontrerez chez tout client exportateur (manufacturier, négoce, e-commerce international, conseil international B2B).',
-              'Vous les rencontrerez surtout chez les clients qui exportent des biens ou réalisent d’autres opérations expressément visées par l’art. 23. Un conseil ordinaire fourni à un client B2B étranger relève d’abord des règles de lieu de l’art. 8 et ne doit pas être appelé « export art. 23 » par réflexe.',
-              'art23 B2B distinction', 1)
-          rep('<li><strong>Exclu (art. 21)</strong> : hors champ effectif → pas de TVA + <strong>pas de DIP</strong> → coût TVA définitif</li>\n<li><strong>Exonéré (art. 23)</strong> : impôt suisse non dû sur une opération listée → pas de TVA + <strong>DIP en principe conservé si conditions remplies</strong> → preuve déterminante</li>\n<li><strong>Hors champ</strong> (art. 18 a contrario) : absence de contre-prestation → pas dans le champ → DIP selon affectation aux activités imposables/exclues</li>',
-              '<li><strong>Prestation exclue (art. 21)</strong> : prestation couverte par une exclusion légale → pas d’impôt sur la prestation non optée; DIP lié en principe exclu, sous réserve d’une option/règle particulière.</li>\n<li><strong>Prestation exonérée (art. 23)</strong> : impôt suisse non dû sur une opération expressément visée → DIP en principe conservé si les conditions sont remplies.</li>\n<li><strong>Non-contre-prestation / autre mouvement de fonds (art. 18 al. 2 selon le cas)</strong> : pas d’échange imposable; l’impact DIP dépend de la nature du flux et de l’affectation. Une subvention visée par l’art. 33 al. 2 peut réduire le DIP, contrairement à d’autres mouvements de fonds qui doivent être analysés séparément.</li>',
-              'art21-23 terminology gold box', 1)
-
-          # Legislation section: art. 18, art. 22, art. 23, current-source notice
-          rep('Définition de l\'objet de l\'impôt : prestations effectuées à titre onéreux par un assujetti sur le territoire suisse. Al. 2 a contrario : opérations hors champ (dividendes, dons, subventions).',
-              'Définition de l’objet de l’impôt et liste de mouvements de fonds qui ne sont pas considérés comme contre-prestations à l’al. 2. Ne pas mettre automatiquement dividendes, dons et subventions dans une seule catégorie d’impact DIP : leur traitement se poursuit selon les art. 28–33.',
-              'art18 legal card', 1)
-          rep('Possibilité de transformer une opération exclue en imposable pour récupérer le DIP. Exclusions strictes : assurances, titres, logement résidentiel, jeux d\'argent. Décision à documenter : cohérence de traitement, impact prix client et impact DIP, avec prudence renforcée en immobilier.',
-              'Permet, dans les cas admis, d’imposer volontairement une prestation exclue. Avant d’opter, contrôler l’art. 22 al. 2 et la pratique AFC actuelle, notamment pour assurance/finance/jeux, TDFN-TaF et immobilier affecté exclusivement à l’habitation privée. L’effet sur le DIP dépend ensuite de l’affectation réelle des coûts.',
-              'art22 legal card', 1)
-          rep('Liste d\'exonérations avec DIP en principe conservé. Principalement : exportations (ch. 1), transport international (ch. 5-7), intermédiation, voyages, or d’investissement et plateformes numériques selon les cas. Preuves documentaires obligatoires.',
-              'Énumère les prestations exonérées. Les exportations de biens constituent le cas central; d’autres opérations internationales et sectorielles sont visées par le texte. Le DIP est en principe conservé si les conditions sont remplies. Une prestation de services simplement localisée à l’étranger selon l’art. 8 n’est pas, pour cette seule raison, une exonération art. 23.',
-              'art23 legal card', 1)
-
-          marker = '<h4 style="font-size:14px;color:var(--navy);margin:24px 0 12px;font-weight:600">Ordonnance d\'exécution — OTVA RS 641.201</h4>'
-          verified = '''<div class="box success" style="margin:18px 0"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Contrôle ciblé des sources — 06.09.2026</div>Les points à risque de M02 ont été recroisés avec les sources AFC/OTVA actuelles : option art. 22, art. 34–35 OTVA pour les traitements médicaux, structure du décompte effectif (400/405/410/415/420) et traitement des subventions/non-contre-prestations. Cette mention ne signifie pas que chaque exemple sectoriel est « figé » : la pratique AFC continue d’évoluer et doit être recontrôlée lors d’un dossier réel.</div></div>\n'''
-          if marker in t and 'Contrôle ciblé des sources — 06.09.2026' not in t:
-              t = t.replace(marker, verified + marker, 1)
-              changes.append('verified-source notice:1')
-
-          # Replace obsolete/unsafe health jurisprudence card with current OTVA health rule
-          sub(r'<div class="leg-card">\n<div class="leg-icon red">⚖️</div>\n<div class="leg-content">\n<div class="leg-ref">ATAF A-6218/2011.*?</div>\n</div>\n</div>',
-              '''<div class="leg-card">\n<div class="leg-icon blue">📘</div>\n<div class="leg-content">\n<div class="leg-ref">Art. 34–35 OTVA — état dès 01.01.2025</div>\n<div class="leg-title">Santé — traitement médical et qualité du prestataire</div>\n<div class="leg-desc">L’art. 34 OTVA rattache les traitements médicaux à l’art. 21 al. 2 ch. 3 LTVA. Point critique : les prestations visant uniquement le bien-être, la performance ou l’esthétique ne sont en principe pas des traitements médicaux, <strong>sauf</strong> lorsqu’elles sont réalisées par un médecin ou un médecin-dentiste autorisé à exercer en Suisse. L’art. 35 précise les conditions relatives aux dispensateurs de traitements médicaux.</div>\n<div class="leg-links"><a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr" rel="noopener noreferrer" target="_blank">📄 OTVA actuelle</a></div>\n</div>\n</div>''',
-              'replace obsolete health jurisprudence')
-          rep('Jurisprudence — 5 arrêts fondamentaux M02', 'Jurisprudence & texte d’exécution — repères M02', 'legislation heading', 1)
-          rep("L'AFC publie des Infos TVA spécifiques aux thèmes M02 : Info TVA 04 (Objet de l'impôt), Info TVA 05 (Sujets concernant les bases de calcul), Info TVA 14 (Santé), Info TVA 17 (Formation), Info TVA 21 (Associations). Sources de référence pour l'argumentation.",
-              "L'AFC publie des Infos TVA et informations sectorielles sur les thèmes M02 (objet de l'impôt, santé, formation, associations, immobilier, etc.). Les intitulés et numéros de publications peuvent évoluer : utiliser le portail des publications AFC comme point d'entrée et citer la page/section effectivement consultée.",
-              'AFC publication numbers', 1)
-
-          # Medical references: ch. 3 is the health-professional treatment exclusion under current law.
-          # No current M02 example intentionally teaches the separate ambulatory-clinic exclusion of ch. 2.
-          rep('art. 21 al. 2 ch. 2', 'art. 21 al. 2 ch. 3', 'medical ch2 to ch3')
-          rep('art. 21 al. 2 ch. 2 LTVA', 'art. 21 al. 2 ch. 3 LTVA', 'medical ch2 LTVA residual')
-          rep('Art. 21 al. 2 ch. 2', 'Art. 21 al. 2 ch. 3', 'medical capital ch2 to ch3')
-          rep('Art. 21 — Soins médicaux (ch. 2)', 'Art. 21 — Soins médicaux (ch. 3)', 'medical flash heading')
-
-          # Case 2: current OTVA art. 34 expressly contains the doctor/dentist aesthetic exception.
-          rep('Dr. Schmid est inscrit au registre LPMéd.', 'Dr. Schmid est médecin-dentiste et dispose de l’autorisation cantonale requise pour exercer la médecine dentaire en Suisse.', 'case2 authorization', 1)
-          sub(r'<div class="case-step" id="c2s2">.*?</div>\n</div>\n<div class="case-step" id="c2s3">',
-              '''<div class="case-step" id="c2s2">\n<div class="step-question"><span class="step-q-num">Q2</span>Blanchiment dentaire purement esthétique réalisé personnellement par Dr. Schmid, médecin-dentiste autorisé à pratiquer en Suisse — quel régime dans l’hypothèse donnée ?</div>\n<div class="step-options">\n<button class="step-opt" onclick="caseAnswer('c2s2',this,true)">A) Prestation exclue : l’art. 34 al. 3 let. a OTVA prévoit une exception pour les actes esthétiques réalisés par un médecin ou médecin-dentiste autorisé</button>\n<button class="step-opt" onclick="caseAnswer('c2s2',this,false)">B) Toujours imposable 8,1% dès qu’un acte est esthétique</button>\n<button class="step-opt" onclick="caseAnswer('c2s2',this,false)">C) Exonéré art. 23</button>\n<button class="step-opt" onclick="caseAnswer('c2s2',this,false)">D) Taux réduit 2,6%</button>\n</div>\n<div class="step-explanation" id="c2s2-expl">L’art. 34 al. 3 let. a OTVA exclut en principe de la notion de traitement médical les actes visant uniquement le bien-être, la performance ou l’esthétique, <strong>mais réserve expressément les examens, conseils et traitements réalisés par un médecin ou un médecin-dentiste autorisé à exercer en Suisse</strong>. Dans ce cas pédagogique, Dr. Schmid remplit cette condition : ne pas appliquer mécaniquement « esthétique = 8,1% ». <div class="art-ref">📋 art. 21 al. 2 ch. 3 LTVA · art. 34–35 OTVA</div></div>\n</div>\n<div class="case-step" id="c2s3">''',
-              'case2 aesthetic current OTVA')
-
-          # Case 4: hypothesis, not blanket yoga rule; correct threshold article.
-          rep("Cours de yoga = exclus art. 21 al. 2 ch. 11 (formation). Vente accessoires (CHF 28'000) + consulting (CHF 32'000) = CHF 60'000 &lt; 100'000 = pas d'assujettissement obligatoire.",
-              "Dans l’hypothèse du cas, les cours ont déjà été qualifiés comme prestation de formation exclue après analyse de leur contenu et de la pratique AFC. Cette conclusion ne vaut pas pour tout cours de yoga. Vente accessoires (CHF 28'000) + consulting (CHF 32'000) = CHF 60'000 &lt; CHF 100'000 : pas d’assujettissement obligatoire sur cette base.",
-              'case4 hypothesis explanation', 1)
-          rep('art. 10 al. 1 LTVA', 'art. 10 al. 2 let. a LTVA', 'threshold article correction')
-
-          # Case 8: doctors authorized in Switzerland; aesthetic acts by those doctors fall under OTVA art. 34(3)(a) exception.
-          rep('Consultations médicales par médecins LPMéd : CHF 850\'000', 'Consultations médicales réalisées par des médecins autorisés à exercer en Suisse; les conditions de l’art. 35 OTVA sont supposées remplies : CHF 850\'000', 'case8 medical scenario', 1)
-          rep('Médecine esthétique (botox, fillers, peelings sans indication thérapeutique) : CHF 220\'000', 'Actes esthétiques (botox, fillers, peelings sans indication thérapeutique) réalisés personnellement par ces mêmes médecins autorisés : CHF 220\'000', 'case8 aesthetic scenario', 1)
-          sub(r'<div class="case-step" id="c8s2">.*?</div>\n</div>\n<div class="case-step" id="c8s3">',
-              '''<div class="case-step" id="c8s2">\n<div class="step-question"><span class="step-q-num">Q2</span>Actes esthétiques sans indication thérapeutique réalisés personnellement par les médecins autorisés du cabinet (CHF 220'000) — quel réflexe ?</div>\n<div class="step-options">\n<button class="step-opt" onclick="caseAnswer('c8s2',this,true)">A) Dans l’hypothèse donnée, traiter selon l’exception de l’art. 34 al. 3 let. a OTVA; ne pas conclure automatiquement à 8,1%</button>\n<button class="step-opt" onclick="caseAnswer('c8s2',this,false)">B) Toujours imposable 8,1% parce que l’acte est esthétique</button>\n<button class="step-opt" onclick="caseAnswer('c8s2',this,false)">C) Toujours 2,6% parce qu’il s’agit de santé</button>\n<button class="step-opt" onclick="caseAnswer('c8s2',this,false)">D) Exonéré art. 23</button>\n</div>\n<div class="step-explanation" id="c8s2-expl">Depuis la règle actuelle de l’art. 34 al. 3 let. a OTVA, un acte uniquement esthétique n’est en principe pas un traitement médical, <strong>sauf lorsqu’il est réalisé par un médecin ou un médecin-dentiste autorisé à exercer en Suisse</strong>. Le cas précise que les médecins remplissent cette condition. Si l’acte était fourni par un autre prestataire, il faudrait reprendre l’analyse selon les art. 34–35 OTVA. <div class="art-ref">📋 art. 21 al. 2 ch. 3 LTVA · art. 34–35 OTVA</div></div>\n</div>\n<div class="case-step" id="c8s3">''',
-              'case8 aesthetic current OTVA')
-          rep("IP commun (locaux, IT, administration) → prorata objectif selon CA imposable / CA total. Approfondi en M05.",
-              "IP commun (locaux, IT, administration) → utiliser une clé objective et appropriée après l’affectation directe; le chiffre d’affaires peut être une clé dans certains dossiers, mais ce n’est pas une formule universelle. Méthodes approfondies en M05.",
-              'case8 common costs', 1)
-
-          # Case 9: make the training issue substantively consulting, remove fake arithmetic, fix art. 8 vs art. 23 and spontaneous-disclosure guarantee.
-          rep("(1) des prestations de formation interne (séminaires métier) qualifiées d'exclues art. 21 mais sans documentation pédagogique formelle (CHF 180'000/an) → en réalité imposables 8,1%",
-              "(1) des missions de conseil individualisé, facturées sous l’intitulé « séminaires métier », dont les livrables sont des recommandations propres à chaque client et non un enseignement structuré (CHF 180'000/an) → à qualifier comme consulting imposable dans l’hypothèse du cas",
-              'case9 scenario consulting substance', 1)
-          sub(r'<div class="case-step" id="c9s1">.*?</div>\n</div>\n<div class="case-step" id="c9s2">',
-              '''<div class="case-step" id="c9s1">\n<div class="step-question"><span class="step-q-num">Q1</span>Les « séminaires » sont en réalité du conseil individualisé : quelle conséquence de principe ?</div>\n<div class="step-options">\n<button class="step-opt" onclick="caseAnswer('c9s1',this,false)">A) Ils restent exclus dès que la facture utilise le mot « séminaire »</button>\n<button class="step-opt" onclick="caseAnswer('c9s1',this,true)">B) Requalifier selon la substance en prestations imposables et reconstruire période par période la base HT/TTC avant de chiffrer une correction</button>\n<button class="step-opt" onclick="caseAnswer('c9s1',this,false)">C) Appliquer automatiquement 8,1% à CHF 720'000 sans vérifier si les montants sont HT ou TTC</button>\n<button class="step-opt" onclick="caseAnswer('c9s1',this,false)">D) Aucune correction n’est possible avant une décision AFC</button>\n</div>\n<div class="step-explanation" id="c9s1-expl">La qualification repose sur le contenu réel de la prestation. Ici, les faits décrivent du conseil personnalisé, donc une prestation imposable sous les hypothèses du cas. Le rappel ne se calcule pas mécaniquement par « montant × 8,1% » : il faut vérifier les contrats, le caractère HT/TTC des prix, les périodes, les factures et les éventuelles corrections. Les intérêts se calculent ensuite selon les échéances et le taux DFF applicable. <div class="art-ref">📋 art. 18, 24, 25 et 87 LTVA · pratique AFC formation</div></div>\n</div>\n<div class="case-step" id="c9s2">''',
-              'case9 q1 substantive training')
-          rep("Erreur en faveur du fisc : ConsultPlus a qualifié à tort en \"exclues\" des prestations en réalité \"exonérées art. 23\" → a renoncé à tort à du DIP. Effet rétroactif : possibilité de réclamer le DIP indûment perdu via correction du décompte (art. 72 LTVA — corrections spontanées dans les 5 ans). Calcul : si DIP perdu CHF 15'000/an × 4 ans = CHF 60'000 récupérables. L'AFC peut accepter la correction si bien documentée (preuves de localisation client UE).",
-              "La qualification correcte est <strong>prestation localisée hors du territoire suisse selon l’art. 8 al. 1</strong>, et non exonération art. 23. Il faut revoir l’affectation du DIP et la procédure de correction applicable, sans inventer un montant récupérable faute de données sur les coûts concernés. La preuve porte notamment sur le destinataire et son établissement à l’étranger.",
-              'case9 q2 art8 not art23', 1)
-          sub(r'<div class="case-step" id="c9s3">.*?</div>\n</div>\n<div class="case-step" id="c9s4">',
-              '''<div class="case-step" id="c9s3">\n<div class="step-question"><span class="step-q-num">Q3</span>Avant l’annonce du contrôle, une dénonciation spontanée aurait-elle garanti l’absence de sanction pénale ?</div>\n<div class="step-options">\n<button class="step-opt" onclick="caseAnswer('c9s3',this,false)">A) Oui, automatiquement dès qu’elle précède l’annonce du contrôle</button>\n<button class="step-opt" onclick="caseAnswer('c9s3',this,true)">B) Potentiellement seulement si toutes les conditions de l’art. 102 sont remplies, notamment le caractère réellement spontané et les conditions de collaboration/paiement</button>\n<button class="step-opt" onclick="caseAnswer('c9s3',this,false)">C) Non, la TVA ne connaît jamais de dénonciation spontanée</button>\n<button class="step-opt" onclick="caseAnswer('c9s3',this,false)">D) Oui même après que l’autorité connaît déjà suffisamment les faits</button>\n</div>\n<div class="step-explanation" id="c9s3-expl">L’antériorité par rapport à l’annonce d’un contrôle est un élément important, mais pas une garantie autonome. Le praticien vérifie toutes les conditions de l’art. 102 et documente la chronologie avant de promettre un effet pénal. L’impôt et les intérêts restent à traiter séparément. <div class="art-ref">📋 art. 102 LTVA</div></div>\n</div>\n<div class="case-step" id="c9s4">''',
-              'case9 q3 no guarantee')
-
-          # QCM current health law
-          sub(r"\{id:'m02-q12'.*?\},\n  \{id:'m02-q13'",
-              "{id:'m02-q12', diff:'med', q:'Un médecin-dentiste autorisé à exercer en Suisse réalise lui-même un blanchiment dentaire uniquement esthétique. Quel réflexe selon l’art. 34 al. 3 let. a OTVA ?',\n    opts:['Toujours imposable 8,1%','Dans l’hypothèse donnée, l’exception médecin/médecin-dentiste doit être appliquée; ne pas conclure automatiquement à l’imposition','Exonéré art. 23','Taux réduit 2,6%'],\n    correct:1, art:'art. 21 al. 2 ch. 3 LTVA + art. 34–35 OTVA',\n    expl:'L’art. 34 al. 3 let. a OTVA exclut en principe les actes uniquement esthétiques de la notion de traitement médical, sauf lorsqu’ils sont réalisés par un médecin ou médecin-dentiste autorisé à exercer en Suisse. Le statut du prestataire fait donc partie de la qualification.'},\n  {id:'m02-q13'",
-              'q12 current health')
-          rep("{id:'m02-q31', diff:'hard', q:'Un traitement par chirurgie reconstructrice après cancer du sein (par chirurgien LPMéd) :',",
-              "{id:'m02-q31', diff:'hard', q:'Un traitement de chirurgie reconstructrice après cancer, réalisé par un médecin autorisé et remplissant les conditions de l’art. 35 OTVA :',",
-              'q31 scenario', 1)
-          rep("art:'art. 21 al. 2 ch. 3 + ATAF A-6218/2011',", "art:'art. 21 al. 2 ch. 3 LTVA + art. 34–35 OTVA',", 'q31 legal', 1)
-          rep("expl:'La chirurgie reconstructrice après pathologie médicale (cancer du sein, accident, malformation) est un acte thérapeutique exclu art. 21 al. 2 ch. 3. Distinction critique avec la chirurgie purement esthétique = imposable 8,1%. Documentation médicale obligatoire (diagnostic, indication).'",
-              "expl:'La chirurgie reconstructrice après pathologie entre dans la notion de traitement médical sous les hypothèses du cas. Pour l’esthétique pure, ne pas mémoriser « esthétique = imposable » : l’art. 34 al. 3 let. a OTVA prévoit une exception lorsque le traitement est réalisé par un médecin ou médecin-dentiste autorisé.'",
-              'q31 explanation', 1)
-
-          # QCM threshold ref and invoice material-evidence wording
-          rep("art:'art. 10 al. 1 LTVA',", "art:'art. 10 al. 2 let. a LTVA',", 'q04 threshold ref', 1)
-          rep("Une lacune essentielle rend le DIP contestable si la preuve n'est pas suffisante.", "Une lacune formelle doit conduire à sécuriser la preuve et, si nécessaire, à demander une correction; elle n’entraîne pas automatiquement la perte du DIP.", 'q06 invoice evidence', 1)
-
-          # Flashcards/vocab: current health rule, non-consideration nuance
-          rep("def:'Acte thérapeutique par professionnel de santé reconnu (LPMéd) = EXCLU. Médecine esthétique sans indication thérapeutique = imposable 8,1%. Documentation médicale obligatoire.'",
-              "def:'Les traitements médicaux relèvent de l’art. 21 al. 2 ch. 3 avec les conditions des art. 34–35 OTVA. Attention : pour les actes uniquement esthétiques, l’art. 34 al. 3 let. a prévoit une exception lorsque l’acte est réalisé par un médecin ou médecin-dentiste autorisé à exercer en Suisse.'",
-              'health flashcard', 1)
-          rep('<div class="vc-art">art. 21 al. 2 ch. 3 LTVA · MWSTG</div>\n<div class="vc-use">Acte thérapeutique par professionnel LPMéd reconnu. Exclu strictement. Médecine esthétique = imposable 8,1%.</div>',
-              '<div class="vc-art">art. 21 al. 2 ch. 3 LTVA · art. 34–35 OTVA</div>\n<div class="vc-use">Traitement médical fourni dans les conditions légales. Pour l’esthétique pure, vérifier l’exception spécifique lorsque la prestation est réalisée par un médecin ou médecin-dentiste autorisé en Suisse; ne pas appliquer « esthétique = 8,1% » automatiquement.</div>',
-              'health vocab', 1)
-          rep('<div class="vc-use">Opération sans contre-prestation. Dividendes, dons, subventions. Distinct de "exclu" (art. 21) et "exonéré" (art. 23).</div>',
-              '<div class="vc-use">Mouvement de fonds qui n’est pas la contre-prestation d’une prestation selon l’art. 18 al. 2 ou selon la qualification du cas. Dividendes, dons et subventions n’ont pas nécessairement le même impact sur le DIP; vérifier notamment l’art. 33.</div>',
-              'non-consideration vocab', 1)
-
-          # Cheat: keep M02 focused on classification rather than memorising mutable return rows / formal thresholds.
-          rep('<p><strong>Q2 — Lieu en CH ?</strong> Non → prestation localisée à l\'étranger (ch. 221 ; DIP à analyser). Oui → Q3</p>',
-              '<p><strong>Q2 — Lieu en CH ?</strong> Non → prestation localisée à l’étranger; DIP à analyser, rubrique du décompte à vérifier dans M03. Oui → Q3</p>',
-              'cheat tree no form code', 1)
-          rep('<p style="margin-top:8px"><em>Facture simplifiée admise ≤ CHF 400 TTC (art. 27 OTVA)</em></p>',
-              '<p style="margin-top:8px"><em>Pour les factures simplifiées et leur seuil, vérifier l’OTVA en vigueur. Une lacune formelle n’équivaut pas automatiquement à une perte du DIP.</em></p>',
-              'cheat invoice threshold', 1)
-          rep('<li>☐ Ch. 200 = CA brut total</li>\n<li>☐ Ch. 220 = exonérées art. 23 (DIP en principe conservé si preuve suffisante)</li>\n<li>☐ Ch. 230 = exclues art. 21 non optées (DIP non déductible si lié)</li>\n<li>☐ Ch. 221 = prestations localisées à l\'étranger selon les règles de territorialité ; ne pas les classer automatiquement comme art. 23</li>',
-              '<li>☐ Chaque flux possède une qualification, un lieu, une base légale et une preuve</li>\n<li>☐ Les exportations art. 23 sont distinguées des prestations simplement localisées à l’étranger selon l’art. 8</li>\n<li>☐ Les prestations exclues art. 21 sont distinguées des non-contre-prestations art. 18 al. 2</li>\n<li>☐ Les rubriques du décompte sont laissées à M03 et contrôlées sur le formulaire actuel</li>',
-              'cheat return ownership', 1)
-
-          # Remove obsolete health case-law string everywhere if anything remains.
-          t = t.replace('ATAF A-6218/2011', 'art. 34–35 OTVA')
-          t = t.replace('Médecine esthétique = imposable 8,1%.', 'Médecine esthétique : vérifier l’art. 34 al. 3 let. a OTVA et la qualité du prestataire.')
-          t = t.replace('hors champ effectif →', 'prestation exclue →')
-
-          p.write_text(t, encoding='utf-8')
-          print('Applied:', len(changes))
-          for c in changes: print(' -', c)
+          src = Path('/tmp/m02-old-workflow.yml').read_text(encoding='utf-8').splitlines()
+          start = next(i for i, line in enumerate(src) if "python3 - <<'PY'" in line) + 1
+          end = next(i for i in range(start, len(src)) if src[i].strip() == 'PY')
+          code = []
+          for line in src[start:end]:
+              code.append(line[10:] if line.startswith('          ') else line)
+          Path('/tmp/m02-final-patch.py').write_text('\n'.join(code) + '\n', encoding='utf-8')
+          print('extracted patch lines:', len(code))
           PY
+          python3 /tmp/m02-final-patch.py
 
-          echo '--- stale-claim QA ---'
+      - name: Validate M02
+        run: |
           ! grep -q "A-6218/2011" m02-qualification-operations.html
           ! grep -q "CHF 720'000 × 8,1%" m02-qualification-operations.html
           ! grep -q "CHF 8'000-12'000" m02-qualification-operations.html
@@ -186,15 +41,13 @@ jobs:
           ! grep -q "Médecine esthétique = imposable 8,1%" m02-qualification-operations.html
           ! grep -q "prorata objectif selon CA imposable / CA total" m02-qualification-operations.html
           ! grep -q "art. 10 al. 1 LTVA" m02-qualification-operations.html
-
-          echo '--- inline JS syntax QA ---'
           python3 - <<'PY'
           from pathlib import Path
           import re
           t = Path('m02-qualification-operations.html').read_text(encoding='utf-8')
           scripts = re.findall(r'<script>(.*?)</script>', t, re.S)
           Path('/tmp/m02-final.js').write_text('\n'.join(scripts), encoding='utf-8')
-          print('scripts', len(scripts), 'bytes', Path('/tmp/m02-final.js').stat().st_size)
+          print('inline scripts:', len(scripts))
           PY
           node --check /tmp/m02-final.js
 
