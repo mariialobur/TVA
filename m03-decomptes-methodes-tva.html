@@ -301,7 +301,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <body>
 <nav id="sidebar">
 <div class="sidebar-header">
-<div class="sidebar-badge">⬡ Module 03 <span class="sidebar-version">v4.6</span></div>
+<div class="sidebar-badge">⬡ Module 03 <span class="sidebar-version">v5.0</span></div>
 <div class="sidebar-title">Décomptes TVA &amp; Méthodes</div>
 <div class="sidebar-sub">~7–8 heures · 🔴 Risque AFC élevé</div>
 </div>
@@ -324,7 +324,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="nav-item" data-section="cheat" onclick="goto('cheat')"><div class="nav-dot"></div>Cheatsheet AFC</div>
 </div>
 <div class="sidebar-footer">
-<a class="btn-home" href="index.html">← Retour au cours</a>
+<a class="btn-home" href="index.html">← Retour au cours</a><div style="font-size:10.5px;text-align:center;margin-top:8px;line-height:1.6"><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">Mariia Lobur · LinkedIn ↗</a><br/><a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.55);text-decoration:none">GitHub ↗</a></div>
 </div>
 </nav>
 <div id="main">
@@ -335,7 +335,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <span class="topbar-name">Décomptes TVA &amp; Méthodes</span>
 </div>
 <div class="topbar-right">
-<span class="version-badge">v4.8 — Contrôle final</span>
+<span class="version-badge">M03 v5.0</span>
 <span class="hours-badge">⏱ ~7–8 h</span>
 <span class="level-badge">🔴 Risque élevé</span>
 </div>
@@ -354,6 +354,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="meta-chip"><span class="ic">🔴</span> Risque AFC Élevé</div>
 </div>
 </div>
+<div class="theory-block" style="border-left:3px solid var(--gold)">
+<h3><span class="num">✓</span>Objectifs de M03 — livrable professionnel</h3>
+<p class="prose">À l’issue de M03, l’étudiant doit pouvoir <strong>transformer une qualification M02 en décompte exploitable</strong> : choisir la méthode de décompte admise, déterminer la période et le mode convenu/reçu, reporter les flux dans le décompte électronique en vigueur, rapprocher le décompte avec la comptabilité et préparer une correction documentée lorsqu’un écart est découvert.</p>
+<div class="box warning"><div class="box-icon">🧭</div><div class="box-body"><div class="box-title">Règle de sécurité — le formulaire n’est pas la loi</div>Les numéros de chiffres et l’interface ePortal sont des <strong>outils opérationnels susceptibles d’évoluer</strong>. M03 mémorise la logique et les chiffres usuels, mais pour un dossier réel le praticien contrôle toujours le libellé affiché dans le décompte AFC de la période concernée. M05 reste propriétaire des méthodes détaillées de répartition du DIP; M06 de la territorialité; M11 de la procédure de contrôle et du pénal.</div></div>
+</div>
 <!-- BLOC 1 — Méthode effective -->
 <div class="theory-block">
 <h3><span class="num">1</span>Méthode effective — Standard de décompte (art. 36) <span class="block-risk risk-orange">🟠 Orange</span></h3>
@@ -365,7 +370,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <p class="prose">La <strong>méthode effective</strong> (art. 36 LTVA) consiste à calculer la TVA due de manière exacte : <strong>TVA collectée sur les ventes (CA imposable × taux applicable) − Impôt préalable (IP) déductible sur les achats = TVA nette due ou crédit</strong>. C'est la méthode la plus précise mais qui exige une comptabilité TVA détaillée : chaque facture émise et reçue doit être analysée et ventilée par taux et par activité.</p>
-<p class="prose">Cette méthode est <strong>obligatoire</strong> pour : (1) les assujettis dépassant les seuils TDFN (CA &gt; CHF 5'024'000 ou impôt dû &gt; CHF 108'000), (2) les contribuables avec activités complexes/mixtes, (3) les contribuables ayant déjà eu recours à la méthode forfaitaire et qui doivent y rester pendant 3 ans avant de revenir au TDFN.</p>
+<p class="prose">La méthode effective est la méthode de référence lorsque l’assujetti ne remplit pas les conditions d’une méthode simplifiée, n’en a pas fait le choix valable ou y renonce. <strong>Une activité mixte ou complexe n’impose pas, à elle seule, la méthode effective</strong> : il faut vérifier l’éligibilité TDFN/TaF et les règles applicables aux activités multiples.</p>
 <table class="comp-table">
 <thead><tr><th>Caractéristique</th><th>Méthode effective</th><th>Référence</th></tr></thead>
 <tbody>
@@ -374,7 +379,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tr><td>Périodicité standard</td><td>Trimestrielle</td><td class="art-cell">art. 35 al. 1 LTVA</td></tr>
 <tr><td>Délai de dépôt et paiement</td><td>60 jours après fin de la période</td><td class="art-cell">art. 71 + 86 al. 1 LTVA</td></tr>
 <tr><td>Conditions d'accès</td><td>Aucune — méthode par défaut</td><td class="art-cell">art. 36 LTVA</td></tr>
-<tr><td>Activités mixtes</td><td>Obligatoire (calcul prorata IP)</td><td class="art-cell">art. 30 LTVA</td></tr>
+<tr><td>Activités mixtes</td><td>Possible; la méthode de décompte ne remplace jamais la qualification des flux et l’analyse du DIP</td><td class="art-cell">art. 29–30 LTVA</td></tr>
 <tr><td>Avantage principal</td><td>Précision maximale — IP réel récupéré</td><td>—</td></tr>
 <tr><td>Inconvénient principal</td><td>Lourdeur administrative</td><td>—</td></tr>
 </tbody>
@@ -382,8 +387,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box info">
 <div class="box-icon">🧮</div>
 <div class="box-body">
-<div class="box-title">Formule de calcul méthode effective</div>
-<p><strong>TVA due (ch. 500)</strong> = <strong>total de l’impôt dû (ch. 399)</strong> − <strong>total de l’impôt préalable net (ch. 479)</strong>.<br/>Depuis les taux 2024, le ch. 399 agrège notamment les lignes <strong>303</strong> (8,1%), <strong>313</strong> (2,6%), <strong>343</strong> (3,8%) et <strong>383</strong> (impôt sur les acquisitions). Le ch. 479 agrège l’IP sur coûts (400), investissements/autres charges (405), dégrèvement ultérieur (410), puis les corrections/réductions (415/420) selon le signe affiché dans ePortal.<br/>Si le résultat est négatif → <strong>crédit TVA</strong> (ch. 510) remboursable ou reportable.</p>
+<div class="box-title">Formule de calcul — méthode effective</div>
+<p><strong>Impôt dû sur les opérations + impôt sur les acquisitions − DIP déductible après corrections/réductions = solde du décompte.</strong> Les chiffres 303/313/343/383 et 400/405/410/415/420 sont des repères usuels du décompte actuel, mais le calcul doit suivre les libellés et signes effectivement affichés dans ePortal pour la période. Ne jamais reconstruire un solde uniquement depuis un ancien mémo.</p>
 </div>
 </div>
 <div class="box afc">
@@ -396,8 +401,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box warning">
 <div class="box-icon">⚠️</div>
 <div class="box-body">
-<div class="box-title">Piège fréquent — Mauvais arrondi de la TVA collectée</div>
-<p>La TVA collectée est calculée par addition des TVA de chaque facture (somme arithmétique exacte par facture), <strong>pas par application du taux sur le CA total</strong>. Erreur classique : appliquer 8,1% sur CA total Q1 → écart de quelques francs avec la somme réelle des TVA facturées. L'AFC accepte une tolérance de quelques francs, mais le calcul correct doit partir du livre des ventes.</p>
+<div class="box-title">Piège fréquent — Écarts d’arrondi et de paramétrage</div>
+<p>La comptabilité, les factures et le décompte doivent utiliser une méthode d’arrondi cohérente et documentée. Un écart entre le livre des ventes et le décompte n’est pas couvert par une « tolérance de quelques francs » automatique : il faut pouvoir expliquer l’arrondi, les notes de crédit, les écritures de période et les changements de taux.</p>
 </div>
 </div>
 </div>
@@ -411,7 +416,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p>La méthode TDFN est destinée aux <strong>petites et moyennes entreprises</strong>. Vous la rencontrerez chez vos clients fiduciaires, consultants, indépendants à faible volume d'achats, restaurants modestes. Elle simplifie radicalement la gestion : <strong>un seul taux forfaitaire</strong> appliqué au CA brut TTC remplace tout le calcul d'IP. Décompte <strong>semestriel</strong> (au lieu de trimestriel), formulaire allégé. Avantage : gain de temps comptable considérable. Inconvénient : si gros investissements, le forfait peut être moins favorable que le réel.</p>
 </div>
 </div>
-<p class="prose">La <strong>méthode TDFN</strong> (art. 37 LTVA) permet de simplifier le décompte en appliquant un <strong>taux forfaitaire par branche</strong> au CA brut TTC. Ce taux forfaitaire (de 0,1% à 6,8% selon la branche) est calibré par l'AFC (RS 641.202.62) pour intégrer l'IP moyen du secteur. <strong>Conséquence : pas de déduction séparée de l'IP</strong> — il est déjà inclus dans le taux. Le calcul devient : CA brut TTC × taux TDFN = TVA nette due.</p>
+<p class="prose">La <strong>méthode TDFN</strong> (art. 37 LTVA) simplifie le décompte en appliquant au chiffre d’affaires déterminant, TVA comprise, le ou les <strong>taux attribués aux activités réellement exercées</strong>. Le taux ne se choisit pas librement dans une table ancienne : il faut utiliser la classification et la pratique AFC en vigueur. Le DIP n’est pas déduit séparément comme en méthode effective, car il est pris en compte forfaitairement dans le mécanisme TDFN.</p>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Conditions d'accès cumulatives (art. 37 al. 1 LTVA)</h4>
 <table class="comp-table">
 <thead><tr><th>Condition</th><th>Seuil</th><th>Note pratique</th></tr></thead>
@@ -419,22 +424,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tr><td><strong>CA annuel imposable</strong></td><td>≤ CHF 5'024'000</td><td>Prestations imposables déterminantes, TVA comprise, selon pratique AFC</td></tr>
 <tr><td><strong>Impôt dû annuel</strong></td><td>≤ CHF 108'000</td><td>Impôt dû annuel maximal selon seuil AFC</td></tr>
 <tr><td>Choix volontaire</td><td>Sur option formelle à l'AFC</td><td>Demande écrite, engagement min. 1 an</td></tr>
-<tr><td>Renoncement TDFN</td><td>Possible mais 3 ans civils en effective avant retour</td><td class="art-cell">art. 81 OTVA</td></tr>
+<tr><td>Changement de méthode</td><td>Respecter les délais et conditions de changement applicables à la période; ne pas mémoriser une durée depuis une ancienne version</td><td class="art-cell">art. 37 LTVA + OTVA / pratique AFC</td></tr>
 </tbody>
 </table>
-<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Exemples de taux TDFN par branche (RS 641.202.62)</h4>
+<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Déterminer le taux TDFN — méthode praticienne</h4>
 <table class="comp-table">
-<thead><tr><th>Branche</th><th>Taux TDFN</th><th>Logique</th></tr></thead>
+<thead><tr><th>Étape</th><th>Réflexe professionnel</th></tr></thead>
 <tbody>
-<tr><td>Coiffeurs / instituts esthétiques</td><td>à vérifier selon autorisation AFC</td><td>Le taux dépend de la branche exacte autorisée</td></tr>
-<tr><td>Restauration sans hôtellerie</td><td>5,3% à vérifier selon activité</td><td>IP moyen (denrées), taux selon ordonnance AFC</td></tr>
-<tr><td>Hôtellerie</td><td>3,7%</td><td>Mix nuitées 3,8% + services 8,1%</td></tr>
-<tr><td>Services fiduciaires / juridiques / consulting</td><td>6,2% selon branche autorisée AFC</td><td>Faible IP, marge élevée</td></tr>
-<tr><td>Architectes / ingénieurs</td><td>6,2%</td><td>Services à valeur intellectuelle</td></tr>
-<tr><td>Construction / entrepreneurs généraux</td><td>à vérifier selon activité autorisée</td><td>Le taux varie fortement selon la prestation exacte</td></tr>
-<tr><td>Commerce de détail (généralistes)</td><td>2,1%</td><td>Très gros IP (marchandises achetées)</td></tr>
-<tr><td>Garages, mécaniciens auto</td><td>3,7%</td><td>IP intermédiaire</td></tr>
-<tr><td>Médecins, dentistes (option art. 22)</td><td>à vérifier selon autorisation AFC</td><td>Si option imposition pour récup. IP</td></tr>
+<tr><td>1. Cartographier les activités</td><td>Partir des prestations réellement fournies, pas du seul objet social ou du libellé comptable.</td></tr>
+<tr><td>2. Vérifier l’éligibilité</td><td>Contrôler les seuils et exclusions de la méthode pour la période fiscale concernée.</td></tr>
+<tr><td>3. Attribuer le ou les taux</td><td>Utiliser la liste / pratique AFC actuelle. Depuis la réforme 2025, plusieurs activités peuvent conduire à plusieurs taux; la règle de matérialité doit être appliquée selon la pratique en vigueur.</td></tr>
+<tr><td>4. Séparer les chiffres d’affaires</td><td>La comptabilité doit permettre de reconstituer le CA soumis à chaque taux TDFN.</td></tr>
+<tr><td>5. Documenter</td><td>Conserver la décision d’attribution, la description des activités et les contrôles effectués.</td></tr>
 </tbody>
 </table>
 <div class="box gold">
@@ -458,8 +459,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box danger">
 <div class="box-icon">🚨</div>
 <div class="box-body">
-<div class="box-title">Piège critique — Dépassement de seuil en cours d'année</div>
-<p>Si l'assujetti dépasse l'un des deux seuils TDFN (CA &gt; CHF 5'024'000 OU impôt dû &gt; CHF 108'000), il doit <strong>passer à la méthode effective dès l'exercice suivant</strong> et notifier l'AFC dans les 30 jours. <strong>Correction d'entrée obligatoire</strong> sur les stocks : l'IP n'avait pas été déduit séparément sous TDFN, il peut être récupéré sur les stocks en main au jour du changement (art. 32 LTVA — correction d'affectation favorable).</p>
+<div class="box-title">Piège critique — Dépassement d’un seuil TDFN</div>
+<p>Un dépassement de seuil impose de vérifier immédiatement les règles de sortie de la méthode pour la période fiscale concernée et d’informer l’AFC dans le délai applicable. <strong>Ne pas enseigner une récupération automatique de DIP sur les stocks via l’art. 32</strong> : les conséquences d’un changement de méthode relèvent des règles spécifiques TDFN/OTVA et de la pratique AFC en vigueur. Inventaire, immobilisations et date d’effet doivent être documentés avant toute écriture de transition.</p>
 </div>
 </div>
 </div>
@@ -473,23 +474,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p>La méthode des <strong>taux forfaitaires (TaF)</strong> est réservée à des entités spécifiques : collectivités publiques, associations sans but lucratif, institutions d'utilité publique, paroisses, hôpitaux. Elle ressemble au TDFN mais avec des taux propres et une logique adaptée aux activités à but non lucratif. Vous la rencontrerez dans le secteur public et le tiers secteur (NPO).</p>
 </div>
 </div>
-<p class="prose">La méthode <strong>TaF</strong> (art. 37 al. 5 LTVA) applique des taux forfaitaires spécifiques à des branches institutionnelles. Différences principales avec TDFN : (1) <strong>pas de plafond</strong> de CA ni de dette fiscale, (2) <strong>plusieurs taux possibles</strong> selon les activités et la pratique applicable, (3) <strong>périodicité semestrielle</strong> standard, (4) destinée aux <strong>structures sans but lucratif</strong> où la simplification administrative est essentielle.</p>
+<p class="prose">La méthode <strong>TaF</strong> (art. 37 al. 5 LTVA) applique des taux forfaitaires spécifiques à des branches institutionnelles. Différences principales avec TDFN : l’accès dépend de la <strong>catégorie d’assujetti admise par l’art. 37 al. 5 et la pratique AFC</strong>; plusieurs taux peuvent être nécessaires selon les activités; la méthode n’autorise pas à traiter indistinctement toutes les NPO comme éligibles. La période de décompte doit être déterminée selon l’art. 35 applicable à la méthode — ne pas transposer automatiquement le semestre TDFN.</p>
 <table class="comp-table">
 <thead><tr><th>Critère</th><th>TDFN (art. 37 al. 1)</th><th>TaF (art. 37 al. 5)</th></tr></thead>
 <tbody>
 <tr><td>Bénéficiaires</td><td>PME commerciales</td><td>Collectivités publiques, NPO, paroisses, hôpitaux</td></tr>
 <tr><td>Plafond CA</td><td>CHF 5'024'000</td><td>Aucun plafond</td></tr>
 <tr><td>Plafond dette fiscale</td><td>CHF 108'000</td><td>Aucun plafond</td></tr>
-<tr><td>Nombre de taux</td><td>1 ou 2 max.</td><td>Jusqu'à 3 taux</td></tr>
-<tr><td>Périodicité</td><td>Semestrielle</td><td>Semestrielle</td></tr>
+<tr><td>Nombre de taux</td><td>Plusieurs taux possibles selon les activités et la pratique actuelle</td><td>Plusieurs taux possibles selon l’attribution applicable</td></tr>
+<tr><td>Périodicité</td><td>Semestrielle en TDFN</td><td>Déterminée selon l’art. 35 / pratique applicable; ne pas supposer « semestrielle »</td></tr>
 <tr><td>IP séparé déductible</td><td>Non (inclus dans le taux)</td><td>Non (inclus dans le taux)</td></tr>
 </tbody>
 </table>
 <div class="box info">
 <div class="box-icon">📋</div>
 <div class="box-body">
-<div class="box-title">Périodicité semestrielle pour TDFN et TaF</div>
-<p>Les deux méthodes forfaitaires (TDFN et TaF) utilisent une <strong>périodicité semestrielle</strong> par défaut (art. 35 al. 1 let. b LTVA) — au lieu de trimestrielle pour la méthode effective. <strong>Délai de dépôt et paiement : 60 jours</strong> après la fin du semestre, comme pour toutes les méthodes (art. 86 al. 1). Avantage administratif : seulement 2 décomptes par an au lieu de 4.</p>
+<div class="box-title">Périodicité — ne pas confondre méthode et rythme</div>
+<p>La TDFN est normalement liée à une période semestrielle. Pour la méthode des taux forfaitaires et les autres situations, contrôler l’art. 35 et l’option annuelle éventuelle. Le délai de remise/paiement se calcule ensuite depuis la fin de la période concernée.</p>
 </div>
 </div>
 <div class="box afc">
@@ -502,21 +503,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <!-- BLOC 4 — Périodes de décompte -->
 <div class="theory-block">
-<h3><span class="num">4</span>Périodes de décompte — Trimestriel · Semestriel · Annuel (art. 35) <span class="block-risk risk-green">🟢 Vert</span></h3>
+<h3><span class="num">4</span>Périodes de décompte — Trimestriel · Semestriel · Annuel (art. 35 et 35a) <span class="block-risk risk-green">🟢 Vert</span></h3>
 <div class="box fidu">
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>La périodicité du décompte conditionne votre rythme de travail fiduciaire. <strong>Décompte trimestriel</strong> (standard méthode effective) = 4 décomptes/an aux échéances 31.05, 31.08, 30.11, 28/29.02. <strong>Décompte semestriel</strong> (TDFN/TaF) = 2 décomptes/an. <strong>Décompte annuel</strong> (option) = 1 décompte/an + 3 acomptes trimestriels.</p>
+<p>La périodicité du décompte conditionne votre rythme de travail fiduciaire. <strong>Décompte trimestriel</strong> (standard méthode effective) = 4 décomptes/an aux échéances 31.05, 31.08, 30.11, 28/29.02. <strong>Décompte semestriel</strong> (TDFN/TaF) = 2 décomptes/an. <strong>Décompte annuel</strong> (option dès 2025) = 1 décompte annuel avec acomptes selon la méthode et les règles AFC applicables.</p>
 </div>
 </div>
-<p class="prose">L'<strong>art. 35 LTVA</strong> définit les périodes de décompte. Par défaut : <strong>trimestrielle</strong> (méthode effective) ou <strong>semestrielle</strong> (méthodes forfaitaires). Sur demande, l'assujetti peut choisir un autre rythme dans les limites légales.</p>
+<p class="prose">L’<strong>art. 35 LTVA</strong> règle les périodes ordinaires; l’<strong>art. 35a LTVA</strong> encadre le décompte annuel introduit dès 2025. La période dépend de la méthode de décompte et des conditions particulières. Avant de promettre un rythme à un client, vérifier l’éligibilité et les modalités d’acomptes affichées par l’AFC pour la période fiscale concernée.</p>
 <table class="comp-table">
 <thead><tr><th>Périodicité</th><th>Conditions d'accès</th><th>Avantages / Inconvénients</th></tr></thead>
 <tbody>
 <tr><td><strong>Trimestrielle</strong> (défaut effective)</td><td>Toute personne assujettie en méthode effective</td><td>Lourd mais cash-flow optimisé (paiement étalé)</td></tr>
-<tr><td><strong>Semestrielle</strong> (défaut TDFN/TaF)</td><td>TDFN ou TaF</td><td>2 décomptes/an — simplification</td></tr>
-<tr><td><strong>Annuelle avec acomptes</strong></td><td>CA ≤ CHF 5'005'000 + historique de remise/paiement dans les délais + demande via Portail AFC</td><td>1 décompte/an + 3 acomptes trimestriels — gain administratif mais cash-flow concentré</td></tr>
+<tr><td><strong>Semestrielle</strong></td><td>Notamment TDFN</td><td>2 décomptes/an lorsque cette période est applicable</td></tr>
+<tr><td><strong>Annuelle avec acomptes</strong></td><td>Sur demande si les conditions de l’art. 35a et de la pratique AFC sont remplies; contrôler le seuil et l’historique au moment de la demande</td><td>1 décompte annuel; nombre et montant des acomptes dépendent de la méthode / règles AFC</td></tr>
 <tr><td><strong>Mensuelle</strong> (rare)</td><td>Crédit IP récurrent + demande via le Portail AFC</td><td>Récupération IP mensuelle — utile pour exportateurs/startups</td></tr>
 </tbody>
 </table>
@@ -524,17 +525,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <table class="comp-table">
 <thead><tr><th>Période</th><th>Fin de période</th><th>Échéance dépôt + paiement</th><th>Intérêts moratoires si retard</th></tr></thead>
 <tbody>
-<tr><td>Q1 (jan-fév-mars)</td><td>31.03</td><td><strong>31.05</strong> (60 jours)</td><td>4,0%/an dès 01.06</td></tr>
-<tr><td>Q2 (avr-mai-juin)</td><td>30.06</td><td><strong>31.08</strong> (60 jours)</td><td>4,0%/an dès 01.09</td></tr>
-<tr><td>Q3 (juil-août-sept)</td><td>30.09</td><td><strong>30.11</strong> (60 jours)</td><td>4,0%/an dès 01.12</td></tr>
-<tr><td>Q4 (oct-nov-déc)</td><td>31.12</td><td><strong>28.02</strong> (60 jours)</td><td>4,0%/an dès 01.03</td></tr>
+<tr><td>Q1 (jan-fév-mars)</td><td>31.03</td><td><strong>31.05</strong> (60 jours)</td><td>taux DFF applicable dès l’échéance</td></tr>
+<tr><td>Q2 (avr-mai-juin)</td><td>30.06</td><td><strong>31.08</strong> (60 jours)</td><td>taux DFF applicable dès l’échéance</td></tr>
+<tr><td>Q3 (juil-août-sept)</td><td>30.09</td><td><strong>30.11</strong> (60 jours)</td><td>taux DFF applicable dès l’échéance</td></tr>
+<tr><td>Q4 (oct-nov-déc)</td><td>31.12</td><td><strong>28.02</strong> (60 jours)</td><td>taux DFF applicable dès l’échéance</td></tr>
 </tbody>
 </table>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
 <div class="box-title">Vision AFC — Tolérance et rappels automatiques</div>
-<p>Au-delà de l'échéance 60 jours (art. 86 al. 1), l'AFC peut engager une procédure de rappel/sommation, notamment après échéance, (2) taxation d'office si non-dépôt persistant (art. 86 al. 2 — l'AFC estime la TVA due), (3) intérêts moratoires de 4,0%/an dès le 1er jour suivant échéance (DFF RS 631.014 — taux 2026). Retards répétés = signal de risque ; la prolongation doit être demandée via le service adéquat du Portail AFC lorsque c’est nécessaire.</p>
+<p>Après l’échéance, des intérêts moratoires peuvent courir au <strong>taux DFF applicable à la période</strong>. Un défaut de remise peut aussi conduire l’AFC à agir selon la procédure prévue par la LTVA. Pour un dossier réel, utiliser l’échéance affichée dans ePortal et le taux officiel applicable; ne pas mémoriser un taux annuel dans le module.</p>
 </div>
 </div>
 <div class="box warning">
@@ -547,7 +548,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <!-- BLOC 5 — Méthode convenue vs encaissement -->
 <div class="theory-block">
-<h3><span class="num">5</span>Contre-prestations convenues vs encaissées (art. 39-40) <span class="block-risk risk-orange">🟠 Orange</span></h3>
+<h3><span class="num">5</span>Contre-prestations convenues vs reçues — mode de décompte (art. 39; effets art. 40) <span class="block-risk risk-orange">🟠 Orange</span></h3>
 <div class="box fidu">
 <div class="box-icon">💼</div>
 <div class="box-body">
@@ -555,12 +556,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p>Le choix entre méthode <strong>convenue</strong> (default) et <strong>encaissement</strong> (option) impacte directement le cash-flow TVA. Vous le recommanderez selon le profil client : entreprises avec <strong>clients mauvais payeurs</strong> ou <strong>délais de paiement longs</strong> (BTP, distribution B2B) ont intérêt à la méthode encaissement. Inversement, les commerces avec encaissement immédiat (caisse, e-commerce) restent en convenue.</p>
 </div>
 </div>
-<p class="prose">L'<strong>art. 39 LTVA</strong> pose le principe : la TVA est due selon les <strong>contre-prestations convenues</strong> (date de la facture, peu importe le paiement effectif). L'<strong>art. 40 LTVA</strong> ouvre une option : sur demande à l'AFC, l'assujetti peut décompter selon les <strong>contre-prestations encaissées</strong> (date du paiement reçu).</p>
+<p class="prose">L’<strong>art. 39 LTVA</strong> règle le mode de décompte : en principe selon les contre-prestations convenues; sur autorisation/demande selon les conditions applicables, selon les contre-prestations reçues. L’<strong>art. 40 LTVA</strong> traite ensuite de la naissance de la créance fiscale. Il faut donc distinguer <em>choix du mode</em> et <em>moment fiscal</em>.</p>
 <table class="comp-table">
 <thead><tr><th>Critère</th><th>Convenue (principe)</th><th>Encaissement (option)</th></tr></thead>
 <tbody>
 <tr><td>Naissance créance TVA</td><td>Date de la facture</td><td>Date de l'encaissement effectif</td></tr>
-<tr><td>Référence légale</td><td>art. 39 LTVA</td><td>art. 40 LTVA</td></tr>
+<tr><td>Référence légale</td><td>art. 39 LTVA</td><td>art. 39 LTVA; effets temporels art. 40</td></tr>
 <tr><td>Demande à l'AFC</td><td>Non (default)</td><td>Oui — demande formelle</td></tr>
 <tr><td>Engagement minimum</td><td>—</td><td>1 an</td></tr>
 <tr><td>Avantage</td><td>Pas de suivi des paiements</td><td>Pas de TVA sur créances non encaissées</td></tr>
@@ -572,15 +573,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box info">
 <div class="box-icon">💡</div>
 <div class="box-body">
-<div class="box-title">Facture impayée — Correction art. 27</div>
-<p>En méthode <strong>convenue</strong>, si une créance devient <strong>définitivement irrécouvrable</strong> (faillite client clôturée sans paiement, prescription civile), l'assujetti peut <strong>récupérer la TVA déjà versée</strong> via un décompte rectificatif (art. 27 LTVA). Preuve de l'irrécouvrabilité requise (acte de défaut de biens, jugement de clôture de faillite). En méthode <strong>encaissement</strong>, le problème ne se pose pas : pas de TVA versée tant que pas d'encaissement.</p>
+<div class="box-title">Créance irrécouvrable — modification ultérieure de la contre-prestation</div>
+<p>En mode convenu, une perte sur débiteur peut entraîner une <strong>modification ultérieure de la contre-prestation et de la dette fiscale</strong> lorsque les conditions sont établies. Le réflexe juridique se rattache à l’art. 41 LTVA et à la pratique AFC, pas à l’art. 27 (qui concerne l’impôt facturé à tort / mention de l’impôt). Documenter la perte, la chronologie et la correction comptable avant d’ajuster le décompte.</p>
 </div>
 </div>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
 <div class="box-title">Vision AFC — Vérification de la cohérence</div>
-<p>L'AFC contrôle systématiquement la cohérence de la méthode choisie : (1) la TVA collectée et l'IP doivent suivre la même règle, (2) le passage d'une méthode à l'autre nécessite une demande formelle et une <strong>correction d'entrée</strong> sur les créances clients et dettes fournisseurs (art. 39 al. 2 + 40 al. 2 LTVA). (3) En méthode encaissement, l'assujetti doit pouvoir produire le détail des encaissements par période. Documentation rigoureuse exigée.</p>
+<p>La comptabilité doit être cohérente avec le mode autorisé. Lors d’un changement entre convenu et reçu, appliquer les <strong>règles de transition prévues par la LTVA/OTVA et la pratique AFC</strong> afin d’éviter doubles impositions ou omissions; ne pas comptabiliser une « correction d’entrée » générique sans base spécifique. Le détail des factures, paiements, créances et dettes à la date de transition doit être conservé.</p>
 </div>
 </div>
 </div>
@@ -591,21 +592,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>Maîtriser le <strong>Formulaire 100</strong> (ePortal AFC) est la compétence fiduciaire centrale. Chaque ligne correspond à un chiffre numéroté (ch. 200, 221, 225, etc.). Une mauvaise ventilation = rappel AFC. Vous remplissez ce formulaire pour chaque client trimestriellement. Connaître chaque chiffre par cœur est l'attendu minimal d'un spécialiste TVA junior.</p>
+<p>Savoir <strong>lire le décompte électronique AFC</strong> et justifier chaque rubrique est une compétence fiduciaire centrale. Les chiffres usuels servent de repères, mais le professionnel ne les apprend pas comme une table immuable : il vérifie le formulaire/ePortal de la période, puis relie chaque ligne à la qualification M02 et à la comptabilité.</p>
 </div>
 </div>
-<p class="prose">Le <strong>Formulaire 100</strong> est structuré en deux blocs principaux : <strong>I. Chiffre d'affaires</strong> (ch. 200-299) et <strong>II. Calcul de l'impôt</strong> (ch. 300-499). Le solde est reporté au <strong>ch. 500</strong> (TVA nette due) ou ch. 510 (crédit en faveur de l'assujetti).</p>
+<p class="prose">Le décompte est structuré autour du <strong>chiffre d’affaires / déductions</strong>, du <strong>calcul de l’impôt</strong>, du <strong>DIP et de ses corrections</strong>, puis du solde. Les repères ci-dessous correspondent à la structure de travail actuelle du module; tout libellé doit être contrôlé dans ePortal avant dépôt.</p>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Bloc I — Chiffre d'affaires (ch. 200-299)</h4>
 <table class="comp-table">
 <thead><tr><th>Chiffre</th><th>Contenu</th><th>Impact TVA</th></tr></thead>
 <tbody>
 <tr><td class="art-cell">ch. 200</td><td><strong>CA total brut</strong> (toutes opérations sans déduction)</td><td>Base de toutes les déductions ultérieures</td></tr>
-<tr><td class="art-cell">ch. 205</td><td>Prestations à soi-même (usage privé, art. 31)</td><td>Imposable au taux applicable</td></tr>
+<tr><td class="art-cell">ch. 205</td><td><strong>Rubrique spécifique du décompte</strong> — lire le libellé de la période</td><td>Ne pas l’utiliser comme synonyme de « prestations à soi-même »; les corrections d’utilisation se traitent dans les rubriques DIP appropriées selon le cas.</td></tr>
 <tr><td class="art-cell">ch. 220</td><td><strong>Prestations exonérées art. 23</strong> (exports, opérations exonérées)</td><td>Pas de TVA suisse + DIP conservé si preuve suffisante</td></tr>
 <tr><td class="art-cell">ch. 221</td><td><strong>Prestations fournies à l'étranger</strong> (lieu hors Suisse, art. 7/8)</td><td>Pas de TVA suisse, preuve de localisation requise</td></tr>
 <tr><td class="art-cell">ch. 225</td><td><strong>Transferts selon procédure de déclaration</strong> (art. 38)</td><td>À déclarer aussi avec le formulaire 764 si applicable</td></tr>
 <tr><td class="art-cell">ch. 230</td><td><strong>Prestations exclues art. 21 non optées</strong></td><td>Pas de TVA facturée + impact DIP à analyser</td></tr>
-<tr><td class="art-cell">ch. 280</td><td>Autres déductions (escomptes, rabais accordés)</td><td>Réduisent la base imposable</td></tr>
+<tr><td class="art-cell">ch. 280</td><td>Autres déductions / ajustements selon le libellé du décompte applicable</td><td>Documenter la nature; les rabais/escomptes relèvent d’abord de la modification de la contre-prestation et de la comptabilité.</td></tr>
 <tr><td class="art-cell">ch. 289</td><td><strong>Total des déductions du chiffre d’affaires</strong></td><td>Somme des lignes déductives (220, 221, 225, 230, 235, 280 selon cas)</td></tr>
 <tr><td class="art-cell">ch. 299</td><td><strong>Chiffre d’affaires imposable</strong></td><td>ch. 200 − ch. 289</td></tr>
 </tbody>
@@ -623,7 +624,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tr><td class="art-cell">ch. 405</td><td><strong>IP sur investissements et autres charges d’exploitation</strong></td><td>Investissements, immobilisations, autres charges d’exploitation.</td></tr>
 <tr><td class="art-cell">ch. 410</td><td><strong>Dégrèvement ultérieur de l’IP</strong> (art. 32)</td><td>Correction favorable, p.ex. passage TDFN → effective ou changement d’affectation donnant droit à DIP.</td></tr>
 <tr><td class="art-cell">ch. 415</td><td><strong>Corrections de l’IP</strong></td><td>Double affectation art. 30, prestations à soi-même art. 31, IP non déductible à corriger.</td></tr>
-<tr><td class="art-cell">ch. 420</td><td><strong>Réductions de la déduction de l’IP</strong></td><td>Subventions, taxes touristiques et autres flux art. 18 al. 2 / art. 33.</td></tr>
+<tr><td class="art-cell">ch. 420</td><td><strong>Réductions de la déduction de l’IP</strong></td><td>Notamment contributions visées par l’art. 33; toutes les non-contre-prestations ne déclenchent pas automatiquement la même réduction.</td></tr>
 <tr><td class="art-cell">ch. 479</td><td><strong>Total IP net</strong></td><td>Total ePortal des lignes 400 à 420. Ne pas reconstruire mécaniquement sans vérifier le signe des lignes.</td></tr>
 <tr><td class="art-cell">ch. 500</td><td><strong>Montant à payer</strong></td><td>Si ch. 399 &gt; ch. 479.</td></tr>
 <tr><td class="art-cell">ch. 510</td><td><strong>Solde en faveur de l’assujetti</strong></td><td>Si ch. 479 &gt; ch. 399.</td></tr>
@@ -647,15 +648,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <!-- BLOC 7 — Concordance annuelle -->
 <div class="theory-block">
-<h3><span class="num">7</span>Concordance annuelle (art. 72) — Formulaire 550_03 <span class="block-risk risk-red">🔴 Rouge</span></h3>
+<h3><span class="num">7</span>Concordance annuelle (art. 72) — correction dans ePortal <span class="block-risk risk-red">🔴 Rouge</span></h3>
 <div class="box fidu">
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>La <strong>concordance annuelle</strong> est l'étape finale obligatoire après le bouclement comptable de l'exercice. Elle consiste à rapprocher le CA TVA déclaré (somme des 4 décomptes trimestriels) avec le CA comptable annuel. Tout écart se corrige via le <strong>Formulaire 550_03</strong> ("Concordance annuelle / décompte rectificatif"). Vous l'établissez systématiquement pour chaque client après clôture, dans le délai des 240 jours.</p>
+<p>La <strong>concordance annuelle</strong> est l'étape finale obligatoire après le bouclement comptable de l'exercice. Elle consiste à rapprocher le CA TVA déclaré (somme des 4 décomptes trimestriels) avec le CA comptable annuel. Tout écart se corrige via le <strong>service de correction / concordance disponible dans ePortal</strong> ("Concordance annuelle / décompte rectificatif"). Vous l'établissez systématiquement pour chaque client après clôture, dans le délai des 240 jours.</p>
 </div>
 </div>
-<p class="prose">L'<strong>art. 72 LTVA</strong> impose à l'assujetti de corriger les <strong>inexactitudes constatées dans le cadre de la concordance annuelle</strong>, dans les <strong>240 jours suivant la fin de l'exercice commercial</strong>. Le formulaire dédié est le <strong>550_03</strong>, déposé via ePortal AFC. Au-delà des 240 jours, l'AFC peut considérer les décomptes périodiques comme définitifs (sauf erreur substantielle pouvant relever de la dénonciation spontanée art. 102).</p>
+<p class="prose">L'<strong>art. 72 LTVA</strong> impose à l'assujetti de corriger les <strong>inexactitudes constatées dans le cadre de la concordance annuelle</strong>, dans les <strong>240 jours suivant la fin de l'exercice commercial</strong>. Le formulaire dédié est le <strong>550_03</strong>, déposé via ePortal AFC. Le délai de 240 jours est le délai de concordance annuelle prévu par l’art. 72. Une erreur découverte plus tard ne se transforme pas automatiquement en dénonciation spontanée : il faut encore examiner la possibilité de correction, la prescription et, séparément, les éventuels éléments pénaux.</p>
 <table class="comp-table">
 <thead><tr><th>Caractéristique</th><th>Concordance annuelle (Form. 550_03)</th></tr></thead>
 <tbody>
@@ -685,7 +686,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="tree-a"><span class="tree-tag no">→</span><span class="tree-result">Si écart ≠ 0 → analyser cause + préparer formulaire 550_03</span></div>
 </div>
 <div class="tree-node">
-<div class="tree-q">Étape 4 — Déposer Formulaire 550_03 via ePortal AFC dans les 240 jours</div>
+<div class="tree-q">Étape 4 — Déposer correction / concordance ePortal via ePortal AFC dans les 240 jours</div>
 <div class="tree-a"><span class="tree-tag yes">→</span><span class="tree-result">Régler le solde TVA + intérêts moratoires si applicable</span></div>
 </div>
 </div>
@@ -693,21 +694,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">📊</div>
 <div class="box-body">
 <div class="box-title">Exemple chiffré simple de concordance</div>
-<p>CA TVA déclaré (somme Q1-Q4) ch. 200 : CHF 950'000. CA comptable annuel : CHF 980'000. <strong>Écart : CHF 30'000</strong> (non déclaré). Cause : facture émise en décembre, encaissée en janvier, oubliée du décompte Q4. Correction : Formulaire 550_03 → CA correct CHF 980'000 → TVA supplémentaire CHF 30'000 × 8,1% = <strong>CHF 2'430</strong> + intérêts moratoires 4,0%/an depuis le 28/29.02 (échéance Q4).</p>
+<p>CA TVA déclaré (somme Q1-Q4) ch. 200 : CHF 950'000. CA comptable annuel : CHF 980'000. <strong>Écart : CHF 30'000</strong> (non déclaré). Cause : facture émise en décembre, encaissée en janvier, oubliée du décompte Q4. Correction : correction / concordance ePortal → CA correct CHF 980'000 → TVA supplémentaire CHF 30'000 × 8,1% = <strong>CHF 2'430</strong> + intérêts au taux DFF applicable depuis le 28/29.02 (échéance Q4).</p>
 </div>
 </div>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
-<div class="box-title">Vision AFC — La concordance comme premier filtre de contrôle</div>
-<p>L'AFC accorde une <strong>grande importance à la concordance annuelle</strong> : elle démontre la rigueur du contribuable et limite les risques de soustraction. <strong>Absence de concordance déposée</strong> = signal rouge → augmente la probabilité d'un contrôle approfondi. <strong>Concordance déposée avec écart</strong> = bonne foi reconnue, traitement administratif simple. <strong>Concordance déposée et exacte</strong> (écart 0) = signal vert, faible risque de contrôle.</p>
+<div class="box-title">Vision contrôle — concordance reconstituable</div>
+<p>La concordance doit permettre d’expliquer le passage entre comptabilité, journaux TVA et décomptes remis. Elle n’est ni un « signal vert » automatique ni une immunité contre le contrôle. Un dossier professionnel conserve le rapprochement, les écritures d’écart, les justificatifs et la preuve de la correction déposée.</p>
 </div>
 </div>
 <div class="box danger">
 <div class="box-icon">🚨</div>
 <div class="box-body">
-<div class="box-title">Erreur critique — Confusion concordance vs dénonciation spontanée</div>
-<p>La <strong>concordance annuelle (art. 72)</strong> est obligatoire et concerne les inexactitudes mineures détectées en clôture (oubli, mauvaise ventilation). La <strong>dénonciation spontanée (art. 102)</strong> est facultative et concerne les erreurs constituant potentiellement une soustraction (intention ou négligence grave). Différence clé : <strong>la concordance n'évite pas une procédure pénale si l'AFC qualifie en soustraction</strong>. Pour une erreur significative, conseiller la dénonciation spontanée AVANT le contrôle.</p>
+<div class="box-title">Erreur critique — Mélanger correction fiscale et pénal</div>
+<p>Une correction selon l’art. 72 vise à remettre le décompte en conformité. L’art. 102 traite d’un éventuel effet pénal favorable sous conditions. <strong>Ne pas décider « concordance » ou « dénonciation » uniquement selon le montant ou la gravité ressentie</strong> : corriger l’impôt, documenter la chronologie et analyser séparément les conditions de l’art. 102 si un risque pénal existe.</p>
 </div>
 </div>
 </div>
@@ -718,7 +719,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>Trois notions transversales à maîtriser : (1) la <strong>prescription</strong> détermine combien d'années en arrière l'AFC peut contrôler/rappeler (5 ans en principe, 10 ans en cas de fraude), (2) les <strong>délais de paiement</strong> conditionnent la date à laquelle la TVA est exigible (60 jours), (3) les <strong>intérêts moratoires et rémunératoires</strong> 2026 sont à <strong>4,0%/an</strong> (DFF RS 631.014, en vigueur depuis le 1<sup>er</sup> janvier 2026).</p>
+<p>Trois notions transversales à maîtriser : (1) la <strong>prescription</strong> doit être calculée période par période selon l’art. 42 et les actes interruptifs/suspensifs, (2) les <strong>délais de remise et de paiement</strong> déterminent les échéances, (3) les <strong>intérêts</strong> se calculent au taux DFF applicable à chaque période. Aucun taux annuel ne doit être mémorisé comme permanent.</p>
 </div>
 </div>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Prescription — Art. 42 LTVA</h4>
@@ -727,7 +728,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tbody>
 <tr><td><strong>Prescription relative</strong></td><td>5 ans dès naissance de la créance</td><td class="art-cell">art. 42 al. 1 LTVA</td></tr>
 <tr><td><strong>Prescription absolue</strong></td><td>10 ans dès naissance de la créance</td><td class="art-cell">art. 42 al. 6 LTVA</td></tr>
-<tr><td>Droit de contrôle AFC</td><td>5 ans (10 ans si fraude)</td><td class="art-cell">art. 78 LTVA</td></tr>
+<tr><td>Contrôle AFC</td><td>Peut porter sur les périodes non prescrites; appliquer la chronologie concrète</td><td class="art-cell">art. 42 + art. 78 LTVA</td></tr>
 <tr><td>Suspension de prescription</td><td>Pendant procédures de réclamation/recours</td><td class="art-cell">art. 42 al. 4 LTVA</td></tr>
 <tr><td>Interruption de prescription</td><td>Tout acte AFC tendant à fixer la créance</td><td class="art-cell">art. 42 al. 2-3 LTVA</td></tr>
 </tbody>
@@ -741,29 +742,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tr><td>Recours contre taxation d'office</td><td>30 jours pour réclamation</td><td class="art-cell">art. 83 LTVA</td></tr>
 </tbody>
 </table>
-<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Intérêts 2026 — DFF RS 631.014 (en vigueur 01.01.2026)</h4>
+<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Intérêts — méthode de travail</h4>
 <table class="comp-table">
-<thead><tr><th>Type d'intérêt</th><th>Taux 2026</th><th>Application</th></tr></thead>
+<thead><tr><th>Question</th><th>Réflexe</th></tr></thead>
 <tbody>
-<tr><td><strong>Intérêt moratoire</strong> (retard de paiement)</td><td>4,0%/an</td><td>Dû en faveur de l'AFC en cas de paiement tardif (art. 87 LTVA)</td></tr>
-<tr><td><strong>Intérêt rémunératoire</strong> (paiement excessif)</td><td>4,0%/an</td><td>Dû en faveur de l'assujetti en cas de TVA payée en trop</td></tr>
-<tr><td>Point de départ</td><td>Lendemain de l'échéance</td><td>Calcul officiel selon la méthode commerciale 30/360 lorsque l’AFC/ePortal le précise</td></tr>
-<tr><td>Seuil minimal de perception</td><td>CHF 100 en principe</td><td class="art-cell">art. 1 al. 3 Ord. DFF (RS 631.014)</td></tr>
-<tr><td>Évolution récente</td><td>2024 : 4,75% · 2025 : 4,5% · 2026 : 4,0%</td><td>Référence au taux des emprunts fédéraux</td></tr>
+<tr><td>Taux applicable</td><td>Consulter l’ordonnance DFF applicable à la période; un dossier couvrant plusieurs années peut nécessiter plusieurs taux.</td></tr>
+<tr><td>Point de départ</td><td>Identifier l’échéance fiscale pertinente avant tout calcul.</td></tr>
+<tr><td>Méthode de calcul</td><td>Utiliser le calcul / décompte officiel AFC lorsque disponible et documenter les hypothèses; ne pas imposer une convention 30/360 sans source de la période.</td></tr>
+<tr><td>Seuil / montant minimal</td><td>Vérifier la règle actuelle dans l’ordonnance DFF au moment du dossier.</td></tr>
 </tbody>
 </table>
 <div class="box info">
 <div class="box-icon">🧮</div>
 <div class="box-body">
-<div class="box-title">Calcul d'intérêt moratoire — Exemple</div>
-<p>Décompte Q1 2026, TVA due CHF 50'000, échéance 31.05.2026. Paiement effectué le 30.11.2026 (6 mois de retard). <strong>Intérêts moratoires</strong> : CHF 50'000 × 4,0% × 6/12 = <strong>CHF 1'000</strong> (au-dessus du seuil minimal CHF 100 → perçus). Le calcul ePortal/AFC suit la méthode commerciale 30/360 lorsque applicable; pour 6 mois exacts, l’approximation pédagogique donne CHF 1'000.</p>
+<div class="box-title">Calcul d’intérêt — exercice pédagogique</div>
+<p>Pour un exercice chiffré, le taux et la convention de jours doivent être <strong>donnés dans l’énoncé</strong>. Dans un dossier réel, reprendre l’échéance, le taux DFF de chaque période et le calcul AFC. L’objectif M03 est la méthode et la traçabilité, pas la mémorisation d’un taux 2026.</p>
 </div>
 </div>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
-<div class="box-title">Vision AFC — Prescription en cas de soustraction</div>
-<p>En cas de <strong>soustraction d'impôt qualifiée</strong> (art. 96 LTVA) ou de fraude (intention dolosive), la prescription du droit de taxer s'étend à <strong>10 ans</strong> (art. 78 al. 1 LTVA). En pratique fiduciaire : avant tout contrôle AFC sur les 5 dernières années, vérifier qu'aucune erreur des années 6-10 ne pourrait être requalifiée en soustraction → cela ouvrirait l'AFC à un contrôle étendu. La <strong>dénonciation spontanée art. 102</strong> est l'outil de protection pour les erreurs anciennes découvertes.</p>
+<div class="box-title">Vision contrôle — prescription et pénal sont deux analyses</div>
+<p>Le droit de taxer se prescrit selon l’art. 42 et ses causes d’interruption/suspension. L’art. 78 organise le contrôle; il ne crée pas une règle simple « 5 ans, 10 ans si fraude ». Les délais pénaux et la qualification d’une soustraction suivent leurs propres dispositions. Toujours établir une chronologie par période avant de conclure qu’une année est ouverte ou prescrite.</p>
 </div>
 </div>
 <div class="box warning">
@@ -791,6 +791,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="meta-chip"><span class="ic">📋</span> Jurisprudence concordance</div>
 </div>
 </div>
+<div class="box success" style="margin:18px 0"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Audit professionnel M03 — 06.09.2026</div>Le module a été révisé pour supprimer les automatismes dangereux : art. 39/40, créances irrécouvrables, périodicité TaF, changement TDFN, subventions/DIP, prescription/contrôle et taux d’intérêt volatils. Pour les <strong>numéros de rubriques ePortal, taux TDFN et taux d’intérêt</strong>, la source officielle de la période reste prioritaire sur tout mémo pédagogique.</div></div>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 12px;font-weight:600">Articles LTVA clés M03 — Liens Fedlex</h4>
 <div class="leg-card">
 <div class="leg-icon blue">📕</div>
@@ -819,7 +820,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">Art. 37 LTVA — RS 641.20</div>
 <div class="leg-title">Méthode TDFN &amp; taux forfaitaires</div>
-<div class="leg-desc">Méthode TDFN (al. 1-4) : taux forfaitaire par branche × CA brut TTC. Conditions : CA imposable TVA comprise ≤ CHF 5'024'000 ET impôt dû ≤ CHF 108'000. Méthode TaF (al. 5) : collectivités publiques et NPO, sans plafond. Engagement min. 1 an.</div>
+<div class="leg-desc">L’art. 37 encadre les méthodes simplifiées. Pour TDFN, contrôler les seuils et l’attribution des taux de la période. Pour TaF, contrôler l’éligibilité de l’entité et les taux applicables. Les détails de changement de méthode et d’activités multiples doivent être vérifiés dans l’OTVA / pratique AFC actuelle.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_37" rel="noopener noreferrer" target="_blank">📄 Art. 37 LTVA</a>
 </div>
@@ -840,8 +841,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon purple">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 40 LTVA — RS 641.20</div>
-<div class="leg-title">Décompte selon les contre-prestations reçues (encaissement)</div>
-<div class="leg-desc">Option sur demande à l'AFC. TVA due à l'encaissement effectif (avantage pour clients lents/B2B). Engagement min. 1 an. Cohérence obligatoire entre TVA collectée et IP (même méthode).</div>
+<div class="leg-title">Naissance de la créance fiscale — effets du mode de décompte</div>
+<div class="leg-desc">L’art. 40 doit être lu avec l’art. 39 : l’art. 39 encadre le mode convenu/reçu; l’art. 40 règle le moment fiscal. Ne pas présenter l’art. 40 comme l’article qui « autorise » à lui seul la méthode reçue.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_40" rel="noopener noreferrer" target="_blank">📄 Art. 40 LTVA</a>
 </div>
@@ -886,7 +887,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">Art. 72 LTVA — RS 641.20</div>
 <div class="leg-title">Concordance annuelle</div>
-<div class="leg-desc">L'assujetti doit, dans les 240 jours suivant la fin de l'exercice commercial, corriger les inexactitudes constatées dans la concordance des décomptes périodiques avec la comptabilité annuelle. Formulaire 550_03 via ePortal AFC.</div>
+<div class="leg-desc">L'assujetti doit, dans les 240 jours suivant la fin de l'exercice commercial, corriger les inexactitudes constatées dans la concordance des décomptes périodiques avec la comptabilité annuelle. correction / concordance ePortal via ePortal AFC.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_72" rel="noopener noreferrer" target="_blank">📄 Art. 72 LTVA</a>
 </div>
@@ -907,45 +908,37 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon red">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 87 LTVA — RS 641.20</div>
-<div class="leg-title">Intérêts moratoires et rémunératoires</div>
-<div class="leg-desc">Taux fixé par le DFF (RS 631.014). 2026 : 4,0%/an pour intérêts moratoires (en faveur AFC) et rémunératoires (en faveur assujetti). Calcul selon la méthode commerciale 30/360 / ePortal dès l’échéance applicable. Seuil minimal de perception : CHF 100.</div>
-<div class="leg-links">
-<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_87" rel="noopener noreferrer" target="_blank">📄 Art. 87 LTVA</a>
-</div>
+<div class="leg-title">Intérêts moratoires / rémunératoires</div>
+<div class="leg-desc">L’art. 87 renvoie au régime des intérêts. Le <strong>taux chiffré</strong> est fixé par les prescriptions DFF applicables et doit être contrôlé pour la période concernée; ne pas figer un taux annuel dans M03.</div>
+<div class="leg-links"><a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_87" rel="noopener noreferrer" target="_blank">📄 Art. 87 LTVA</a></div>
 </div>
 </div>
 <div class="leg-card">
 <div class="leg-icon purple">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 102 LTVA — RS 641.20</div>
-<div class="leg-title">Dénonciation spontanée (rappel M03)</div>
-<div class="leg-desc">Possibilité avant l’annonce d’un contrôle AFC lorsqu’un risque de soustraction existe. Peut éviter la sanction pénale si les conditions sont remplies. N’évite pas le rappel d’impôt ni les intérêts lorsqu’un solde fiscal existe.</div>
-<div class="leg-links">
-<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_102" rel="noopener noreferrer" target="_blank">📄 Art. 102 LTVA</a>
-</div>
+<div class="leg-title">Dénonciation spontanée — effet pénal sous conditions</div>
+<div class="leg-desc">L’effet favorable suppose que toutes les conditions légales soient remplies. La chronologie et l’état de connaissance de l’autorité comptent, mais M03 ne doit pas enseigner une garantie automatique fondée uniquement sur la date d’annonce d’un contrôle.</div>
+<div class="leg-links"><a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_102" rel="noopener noreferrer" target="_blank">📄 Art. 102 LTVA</a></div>
 </div>
 </div>
 <h4 style="font-size:14px;color:var(--navy);margin:24px 0 12px;font-weight:600">Ordonnances et taux officiels</h4>
 <div class="leg-card">
 <div class="leg-icon gold">📘</div>
 <div class="leg-content">
-<div class="leg-ref">DFF RS 631.014 (en vigueur 01.01.2026)</div>
-<div class="leg-title">Ordonnance DFF sur les taux d'intérêt</div>
-<div class="leg-desc">Fixe le taux d'intérêt moratoire et rémunératoire à <strong>4,0%/an</strong> dès le 1<sup>er</sup> janvier 2026. Évolution : 2024 : 4,75% · 2025 : 4,5% · 2026 : 4,0%. Seuil minimal de perception CHF 100 (art. 1 al. 3).</div>
-<div class="leg-links">
-<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2010/254/fr" rel="noopener noreferrer" target="_blank">📄 RS 631.014</a>
-</div>
+<div class="leg-ref">Ordonnance DFF sur les taux d’intérêt</div>
+<div class="leg-title">Taux d’intérêt — source à contrôler par période</div>
+<div class="leg-desc">Le taux peut évoluer. Pour un dossier réel ou un calcul rétroactif, consulter l’ordonnance applicable à chaque période et conserver la référence utilisée.</div>
+<div class="leg-links"><a class="leg-link" href="https://www.fedlex.admin.ch" rel="noopener noreferrer" target="_blank">📄 Fedlex</a></div>
 </div>
 </div>
 <div class="leg-card">
 <div class="leg-icon gold">📘</div>
 <div class="leg-content">
-<div class="leg-ref">RS 641.202.62 — Ordonnance DFF</div>
-<div class="leg-title">Ordonnance régissant les taux de la dette fiscale nette (TDFN)</div>
-<div class="leg-desc">Fixe par branche les taux TDFN applicables : commerce 2,1%, fiduciaire 6,2%, restauration généralement 5,3% selon activité, hôtellerie 3,7%, etc. Mis à jour périodiquement par le DFF.</div>
-<div class="leg-links">
-<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/702/fr" rel="noopener noreferrer" target="_blank">📄 RS 641.202.62</a>
-</div>
+<div class="leg-ref">TDFN — liste / pratique AFC en vigueur</div>
+<div class="leg-title">Attribution des taux TDFN</div>
+<div class="leg-desc">Les taux sont liés aux activités et peuvent être adaptés lors des révisions. Le module ne doit pas figer « fiduciaire 6,2% », « commerce 2,1% », etc. comme valeurs éternelles. Toujours contrôler la liste actuelle et l’attribution retenue pour le client.</div>
+<div class="leg-links"><a class="leg-link" href="https://www.estv.admin.ch" rel="noopener noreferrer" target="_blank">🔗 Portail AFC</a></div>
 </div>
 </div>
 <div class="leg-card">
@@ -964,7 +957,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon gold">📋</div>
 <div class="leg-content">
 <div class="leg-ref">Info TVA AFC</div>
-<div class="leg-title">Info TVA 12 — Taux de la dette fiscale nette (TDFN)</div>
+<div class="leg-title">Pratique AFC — TDFN</div>
 <div class="leg-desc">Doctrine AFC sur l'application TDFN : conditions, branches, taux applicables, passage à la méthode effective, corrections d'entrée. Lecture indispensable pour les fiduciaires gérant des PME.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.estv.admin.ch/estv/fr/accueil/taxe-sur-la-valeur-ajoutee/informations-specialisees/publications-tva.html" rel="noopener noreferrer" target="_blank">🔗 Infos TVA AFC</a>
@@ -975,8 +968,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon gold">📋</div>
 <div class="leg-content">
 <div class="leg-ref">Info TVA AFC</div>
-<div class="leg-title">Info TVA 15 — Décompte et paiement de l'impôt</div>
-<div class="leg-desc">Doctrine AFC sur la procédure de décompte (Formulaire 100), les délais de paiement, la concordance annuelle (Formulaire 550_03), les corrections rétroactives. Référence pour l'établissement quotidien des décomptes.</div>
+<div class="leg-title">Pratique AFC — Décompte, correction et paiement</div>
+<div class="leg-desc">Doctrine AFC sur la procédure de décompte (Formulaire 100), les délais de paiement, la concordance annuelle (correction / concordance ePortal), les corrections rétroactives. Référence pour l'établissement quotidien des décomptes.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.estv.admin.ch/estv/fr/accueil/taxe-sur-la-valeur-ajoutee/informations-specialisees/publications-tva.html" rel="noopener noreferrer" target="_blank">🔗 Infos TVA AFC</a>
 </div>
@@ -1010,7 +1003,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">ATF 145 II 130 — Tribunal fédéral</div>
 <div class="leg-title">Dénonciation spontanée — Conditions et limites</div>
-<div class="leg-desc">Précise les conditions strictes de la dénonciation spontanée art. 102 LTVA : auto-signalement complet AVANT toute annonce de contrôle, collaboration au calcul, paiement intégral. Évite la sanction pénale mais pas les intérêts moratoires.</div>
+<div class="leg-desc">Précise les conditions strictes de la dénonciation spontanée art. 102 LTVA : auto-signalement complet chronologie à documenter et conditions légales à vérifier, collaboration au calcul, paiement intégral. Peut produire un effet pénal favorable si toutes les conditions sont remplies; le traitement fiscal et les intérêts restent à analyser séparément.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.bger.ch" rel="noopener noreferrer" target="_blank">🔗 bger.ch</a>
 </div>
@@ -1131,7 +1124,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <strong>Contexte :</strong> Marc Dubois exploite une fiduciaire à Lausanne. <strong>Données 2026 prévisionnelles :</strong>
 <br/>• Honoraires fiduciaires HT : CHF 580'000 (soit CHF 626'980 TVA comprise)
           <br/>• IP réel estimé (loyer, IT, fournitures) : CHF 6'500
-          <br/>• Taux TDFN services fiduciaires : 6,2%
+          <br/>• Pour l’exercice, l’AFC a attribué un taux TDFN de 6,2% à l’activité décrite (valeur pédagogique donnée, à ne pas généraliser)
           <br/>Il hésite entre méthode effective et TDFN.
         </div>
 <div class="case-context">📚 <strong>Objectif :</strong> calculer la TVA nette sous chaque méthode et conseiller le meilleur choix.</div>
@@ -1180,8 +1173,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="calc-row"><span class="calc-label">Effective : TVA brute (8,1%)</span><span class="calc-val">CHF 46'980</span></div>
 <div class="calc-row"><span class="calc-label">Effective : − IP réel</span><span class="calc-val">− CHF 6'500</span></div>
 <div class="calc-row total"><span class="calc-label">Effective : TVA nette due</span><span class="calc-val">CHF 40'480</span></div>
-<div class="calc-row"><span class="calc-label">TDFN : CA × 6,2%</span><span class="calc-val">CHF 35'960</span></div>
-<div class="calc-row highlight"><span class="calc-label">Gain TDFN vs effective</span><span class="calc-val">+ CHF 6'260</span></div>
+<div class="calc-row"><span class="calc-label">TDFN : CA TTC du cas × taux TDFN donné (6,2%)</span><span class="calc-val">CHF 38'873</span></div>
+<div class="calc-row highlight"><span class="calc-label">Écart TDFN vs effective dans l’hypothèse</span><span class="calc-val">CHF 1'607</span></div>
 </div>
 </div>
 </div>
@@ -1200,7 +1193,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <br/>• Factures émises Q1 : CHF 850'000 HT (8,1%)
           <br/>• Factures encaissées Q1 : CHF 320'000 HT (les autres en attente, DSO 90 jours)
           <br/>• Une facture impayée de CHF 90'000 d'un client en faillite (déclarée en T1)
-          <br/>BatiPro envisage de passer à la méthode encaissement art. 40 pour Q2.
+          <br/>BatiPro envisage de demander le passage au mode selon les contre-prestations reçues au sens de l’art. 39; l’effet temporel se lit avec l’art. 40.
         </div>
 <div class="case-context">📚 <strong>Objectif :</strong> calculer la TVA due Q1 sous chaque méthode et conseiller le changement.</div>
 <div class="case-step" id="m3c3s1">
@@ -1217,7 +1210,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <div class="case-step" id="m3c3s2">
-<div class="step-question"><span class="step-q-num">Q2</span>TVA due Q1 si BatiPro avait opté pour la méthode encaissement (art. 40) ?</div>
+<div class="step-question"><span class="step-q-num">Q2</span>TVA due Q1 si BatiPro avait été autorisée à décompter selon les contre-prestations reçues ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c3s2',this,false)">A) CHF 850'000 × 8,1% = CHF 68'850</button>
 <button class="step-opt" onclick="caseAnswer('m3c3s2',this,true)">B) CHF 320'000 × 8,1% = CHF 25'920 — base = factures encaissées</button>
@@ -1225,22 +1218,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m3c3s2',this,false)">D) CHF 850'000 − CHF 90'000 impayé</button>
 </div>
 <div class="step-explanation" id="m3c3s2-expl">
-            En méthode encaissement (art. 40 LTVA — option), la TVA est due seulement à l'encaissement effectif. Base Q1 = CHF 320'000 (factures encaissées). TVA due = <strong>CHF 25'920</strong>. Avantage cash-flow majeur pour les entreprises B2B avec DSO long.
+            Dans le mode selon les contre-prestations reçues, la dette est rattachée aux encaissements selon les art. 39–40 LTVA. Base Q1 = CHF 320'000 (factures encaissées). TVA due = <strong>CHF 25'920</strong>. Avantage cash-flow majeur pour les entreprises B2B avec DSO long.
             <div class="art-ref">📋 art. 40 LTVA</div>
 </div>
 </div>
 <div class="case-step" id="m3c3s3">
-<div class="step-question"><span class="step-q-num">Q3</span>La facture impayée de CHF 90'000 (client en faillite déclarée) — quelle correction possible en méthode convenue ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Une créance de CHF 90'000 devient définitivement irrécouvrable après avoir été imposée selon le mode convenu. Quel réflexe ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">A) Aucune — la TVA déjà versée est perdue</button>
-<button class="step-opt" onclick="caseAnswer('m3c3s3',this,true)">B) Si créance définitivement irrécouvrable (acte de défaut de biens) → correction art. 27 LTVA, TVA récupérable CHF 7'290</button>
-<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">C) Demander le remboursement direct au client</button>
-<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">D) Attendre 10 ans</button>
+<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">A) La TVA est toujours définitivement perdue</button>
+<button class="step-opt" onclick="caseAnswer('m3c3s3',this,true)">B) Documenter la perte et traiter la modification ultérieure de contre-prestation / dette fiscale selon l’art. 41 et la pratique AFC</button>
+<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">C) Utiliser l’art. 27 comme règle générale des créances irrécouvrables</button>
+<button class="step-opt" onclick="caseAnswer('m3c3s3',this,false)">D) Attendre automatiquement 10 ans</button>
 </div>
-<div class="step-explanation" id="m3c3s3-expl">
-            L'art. 27 LTVA permet de récupérer la TVA déjà versée si la créance est définitivement irrécouvrable. Preuve requise : acte de défaut de biens, jugement de clôture de faillite. TVA récupérable = CHF 90'000 × 8,1% = <strong>CHF 7'290</strong>. À déclarer via décompte rectificatif (formulaire 550_03). Conseil : en encaissement, ce problème n'existerait pas.
-            <div class="art-ref">📋 art. 27 LTVA</div>
-</div>
+<div class="step-explanation" id="m3c3s3-expl">Une perte sur débiteur peut modifier la contre-prestation imposable. Le dossier doit prouver l’irrécouvrabilité et la correction comptable; l’ajustement se traite selon l’art. 41 et la pratique AFC applicable. L’art. 27 concerne l’impôt facturé / mentionné à tort et ne doit pas servir de base générique pour les pertes sur débiteurs. <div class="art-ref">📋 art. 41 LTVA · pratique AFC</div></div>
 </div>
 </div>
 </div>
@@ -1267,7 +1257,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m3c4s1',this,false)">D) Seules les associations peuvent le demander</button>
 </div>
 <div class="step-explanation" id="m3c4s1-expl">
-            Le décompte annuel (art. 35 al. 1 LTVA + pratique AFC) suppose : (1) CA ≤ CHF 5'005'000, (2) bon historique de paiement (pas de retards récents), (3) demande via le Portail AFC. L'AFC accepte ou refuse selon le profil de risque. Boutique Mode (CHF 950'000) remplit largement la condition CA.
+            Le décompte annuel est encadré par l’art. 35a LTVA. Le seuil et les conditions de comportement/remise doivent être contrôlés dans la pratique AFC de la période avant la demande. Avec CHF 950'000 de CA, Boutique Mode est sous le seuil chiffré présenté dans le cas, mais l’éligibilité ne se réduit pas au CA seul.
             <div class="art-ref">📋 art. 35 al. 1 LTVA</div>
 </div>
 </div>
@@ -1275,12 +1265,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q2</span>Implications pratiques du décompte annuel ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c4s2',this,false)">A) 1 décompte/an SANS acomptes intermédiaires</button>
-<button class="step-opt" onclick="caseAnswer('m3c4s2',this,true)">B) 1 décompte annuel + 3 acomptes trimestriels obligatoires (calculés sur l'année précédente)</button>
+<button class="step-opt" onclick="caseAnswer('m3c4s2',this,true)">B) 1 décompte annuel + acomptes selon la méthode et le calendrier fixés par l’AFC</button>
 <button class="step-opt" onclick="caseAnswer('m3c4s2',this,false)">C) Périodicité semestrielle automatique</button>
 <button class="step-opt" onclick="caseAnswer('m3c4s2',this,false)">D) Plus de TVA à payer</button>
 </div>
 <div class="step-explanation" id="m3c4s2-expl">
-            Le décompte annuel s'accompagne de <strong>3 acomptes trimestriels obligatoires</strong> calculés sur la TVA due de l'année précédente (1/4 pour chaque trimestre Q1, Q2, Q3). Le décompte annuel final régularise au début de l'année suivante. Avantage : 1 seul décompte détaillé/an. Inconvénient : trésorerie similaire (acomptes), gestion plus pointue.
+            Le décompte annuel s’accompagne d’<strong>acomptes fixés selon les règles AFC applicables à la méthode de décompte</strong>. Le praticien contrôle le calendrier et les montants dans ePortal; il ne promet pas « trois quarts de l’année précédente » comme formule universelle. Le décompte annuel final régularise les acomptes.
             <div class="art-ref">📋 art. 35 al. 1 LTVA + pratique AFC</div>
 </div>
 </div>
@@ -1312,9 +1302,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
           <br/>• Cause identifiée : 2 factures de décembre 2025 (CHF 65'000 HT à 8,1%) émises mais oubliées du décompte Q4
           <br/>• Échéance Q4 : 28.02.2026
         </div>
-<div class="case-context">📚 <strong>Objectif :</strong> calculer la correction via Formulaire 550_03 et les intérêts moratoires applicables.</div>
+<div class="case-context">📚 <strong>Objectif :</strong> calculer la correction via correction / concordance ePortal et les intérêts moratoires applicables.</div>
 <div class="case-step" id="m3c5s1">
-<div class="step-question"><span class="step-q-num">Q1</span>Quel délai pour déposer le Formulaire 550_03 et corriger ?</div>
+<div class="step-question"><span class="step-q-num">Q1</span>Quel délai pour déposer le correction / concordance ePortal et corriger ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c5s1',this,false)">A) 30 jours après clôture</button>
 <button class="step-opt" onclick="caseAnswer('m3c5s1',this,false)">B) 90 jours après clôture</button>
@@ -1335,12 +1325,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m3c5s2',this,false)">D) CHF 65'000 × 2,6% = CHF 1'690</button>
 </div>
 <div class="step-explanation" id="m3c5s2-expl">
-            Les factures oubliées étaient à 8,1% (services industriels). Supplément TVA = CHF 65'000 × 8,1% = <strong>CHF 5'265</strong>. À déclarer au Formulaire 550_03 (seules les différences constatées par rapport aux décomptes remis) et à payer.
-            <div class="art-ref">📋 art. 72 LTVA + Formulaire 550_03</div>
+            Les factures oubliées étaient à 8,1% (services industriels). Supplément TVA = CHF 65'000 × 8,1% = <strong>CHF 5'265</strong>. À déclarer au correction / concordance ePortal (seules les différences constatées par rapport aux décomptes remis) et à payer.
+            <div class="art-ref">📋 art. 72 LTVA + correction / concordance ePortal</div>
 </div>
 </div>
 <div class="case-step" id="m3c5s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Calcul des intérêts moratoires si le Formulaire 550_03 est déposé le 30.06.2026 (4 mois après échéance Q4) ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Calcul des intérêts moratoires si le correction / concordance ePortal est déposé le 30.06.2026 (4 mois après échéance Q4) ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c5s3',this,false)">A) Aucun intérêt — concordance dans les délais</button>
 <button class="step-opt" onclick="caseAnswer('m3c5s3',this,true)">B) CHF 5'265 × 4,0% × 4/12 = CHF 70 — mais &lt; CHF 100 → en principe non perçu (art. 1 al. 3 Ord. DFF)</button>
@@ -1396,30 +1386,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <div class="case-step" id="m3c6s2">
-<div class="step-question"><span class="step-q-num">Q2</span>Correction d'entrée sur les stocks au passage TDFN → effective ?</div>
+<div class="step-question"><span class="step-q-num">Q2</span>Au passage TDFN → effective, peut-on récupérer automatiquement 8,1% sur tout le stock au titre de l’art. 32 ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">A) Aucune correction possible</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s2',this,true)">B) IP récupérable sur les stocks : CHF 65'000 × 8,1% = CHF 5'265 (correction d'affectation favorable art. 32)</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">C) IP non récupérable car déjà inclus dans TDFN</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">D) Doit revendre les stocks d'abord</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">A) Oui, toujours sur la valeur comptable du stock</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s2',this,true)">B) Non — appliquer les règles spécifiques de changement de méthode TDFN/OTVA et la pratique AFC actuelle avant toute correction</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">C) Oui, mais seulement sans inventaire</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s2',this,false)">D) Le stock doit être vendu avant le changement</button>
 </div>
-<div class="step-explanation" id="m3c6s2-expl">
-            Au passage TDFN → effective, l'art. 32 LTVA (correction d'affectation favorable) permet de récupérer l'IP sur les stocks en main qui n'avait pas été déduit sous TDFN (intégré dans le forfait). Calcul : 65'000 × 8,1% = <strong>CHF 5'265 récupérables</strong>. À déclarer au premier décompte sous méthode effective (Q1 2027). Documentation : inventaire détaillé des stocks au 31.12.2026 avec valeur HT et factures fournisseurs d'origine.
-            <div class="art-ref">📋 art. 32 LTVA + ATAF A-1133/2018</div>
-</div>
+<div class="step-explanation" id="m3c6s2-expl">La TDFN intègre forfaitairement le DIP; le changement de méthode obéit à des règles spécifiques. <strong>L’art. 32 n’autorise pas à lui seul une récupération mécanique « stock × taux normal ».</strong> Avant l’écriture de transition, documenter stocks/immobilisations et appliquer l’OTVA / pratique AFC en vigueur à la date du changement. <div class="art-ref">📋 art. 37 LTVA · OTVA / pratique AFC TDFN</div></div>
 </div>
 <div class="case-step" id="m3c6s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Délai minimum avant retour possible vers TDFN ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Quel délai faut-il respecter avant un nouveau changement de méthode ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">A) Immédiat sur demande</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">B) 1 an</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s3',this,true)">C) 3 ans en méthode effective minimum</button>
-<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">D) Impossible — passage définitif</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s3',this,true)">A) Vérifier la règle de changement applicable à la période fiscale et déposer la demande dans le délai AFC</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">B) Toujours exactement 3 ans, quelle que soit la version légale</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">C) Toujours 1 mois</button>
+<button class="step-opt" onclick="caseAnswer('m3c6s3',this,false)">D) Le changement est irréversible</button>
 </div>
-<div class="step-explanation" id="m3c6s3-expl">
-            Le retour à TDFN est possible mais nécessite au minimum <strong>3 ans en méthode effective</strong> avant de pouvoir redemander TDFN (art. 37 al. 5 LTVA + pratique AFC). L'AFC doit approuver le retour. Une correction d'entrée sera à nouveau nécessaire (cette fois en sens inverse). Cette règle évite les allers-retours opportunistes.
-            <div class="art-ref">📋 art. 37 LTVA + pratique AFC</div>
-</div>
+<div class="step-explanation" id="m3c6s3-expl">Les délais de changement ont fait l’objet de révisions et doivent être contrôlés dans l’OTVA / pratique AFC en vigueur. Le bon réflexe M03 est de vérifier la période minimale et le délai de demande <strong>avant</strong> de conseiller le passage. <div class="art-ref">📋 art. 37 LTVA · OTVA / pratique AFC</div></div>
 </div>
 </div>
 </div>
@@ -1437,8 +1421,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <strong>Contexte :</strong> TechStartup SA, méthode effective, décompte trimestriel. <strong>Q3 2025 :</strong>
 <br/>• TVA nette due (ch. 500) : CHF 28'500
           <br/>• Échéance dépôt + paiement : 30.11.2025
-          <br/>• Paiement effectué : 15.05.2026 (retard à calculer selon la méthode commerciale 30/360)
-          <br/>Taux d'intérêt moratoire applicable : 4,5%/an en 2025 → 4,0%/an dès 01.01.2026 (RS 631.014).
+          <br/>• Paiement effectué : 15.05.2026 (retard à calculer selon la convention de calcul donnée dans l’exercice)
+          <br/>Pour cet <strong>exercice pédagogique</strong>, l’énoncé fournit les taux 4,5% pour la portion 2025 et 4,0% pour la portion 2026. Dans un dossier réel, les taux doivent être contrôlés dans l’ordonnance DFF applicable.
         </div>
 <div class="case-context">📚 <strong>Objectif :</strong> calculer les intérêts moratoires en distinguant les périodes 2025 (4,5%) et 2026 (4,0%).</div>
 <div class="case-step" id="m3c7s1">
@@ -1450,7 +1434,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m3c7s1',this,false)">D) Date du décompte original (30.09.2025)</button>
 </div>
 <div class="step-explanation" id="m3c7s1-expl">
-            L'intérêt moratoire court à partir du <strong>lendemain de l'échéance</strong> (art. 87 LTVA). Échéance Q3 = 30.11.2025 → départ intérêts = 01.12.2025. Calcul selon la méthode commerciale 30/360 jusqu’à la réception du paiement.
+            L'intérêt moratoire court à partir du <strong>lendemain de l'échéance</strong> (art. 87 LTVA). Échéance Q3 = 30.11.2025 → départ intérêts = 01.12.2025. Calcul selon la convention de calcul donnée dans l’exercice jusqu’à la réception du paiement.
             <div class="art-ref">📋 art. 87 LTVA</div>
 </div>
 </div>
@@ -1463,7 +1447,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m3c7s2',this,true)">D) CHF 28'500 × 4,5% × 30/360 = CHF 107 — méthode commerciale</button>
 </div>
 <div class="step-explanation" id="m3c7s2-expl">
-            Décembre 2025 : en méthode commerciale 30/360, on retient 30 jours à 4,5% (taux 2025). Calcul : 28'500 × 4,5% × 30/360 = <strong>CHF 107</strong>. Le taux 2025 reste applicable pour la portion 2025 (principe de prorata temporis selon le taux en vigueur).
+            Décembre 2025 : en convention pédagogique 30/360, on retient 30 jours à 4,5% (taux 2025). Calcul : 28'500 × 4,5% × 30/360 = <strong>CHF 107</strong>. Le taux 2025 reste applicable pour la portion 2025 (principe de prorata temporis selon le taux en vigueur).
             <div class="art-ref">📋 art. 87 LTVA + DFF RS 631.014 (2025)</div>
 </div>
 </div>
@@ -1481,7 +1465,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <div class="calc-box">
-<div class="calc-title">📊 Calcul intérêts moratoires TechStartup Q3 2025 — méthode commerciale 30/360</div>
+<div class="calc-title">📊 Calcul intérêts moratoires TechStartup Q3 2025 — convention pédagogique 30/360</div>
 <div class="calc-row"><span class="calc-label">TVA due Q3 2025</span><span class="calc-val">CHF 28'500</span></div>
 <div class="calc-row"><span class="calc-label">Échéance</span><span class="calc-val">30.11.2025</span></div>
 <div class="calc-row"><span class="calc-label">Paiement effectif</span><span class="calc-val">15.05.2026</span></div>
@@ -1538,44 +1522,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <div class="case-step" id="m3c8s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Corrections / réductions IP aux ch. 415 et 420 ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Comment traiter le DIP lié à l’activité de formation exclue et à la subvention ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">A) Aucune correction</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s3',this,true)">B) ch. 415 = − CHF 1'200 (correction IP activité exclue) + ch. 420 = réduction prorata subventions sur IP commun</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">C) ch. 415 = − CHF 18'500 (tout l'IP)</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">D) ch. 420 uniquement = − CHF 25'000</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">A) Appliquer automatiquement le ratio subventions / (subventions + CA) à tout l’IP</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s3',this,true)">B) Affecter directement l’IP lié à la formation, qualifier la subvention, puis appliquer une méthode de réduction appropriée aux coûts communs si l’art. 33 l’exige</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">C) Supprimer tout l’IP</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s3',this,false)">D) Ignorer la subvention dans tous les cas</button>
 </div>
-<div class="step-explanation" id="m3c8s3-expl">
-<strong>Ch. 415</strong> = correction de l’IP affecté à l’activité exclue (formation) = <strong>− CHF 1'200</strong> (affectation directe art. 30). <strong>Ch. 420</strong> = réduction de la déduction de l’IP pour subvention hors champ (art. 33). Prorata = Subventions ÷ (Subventions + CA imposable) = 25'000 / (25'000 + 420'000) ≈ 5,62%. IP commun = 18'500 − 1'200 = 17'300. Réduction ch. 420 = 17'300 × 5,62% ≈ <strong>− CHF 972</strong>. IP net déductible = 18'500 − 1'200 − 972 = <strong>CHF 16'328</strong>.
-            <div class="art-ref">📋 ch. 415/420 + art. 29-30 + art. 33 LTVA</div>
-</div>
+<div class="step-explanation" id="m3c8s3-expl">L’IP directement lié à une prestation exclue non optée doit être traité selon son affectation. Pour la subvention, il faut d’abord vérifier qu’elle relève bien de l’art. 33 et identifier les coûts financés / communs. <strong>Il n’existe pas dans M03 de prorata universel « subvention ÷ chiffre d’affaires ».</strong> La méthode détaillée appartient à M05. <div class="art-ref">📋 art. 29–30 + art. 33 LTVA · renvoi M05</div></div>
 </div>
 <div class="case-step" id="m3c8s4">
-<div class="step-question"><span class="step-q-num">Q4</span>TVA nette due Q2 (ch. 500) ?</div>
+<div class="step-question"><span class="step-q-num">Q4</span>Peut-on calculer un solde TVA final fiable avec les seules données du cas ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">A) CHF 34'020 — TVA collectée brute</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s4',this,true)">B) CHF 420'000 × 8,1% − CHF 16'328 = CHF 34'020 − CHF 16'328 = CHF 17'692</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">C) CHF 560'000 × 8,1% = CHF 45'360</button>
-<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">D) Crédit en faveur de PolyServices</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">A) Oui, en appliquant automatiquement 5,62% à l’IP commun</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s4',this,true)">B) Non — il manque la méthode justifiée de réduction liée à la subvention / affectation des coûts communs</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">C) Oui, ch. 420 vaut toujours le montant de la subvention</button>
+<button class="step-opt" onclick="caseAnswer('m3c8s4',this,false)">D) Oui, aucun DIP n’est déductible</button>
 </div>
-<div class="step-explanation" id="m3c8s4-expl">
-<strong>Calcul final :</strong> TVA collectée = base ligne 303 (420'000) × 8,1% = CHF 34'020. IP net déductible = ch. 400 − ch. 415 − ch. 420 = 18'500 − 1'200 − 972 = CHF 16'328. TVA nette due (ch. 500) = 34'020 − 16'328 = <strong>CHF 17'692</strong>. À payer avant 31.08.2026.
-            <div class="art-ref">📋 Synthèse décompte ch. 500</div>
-</div>
-</div>
-<div class="calc-box">
-<div class="calc-title">📊 Décompte Q2 2026 — PolyServices SA</div>
-<div class="calc-row"><span class="calc-label">Ch. 200 — CA brut total hors subvention</span><span class="calc-val">CHF 535'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 221 — Prestations B2B UE hors Suisse</span><span class="calc-val">CHF 80'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 230 — Formation art. 21 non optée</span><span class="calc-val">CHF 35'000</span></div>
-<div class="calc-row"><span class="calc-label">Autres mouvements / suivi art. 33 — Subvention hors ch. 200</span><span class="calc-val">CHF 25'000</span></div>
-<div class="calc-row total"><span class="calc-label">Ligne 303 — Prestations au taux normal 8,1%</span><span class="calc-val">CHF 420'000</span></div>
-<div class="calc-row"><span class="calc-label">Impôt ligne 303 — 8,1%</span><span class="calc-val">CHF 34'020</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 400 — IP brut total</span><span class="calc-val">CHF 18'500</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 415 — Correction IP activité exclue</span><span class="calc-val">− CHF 1'200</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 420 — Réduction DIP subvention (prorata 5,62%)</span><span class="calc-val">− CHF 972</span></div>
-<div class="calc-row total"><span class="calc-label">IP net déductible</span><span class="calc-val">CHF 16'328</span></div>
-<div class="calc-row highlight"><span class="calc-label">Ch. 500 — TVA nette due AFC</span><span class="calc-val">CHF 17'692</span></div>
+<div class="step-explanation" id="m3c8s4-expl">La TVA sur les ventes imposables peut être calculée, mais le <strong>solde net</strong> dépend du traitement correct du DIP commun. Sans faits supplémentaires sur la subvention, les coûts financés et la méthode appropriée, chiffrer CHF 972 serait une fausse précision. La sortie professionnelle est une matrice de qualification + une demande d’informations / calcul M05. <div class="art-ref">📋 M03 → M05</div></div>
 </div>
 </div>
 </div>
@@ -1587,78 +1551,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <span class="level-title">Niveau 3 — Cas complexes (contrôle AFC, dénonciation, examen)</span>
 <span class="level-sub">Cas 9 à 12</span>
 </div>
-<!-- CAS 9 — Contrôle AFC avec extrapolation -->
+<!-- CAS 9 — Contrôle AFC / estimation -->
 <div class="case-block">
-<div class="case-header">
-<div class="case-num">09</div>
-<div class="case-meta">
-<div class="case-title">Helvetia Trading SA — Contrôle AFC avec extrapolation 5 ans</div>
-<div class="case-subtitle">PME commerce · Vaud · Contrôle AFC 2026 · 🔴 Risque élevé</div>
-</div>
-</div>
+<div class="case-header"><div class="case-num">09</div><div class="case-meta"><div class="case-title">Helvetia Trading SA — Erreur récurrente et contrôle AFC</div><div class="case-subtitle">PME commerce · Vaud · Contrôle 2026 · 🔴 Risque élevé</div></div></div>
 <div class="case-body">
-<div class="case-scenario">
-<strong>Contexte :</strong> Helvetia Trading SA reçoit une annonce de contrôle AFC pour les exercices 2021-2025. <strong>Constat du contrôle :</strong>
-<br/>• Sur l'exercice testé (2025) : 18 factures de prestations B2B à clients UE (CHF 240'000) déclarées comme prestations exclues art. 21 au ch. 230 au lieu d’être analysées comme prestations fournies à l’étranger et déclarées au ch. 221 si le lieu est effectivement hors Suisse
-          <br/>• Erreur récurrente identique sur les 5 dernières années
-          <br/>• Volume annuel similaire : ~CHF 230'000/an de prestations B2B UE localisées hors Suisse
-          <br/>• L'AFC procède à une <strong>extrapolation</strong> sur 5 ans (art. 79 LTVA)
-        </div>
-<div class="case-context">📚 <strong>Objectif :</strong> évaluer l'impact d'une erreur récurrente et le mécanisme d'extrapolation AFC.</div>
-<div class="case-step" id="m3c9s1">
-<div class="step-question"><span class="step-q-num">Q1</span>Quel est l'impact direct de l'erreur (ch. 230 au lieu de ch. 221) ?</div>
-<div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">A) Aucun — les deux sont sans TVA</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s1',this,true)">B) DIP perdu sur la part IP commun affectée à ces opérations (le ch. 230 réduit le DIP par prorata art. 30)</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">C) TVA à payer sur CHF 240'000 × 8,1%</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">D) Amende automatique</button>
-</div>
-<div class="step-explanation" id="m3c9s1-expl">
-            Erreur classique ch. 221 vs ch. 230. Le ch. 221 vise les prestations dont le lieu est à l’étranger : pas de TVA suisse, mais le droit au DIP peut subsister si l’affectation et les preuves sont suffisantes. Le ch. 230 vise les prestations exclues art. 21 non optées : il réduit le DIP par prorata (art. 30). En déclarant CHF 240'000 au ch. 230, Helvetia s’est privée à tort d’une part de DIP. Coût direct : DIP perdu sur les IP communs (loyer, IT, etc.). C’est une erreur DOUBLE : qualification + perte DIP.
-            <div class="art-ref">📋 art. 8 + art. 21 + art. 29-30 LTVA</div>
-</div>
-</div>
-<div class="case-step" id="m3c9s2">
-<div class="step-question"><span class="step-q-num">Q2</span>L'AFC est-elle en droit de contrôler les 5 dernières années (2021-2025) ?</div>
-<div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">A) Non — droit de contrôle limité à 3 ans</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s2',this,true)">B) Oui — droit de contrôle 5 ans (art. 78 LTVA), 10 ans en cas de soustraction</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">C) Non — uniquement l'année testée</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">D) Oui — 7 ans</button>
-</div>
-<div class="step-explanation" id="m3c9s2-expl">
-            L'AFC dispose d'un droit de contrôle de <strong>5 ans</strong> (art. 78 LTVA — prescription du droit de taxer art. 42 al. 1). Étendu à <strong>10 ans</strong> en cas de soustraction d'impôt qualifiée (art. 78 al. 1 + art. 96 LTVA). Ici, erreur récurrente non frauduleuse → 5 ans applicable. L'extrapolation art. 79 permet à l'AFC d'appliquer le constat de l'année testée aux 4 autres années si les conditions sont similaires.
-            <div class="art-ref">📋 art. 78 + 42 + 79 LTVA</div>
-</div>
-</div>
-<div class="case-step" id="m3c9s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Si la perte DIP annuelle est estimée à CHF 2'400, quel rappel cumulé 5 ans ?</div>
-<div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">A) CHF 2'400 — uniquement année testée</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s3',this,true)">B) CHF 12'000 = 2'400 × 5 (extrapolation) + intérêts moratoires sur chaque année</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">C) CHF 4'800 — 2 ans uniquement</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">D) CHF 24'000 — 10 ans</button>
-</div>
-<div class="step-explanation" id="m3c9s3-expl">
-            Extrapolation art. 79 LTVA : 2'400 × 5 = <strong>CHF 12'000 rappel TVA</strong>. <strong>Intérêts moratoires</strong> à calculer sur chaque exercice depuis son échéance respective (2021 : 5 ans × 4,5% ≈ 22% au total ; 2025 : 1 an × 4,0%). Total intérêts ≈ CHF 1'500-1'800. <strong>Total à régler ≈ CHF 13'500-13'800</strong>. Pas d'amende si pas d'intention (négligence ordinaire — art. 96 LTVA). Coût administratif : audit, défense, temps perdu.
-            <div class="art-ref">📋 art. 79 + 87 LTVA</div>
-</div>
-</div>
-<div class="case-step" id="m3c9s4">
-<div class="step-question"><span class="step-q-num">Q4</span>Quelle stratégie de défense recommander à Helvetia ?</div>
-<div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">A) Nier l'erreur</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s4',this,true)">B) Reconnaître l'erreur, démontrer bonne foi, négocier l'extrapolation (peut-être 2-3 ans contestables), payer rapidement pour limiter intérêts</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">C) Recourir systématiquement contre la taxation</button>
-<button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">D) Ignorer le contrôle</button>
-</div>
-<div class="step-explanation" id="m3c9s4-expl">
-<strong>Stratégie pragmatique :</strong> reconnaître l'erreur (factuelle, documentée), démontrer la bonne foi (erreur récurrente identique = pas d'intention dissimulatoire), contester l'extrapolation si certaines années avaient un contexte différent (changement de clients, taux, etc.), payer rapidement pour limiter les intérêts cumulés. <strong>Éviter</strong> de transformer une négligence en soustraction par déni — l'AFC qualifierait alors en intention (10 ans + amende selon art. 96).
-            <div class="art-ref">📋 art. 79 LTVA + stratégie défense AFC</div>
-</div>
-</div>
-</div>
-</div>
+<div class="case-scenario"><strong>Contexte :</strong> Helvetia a classé des prestations B2B étrangères au ch. 230 alors que, sous les faits donnés, elles relèvent de la territorialité et du ch. 221. L’erreur existe sur plusieurs périodes; l’AFC demande la reconstitution.</div>
+<div class="case-context">📚 <strong>Objectif :</strong> distinguer correction fiscale, droit au DIP, période non prescrite et éventuelle estimation.</div>
+<div class="case-step" id="m3c9s1"><div class="step-question"><span class="step-q-num">Q1</span>Premier impact à analyser ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('m3c9s1',this,true)">A) Requalifier les flux et recalculer le DIP par affectation; ch. 221 et ch. 230 n’ont pas les mêmes conséquences</button><button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">B) Appliquer 8,1% à tout le CA étranger</button><button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">C) Aucune conséquence possible</button><button class="step-opt" onclick="caseAnswer('m3c9s1',this,false)">D) Amende automatique</button></div><div class="step-explanation" id="m3c9s1-expl">La qualification et le lieu déterminent le traitement du chiffre d’affaires et du DIP. Le dossier doit être reconstruit période par période. <div class="art-ref">📋 art. 8, 21, 29–30 LTVA</div></div></div>
+<div class="case-step" id="m3c9s2"><div class="step-question"><span class="step-q-num">Q2</span>Combien d’années l’AFC peut-elle reprendre automatiquement ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">A) Toujours exactement 5</button><button class="step-opt" onclick="caseAnswer('m3c9s2',this,true)">B) Il faut calculer la prescription selon l’art. 42 et la chronologie; l’art. 78 organise le contrôle</button><button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">C) Toujours 10 en cas d’erreur</button><button class="step-opt" onclick="caseAnswer('m3c9s2',this,false)">D) Une seule année</button></div><div class="step-explanation" id="m3c9s2-expl">La fenêtre de contrôle ne se résume pas à un nombre mémorisé. Vérifier naissance de la créance, interruptions/suspensions et prescription absolue. <div class="art-ref">📋 art. 42 + art. 78 LTVA</div></div></div>
+<div class="case-step" id="m3c9s3"><div class="step-question"><span class="step-q-num">Q3</span>Une extrapolation à partir d’un échantillon est-elle automatique ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">A) Oui, tout écart d’une année est multiplié par cinq</button><button class="step-opt" onclick="caseAnswer('m3c9s3',this,true)">B) Non — toute estimation/extrapolation doit reposer sur des faits comparables, une méthode défendable et les périodes juridiquement ouvertes</button><button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">C) Oui, sans examen des pièces</button><button class="step-opt" onclick="caseAnswer('m3c9s3',this,false)">D) Jamais</button></div><div class="step-explanation" id="m3c9s3-expl">Le praticien teste la représentativité, la qualité des données et les différences entre périodes. Aucun « rappel type » ne doit être inventé. <div class="art-ref">📋 contrôle / estimation selon LTVA et pratique</div></div></div>
+<div class="case-step" id="m3c9s4"><div class="step-question"><span class="step-q-num">Q4</span>Quelle réponse professionnelle au contrôle ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('m3c9s4',this,true)">A) Fournir une reconstruction documentée, corriger ce qui est établi et contester méthodiquement ce qui ne l’est pas</button><button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">B) Nier les faits</button><button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">C) Accepter toute extrapolation sans contrôle</button><button class="step-opt" onclick="caseAnswer('m3c9s4',this,false)">D) Retarder les réponses pour « négocier » les intérêts</button></div><div class="step-explanation" id="m3c9s4-expl">Séparer faits, qualification, calcul fiscal, prescription et pénal. M11 approfondira la stratégie procédurale. <div class="art-ref">📋 méthode M03 → M11</div></div></div>
+</div></div>
 <!-- CAS 10 — Dénonciation spontanée -->
 <div class="case-block">
 <div class="case-header">
@@ -1694,12 +1597,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q2</span>Conditions strictes pour bénéficier de la dénonciation spontanée (art. 102) ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c10s2',this,false)">A) Aucune condition</button>
-<button class="step-opt" onclick="caseAnswer('m3c10s2',this,true)">B) Auto-signalement complet AVANT toute annonce de contrôle + collaboration AFC + paiement intégral des sommes dues</button>
+<button class="step-opt" onclick="caseAnswer('m3c10s2',this,true)">B) Auto-signalement complet chronologie à documenter et conditions légales à vérifier + collaboration AFC + paiement intégral des sommes dues</button>
 <button class="step-opt" onclick="caseAnswer('m3c10s2',this,false)">C) Seulement pour montants ≤ CHF 50'000</button>
 <button class="step-opt" onclick="caseAnswer('m3c10s2',this,false)">D) Uniquement si erreur prouvée non intentionnelle</button>
 </div>
 <div class="step-explanation" id="m3c10s2-expl">
-            Si le dossier présente un risque de soustraction, les conditions protectrices de l’art. 102 supposent un auto-signalement complet AVANT toute annonce de contrôle, une collaboration avec l’AFC et le paiement intégral des sommes dues. Si l’effet net est nul, il s’agit au minimum d’une correction spontanée documentée ; l’AFC qualifiera ensuite la portée pénale éventuelle selon les circonstances.
+            Si le dossier présente un risque de soustraction, les conditions protectrices de l’art. 102 supposent un auto-signalement complet chronologie à documenter et conditions légales à vérifier, une collaboration avec l’AFC et le paiement intégral des sommes dues. Si l’effet net est nul, il s’agit au minimum d’une correction spontanée documentée ; l’AFC qualifiera ensuite la portée pénale éventuelle selon les circonstances.
             <div class="art-ref">📋 art. 102 LTVA + ATF 145 II 130</div>
 </div>
 </div>
@@ -1707,12 +1610,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q3</span>Impact financier net si l’effet acquisition/DIP est neutre ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c10s3',this,false)">A) CHF 480'000 × 8,1% = CHF 38'880 à payer</button>
-<button class="step-opt" onclick="caseAnswer('m3c10s3',this,true)">B) Impact financier net = CHF 0 si droit intégral à DIP, mais déclaration corrective via Formulaire 550_03 obligatoire</button>
+<button class="step-opt" onclick="caseAnswer('m3c10s3',this,true)">B) Impact financier net = CHF 0 si droit intégral à DIP, mais déclaration corrective via correction / concordance ePortal obligatoire</button>
 <button class="step-opt" onclick="caseAnswer('m3c10s3',this,false)">C) Amende automatique sur CHF 38'880</button>
 <button class="step-opt" onclick="caseAnswer('m3c10s3',this,false)">D) Pas besoin de corriger si neutre</button>
 </div>
 <div class="step-explanation" id="m3c10s3-expl">
-            Activité 100% imposable → TVA auto-imposée sur l’acquisition et DIP miroir déductible. <strong>Effet net = CHF 0</strong>. Mais déclaration corrective via Formulaire 550_03 obligatoire pour chaque année (2022, 2023, 2024, 2025). Pas d’amende à affirmer automatiquement : le risque est fortement réduit si la correction est complète, spontanée et déposée avant contrôle. Pas d’intérêts moratoires si le solde de chaque décompte rectifié reste CHF 0. Coût principal : honoraires fiduciaire pour le travail de régularisation.
+            Activité 100% imposable → TVA auto-imposée sur l’acquisition et DIP miroir déductible. <strong>Effet net = CHF 0</strong>. Mais déclaration corrective via correction / concordance ePortal obligatoire pour chaque année (2022, 2023, 2024, 2025). Pas d’amende à affirmer automatiquement : le risque est fortement réduit si la correction est complète, spontanée et déposée avant contrôle. Pas d’intérêts moratoires si le solde de chaque décompte rectifié reste CHF 0. Coût principal : honoraires fiduciaire pour le travail de régularisation.
             <div class="art-ref">📋 art. 45 + 72 + 102 LTVA</div>
 </div>
 </div>
@@ -1889,13 +1792,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q4</span>Identification de l'écart de concordance CHF 30'000 et démarche ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m3c12s4',this,false)">A) Ignorer si &lt; 1% du CA</button>
-<button class="step-opt" onclick="caseAnswer('m3c12s4',this,true)">B) Analyser la cause (facture oubliée, classement erroné, escompte) puis déposer Formulaire 550_03 dans les 240 jours (avant 28.08.2026) avec correction</button>
+<button class="step-opt" onclick="caseAnswer('m3c12s4',this,true)">B) Analyser la cause (facture oubliée, classement erroné, escompte) puis déposer correction / concordance ePortal dans les 240 jours (avant 28.08.2026) avec correction</button>
 <button class="step-opt" onclick="caseAnswer('m3c12s4',this,false)">C) Modifier directement le décompte Q4</button>
 <button class="step-opt" onclick="caseAnswer('m3c12s4',this,false)">D) Attendre le contrôle AFC</button>
 </div>
 <div class="step-explanation" id="m3c12s4-expl">
-<strong>Démarche correcte :</strong> (1) Analyser la cause de l'écart (consultation des factures de fin d'exercice, livre des ventes, comptes auxiliaires). (2) Déposer le <strong>Formulaire 550_03</strong> via ePortal AFC <strong>avant le 28.08.2026</strong> (240 jours après clôture 31.12.2025). (3) Si écart à 8,1% : supplément TVA = 30'000 × 8,1% = CHF 2'430. (4) Intérêts moratoires calculés depuis l'échéance du trimestre concerné. Le dépôt précoce (avant fin août 2026) maintient une forte présomption de bonne foi.
-            <div class="art-ref">📋 art. 72 LTVA + Formulaire 550_03</div>
+<strong>Démarche correcte :</strong> (1) Analyser la cause de l'écart (consultation des factures de fin d'exercice, livre des ventes, comptes auxiliaires). (2) Déposer le <strong>service de correction / concordance disponible dans ePortal</strong> via ePortal AFC <strong>avant le 28.08.2026</strong> (240 jours après clôture 31.12.2025). (3) Si écart à 8,1% : supplément TVA = 30'000 × 8,1% = CHF 2'430. (4) Intérêts moratoires calculés depuis l'échéance du trimestre concerné. Le dépôt précoce (avant fin août 2026) maintient une forte présomption de bonne foi.
+            <div class="art-ref">📋 art. 72 LTVA + correction / concordance ePortal</div>
 </div>
 </div>
 <div class="calc-box">
@@ -1947,7 +1850,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">01</div>
 <div class="error-title">Confusion ch. 220 / 221 / 230 — qualification du chiffre d’affaires</div>
-<div class="error-impact">CHF 5'000 - 50'000</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
@@ -1960,11 +1863,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Décompte rectificatif via <strong>Formulaire 550_03</strong> dans les 240 jours après fin d'exercice (art. 72). Recalcul DIP avec prorata correct. Si erreur récurrente sur plusieurs années : envisager la dénonciation spontanée art. 102 pour les années hors délai concordance.</div>
+<div class="error-text">Décompte rectificatif via <strong>service de correction / concordance disponible dans ePortal</strong> dans les 240 jours après fin d'exercice (art. 72). Recalcul DIP avec prorata correct. Si erreur récurrente sur plusieurs années : envisager la dénonciation spontanée art. 102 pour les années hors délai concordance.</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text"><strong>CHF 5'000 à 50'000</strong> selon volume et IP commun. Cas Helvetia Trading (M03 cas 9) : correction sur plusieurs années possible si la qualification était systématiquement erronée. À documenter avant toute extrapolation.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -1973,7 +1875,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">02</div>
 <div class="error-title">Omission de l’impôt sur les acquisitions (rubrique acquisition/reverse charge) (acquisitions étrangères — SaaS US, Adobe, AWS)</div>
-<div class="error-impact">CHF 0 à CHF 100'000 amende</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
@@ -1989,8 +1891,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-text">Dénonciation spontanée art. 102 LTVA <strong>AVANT</strong> toute annonce de contrôle. Inventaire des achats étrangers sur 5 ans. Formulaires 550_03 pour chaque exercice. Effet attendu : dossier sécurisé avant contrôle, correction des flux et réduction forte du risque de sanction. Le paiement net peut rester 0 si le droit au DIP miroir est intégral.</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Si découvert par l’AFC seule : rectification imposée et risque procédural à qualifier selon faute, avantage fiscal et collaboration. Avec correction spontanée complète : risque fortement réduit ; coût principal souvent limité aux honoraires fiduciaires si l’effet net reste nul.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -1999,7 +1900,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">03</div>
 <div class="error-title">Choix TDFN sans analyse coût/bénéfice préalable</div>
-<div class="error-impact">CHF 2'000 - 15'000/an</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
@@ -2008,15 +1909,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 37 LTVA — méthode TDFN avec taux forfaitaire de branche. Choix libre dans les limites légales. Pas de sanction AFC mais perte économique si mauvais choix. <strong>Engagement min. 1 an</strong> (art. 37 al. 4 LTVA). <strong>Retour TDFN après effective : min. 3 ans civils</strong> (art. 81 OTVA).</div>
+<div class="error-text">Art. 37 LTVA — méthode TDFN avec taux forfaitaire de branche. Choix libre dans les limites légales. Pas de sanction AFC mais perte économique si mauvais choix. <strong>Engagement min. 1 an</strong> (art. 37 al. 4 LTVA). <strong>Retour/changement de méthode : délai à vérifier dans l’OTVA / pratique AFC en vigueur</strong> (art. 81 OTVA).</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
 <div class="error-text">Comparaison annuelle systématique (cas Marc Dubois M03 cas 2). Si découvert tardivement : attendre la fin du délai engagement, puis changer de méthode avec notification AFC. Correction d'entrée sur stocks lors du passage TDFN → effective (art. 32 LTVA — favorable).</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Selon le profil : <strong>perte CHF 2'000 à 15'000/an</strong>. Cas typique : restaurant ayant investi CHF 200'000 en équipement → IP réel 16'200, manqué sous TDFN. Sur 3 ans (engagement min.) : CHF 48'600 d'IP perdu.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -2024,13 +1924,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-block">
 <div class="error-head">
 <div class="error-num">04</div>
-<div class="error-title">Oubli de la concordance annuelle (Formulaire 550_03 — 240 jours)</div>
-<div class="error-impact">CHF 500 - 20'000</div>
+<div class="error-title">Oubli de la concordance annuelle (correction / concordance ePortal — 240 jours)</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
 <div class="error-section-title">Symptôme</div>
-<div class="error-text">Le délai de 240 jours après clôture (art. 72 LTVA) expire sans dépôt du Formulaire 550_03. Pour exercice 2025 clos le 31.12.2025 → délai 28.08.2026. Au-delà : l'AFC peut considérer les décomptes périodiques comme définitifs (ATF 140 II 202). Toute correction ultérieure nécessite des motifs sérieux.</div>
+<div class="error-text">Le délai de 240 jours après clôture (art. 72 LTVA) expire sans dépôt du correction / concordance ePortal. Pour exercice 2025 clos le 31.12.2025 → délai 28.08.2026. Au-delà : l'AFC peut considérer les décomptes périodiques comme définitifs (ATF 140 II 202). Toute correction ultérieure nécessite des motifs sérieux.</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
@@ -2041,8 +1941,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-text">Discipline cabinet : <strong>checklist annuelle de clôture</strong> incluant la concordance. Délai de sécurité : déposer 3-4 mois avant les 240 jours (en juin/juillet pour clôture 31.12). Documentation : rapprochement comptable détaillé + liste des écarts identifiés. Si délai expiré et erreur significative : dénonciation spontanée art. 102.</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Variable : si écart en faveur AFC = supplément TVA dû + intérêts moratoires <strong>CHF 500 à 20'000</strong>. Si écart en faveur assujetti (peu probable) = perte de TVA récupérable. Cas grave : signal rouge AFC déclenchant un contrôle approfondi → coût indirect bien supérieur.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -2051,7 +1950,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">05</div>
 <div class="error-title">Incohérence méthode TVA collectée vs IP (convenue/encaissement)</div>
-<div class="error-impact">CHF 1'000 - 25'000</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
@@ -2064,11 +1963,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Audit interne des dates de naissance créance vs déduction IP. Aligner les deux méthodes via décompte rectificatif Formulaire 550_03. Si passage formel d'une méthode à l'autre : demande à l'AFC + correction d'entrée sur créances clients et dettes fournisseurs (art. 39 al. 2 + 40 al. 2 LTVA).</div>
+<div class="error-text">Audit interne des dates de naissance créance vs déduction IP. Aligner les deux méthodes via décompte rectificatif correction / concordance ePortal. Si passage formel d'une méthode à l'autre : demande à l'AFC + correction d'entrée sur créances clients et dettes fournisseurs (art. 39 al. 2 + 40 al. 2 LTVA).</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text"><strong>CHF 1'000 à 25'000</strong> selon le volume et la durée. Erreur souvent technique (paramétrage ERP), pas nécessairement intentionnelle. L'AFC accepte la correction sans amende si déclarée spontanément.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -2076,25 +1974,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-block">
 <div class="error-head">
 <div class="error-num">06</div>
-<div class="error-title">Retard de paiement non anticipé — intérêts moratoires 4,0%/an</div>
-<div class="error-impact">CHF 100 - 10'000/trimestre</div>
+<div class="error-title">Retard de paiement non anticipé — intérêts au taux DFF applicable</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
 <div class="error-section-title">Symptôme</div>
-<div class="error-text">Dépassement de l'échéance des 60 jours (art. 86 al. 1) sans anticipation. Cause fréquente : trésorerie tendue, oubli du calendrier, attente du financement. L'AFC envoie une sommation 30 jours après l'échéance, puis intérêts moratoires courent dès le lendemain de l'échéance (4,0%/an en 2026).</div>
+<div class="error-text">Dépassement de l'échéance des 60 jours (art. 86 al. 1) sans anticipation. Cause fréquente : trésorerie tendue, oubli du calendrier, attente du financement. L'AFC envoie une sommation 30 jours après l'échéance, puis intérêts moratoires courent dès le lendemain de l'échéance (taux DFF applicable à la période).</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 86 al. 1 LTVA (échéance 60 jours) + art. 87 LTVA (intérêts moratoires). Taux fixé par DFF RS 631.014 : 4,0%/an en 2026 (4,5% en 2025, 4,75% en 2024). Seuil minimal de perception CHF 100 (art. 1 al. 3 Ord. DFF). Calcul selon la méthode commerciale 30/360 lorsque applicable.</div>
+<div class="error-text">Art. 86 al. 1 LTVA (échéance 60 jours) + art. 87 LTVA (intérêts moratoires). Taux fixé par DFF RS 631.014 : taux DFF applicable à la période (4,5% en 2025, 4,75% en 2024). Seuil minimal de perception CHF 100 (art. 1 al. 3 Ord. DFF). Calcul selon la convention de calcul donnée dans l’exercice lorsque applicable.</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
 <div class="error-text">Discipline cash-flow : provisionner la TVA dès la facturation (méthode convenue) ou l'encaissement (méthode encaissement). Calendrier rappels client à 60 jours. Si retard inévitable : payer le plus rapidement possible pour limiter les intérêts (CHF 50'000 × 4% × 1 mois ≈ CHF 167 ; sur 6 mois ≈ CHF 1'000).</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Variable : retard 1-3 mois sur CHF 50'000 = <strong>CHF 167 à 500 d'intérêts</strong>. Retard 12 mois sur CHF 100'000 = <strong>CHF 4'000</strong>. Retards répétés = signal rouge AFC → augmente probabilité de contrôle.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
@@ -2103,53 +2000,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">07</div>
 <div class="error-title">Dénonciation spontanée tardive — après annonce de contrôle AFC</div>
-<div class="error-impact">CHF 5'000 - 100'000 amende</div>
+<div class="error-impact">Impact à chiffrer selon dossier</div>
 </div>
 <div class="error-body">
 <div class="error-section">
 <div class="error-section-title">Symptôme</div>
-<div class="error-text">L'assujetti découvre une erreur significative <strong>après</strong> avoir reçu l'annonce de contrôle AFC et tente une dénonciation spontanée. <strong>Échec garanti</strong> : l'art. 102 al. 1 LTVA exige l'auto-signalement <strong>AVANT</strong> toute annonce. Une fois le contrôle annoncé, la dénonciation perd son effet exonératoire de sanction.</div>
+<div class="error-text">L'assujetti découvre une erreur significative <strong>après</strong> avoir reçu l'annonce de contrôle AFC et tente une dénonciation spontanée. <strong>Effet favorable non garanti</strong> : l'art. 102 al. 1 LTVA exige l'auto-signalement <strong>AVANT</strong> toute annonce. Une fois le contrôle annoncé, la dénonciation perd son effet exonératoire de sanction.</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 102 al. 1 LTVA — conditions strictes : (1) signalement complet AVANT annonce de contrôle, (2) collaboration AFC, (3) paiement intégral. ATF 145 II 130 confirme la rigueur de la condition temporelle. Après annonce : l'erreur découverte expose à l'amende art. 96 (selon art. 96 du montant éludé).</div>
+<div class="error-text">Art. 102 al. 1 LTVA — conditions strictes : (1) vérification de toutes les conditions de l’art. 102, de la chronologie et de l’état de connaissance de l’autorité, (2) collaboration AFC, (3) paiement intégral. ATF 145 II 130 confirme la rigueur de la condition temporelle. Après annonce : l'erreur découverte expose à l'amende art. 96 (selon art. 96 du montant éludé).</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
 <div class="error-text">Anticipation : audit interne TVA annuel pour identifier les erreurs et déclencher la dénonciation avant tout contrôle. Si annonce déjà reçue : préparer une défense rigoureuse (démontrer bonne foi, négligence ordinaire et non grave, contester l'extrapolation si justifié). Engager un avocat fiscaliste spécialisé.</div>
 </div>
 <div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Coûteux : amende possible selon faute, montant éludé et circonstances. Exemple : une erreur peut entraîner une amende si un avantage fiscal ou une faute sanctionnable est retenu. Le montant dépend du cas concret, de l’impôt effectivement éludé et du comportement de l’assujetti. À cela peuvent s’ajouter les frais de procédure et le risque pénal dans les cas graves.</div>
+<div class="error-section-title">Conséquence possible</div><div class="error-text">Le montant dépend des périodes, de la base HT/TTC, du DIP effectivement ouvert, des preuves et des intérêts applicables. Aucun « impact moyen » ne doit être présenté comme statistique AFC sans source.</div>
 </div>
 </div>
 </div>
 <!-- E8 -->
-<div class="error-block">
-<div class="error-head">
-<div class="error-num">08</div>
-<div class="error-title">Passage TDFN → effective sans correction d'entrée sur stocks</div>
-<div class="error-impact">CHF 2'000 - 25'000 perdus</div>
-</div>
-<div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">L'entreprise passe de la méthode TDFN à la méthode effective (dépassement de seuil ou choix volontaire après 3 ans) mais <strong>oublie la correction d'entrée</strong> sur les stocks (art. 32 LTVA — correction d'affectation favorable). L'IP sur les marchandises en stock n'avait pas été déduit séparément sous TDFN (forfaitisé) → il peut être récupéré au passage.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 32 LTVA — correction d'affectation favorable lors d'un changement de méthode ou d'affectation. ATAF A-1133/2018 confirme le droit à la récupération. Documentation requise : inventaire détaillé des stocks au jour du changement, valeur HT, factures fournisseurs d'origine.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">Au premier décompte sous méthode effective : déclarer l'IP récupérable au ch. 400 avec note explicative. Documentation : inventaire physique daté, valorisation HT, traçabilité des factures d'achat. Délai : peut être effectué jusqu'à 5 ans après le changement (prescription relative art. 42 al. 1 LTVA).</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Impact financier moyen</div>
-<div class="error-text">Selon le volume de stocks : <strong>CHF 2'000 à 25'000</strong> d'IP récupérable. Exemple cas Trattoria (M03 cas 6) : stocks CHF 65'000 × 8,1% = CHF 5'265 récupérables. Restaurant moyen : stocks CHF 30'000-80'000 → récupération CHF 2'430-6'480.</div>
-</div>
-</div>
-</div>
+<div class="error-block"><div class="error-head"><div class="error-num">08</div><div class="error-title">Changement TDFN → effective traité comme une simple écriture d’IP</div><div class="error-impact">Impact à chiffrer selon dossier</div></div><div class="error-body"><div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">Le dossier applique automatiquement « valeur des stocks × taux » au premier décompte effectif sans vérifier les règles de transition TDFN.</div></div><div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Documenter stocks, immobilisations, activités et date du changement; appliquer l’OTVA / pratique AFC actuelle relative au changement de méthode. L’art. 32 ne constitue pas à lui seul une autorisation de récupération automatique.</div></div><div class="error-section"><div class="error-section-title">Conséquence possible</div><div class="error-text">Une transition mal traitée peut créer une double déduction ou une perte de droit. Reconstituer le traitement avant correction.</div></div></div></div>
 <div class="section-nav">
 <button class="btn btn-ghost" onclick="goto('cases')">← Cas pratiques</button>
 <button class="btn btn-primary" onclick="goto('quiz')">Autotest QCM →</button>
@@ -2322,7 +2194,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vc-fr">Concordance annuelle</div>
 <div class="vc-de">de. Jahresabstimmung / Jahresumsatzkonkordanz</div>
 <div class="vc-art">art. 72 LTVA</div>
-<div class="vc-use">Rapprochement CA TVA déclaré vs CA comptable annuel. Délai 240 jours après clôture exercice. Formulaire 550_03 via ePortal AFC.</div>
+<div class="vc-use">Rapprochement CA TVA déclaré vs CA comptable annuel. Délai 240 jours après clôture exercice. correction / concordance ePortal via ePortal AFC.</div>
 </div>
 <div class="vocab-card">
 <div class="vc-fr">Formulaire 100 (décompte effectif)</div>
@@ -2331,7 +2203,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vc-use">Formulaire principal AFC pour décompte trimestriel/semestriel. Comprend chiffres 200-500 (CA, TVA collectée, IP, solde net). Dépôt ePortal obligatoire.</div>
 </div>
 <div class="vocab-card">
-<div class="vc-fr">Formulaire 550_03</div>
+<div class="vc-fr">correction / concordance ePortal</div>
 <div class="vc-de">de. Formular 550_03 / Berichtigungsformular</div>
 <div class="vc-art">art. 72 + 128 OTVA</div>
 <div class="vc-use">Formulaire de concordance annuelle / décompte rectificatif. Pour corriger inexactitudes constatées en clôture. Saisie des différences constatées, et non des montants totaux déjà déclarés.</div>
@@ -2352,7 +2224,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vc-fr">Intérêt moratoire</div>
 <div class="vc-de">de. Verzugszins</div>
 <div class="vc-art">art. 87 LTVA</div>
-<div class="vc-use">En faveur de l'AFC en cas de paiement tardif. Taux 2026 : 4,0%/an (DFF RS 631.014). Calcul selon la méthode commerciale 30/360 lorsque applicable. Seuil minimal CHF 100.</div>
+<div class="vc-use">En faveur de l'AFC en cas de paiement tardif. Taux 2026 : 4,0%/an (DFF RS 631.014). Calcul selon la convention de calcul donnée dans l’exercice lorsque applicable. Seuil minimal CHF 100.</div>
 </div>
 <div class="vocab-card">
 <div class="vc-fr">Intérêt rémunératoire</div>
@@ -2364,7 +2236,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vc-fr">Dénonciation spontanée</div>
 <div class="vc-de">de. Selbstanzeige</div>
 <div class="vc-art">art. 102 LTVA</div>
-<div class="vc-use">Auto-signalement complet AVANT toute annonce de contrôle AFC. Évite la sanction pénale (art. 96). N'évite pas le rappel TVA + intérêts moratoires.</div>
+<div class="vc-use">Auto-signalement complet chronologie à documenter et conditions légales à vérifier AFC. Évite la sanction pénale (art. 96). N'évite pas le rappel TVA + intérêts moratoires.</div>
 </div>
 <div class="vocab-card">
 <div class="vc-fr">ePortal AFC</div>
@@ -2475,7 +2347,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <li><strong>Taux 2026</strong> : 4,0%/an (moratoire + rémunératoire)</li>
 <li><strong>Évolution</strong> : 2024 : 4,75% · 2025 : 4,5% · 2026 : 4,0%</li>
 <li><strong>Départ calcul</strong> : lendemain de l'échéance</li>
-<li><strong>Calcul</strong> : méthode commerciale 30/360 (montant × taux × jours commerciaux/360)</li>
+<li><strong>Calcul</strong> : convention pédagogique 30/360 (montant × taux × jours commerciaux/360)</li>
 <li><strong>Seuil minimal de perception</strong> : <strong>CHF 100</strong> (art. 1 al. 3 Ord. DFF)</li>
 <li><strong>Exemple</strong> : CHF 50'000 × 4,0% × 6 mois = CHF 1'000</li>
 <li>Si écart d'année : prorata temporis du taux applicable</li>
@@ -2512,17 +2384,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <li>Cumul ch. 200 des 4 décomptes Q1-Q4</li>
 <li>Comparaison avec CA comptable annuel (compte 3000)</li>
 <li>Identifier l'écart + cause (oubli facture, classement, escompte)</li>
-<li>Préparer Formulaire 550_03 (différences constatées uniquement)</li>
+<li>Préparer correction / concordance ePortal (différences constatées uniquement)</li>
 <li>Déposer via ePortal AFC <strong>avant 240 jours</strong></li>
 <li>Payer supplément TVA + intérêts (si &gt; CHF 100)</li>
 </ol>
 <p><strong>Dénonciation spontanée (art. 102)</strong> :</p>
 <ul>
-<li>AVANT toute annonce de contrôle AFC ✓</li>
+<li>chronologie à documenter et conditions légales à vérifier AFC ✓</li>
 <li>Signalement complet sur 5 ans (10 si soustraction)</li>
 <li>Collaboration AFC au calcul</li>
 <li>Paiement intégral TVA + intérêts moratoires</li>
-<li><strong>Effet</strong> : exempt d'amende art. 96</li>
+<li><strong>Effet</strong> : effet pénal favorable seulement si toutes les conditions légales sont remplies</li>
 </ul>
 </div>
 </div>
@@ -2637,13 +2509,13 @@ const QCM = [
     q:'Quelle est la périodicité par défaut du décompte en méthode effective ?',
     opts:['Mensuelle','Trimestrielle','Semestrielle','Annuelle'],
     correct:1,
-    expl:'La méthode effective utilise la périodicité trimestrielle par défaut (art. 35 al. 1 LTVA). 4 décomptes/an aux échéances 31.05, 31.08, 30.11 et 28/29.02. La périodicité semestrielle est réservée aux TDFN/TaF.'
+    expl:'La méthode effective utilise la périodicité trimestrielle par défaut (art. 35 al. 1 LTVA). 4 décomptes/an aux échéances 31.05, 31.08, 30.11 et 28/29.02. La périodicité semestrielle concerne notamment la TDFN; vérifier la période applicable aux TaF.'
   },
   { id:'m03-q02', diff:'easy', art:'art. 86 al. 1 LTVA',
     q:'Quel est le délai de paiement standard d\'un décompte TVA trimestriel ?',
     opts:['30 jours après la fin du trimestre','60 jours après la fin du trimestre','90 jours après la fin du trimestre','À la date du dépôt'],
     correct:1,
-    expl:'L\'art. 86 al. 1 LTVA fixe le délai à 60 jours après la fin de la période. Q1 (31.03) → échéance 31.05. Dépassement : intérêts moratoires 4,0%/an (taux 2026). Le décompte doit aussi être déposé dans ce délai.'
+    expl:'L\'art. 86 al. 1 LTVA fixe le délai à 60 jours après la fin de la période. Q1 (31.03) → échéance 31.05. Dépassement : intérêts moratoires taux DFF applicable. Le décompte doit aussi être déposé dans ce délai.'
   },
   { id:'m03-q03', diff:'easy', art:'art. 71a LTVA',
     q:'Depuis quand le dépôt électronique via ePortal AFC est-il obligatoire ?',
@@ -2652,16 +2524,16 @@ const QCM = [
     expl:'L\'art. 71a LTVA impose le dépôt électronique via ePortal AFC depuis le 1er janvier 2025. Identification via AGOV (anciennement CH-LOGIN). Le papier n\'est plus admis pour les assujettis standards (exceptions sur dérogation).'
   },
   { id:'m03-q04', diff:'easy', art:'art. 72 LTVA',
-    q:'Quel est le délai pour déposer la concordance annuelle (Formulaire 550_03) ?',
+    q:'Quel est le délai pour déposer la concordance annuelle (correction / concordance ePortal) ?',
     opts:['60 jours après clôture','180 jours après clôture','240 jours après fin de l\'exercice','360 jours'],
     correct:2,
     expl:'L\'art. 72 LTVA fixe le délai à 240 jours après la fin de l\'exercice commercial. Pour exercice 2025 (clos 31.12.2025) → délai 28.08.2026. Au-delà : les décomptes périodiques peuvent être considérés comme définitifs.'
   },
-  { id:'m03-q05', diff:'easy', art:'DFF RS 631.014',
-    q:'Quel est le taux d\'intérêt moratoire en vigueur depuis le 01.01.2026 ?',
-    opts:['3,5%/an','4,0%/an','4,5%/an','5,0%/an'],
+  { id:'m03-q05', diff:'easy', art:'art. 87 LTVA + ordonnance DFF',
+    q:'Quel réflexe est correct pour les intérêts moratoires ?',
+    opts:['Mémoriser 4,0% comme taux permanent','Vérifier le taux DFF applicable à la période et l’échéance avant de calculer','Utiliser toujours 5%','Aucun intérêt n’est possible en TVA'],
     correct:1,
-    expl:'Le DFF RS 631.014 fixe le taux à 4,0%/an dès le 01.01.2026 (intérêt moratoire ET rémunératoire). Évolution : 2024 : 4,75% · 2025 : 4,5% · 2026 : 4,0%. Seuil minimal de perception CHF 100.'
+    expl:'Le taux peut évoluer. M03 enseigne à identifier l’échéance, le taux DFF de la période et le calcul applicable, pas à mémoriser un chiffre annuel.'
   },
   { id:'m03-q06', diff:'easy', art:'art. 36 LTVA',
     q:'En méthode effective, comment se calcule la TVA nette due ?',
@@ -2683,9 +2555,9 @@ const QCM = [
   },
   { id:'m03-q09', diff:'easy', art:'art. 71 LTVA',
     q:'Quel formulaire utilise-t-on pour le décompte trimestriel standard ?',
-    opts:['Formulaire 100','Formulaire 550_03','Formulaire 103','Formulaire 200'],
+    opts:['Formulaire 100','correction / concordance ePortal','Formulaire 103','Formulaire 200'],
     correct:0,
-    expl:'Le Formulaire 100 (décompte effectif) est le formulaire standard du décompte trimestriel/semestriel. Le Formulaire 550_03 est dédié à la concordance annuelle et aux décomptes rectificatifs (art. 72).'
+    expl:'Le Formulaire 100 (décompte effectif) est le formulaire standard du décompte trimestriel/semestriel. Le correction / concordance ePortal est dédié à la concordance annuelle et aux décomptes rectificatifs (art. 72).'
   },
   { id:'m03-q10', diff:'easy', art:'art. 37 al. 1 LTVA',
     q:'Quel est le seuil de CA pour accéder à la méthode TDFN ?',
@@ -2739,11 +2611,11 @@ const QCM = [
     opts:[
       'Formulaire 100',
       'Formulaire 550_02',
-      'Formulaire 550_03',
+      'correction / concordance ePortal',
       'Formulaire 103'
     ],
     correct:2,
-    expl:'Le Formulaire 550_03 « Concordance annuelle » est utilisé pour les corrections des décomptes d\'une période passée et la concordance annuelle. Dépôt via ePortal AFC dans les 240 jours après fin d\'exercice.'
+    expl:'Le correction / concordance ePortal « Concordance annuelle » est utilisé pour les corrections des décomptes d\'une période passée et la concordance annuelle. Dépôt via ePortal AFC dans les 240 jours après fin d\'exercice.'
   },
   { id:'m03-q16', diff:'med', art:'art. 71a LTVA',
     q:'Quelle infrastructure d\'identification est utilisée pour ePortal AFC depuis 2025 ?',
@@ -2765,7 +2637,7 @@ const QCM = [
       'La TVA est compensée par l\'IP'
     ],
     correct:1,
-    expl:'L\'art. 27 LTVA permet la récupération de la TVA déjà versée si la créance est définitivement irrécouvrable (faillite client clôturée sans paiement, prescription civile). Preuve requise : acte de défaut de biens, jugement de clôture de faillite. Décompte rectificatif Formulaire 550_03.'
+    expl:'L\'art. 27 LTVA permet la récupération de la TVA déjà versée si la créance est définitivement irrécouvrable (faillite client clôturée sans paiement, prescription civile). Preuve requise : acte de défaut de biens, jugement de clôture de faillite. Décompte rectificatif correction / concordance ePortal.'
   },
   { id:'m03-q18', diff:'med', art:'art. 32 LTVA + ATAF A-1133/2018',
     q:'Lors du passage de TDFN à méthode effective, peut-on récupérer l\'IP sur les stocks ?',
@@ -2787,7 +2659,7 @@ const QCM = [
       'Date de la sommation AFC'
     ],
     correct:1,
-    expl:'L\'art. 87 LTVA fait courir l\'intérêt moratoire à partir du lendemain de l\'échéance (60ème jour + 1). Calcul selon la méthode commerciale 30/360 lorsque applicable jusqu’à réception du paiement. Seuil minimal de perception CHF 100 (art. 1 al. 3 Ord. DFF).'
+    expl:'L\'art. 87 LTVA fait courir l\'intérêt moratoire à partir du lendemain de l\'échéance (60ème jour + 1). Calcul selon la convention de calcul donnée dans l’exercice lorsque applicable jusqu’à réception du paiement. Seuil minimal de perception CHF 100 (art. 1 al. 3 Ord. DFF).'
   },
   { id:'m03-q20', diff:'med', art:'art. 1 al. 3 Ord. DFF (RS 631.014)',
     q:'Quel est le seuil minimal de perception des intérêts moratoires ?',
@@ -2804,12 +2676,12 @@ const QCM = [
     q:'Quelle condition essentielle pour bénéficier de la dénonciation spontanée ?',
     opts:[
       'Montant inférieur à CHF 50\'000',
-      'Auto-signalement complet AVANT toute annonce de contrôle AFC',
+      'Auto-signalement complet chronologie à documenter et conditions légales à vérifier AFC',
       'Erreur prouvée non intentionnelle',
       'Acceptation préalable de l\'AFC'
     ],
     correct:1,
-    expl:'L\'art. 102 al. 1 LTVA exige strictement l\'auto-signalement AVANT toute annonce de contrôle AFC (ATF 145 II 130). Autres conditions : collaboration AFC + paiement intégral TVA + intérêts moratoires. Effet : exempt d\'amende art. 96.'
+    expl:'L\'art. 102 al. 1 LTVA exige strictement l\'auto-signalement chronologie à documenter et conditions légales à vérifier AFC (ATF 145 II 130). Autres conditions : collaboration AFC + paiement intégral TVA + intérêts moratoires. Effet : exempt d\'amende art. 96.'
   },
   { id:'m03-q22', diff:'med', art:'ch. 220/221/225/230',
     q:'Quelle est la différence essentielle entre les ch. 221 et 225 du décompte ?',
@@ -2965,7 +2837,7 @@ const QCM = [
       'Oui si l\'amende n\'a pas encore été notifiée'
     ],
     correct:1,
-    expl:'L\'ATF 145 II 130 confirme la rigueur de la condition temporelle de l\'art. 102 al. 1 LTVA : l\'auto-signalement doit intervenir AVANT toute annonce de contrôle. Une fois le contrôle annoncé, la dénonciation perd son effet exonératoire. L\'assujetti devra payer le rappel TVA + intérêts + amende potentielle selon art. 96.'
+    expl:'L\'ATF 145 II 130 confirme la rigueur de la condition temporelle de l\'art. 102 al. 1 LTVA : l\'auto-signalement doit intervenir chronologie à documenter et conditions légales à vérifier. Une fois le contrôle annoncé, la dénonciation perd son effet exonératoire. L\'assujetti devra payer le rappel TVA + intérêts + amende potentielle selon art. 96.'
   }
 ];
 
@@ -3003,12 +2875,12 @@ const FLASHCARDS = [
   },
   { id:'fc06', cat:'per', catLabel:'Périodes &amp; délais',
     term:'Délai de paiement art. 86',
-    def:'<strong>60 jours</strong> après la fin de la période de décompte. Calendrier trimestriel : Q1 (31.03) → échéance 31.05 · Q2 (30.06) → 31.08 · Q3 (30.09) → 30.11 · Q4 (31.12) → 28/29.02. Au-delà : intérêts moratoires (4,0%/an en 2026). Taxation d\'office possible si non-dépôt persistant (al. 2).',
+    def:'<strong>60 jours</strong> après la fin de la période de décompte. Calendrier trimestriel : Q1 (31.03) → échéance 31.05 · Q2 (30.06) → 31.08 · Q3 (30.09) → 30.11 · Q4 (31.12) → 28/29.02. Au-delà : intérêts moratoires (taux DFF applicable à la période). Taxation d\'office possible si non-dépôt persistant (al. 2).',
     art:'art. 86 al. 1 LTVA'
   },
   { id:'fc07', cat:'per', catLabel:'Périodes &amp; délais',
     term:'Concordance annuelle — Délai et formulaire',
-    def:'<strong>Délai : 240 jours</strong> après la fin de l\'exercice commercial. Pour clôture 31.12.2025 → délai 28.08.2026. <strong>Formulaire 550_03</strong> via ePortal AFC. Saisie des différences constatées par rapport aux décomptes déjà remis. Au-delà des 240 jours : décomptes périodiques peuvent être considérés comme définitifs (ATF 140 II 202).',
+    def:'<strong>Délai : 240 jours</strong> après la fin de l\'exercice commercial. Pour clôture 31.12.2025 → délai 28.08.2026. <strong>service de correction / concordance disponible dans ePortal</strong> via ePortal AFC. Saisie des différences constatées par rapport aux décomptes déjà remis. Au-delà des 240 jours : décomptes périodiques peuvent être considérés comme définitifs (ATF 140 II 202).',
     art:'art. 72 LTVA'
   },
   { id:'fc08', cat:'per', catLabel:'Périodes &amp; délais',
@@ -3292,7 +3164,7 @@ function fcRate(fid, score){
 // MODULE COMPLETION
 // ═══════════════════════════════════════════════════
 function finishModule(){
-  alert('🏆 Module M03 — Décomptes TVA & Méthodes terminé !\n\nVous maîtrisez désormais :\n• Les 3 méthodes de décompte (effective, TDFN, TaF)\n• Les périodes et délais (60 jours paiement, 240 jours concordance)\n• Les chiffres clés du décompte ePortal/Formulaire 100\n• La concordance annuelle (Formulaire 550_03)\n• Les intérêts moratoires 2026 (4,0%/an)\n• La procédure de dénonciation spontanée art. 102\n\nProchain module recommandé : M05 — Impôt préalable (DIP) ou M04 — TVA & Comptabilité.');
+  alert('🏆 Module M03 — Décomptes TVA & Méthodes terminé !\n\nVous maîtrisez désormais :\n• Les 3 méthodes de décompte (effective, TDFN, TaF)\n• Les périodes et délais (60 jours paiement, 240 jours concordance)\n• Les chiffres clés du décompte ePortal/Formulaire 100\n• La concordance annuelle (correction / concordance ePortal)\n• Les intérêts moratoires 2026 (4,0%/an)\n• La procédure de dénonciation spontanée art. 102\n\nProchain module recommandé : M05 — Impôt préalable (DIP) ou M04 — TVA & Comptabilité.');
   state.completed = true;
   state.quiz_passed = true;
   saveState();
