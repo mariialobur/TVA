@@ -1,0 +1,76 @@
+name: M05 residual audit
+
+on:
+  push:
+    paths:
+      - '.m05-residual-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply residual M05 patch
+        run: python3 tools/m05_residual_patch.py
+      - name: Validate residual M05
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('m05-deduction-impot-prealable-dip.html').read_text(encoding='utf-8')
+          forbidden=[
+            "Prorata art. 33 = Subvention / (Subvention + CA donnant droit DIP)",
+            "Subvention 100k + CA imposable 400k + IP totaux 32'400 : quelle réduction art. 33 ?",
+            "TVA prestation à soi-même = 6'480 × 8,1% = CHF 524.88/an",
+            "Méthode prioritaire : affectation directe. Si IP restent communs : prorata CA",
+            "Prorata CA standard",
+            "Prorata 33 = fonds réducteurs / (fonds réducteurs + CA donnant droit DIP)",
+            "Sécurité juridique totale",
+            "ATF 132 II 353",
+            "ATF 142 II 488",
+            "ATAF A-3251/2014",
+            "régularisation art. 32 LTVA</strong>. Erreur particulièrement coûteuse",
+            "registre des biens d'investissement</strong> obligatoire",
+            "quittance e-dec OFDF",
+          ]
+          for s in forbidden:
+              assert s not in t, 'forbidden: '+s
+          required=[
+            "state.completed?100",
+            "art. 75 OTVA",
+            "personne morale",
+            "forfait de 0,9%",
+            "Art. 31 vs art. 32",
+            "Fardeau de la preuve",
+            "Clé de chiffre d’affaires",
+            "Subvention identifiée mais mal imputée au DIP",
+            "Fin d’assujettissement — actifs résiduels non analysés",
+            "Cette validation de module n’est pas un diplôme officiel",
+            "Continuer avec M06",
+            "d.M05='done'",
+          ]
+          for s in required:
+              assert s in t, 'required: '+s
+          q=len(re.findall(r"id:'m05-q",t)); cases=len(re.findall(r'class="case-step"',t)); fc=len(re.findall(r"id:'fc\d+",t))
+          print('M05 residual bytes',len(t.encode()),'QCM',q,'cases',cases,'flashcards',fc,'h1',t.count('<h1'))
+          assert q==35
+          assert cases>=30
+          assert fc==18
+          assert t.count('<h1')==1
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          assert scripts
+          Path('/tmp/m05.js').write_text('\n'.join(scripts),encoding='utf-8')
+          PY
+          node --check /tmp/m05.js
+      - name: Commit residual M05
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m05-deduction-impot-prealable-dip.html
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Finalize M05 professional consistency audit"
+          git push
