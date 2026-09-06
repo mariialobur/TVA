@@ -41,6 +41,10 @@ jobs:
               "  },\n"
           )
           t=t[:a]+q07+t[b:]
+          bad="Le changement de mode exige une transition documentée. Pour la méthode effective, l'art. 106 OTVA règle le passage entre contre-prestations convenues et reçues; le professionnel identifie les débiteurs/créanciers ouverts et contrôle le premier décompte afin d'éviter doubles déclarations ou omissions. L'art. 40 règle ensuite les effets temporels du mode choisi."
+          good="Le changement de mode exige une transition documentée. Pour la méthode effective, l’art. 106 OTVA règle le passage entre contre-prestations convenues et reçues; le professionnel identifie les débiteurs/créanciers ouverts et contrôle le premier décompte afin d’éviter doubles déclarations ou omissions. L’art. 40 règle ensuite les effets temporels du mode choisi."
+          assert bad in t
+          t=t.replace(bad,good)
           p.write_text(t,encoding='utf-8')
           PY
       - name: Validate polished M04
