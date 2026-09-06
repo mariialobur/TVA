@@ -14,8 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply residual M05 patch
-        run: python3 tools/m05_residual_patch.py
+      - name: Apply residual M05 patches
+        run: |
+          python3 tools/m05_residual_patch.py
+          python3 tools/m05_residual_patch2.py
       - name: Validate residual M05
         run: |
           python3 - <<'PY'
@@ -36,6 +38,12 @@ jobs:
             "régularisation art. 32 LTVA</strong>. Erreur particulièrement coûteuse",
             "registre des biens d'investissement</strong> obligatoire",
             "quittance e-dec OFDF",
+            "Prorata 33 = 300'000 / 4'200'000",
+            "DIP net = 76'950",
+            "concordance 550_03",
+            "art. 32 al. 3</strong> : Régularisation",
+            "B) Application rétroactive du forfait 0,9%/mois sur 5 ans",
+            "Total rappel envisagé :",
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
@@ -52,6 +60,11 @@ jobs:
             "Cette validation de module n’est pas un diplôme officiel",
             "Continuer avec M06",
             "d.M05='done'",
+            "Défense par la preuve",
+            "art. 31 al. 1–3 LTVA",
+            "La subvention Innosuisse de CHF 300’000 permet-elle, à elle seule",
+            "Quel livrable professionnel produire avant de calculer le DIP net final",
+            "travaux de concordance / corrections",
           ]
           for s in required:
               assert s in t, 'required: '+s
