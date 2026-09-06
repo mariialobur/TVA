@@ -1,0 +1,81 @@
+name: M05 professional audit
+
+on:
+  push:
+    paths:
+      - '.m05-professional-audit-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply M05 professional patch
+        run: python3 tools/m05_professional_patch.py
+      - name: Validate M05
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('m05-deduction-impot-prealable-dip.html').read_text(encoding='utf-8')
+          forbidden=[
+            "Prorata art. 33 = Subvention / (Subvention + CA total générant DIP)",
+            "IP net = IP brut × Prorata art. 30 × (1 − Prorata art. 33)",
+            "Méthode standard pour ventiler l'IP commun",
+            "priorité, art. 30 al. 2 LTVA",
+            "Dossier DIP premium",
+            "3 ans en effective avant retour à TDFN",
+            "contrairement à l'impôt direct LIFD qui limite à 50%",
+            "ATF 123 II 295 — Tribunal fédéral",
+            "ATAF A-3251/2014 — Tribunal administratif fédéral",
+            "Art. 66-72 OTVA — RS 641.201",
+            "Art. 73-81 OTVA — RS 641.201",
+            "IP fictif sur reprise de stocks (achat occasion à non-assujetti)",
+            "Correction de l’IP / prestation à soi-même (art. 31)</td><td class=\"art-cell\">art. 31 LTVA</td><td>ch. 415",
+            "CHF 11'781 → DIP net = 20'619",
+            "forfait 0,9%/mois × 80'000 × 12 mois × 8,1%",
+          ]
+          for s in forbidden:
+              assert s not in t, 'forbidden: '+s
+          required=[
+            'v5.0 — DIP &amp; corrections',
+            '<h1 class="hero-title">',
+            'Objectifs professionnels de M05',
+            'art. 28a',
+            'Liberté des moyens de preuve',
+            'art. 65–68 OTVA',
+            'art. 75 OTVA',
+            'Il n’existe pas une formule universelle',
+            'personne morale',
+            'forfait de 0,9% est applicable en TVA depuis 2022',
+            'Continuer avec M06',
+            'm06-territorialite-tva-internationale.html',
+            'Mariia Lobur',
+            "d.M05='done'",
+            "schemaVersion:'v5_0'",
+          ]
+          for s in required:
+              assert s in t, 'required: '+s
+          assert t.count('<h1')==1, t.count('<h1')
+          q=len(re.findall(r"id:'m05-q",t))
+          cases=len(re.findall(r'class="case-step"',t))
+          print('M05 bytes',len(t.encode()),'QCM',q,'case steps',cases,'h1',t.count('<h1'))
+          assert q==35, q
+          assert cases>=30, cases
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          assert scripts
+          Path('/tmp/m05.js').write_text('\n'.join(scripts),encoding='utf-8')
+          PY
+          node --check /tmp/m05.js
+      - name: Commit M05
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m05-deduction-impot-prealable-dip.html
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Audit M05 input tax deduction and corrections"
+          git push
