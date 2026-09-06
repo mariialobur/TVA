@@ -1,0 +1,79 @@
+name: M04 final audit
+
+on:
+  push:
+    paths:
+      - '.m04-final-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply final M04 patch
+        run: python3 tools/m04_final_patch.py
+      - name: Validate final M04
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('m04-tva-comptabilite-suisse.html').read_text(encoding='utf-8')
+          forbidden=[
+            '3 ans en effective',
+            'règle de l\'engagement triennal',
+            'système d\'archivage certifié',
+            'Conformité AFC native',
+            'Google Drive permet modification donc défaillant',
+            "126'000 × 8,1% = <strong>CHF 10'206</strong>",
+            "145'000 / (145'000 + 3'700'000)",
+            'Prorata = Subvention / (Subvention + CA total',
+            'don (let. d) — même traitement',
+            'solde 2200 au 31.12 doit correspondre à la TVA collectée du Q4 uniquement',
+            'ATF 140 II 202 — au-delà du délai',
+            'Art. 72 LTVA — obligation de concordance annuelle dans les 240 jours',
+            'PDF/A), responsabilité, lieu',
+          ]
+          for s in forbidden:
+              assert s not in t, 'forbidden residual: '+s
+          required=[
+            'art. 106 al. 2 OTVA',
+            'don</strong> au sens de l\'art. 18 al. 2 let. d',
+            'ch. 220/221 Décompte TVA pro',
+            'frais Stripe doivent être ventilés selon leur nature',
+            'Ch. 383 — acquisitions étrangères</span><span class="calc-val">à déterminer après qualification',
+            "Ch. 200 = CHF 3'700'000",
+            'Net provisoire avant ch. 420',
+            '180e jour',
+            'Les numéros de comptes 1170/1171 ne sont pas imposés par la loi',
+            'Depuis 2025, les changements entre méthode effective et TDFN entraînent des corrections',
+            'Continuer avec M05',
+            'Mariia Lobur',
+          ]
+          for s in required:
+              assert s in t, 'required missing: '+s
+          q=len(re.findall(r"id:'m04-q",t))
+          cases=len(re.findall(r'class="case-step"',t))
+          assert q==30, q
+          assert cases==39, cases
+          assert t.count('<h1')==1
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          assert scripts
+          Path('/tmp/m04.js').write_text('\n'.join(scripts),encoding='utf-8')
+          print('FINAL M04 bytes',len(t.encode()),'QCM',q,'case steps',cases,'H1',t.count('<h1'))
+          PY
+          node --check /tmp/m04.js
+      - name: Residual wording scan
+        run: |
+          grep -nEi "3 ans|24 mois|Google Drive|PDF/A|certifi|ATF 140 II 202|art\. 86 al\. 2|Subvention /|Stripe|image fidèle|1171|240 jours|Formulaire 550_03" m04-tva-comptabilite-suisse.html || true
+      - name: Commit final M04
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m04-tva-comptabilite-suisse.html
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Finalize M04 VAT accounting professional audit"
+          git push
