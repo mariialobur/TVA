@@ -16,6 +16,8 @@ Un parcours complet pour passer des fondamentaux aux dossiers complexes : qualif
 
 ## 👉 [Ouvrir la formation](https://mariialobur.github.io/TVA/)
 
+**Conception : [Mariia Lobur](https://www.linkedin.com/in/mariia-lobur/) · [LinkedIn](https://www.linkedin.com/in/mariia-lobur/) · [GitHub](https://github.com/mariialobur)**
+
 </div>
 
 ---
@@ -229,6 +231,19 @@ Les **14 modules sont publiés et utilisables**. Le travail continue avec une re
 L’objectif n’est pas de figer le contenu une fois pour toutes, mais de maintenir un environnement de formation qui reste cohérent avec les sources en vigueur et suffisamment exigeant pour être utile dans la pratique.
 
 ---
+
+
+---
+
+## 👤 Conception du projet
+
+**Mariia Lobur**  
+Conception, structuration pédagogique et développement de la formation.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mariia%20Lobur-0A66C2?logo=linkedin&logoColor=white&style=flat-square)](https://www.linkedin.com/in/mariia-lobur/)
+[![GitHub](https://img.shields.io/badge/GitHub-mariialobur-181717?logo=github&logoColor=white&style=flat-square)](https://github.com/mariialobur)
+
+Projet pédagogique indépendant consacré à l’apprentissage pratique de la TVA suisse.
 
 <div align="center">
 
