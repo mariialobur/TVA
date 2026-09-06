@@ -282,7 +282,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:v
 .tag-plan{background:var(--border);color:var(--muted)}
 
 /* ═══════ NAV BUTTONS ═══════════════════════════ */
-.sec-nav{display:flex;justify-content:space-between;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}
+.sec-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}
+.sec-nav-group{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .btn{padding:9px 18px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
 .btn-p{background:var(--navy);color:#fff}
 .btn-p:hover{background:var(--navy2)}
@@ -291,6 +292,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:v
 .btn-gold{background:var(--gold);color:var(--navy);font-weight:600}
 .btn-gold:hover{background:var(--gold2)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
+.finish-box{display:none;background:var(--sage2);border:1px solid rgba(42,107,72,.2);border-left:4px solid var(--sage);border-radius:8px;padding:16px 18px;margin-top:16px}
+.finish-title{font-size:15px;font-weight:700;color:var(--sage);margin-bottom:6px}
+.finish-text{font-size:13px;line-height:1.65;color:#234034;margin-bottom:12px}
+.finish-actions{display:flex;gap:10px;flex-wrap:wrap}
 
 @media(max-width:768px){#sidebar{transform:translateX(-100%)} #main{margin-left:0} .content{padding:16px 14px} .rate-grid,.mod-map,.vocab-grid,.cheat-grid,.method-grid,.synth-grid{grid-template-columns:1fr} .method-card.full{grid-column:auto} .res-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
@@ -1175,8 +1180,22 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:v
 </div>
 </div>
 <div class="sec-nav">
+<div class="sec-nav-group">
 <button class="btn btn-g" onclick="NAV.go('vocab')">← Vocabulaire</button>
-<button class="btn btn-gold" onclick="PROG.finish()">✓ Terminer M01 ✓</button>
+<a class="btn btn-g" href="index.html" style="text-decoration:none">↑ Dashboard</a>
+</div>
+<div class="sec-nav-group">
+<button class="btn btn-p" onclick="PROG.goNext()">Module suivant : M02 →</button>
+<button class="btn btn-gold" id="finish-m01" onclick="PROG.finish()">✓ Terminer M01</button>
+</div>
+</div>
+<div class="finish-box" id="finish-box">
+<div class="finish-title">✅ M01 terminé — progression enregistrée</div>
+<div class="finish-text">Vous avez terminé le module d’introduction. La suite logique est <strong>M02 — Qualification des opérations TVA</strong>, où l’on apprend à distinguer prestations imposables, exclues, exonérées et opérations particulières.</div>
+<div class="finish-actions">
+<a class="btn btn-g" href="index.html" style="text-decoration:none">← Retour au dashboard</a>
+<a class="btn btn-p" href="m02-qualification-operations.html" style="text-decoration:none">Continuer avec M02 →</a>
+</div>
 </div>
 </div>
 </div><!-- /content -->
@@ -1226,8 +1245,31 @@ const PROG = {
   },
   finish() {
     state.completed = 1;
+    SECS.forEach(s => state[s] = 1);
     PROG.save();
-    alert('✅ Module M01 terminé et sauvegardé !\n\nÉtape recommandée : M02 — Opérations imposables, exclues, exonérées.');
+    PROG.update();
+    try {
+      const key = 'tvaSpecialisteTvaDashboardV1';
+      const dash = JSON.parse(localStorage.getItem(key) || '{}');
+      dash.M01 = 'done';
+      localStorage.setItem(key, JSON.stringify(dash));
+    } catch (e) {}
+    const btn = document.getElementById('finish-m01');
+    if (btn) { btn.textContent = '✓ M01 terminé'; btn.disabled = true; }
+    const box = document.getElementById('finish-box');
+    if (box) { box.style.display = 'block'; box.scrollIntoView({behavior:'smooth', block:'center'}); }
+  },
+  goNext() {
+    state.completed = 1;
+    SECS.forEach(s => state[s] = 1);
+    PROG.save();
+    try {
+      const key = 'tvaSpecialisteTvaDashboardV1';
+      const dash = JSON.parse(localStorage.getItem(key) || '{}');
+      dash.M01 = 'done';
+      localStorage.setItem(key, JSON.stringify(dash));
+    } catch (e) {}
+    window.location.href = 'm02-qualification-operations.html';
   }
 };
 
