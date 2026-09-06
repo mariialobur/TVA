@@ -1,0 +1,319 @@
+name: Professional audit M02
+
+on:
+  push:
+    paths:
+      - '.m02-professional-audit-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply fiscal legal pedagogical and UX audit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('m02-qualification-operations.html')
+          t = p.read_text(encoding='utf-8')
+          changes = []
+
+          def rep(old, new, label, count=0):
+              global t
+              n = t.count(old)
+              if not n:
+                  print('WARN missing:', label)
+                  return
+              t = t.replace(old, new, count if count else n)
+              changes.append(f'{label}:{n if not count else min(n,count)}')
+
+          def sub(pattern, repl, label, count=1, flags=re.S):
+              global t
+              t2, n = re.subn(pattern, repl, t, count=count, flags=flags)
+              if not n:
+                  print('WARN regex missing:', label)
+                  return
+              t = t2
+              changes.append(f'{label}:{n}')
+
+          # Version + visible author (preserve existing localStorage keys so learner progress is not reset)
+          rep('<span class="sidebar-version">v4.7</span>', '<span class="sidebar-version">v4.8</span>', 'sidebar version', 1)
+          rep('<span class="version-badge">M02 v4.7</span>', '<span class="version-badge">M02 v4.8</span>', 'topbar version', 1)
+          footer = '<a class="btn-home" href="index.html">← Retour au cours</a>'
+          author = footer + '<div style="font-size:10.5px;text-align:center;margin-top:8px;line-height:1.6"><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">Mariia Lobur · LinkedIn ↗</a><br/><a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.55);text-decoration:none">GitHub ↗</a></div>'
+          rep(footer, author, 'author credit', 1)
+
+          # Add professional scope / learning objective before first principle box
+          scope_marker = '<div class="box gold">\n<div class="box-icon">🧭</div>\n<div class="box-body">\n<div class="box-title">Principe M02 — qualification avant calcul</div>'
+          scope_box = '''<div class="theory-block" style="border-left:3px solid var(--gold)">\n<h3><span class="num">✓</span>Objectifs de M02 — compétence attendue</h3>\n<p class="prose">À l’issue de M02, l’étudiant doit pouvoir <strong>qualifier une opération avant de calculer</strong> : identifier la prestation et la contre-prestation, déterminer le lieu, distinguer prestation imposable, prestation exclue, prestation exonérée et non-contre-prestation, puis identifier l’impact de principe sur le DIP et les preuves à conserver.</p>\n<div class="box warning"><div class="box-icon">🧭</div><div class="box-body"><div class="box-title">Périmètre volontaire</div>M02 enseigne la <strong>qualification</strong>. Les rubriques exactes du décompte et les méthodes de correction sont propriétaires de M03; la répartition détaillée du DIP de M05; la territorialité complexe de M06; holdings, immobilier et secteurs sensibles de M07–M09. Une rubrique de formulaire, un chiffre d’article ou une pratique sectorielle qui peut évoluer doit être contrôlé dans la source officielle au moment du dossier.</div></div>\n</div>\n'''
+          if scope_marker in t and 'Objectifs de M02 — compétence attendue' not in t:
+              t = t.replace(scope_marker, scope_box + scope_marker, 1)
+              changes.append('scope/objectives:1')
+
+          rep('Pour les intérêts moratoires, ne jamais mémoriser un taux éternel : vérifier le taux fixé par le DFF pour la période concernée. Pour 2026, la référence opérationnelle est en principe 4,0% par an.',
+              'Pour les intérêts moratoires, ne jamais mémoriser un taux comme permanent : vérifier le taux fixé par le DFF pour la période concernée au moment du traitement.',
+              'remove volatile interest from principle', 1)
+
+          # Art. 18 / evidence: remove over-broad presumption and terminology shortcuts
+          rep("L'AFC part du principe que <strong>toute opération est imposable</strong>, sauf preuve contraire fournie par l'assujetti. Lors d'un contrôle, c'est à l'assujetti de démontrer que ses opérations relèvent d'une exclusion (art. 21) ou d'une exonération (art. 23). Documents demandés : factures conformes, contrats, preuves d'exportation (CMR, document douanier), classifications professionnelles (LPMéd pour médecins, OOFSP pour reconnaissance fédérale).",
+              "En contrôle, la qualification doit pouvoir être <strong>reconstituée à partir des faits et des preuves</strong> : contrats, factures, nature réelle de la prestation, lieu, qualité des parties et, lorsque cela est pertinent, preuves d’exportation ou conditions sectorielles. Éviter le raccourci « tout est imposable jusqu’à preuve du contraire » : le praticien doit appliquer la loi dans l’ordre et documenter le motif de toute exclusion ou exonération.",
+              'evidence not presumption', 1)
+          rep('<strong>Hors champ</strong> (art. 18 al. 2 a contrario) = pas de contre-prestation (dividendes, subventions, dons). <strong>Exclu</strong> (art. 21) = dans le champ MAIS sans TVA et SANS DIP. <strong>Exonéré</strong> (art. 23) = dans le champ avec TVA à 0% ET DIP en principe conservé. Trois concepts radicalement différents souvent confondus.',
+              '<strong>Non-contre-prestations / flux sans prestation imposable</strong> (notamment art. 18 al. 2 selon le cas) : aucun échange prestation–contre-prestation à taxer. <strong>Prestations exclues</strong> (art. 21) : prestations relevant d’une exclusion légale; le DIP lié est en principe exclu en l’absence d’option ou de règle particulière. <strong>Prestations exonérées</strong> (art. 23) : impôt suisse non dû sur l’opération visée et droit au DIP en principe maintenu si les conditions sont remplies. Ne pas utiliser « hors champ » comme synonyme de l’art. 21.',
+              'terminology art18/21/23', 1)
+
+          # Replace the long, fragile art. 21 numbering list by a practitioner map.
+          start_token = '<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Liste de travail — Art. 21 al. 2 LTVA</h4>'
+          end_token = '<div class="box warning">\n<div class="box-icon">⚠️</div>\n<div class="box-body">\n<div class="box-title">Ne pas confondre art. 21 et puissance publique</div>'
+          if start_token in t:
+              s = t.index(start_token)
+              e = t.index(end_token, s)
+              map21 = '''<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Cartographie praticienne — familles de prestations de l’art. 21</h4>\n<div class="box info"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Le texte légal reste la source de vérité</div>L’art. 21 al. 2 est une liste légale détaillée dont la numérotation et certaines conditions ont évolué au fil des révisions. Pour éviter d’apprendre une « liste figée » devenue fausse, M02 mémorise les <strong>familles</strong> et la méthode. Avant de citer un chiffre précis dans un dossier, contrôler la version Fedlex en vigueur et la pratique AFC sectorielle.</div></div>\n<table class="comp-table">\n<thead><tr><th>Famille à reconnaître</th><th>Réflexe de qualification</th><th>Renvoi</th></tr></thead>\n<tbody>\n<tr><td><strong>Santé / soins</strong></td><td>Vérifier la nature thérapeutique, la qualité du prestataire et les conditions réglementaires; une activité esthétique ou commerciale ne devient pas exclue par le seul métier du prestataire.</td><td>M09</td></tr>\n<tr><td><strong>Aide sociale / enfance / jeunesse</strong></td><td>Vérifier la nature de l’institution et de la prestation; isoler les prestations commerciales accessoires.</td><td>M09</td></tr>\n<tr><td><strong>Formation / enseignement</strong></td><td>Le contenu et la finalité pédagogique sont déterminants. « Reconnu » ou « non reconnu » n’est pas, à lui seul, un test TVA.</td><td>M09</td></tr>\n<tr><td><strong>Associations / membres</strong></td><td>Distinguer cotisation liée à la qualité de membre, prestation individualisée, sponsoring, publicité et vente de biens.</td><td>M09</td></tr>\n<tr><td><strong>Culture / sport</strong></td><td>Qualifier la prestation précise (admission, participation, enseignement, sponsoring, restauration, merchandising).</td><td>M09</td></tr>\n<tr><td><strong>Assurance / finance</strong></td><td>Distinguer l’opération financière ou assurantielle exclue des prestations de conseil, gestion ou services séparés.</td><td>M09 / M07</td></tr>\n<tr><td><strong>Immobilier</strong></td><td>Distinguer transfert, location, hébergement, parking et autres exceptions; analyser séparément l’option art. 22.</td><td>M08</td></tr>\n<tr><td><strong>Autres catégories légales</strong></td><td>Jeux d’argent, organismes d’utilité publique, secteur public, coopération formation/recherche, voyages et autres cas : lire le texte légal actuel avant de conclure.</td><td>Fedlex + AFC</td></tr>\n</tbody>\n</table>\n'''
+              t = t[:s] + map21 + t[e:]
+              changes.append('replace fragile art21 list:1')
+
+          # Art. 22: do not teach option through a frozen badge list or invented holding periods
+          rep("L'option s'exerce <strong>en facturant la TVA sur la facture</strong> (mention TVA visible) ou par la déclaration dans le décompte TVA selon la pratique AFC. Aucune autorisation préalable de l'AFC n'est requise. Toutefois, certaines catégories sont <strong>strictement exclues de l'option</strong> (art. 22 al. 2) : assurances (ch. 18), titres et marchés financiers (ch. 19), <strong>logement résidentiel</strong> (partie de ch. 20-21 lorsque l'affectation est exclusivement l'habitation), jeux d'argent (ch. 23), ainsi que les assujettis qui décomptent selon la méthode des taux de la dette fiscale nette ou des taux forfaitaires.",
+              "L'option peut être exercée selon les formes admises par l’art. 22 et la pratique AFC, sans autorisation préalable générale. <strong>Avant toute option, lire l’art. 22 al. 2 dans sa version en vigueur</strong> : il contient les cas où l’option n’est pas admise. Pour l’immobilier, l’affectation effective du bien est déterminante et les conséquences de changement d’affectation doivent être suivies dans le temps.",
+              'art22 current-source rule', 1)
+          sub(r'<table class="comp-table">\n<thead><tr><th>Domaine</th><th>Option art\. 22</th><th>Conditions / Limites</th></tr></thead>.*?</table>',
+              '''<table class="comp-table">\n<thead><tr><th>Question avant option</th><th>Pourquoi elle compte</th></tr></thead>\n<tbody>\n<tr><td>L’opération est-elle réellement exclue selon l’art. 21 ?</td><td>Pas d’option à « créer » si la prestation est déjà imposable ou hors territoire.</td></tr>\n<tr><td>L’art. 22 al. 2 autorise-t-il l’option dans ce cas précis ?</td><td>La liste d’exceptions doit être contrôlée dans le texte actuel, pas mémorisée depuis un tableau ancien.</td></tr>\n<tr><td>Comment l’option sera-t-elle exercée et documentée ?</td><td>Factures, contrats, décompte et comptabilité doivent raconter la même histoire fiscale.</td></tr>\n<tr><td>Quel est l’impact sur le DIP et sur le client ?</td><td>Le DIP dépend de l’affectation; le client peut ne pas récupérer la TVA.</td></tr>\n<tr><td>Y a-t-il un immeuble ou un changement d’affectation ?</td><td>Renvoi M08/M05 pour les corrections et le suivi dans le temps.</td></tr>\n</tbody>\n</table>''',
+              'replace art22 frozen matrix')
+          rep('<tr><td><strong>🔴 Feu rouge</strong></td><td>Assurances, opérations financières exclues, jeux d\'argent, logement résidentiel, TDFN/TaF</td><td>Option interdite ou non disponible : ne pas facturer la TVA par réflexe.</td></tr>',
+              '<tr><td><strong>🔴 Feu rouge</strong></td><td>Situation potentiellement non optable selon l’art. 22 al. 2 ou méthode de décompte incompatible</td><td>Contrôler le texte légal et la pratique actuelle avant toute facturation TVA.</td></tr>',
+              'art22 traffic-light nuance', 1)
+
+          # Art. 23: evidence is not a one-document checkbox, and foreign B2B services are not exports under art. 23
+          rep('Le risque principal : la <strong>preuve documentaire</strong> de l\'exportation. Sans preuve, l\'AFC requalifie en imposable suisse.',
+              'Le risque principal : la <strong>preuve suffisante</strong> de l’exportation. L’absence d’un document précis n’équivaut pas mécaniquement à une requalification : il faut apprécier l’ensemble des preuves disponibles et, si elles restent insuffisantes, corriger le traitement.',
+              'art23 proof nuance', 1)
+          rep("L'AFC contrôle la preuve d'exportation pour les opérations déclarées art. 23 ch. 1. <strong>Documents acceptés</strong> : déclaration d'exportation visée par l'OFDF (e-dec), CMR signé à destination, attestation client. <strong>Documents insuffisants</strong> : facture seule, courriels, photos. Sans preuve suffisante : risque de requalification en imposable suisse 8,1% + intérêts moratoires selon le taux DFF applicable. Conserver les preuves pendant <strong>10 ans</strong> (art. 70 LTVA).",
+              "Pour une exonération d’exportation, le dossier doit permettre de démontrer que les conditions légales sont remplies. Les documents douaniers et de transport sont des preuves fortes, mais M02 n’enseigne pas une liste fermée de pièces « acceptées/refusées ». Le praticien rassemble un faisceau de preuves cohérent et conserve les pièces pendant la durée légale applicable.",
+              'export evidence no closed list', 1)
+
+          # Art. 26: invoice form is evidence; right to DIP is material, not purely formal
+          rep('<h3><span class="num">6</span>Facture conforme — 7 points de contrôle art. 26 <span class="block-risk risk-red">🔴 Rouge</span></h3>',
+              '<h3><span class="num">6</span>Facture & preuve — grille de contrôle art. 26 <span class="block-risk risk-red">🔴 Rouge</span></h3>',
+              'invoice heading', 1)
+          rep("L'<strong>art. 26 LTVA</strong> énumère les <strong>7 points de contrôle usuels</strong> d'une facture pour qu'elle ouvre droit à la déduction de l'impôt préalable chez le destinataire. Une facture incomplète n'invalide pas l'opération elle-même, mais <strong>rend la déduction du DIP contestable si la preuve économique et formelle est insuffisante</strong>, ce qui est un préjudice commercial majeur.",
+              "L'<strong>art. 26 LTVA</strong> fixe les indications qu’une facture doit normalement contenir. La grille de 7 points ci-dessous est un <strong>outil de contrôle praticien</strong>, pas une théorie selon laquelle une lacune formelle détruit automatiquement le DIP. Le droit à déduction se vérifie avec l’art. 28 et la preuve matérielle de la prestation et de l’impôt; en cas de lacune, demander une correction et sécuriser le dossier.",
+              'invoice material proof', 1)
+          rep("Pour les <strong>petits montants (≤ CHF 400 TTC)</strong>, une facture simplifiée est admise : peut omettre certaines mentions (notamment adresse client). Typique : tickets de caisse, restaurant, taxi. Au-dessus de CHF 400 : toutes les mentions de l'art. 26 sont requises.",
+              "Pour les petits montants, l’OTVA prévoit des allègements de facturation. Au-delà du seuil applicable, utiliser la facture complète selon l’art. 26. Dans tous les cas, une lacune formelle doit être corrigée ou compensée par une preuve matérielle suffisante; elle ne doit pas être enseignée comme perte automatique du DIP.",
+              'simplified invoice nuance', 1)
+          rep("<strong>Note de crédit (art. 26 al. 5 LTVA) :</strong> document émis par le fournisseur pour corriger ou annuler une facture. Doit comporter les mêmes mentions que la facture initiale + référence à la facture corrigée. La note de crédit est l'outil de correction TVA officiel — toute autre modification (par ex. avoir manuel) peut être refusée par l'AFC.",
+              "<strong>Correction d’une facture :</strong> une note de crédit / un avoir correctement rattaché à la facture initiale est une méthode courante et sûre. L’essentiel est que la correction soit traçable, cohérente dans la comptabilité et qu’elle ajuste correctement la TVA; éviter d’enseigner qu’un seul format documentaire serait toujours obligatoire.",
+              'credit note nuance', 1)
+          rep('Définit les éléments obligatoires d\'une facture donnant droit au DIP. Une mention manquante = DIP à risque pour le destinataire ; demander une correction ou conserver une preuve équivalente exploitable. Article critique pour la pratique fiduciaire quotidienne.',
+              'Fixe les indications usuelles de facturation. Le droit au DIP ne dépend pas d’un formalisme automatique : il faut relier art. 26, art. 28 et la preuve matérielle. En cas de lacune, demander une correction ou sécuriser une preuve équivalente exploitable.',
+              'invoice legal card', 1)
+
+          # Art. 29 / 33 / OTVA legal cards
+          rep("Précise les cas où le DIP n'est pas déductible : opérations exclues (art. 21), usage privé, dépenses sans caractère professionnel. Articulation centrale avec art. 21 et 22.",
+              "Précise notamment l’exclusion du droit au DIP pour les coûts liés à des prestations exclues. L’usage mixte et les changements d’affectation relèvent ensuite des mécanismes des art. 30–32; ne pas résumer l’usage privé à l’art. 29 seul.",
+              'art29 card', 1)
+          rep('<div class="leg-title">Réduction du DIP — Subventions et dons</div>', '<div class="leg-title">Réduction du DIP — Subventions et contributions visées</div>', 'art33 title', 1)
+          rep('Les subventions reçues des collectivités publiques entraînent une réduction proportionnelle du DIP (ch. 410 du décompte). Article très contrôlé pour les associations, hôpitaux, écoles privées.',
+              'Les subventions et contributions visées par l’art. 33 peuvent entraîner une réduction du DIP. La méthode dépend de l’affectation et de la situation; ne pas appliquer un prorata de chiffre d’affaires universel. Les dons et autres non-contre-prestations doivent être qualifiés séparément avant de conclure à une réduction.',
+              'art33 card', 1)
+          rep("Ordonnance d'exécution de la LTVA. Précise les modalités pratiques : art. 27-29 OTVA pour l'option d'imposition, art. 47 OTVA pour les mentions de facture, art. 65-77 OTVA pour la réduction du DIP.",
+              "Ordonnance d’exécution de la LTVA. Pour un dossier réel, consulter l’OTVA avec la publication AFC thématique concernée; éviter de mémoriser depuis M02 des plages d’articles susceptibles d’évoluer ou d’être mal transposées au cas concret.",
+              'OTVA card generalization', 1)
+
+          # Education: recognition alone is not the VAT test
+          rep("cours de yoga reconnus formation continue art. 21 al. 2 ch. 11 — CHF 65'000/an",
+              "cours de yoga structurés; pour ce cas, après analyse selon la pratique AFC «formation», ils sont supposés constituer une prestation exclue art. 21 — CHF 65'000/an",
+              'case4 yoga scenario', 1)
+          rep("Cours de yoga = exclus art. 21 al. 2 ch. 11 (formation). Vente accessoires (CHF 28'000) + consulting (CHF 32'000) = CHF 60'000 < 100'000 = pas d'assujettissement obligatoire.",
+              "Dans l’hypothèse du cas, les cours ont déjà été qualifiés comme prestation de formation exclue. Cette qualification ne découle pas du seul mot « yoga » ni d’une reconnaissance formelle. Vente accessoires (CHF 28'000) + consulting (CHF 32'000) = CHF 60'000 < CHF 100'000 : pas d’assujettissement obligatoire sur cette base.",
+              'case4 yoga explanation', 1)
+          rep("séminaires de coaching professionnel non reconnus CHF 280'000",
+              "missions de coaching individualisé constituant du conseil personnalisé, sans programme d’enseignement structuré, CHF 280'000",
+              'case5 coaching scenario', 1)
+          rep('Séminaires de coaching professionnel non reconnus (CHF 280\'000) — régime ?',
+              'Coaching individualisé de conseil, sans programme d’enseignement structuré (CHF 280\'000) — régime ?',
+              'case5 coaching question', 1)
+          rep('A) Imposable 8,1% — pas de reconnaissance formation, qualifie de consulting',
+              'A) Imposable 8,1% dans l’hypothèse donnée — il s’agit de conseil personnalisé',
+              'case5 coaching answer', 1)
+          rep("L'exclusion formation (art. 21 al. 2 ch. 10-11 LTVA) suppose une reconnaissance ou un contenu pédagogique formalisé. Un coaching professionnel non reconnu = prestation de services / consulting imposable 8,1% (art. 18 + art. 25 al. 1 LTVA). L'AFC contrôle strictement cette distinction.",
+              "Le critère n’est pas simplement « reconnu / non reconnu ». Il faut distinguer une véritable prestation d’enseignement/formation d’un conseil individualisé. Dans l’hypothèse donnée, le contenu est du consulting personnalisé : taux normal. Un séminaire non reconnu peut néanmoins relever de la formation si ses caractéristiques objectives correspondent à la pratique AFC.",
+              'case5 education criterion', 1)
+
+          # Case 3 export evidence: missing one specific document is not automatic tax
+          rep("B) Requalification en imposable 8,1% sur CHF 50'000 = CHF 4'050 TVA + intérêts moratoires selon le taux DFF applicable",
+              "B) Reconstituer d’abord la preuve avec l’ensemble du dossier; si les conditions de l’exonération ne peuvent finalement pas être établies, corriger le traitement et calculer l’impact selon la base applicable",
+              'case3 export answer', 1)
+          rep("Sans preuve d'exportation, l'AFC requalifie en imposable suisse 8,1% (art. 23 al. 4 LTVA — c'est à l'assujetti de prouver l'exonération). CHF 50'000 × 8,1% = CHF 4'050 + intérêts moratoires selon le taux DFF applicable (art. 87 LTVA). Conservation OBLIGATOIRE des preuves pendant 10 ans (art. 70 LTVA). Documents acceptés : e-dec OFDF visée, CMR signé à destination.",
+              "La disparition de la déclaration douanière est un signal de risque, pas une formule automatique « document manquant = 8,1% ». Il faut reconstituer la preuve à partir des pièces disponibles et vérifier si les conditions de l’art. 23 restent démontrables. Si la preuve reste insuffisante, le traitement doit être corrigé; le calcul du rappel et des intérêts dépend alors de la base et des périodes concernées.",
+              'case3 export explanation', 1)
+
+          # Holding case: remove M03 return-line claim and over-simplified DIP statement
+          rep("Ils n'apparaissent pas au ch. 200 du décompte. ATTENTION : impact sur le DIP des holdings (M07) — les dividendes hors champ ne pénalisent pas directement le DIP, mais le caractère mixte de la holding peut limiter le DIP global.",
+              "Leur traitement dans le décompte et leur impact sur le DIP d’une holding ne doivent pas être déduits d’une règle simplifiée M02 : renvoi M03 pour les rubriques et M07 pour la holding / activité entrepreneuriale / affectation des coûts.",
+              'holding scope', 1)
+
+          # Case 9: spontaneous disclosure and fake net calculation
+          rep("La dénonciation spontanée (art. 102 LTVA) est possible UNIQUEMENT avant l'annonce d'un contrôle AFC. Elle évite la sanction pénale (soustraction) mais pas les rappels d'impôt + intérêts moratoires selon le taux DFF applicable. Conditions strictes : (1) auto-signalement complet, (2) collaboration pour calculer le montant dû, (3) paiement intégral. Une fois le contrôle annoncé (15.01.2026 ici), la dénonciation n'est plus possible. Conseil pratique : envisager systématiquement la dénonciation spontanée en cas d'erreur découverte avant tout contrôle.",
+              "La protection liée à une dénonciation spontanée dépend de <strong>toutes les conditions légales</strong>, notamment du caractère réellement spontané, de l’état de connaissance de l’autorité, de la collaboration et du paiement. L’annonce d’un contrôle est un signal majeur que la spontanéité peut faire défaut, mais M02 ne doit pas transformer l’art. 102 en simple règle de calendrier. En pratique : documenter la chronologie et vérifier les conditions avant de promettre un effet pénal.",
+              'case9 spontaneous disclosure', 1)
+          # Replace c9s4 with a non-fictional professional answer
+          sub(r'<div class="case-step" id="c9s4">.*?</div>\n</div>\n</div>\n<!-- CAS 10',
+              '''<div class="case-step" id="c9s4">\n<div class="step-question"><span class="step-q-num">Q4</span>Peut-on calculer un « net dû » fiable à partir des seuls montants résumés du cas ?</div>\n<div class="step-options">\n<button class="step-opt" onclick="caseAnswer('c9s4',this,false)">A) Oui — il suffit de compenser rappel, intérêts et DIP</button>\n<button class="step-opt" onclick="caseAnswer('c9s4',this,true)">B) Non — il faut recalculer période par période, vérifier les bases HT/TTC, le droit au DIP, les preuves, les intérêts applicables et les effets procéduraux</button>\n<button class="step-opt" onclick="caseAnswer('c9s4',this,false)">C) Oui — l’AFC compense toujours automatiquement toutes les erreurs</button>\n<button class="step-opt" onclick="caseAnswer('c9s4',this,false)">D) Oui — un montant approximatif suffit dans un dossier de contrôle</button>\n</div>\n<div class="step-explanation" id="c9s4-expl">Un dossier de contrôle ne doit pas se conclure par une compensation approximative. Le praticien reconstruit chaque période, qualifie les opérations, établit la base correcte, vérifie le DIP effectivement ouvert, applique les procédures de correction et le taux d’intérêt applicable à chaque échéance. Les éventuelles conséquences pénales se traitent séparément. <div class="art-ref">📋 méthode de contrôle · M03/M05/M11</div></div>\n</div>\n</div>\n</div>\n<!-- CAS 10''',
+              'replace case9 fake net')
+
+          # Replace case 10: M02 should not teach volatile/incorrect return boxes or use ch.405 as a correction line.
+          case10_start = '<!-- CAS 10 — Cas Holding mixte + jurisprudence -->'
+          case10_end = '<div class="section-nav">\n<button class="btn btn-ghost" onclick="goto(\'legis\')">← Législation</button>'
+          if case10_start in t:
+              s = t.index(case10_start)
+              e = t.index(case10_end, s)
+              new_case10 = '''<!-- CAS 10 — Pont vers M03 -->\n<div class="case-block">\n<div class="case-header"><div class="case-num">10</div><div class="case-meta"><div class="case-title">SwissMix SA — Synthèse de qualification avant décompte</div><div class="case-subtitle">Pont M02 → M03 · qualification, pas mémorisation des rubriques</div></div></div>\n<div class="case-body">\n<div class="case-scenario"><strong>Contexte :</strong> SwissMix SA réalise : services à des clients suisses CHF 320'000; exportations de marchandises CHF 180'000; une activité de formation CHF 45'000 que le dossier juridique a déjà qualifiée comme prestation exclue; IP total CHF 28'500 dont CHF 6'500 directement lié à cette activité exclue.</div>\n<div class="case-context">📚 <strong>Objectif :</strong> produire la feuille de qualification qui sera ensuite reprise dans M03 (décompte) et M05 (DIP).</div>\n<div class="case-step" id="c10s1"><div class="step-question"><span class="step-q-num">Q1</span>Services à des clients suisses : première qualification ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('c10s1',this,true)">A) Imposables au taux applicable, sous réserve d’une règle spéciale non indiquée</button><button class="step-opt" onclick="caseAnswer('c10s1',this,false)">B) Exonérés art. 23</button><button class="step-opt" onclick="caseAnswer('c10s1',this,false)">C) Exclus art. 21</button><button class="step-opt" onclick="caseAnswer('c10s1',this,false)">D) Hors territoire</button></div><div class="step-explanation" id="c10s1-expl">Aucun fait du cas n’indique une exclusion, une exonération ou un lieu étranger : la qualification de départ est imposable. <div class="art-ref">📋 art. 18 + art. 25 LTVA</div></div></div>\n<div class="case-step" id="c10s2"><div class="step-question"><span class="step-q-num">Q2</span>Exportations de marchandises : traitement de principe ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('c10s2',this,true)">A) Exonération art. 23 si les conditions et la preuve sont suffisantes</button><button class="step-opt" onclick="caseAnswer('c10s2',this,false)">B) Exclusion art. 21</button><button class="step-opt" onclick="caseAnswer('c10s2',this,false)">C) Toujours 8,1%</button><button class="step-opt" onclick="caseAnswer('c10s2',this,false)">D) Hors champ par absence de contre-prestation</button></div><div class="step-explanation" id="c10s2-expl">L’exportation est une exonération si les conditions de l’art. 23 sont remplies et suffisamment prouvées. La rubrique du décompte sera traitée en M03. <div class="art-ref">📋 art. 23 LTVA</div></div></div>\n<div class="case-step" id="c10s3"><div class="step-question"><span class="step-q-num">Q3</span>Activité de formation déjà qualifiée comme exclue : impact de principe ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('c10s3',this,true)">A) Pas de TVA sur cette prestation non optée et DIP lié à analyser / exclure selon l’affectation</button><button class="step-opt" onclick="caseAnswer('c10s3',this,false)">B) Exonération art. 23 avec DIP automatique</button><button class="step-opt" onclick="caseAnswer('c10s3',this,false)">C) Aucun impact DIP dans tous les cas</button><button class="step-opt" onclick="caseAnswer('c10s3',this,false)">D) Elle devient imposable uniquement parce que la société est assujettie</button></div><div class="step-explanation" id="c10s3-expl">Une prestation exclue non optée ne donne en principe pas droit au DIP sur les coûts qui lui sont liés. La méthode de ventilation appartient à M05. <div class="art-ref">📋 art. 21 + art. 29–30 LTVA</div></div></div>\n<div class="case-step" id="c10s4"><div class="step-question"><span class="step-q-num">Q4</span>Que faut-il transmettre à M03/M05 ?</div><div class="step-options"><button class="step-opt" onclick="caseAnswer('c10s4',this.true)">A) Une matrice par flux : qualification, lieu, base légale, preuve, taux éventuel et affectation DIP</button><button class="step-opt" onclick="caseAnswer('c10s4',this,false)">B) Seulement le total du chiffre d’affaires</button><button class="step-opt" onclick="caseAnswer('c10s4',this,false)">C) Un ch. 405 inventé comme correction universelle</button><button class="step-opt" onclick="caseAnswer('c10s4',this,false)">D) Un prorata DIP automatique</button></div><div class="step-explanation" id="c10s4-expl">La sortie professionnelle de M02 est une matrice de qualification documentée. M03 traduit ensuite les flux dans le formulaire en vigueur et M05 traite le DIP. <div class="art-ref">📋 méthode M02 → M03/M05</div></div></div>\n<div class="box success"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Livrable M02</div><strong>Services CH</strong> : imposables sous hypothèses du cas · <strong>exports</strong> : art. 23 sous conditions de preuve · <strong>formation</strong> : exclue selon qualification déjà établie · <strong>DIP</strong> : affectation à transmettre à M05. Aucune rubrique de formulaire n’est mémorisée ici.</div></div>\n</div></div>\n'''
+              # Correct accidental JS token in generated button
+              new_case10 = new_case10.replace("caseAnswer('c10s4',this.true)", "caseAnswer('c10s4',this,true)")
+              t = t[:s] + new_case10 + t[e:]
+              changes.append('replace case10/decompte overreach:1')
+
+          # Error section: remove fictional “typical” amounts and universal formulas
+          rep('8 erreurs typiques M02 — Impact chiffré AFC', '8 erreurs typiques M02 — qualification, preuve et correction', 'errors title', 1)
+          rep('8 erreurs typiques rencontrées dans les dossiers TVA liés à M02. Chaque erreur est documentée avec : (1) symptôme, (2) base légale, (3) correction, (4) impact financier typique.',
+              '8 erreurs typiques rencontrées dans les dossiers TVA liés à M02. Chaque erreur est documentée avec : (1) symptôme, (2) base légale, (3) correction, (4) conséquence possible. Les montants de rappel ne se déduisent jamais d’un « cas type » : ils dépendent des périodes, bases, droits au DIP et preuves.',
+              'errors hero', 1)
+          rep('Art. 33 LTVA : réduction du DIP en cas de subventions, dons et autres contributions sans contre-prestation. Ch. 410 du formulaire de décompte.',
+              'Art. 33 LTVA : analyser si la contribution reçue est une subvention / contribution visée entraînant une réduction du DIP. Les dons et autres non-contre-prestations ne doivent pas être agrégés automatiquement dans une même règle.',
+              'error2 legal', 1)
+          rep('Calcul du prorata de réduction : Subventions / (Subventions + CA imposable au sens large). Appliquer ce prorata au DIP non directement affectable. Documenter la méthode de calcul. Méthodes simplifiées AFC disponibles pour les associations.',
+              'Commencer par l’affectation directe. Pour les coûts communs, utiliser une méthode objective et appropriée ou une simplification admise par l’AFC lorsque ses conditions sont remplies. Un ratio subventions / chiffre d’affaires n’est pas une formule universelle.',
+              'error2 method', 1)
+          rep("Pour une association recevant CHF 200'000 de subventions et CHF 300'000 de CA imposable, avec CHF 25'000 d'IP commun : réduction DIP = 200/500 × 25'000 = CHF 10'000 non déductibles. Sur 5 ans contrôlés = CHF 50'000 de rappel + intérêts.",
+              'Le montant dépend de la nature de la subvention, de l’affectation des coûts et de la méthode de réduction admise. Le dossier doit montrer le calcul retenu et pourquoi il est approprié.',
+              'error2 remove fake amount', 1)
+          rep("Sur un échantillon de 50 factures contrôlées, si 10% non conformes représentant CHF 80'000 de DIP indûment déduit, par extrapolation sur 5 ans avec CA stable : DIP non admis CHF 400'000 + intérêts moratoires selon le taux DFF applicable.",
+              'Une lacune de facture n’entraîne pas automatiquement un refus en cascade. Le risque dépend de la preuve matérielle, de la possibilité de correction et, en contrôle, de la fiabilité globale du dossier. Ne pas extrapoler un montant fictif sans méthode de contrôle établie.',
+              'error3 remove fake extrapolation', 1)
+          rep("CHF 500'000 d'exports sans preuve suffisante → risque de requalification 8,1% = CHF 40'500 TVA, plus intérêts moratoires selon le taux DFF applicable. Sur plusieurs périodes, l'exposition devient très élevée.",
+              'Si les conditions d’exonération ne peuvent pas être prouvées après reconstitution du dossier, une correction fiscale peut être nécessaire. Son montant dépend de la base HT/TTC, des opérations concernées, des périodes et du traitement correct finalement retenu.',
+              'error5 evidence impact', 1)
+          rep('(1) Procédure interne stricte : pour chaque export, archiver immédiatement la preuve douanière (e-dec OFDF). (2) Lier la preuve à la facture dans l\'ERP. (3) Vérification trimestrielle de l\'exhaustivité (avant chaque décompte). (4) Demander à l\'OFDF en cas de perte la copie de l\'e-dec (jusqu\'à 10 ans).',
+              '(1) Définir un dossier de preuve par export. (2) Lier les pièces douanières, transport, commande et facture dans l’ERP. (3) Vérifier périodiquement l’exhaustivité. (4) En cas de pièce manquante, rechercher les duplicatas et autres éléments probants avant de conclure que l’exonération est perdue.',
+              'error5 proof workflow', 1)
+          rep('(1) Mention explicite de la TVA sur chaque facture optée ("TVA option art. 22 LTVA"). (2) Maintenir l\'option de manière constante pendant la durée minimale. (3) Documenter la décision d\'option (procès-verbal, contrat). (4) Pour immobilier : engagement clair 10 ans dans le contrat de bail.',
+              '(1) Exercer l’option sous une forme admise et cohérente. (2) Documenter la décision et l’affectation. (3) Vérifier les conséquences d’un changement ultérieur. (4) Pour l’immobilier, suivre les règles de correction / dégrèvement dans le temps; ne pas inventer une durée minimale d’option ou un « engagement 10 ans » contractuel universel.',
+              'error6 remove invented minimum', 1)
+          rep('Option invalidée → requalification en exclu → DIP récupéré à corriger (rappel) + intérêts moratoires. Pour un immeuble commercial avec DIP investissement CHF 500\'000 : exposition CHF 200\'000-500\'000 selon durée concernée.',
+              'Une option non admise ou mal appliquée peut entraîner des corrections de TVA facturée et de DIP. En immobilier, l’exposition dépend de l’affectation, de la chronologie et des règles de correction / dégrèvement; aucun montant « type » n’est professionnel sans données du dossier.',
+              'error6 remove fake impact', 1)
+
+          # Cheat sheet: remove stale legal enumeration, volatile rate and wrong return-line ownership
+          sub(r'<div class="cheat-card">\n<div class="cheat-title">🚫 Art\. 21 — Exclusions strictes SANS option \(art\. 22 al\. 2\)</div>.*?</div>\n</div>',
+              '''<div class="cheat-card">\n<div class="cheat-title">🚫 Option art. 22 — règle de sécurité</div>\n<div class="cheat-body"><p>Avant toute option, contrôler <strong>l’art. 22 al. 2 dans la version en vigueur</strong> et la pratique AFC. Ne pas mémoriser une liste de chiffres depuis un ancien module. En immobilier, vérifier l’affectation résidentielle/commerciale et les conséquences de changement d’affectation.</p></div>\n</div>''',
+              'cheat option current source')
+          sub(r'<div class="cheat-card">\n<div class="cheat-title">⭐ Art\. 21 — Catégories avec option art\. 22 possible</div>.*?</div>\n</div>',
+              '''<div class="cheat-card">\n<div class="cheat-title">⭐ Décider d’une option</div>\n<div class="cheat-body"><p>1) opération réellement exclue? 2) option admise? 3) forme d’exercice correcte? 4) impact client? 5) DIP affectable? 6) immobilier/changement d’affectation? → documenter la réponse avant de facturer.</p></div>\n</div>''',
+              'cheat option method')
+          sub(r'<div class="cheat-card">\n<div class="cheat-title">✈️ Art\. 23 — liste actuelle exonérées avec DIP</div>.*?</div>\n</div>',
+              '''<div class="cheat-card">\n<div class="cheat-title">✈️ Art. 23 — réflexe exonération</div>\n<div class="cheat-body"><p>Identifier l’opération visée par le texte actuel, vérifier les conditions matérielles et constituer la preuve. Les exportations de biens sont le cas central. Un service B2B localisé à l’étranger relève d’abord de l’art. 8 et ne doit pas être appelé « export art. 23 » par réflexe.</p></div>\n</div>''',
+              'cheat art23 method')
+          rep('<li>Intérêts moratoires : <strong>taux DFF applicable</strong> (art. 87 ; 2026 : 4,0% en principe)</li>', '<li>Intérêts moratoires : <strong>taux DFF applicable à la période</strong> — vérifier la source en vigueur</li>', 'cheat volatile interest', 1)
+          rep('<li>Soustraction d\'impôt : amende jusqu\'à <strong>100% montant soustrait</strong> (art. 96)</li>\n<li>Soustraction qualifiée : amende jusqu\'à <strong>300%</strong> (art. 96 al. 2)</li>\n<li><strong>Dénonciation spontanée (art. 102)</strong> : avant annonce contrôle = sanction pénale évitée</li>\n<li>Correction décompte (art. 72) : <strong>5 ans</strong> pour corrections spontanées</li>',
+              '<li>Sanctions : analyser séparément les éléments constitutifs, le degré de faute et les dispositions pénales applicables; ne pas transformer M02 en tableau automatique de pourcentages.</li>\n<li><strong>Dénonciation spontanée (art. 102)</strong> : effet favorable seulement si toutes les conditions légales sont remplies; vérifier la chronologie et l’état de connaissance de l’autorité.</li>\n<li>Corrections : utiliser la procédure de rectification / concordance applicable; voir M03 et M11.</li>',
+              'cheat sanctions', 1)
+          rep('<li>☐ Ch. 405 = correction DIP activités exclues</li>\n<li>☐ Ch. 410 = correction DIP subventions art. 33</li>', '<li>☐ Affectation du DIP documentée → traitement détaillé en M05</li>\n<li>☐ Rubriques et corrections du décompte vérifiées dans le formulaire actuel → M03</li>', 'cheat decompte ownership', 1)
+
+          # QCM: teach principles, not brittle formalism or fictional arithmetic
+          rep("expl:'Exclu (art. 21) : hors champ effectif → pas de TVA + pas de DIP. Exonéré (art. 23) : dans le champ à 0% + DIP en principe conservé si preuves suffisantes. C\\'est la distinction la plus testée à l\\'examen.'",
+              "expl:'Prestation exclue (art. 21) : exclusion légale; le DIP lié est en principe exclu en l’absence d’option/règle particulière. Prestation exonérée (art. 23) : impôt suisse non dû et DIP en principe maintenu si les conditions sont remplies. Ne pas appeler l’art. 21 « hors champ » par raccourci.'",
+              'q02 terminology', 1)
+          rep("expl:'Les dividendes sont hors champ TVA car ils ne constituent pas une contre-prestation au sens de l\\'art. 3 let. f LTVA. Ils n\\'apparaissent pas au ch. 200 du décompte (sauf déclaration purement informative).'",
+              "expl:'Les dividendes ne sont pas la contre-prestation d’une prestation imposable. Leur traduction dans le décompte et leur impact holding/DIP sont traités en M03/M07; M02 se limite à la qualification.'",
+              'q05 scope', 1)
+          rep("expl:'Les exportations sont exonérées art. 23 ch. 1 LTVA avec DIP en principe conservé. Preuve documentaire obligatoire : déclaration douanière OFDF (e-dec), CMR signé à destination.'",
+              "expl:'Les exportations sont exonérées selon l’art. 23 si les conditions sont remplies. Le dossier doit apporter une preuve suffisante; documents douaniers et de transport sont importants, sans transformer M02 en liste fermée de pièces admises.'",
+              'q10 export proof', 1)
+          # Replace Q16 entirely
+          sub(r"\{id:'m02-q16'.*?\},\n  \{id:'m02-q17'",
+              "{id:'m02-q16', diff:'med', q:'Quel est le bon réflexe lorsqu’une entité reçoit une subvention ou une autre non-contre-prestation ?',\n    opts:['Réduire automatiquement tout le DIP selon un prorata CA','Qualifier la contribution, identifier si l’art. 33 impose une réduction, affecter directement les coûts puis choisir une méthode appropriée pour les coûts communs','Ignorer toujours la contribution','Traiter tous les dons comme subventions'],\n    correct:1, art:'art. 18 + art. 33 LTVA',\n    expl:'Toutes les non-contre-prestations n’ont pas le même effet. Il faut qualifier la contribution, appliquer l’art. 33 si pertinent, puis documenter l’affectation et la méthode de réduction; pas de prorata universel.'},\n  {id:'m02-q17'",
+              'q16 art33')
+          sub(r"\{id:'m02-q20'.*?\},\n  \{id:'m02-q21'",
+              "{id:'m02-q20', diff:'med', q:'Pour distinguer formation exclue et consulting imposable, quel critère est professionnel ?',\n    opts:['La reconnaissance administrative suffit toujours','Le contenu réel, la finalité pédagogique, l’organisation de l’enseignement et la pratique AFC applicable','Le mot « séminaire » sur la facture','Le nombre de participants uniquement'],\n    correct:1, art:'art. 21 LTVA + pratique AFC formation',\n    expl:'La qualification ne se décide pas par le seul label « reconnu/non reconnu ». Il faut analyser le contenu et la finalité de la prestation. Un conseil individualisé peut être imposable; une formation non reconnue peut néanmoins relever de l’exclusion si ses caractéristiques répondent aux conditions applicables.'},\n  {id:'m02-q21'",
+              'q20 education')
+          rep("expl:'L’art. 87 LTVA prévoit l’intérêt moratoire en cas de paiement tardif. Le taux n’est pas à mémoriser comme un chiffre éternel : il est fixé par l’ordonnance du DFF et doit être vérifié selon la période. Pour 2026, le taux de principe est 4,0%.'",
+              "expl:'L’art. 87 LTVA prévoit l’intérêt moratoire en cas de paiement tardif. Le taux est fixé par le DFF et doit être contrôlé pour la période concernée; ne pas mémoriser un chiffre annuel comme permanent.'",
+              'q21 interest', 1)
+          sub(r"\{id:'m02-q23'.*?\},\n  \{id:'m02-q24'",
+              "{id:'m02-q23', diff:'med', q:'Comment déterminer une réduction du DIP liée à une subvention ?',\n    opts:['Toujours subventions / (subventions + CA)','Par affectation directe puis, pour les coûts communs, par une méthode objective / simplification AFC admise selon le cas','Toujours 50%','En supprimant tout le DIP'],\n    correct:1, art:'art. 33 LTVA',\n    expl:'L’art. 33 ne crée pas un prorata universel. Le praticien qualifie la subvention, affecte les coûts directement si possible et documente une méthode appropriée pour les coûts communs.'},\n  {id:'m02-q24'",
+              'q23 no universal ratio')
+          sub(r"\{id:'m02-q24'.*?\},\n  \{id:'m02-q25'",
+              "{id:'m02-q24', diff:'med', q:'Quel est le bon réflexe pour corriger une facture TVA ?',\n    opts:['Utiliser un document de correction traçable relié à la facture initiale et ajuster la TVA/comptabilité de façon cohérente','Obtenir une autorisation AFC pour chaque avoir','Modifier silencieusement le PDF initial','Une note de crédit est le seul format juridiquement possible dans tous les cas'],\n    correct:0, art:'art. 26 LTVA',\n    expl:'La correction doit être traçable et cohérente. Une note de crédit / un avoir correctement référencé est une solution courante; l’objectif est de corriger la preuve et le traitement fiscal, pas de sacraliser un seul format.'},\n  {id:'m02-q25'",
+              'q24 correction')
+          sub(r"\{id:'m02-q25'.*?\},\n\n  // ═══ HARD",
+              "{id:'m02-q25', diff:'med', q:'Quelle formulation est correcte pour la prescription TVA ?',\n    opts:['Toujours 3 ans','Délai relatif de 5 ans et délai absolu de 10 ans, sous réserve des causes légales de suspension/interruption','Toujours 10 ans sans exception','Chaque courrier de l’AFC remet automatiquement tout à zéro sans limite'],\n    correct:1, art:'art. 42 LTVA',\n    expl:'Mémoriser la structure relative/absolue et vérifier la chronologie du dossier. Les causes de suspension/interruption doivent être appliquées juridiquement; ne pas résumer la prescription à une phrase automatique.'},\n\n  // ═══ HARD",
+              'q25 prescription')
+          sub(r"\{id:'m02-q28'.*?\},\n  \{id:'m02-q29'",
+              "{id:'m02-q28', diff:'hard', q:'Quel est le bon réflexe face à une erreur susceptible d’une dénonciation spontanée ?',\n    opts:['Promettre automatiquement l’absence de sanction si le contrôle n’est pas encore annoncé','Vérifier toutes les conditions de l’art. 102, la chronologie et l’état de connaissance de l’autorité avant de conclure à l’effet pénal','Attendre le contrôle','Déclarer uniquement si le montant dépasse CHF 100’000'],\n    correct:1, art:'art. 102 LTVA',\n    expl:'Le caractère spontané est une condition parmi plusieurs. Une annonce de contrôle peut faire perdre la spontanéité, mais la conclusion doit reposer sur toutes les conditions légales et la chronologie documentée.'},\n  {id:'m02-q29'",
+              'q28 spontaneous disclosure')
+          sub(r"\{id:'m02-q29'.*?\},\n  \{id:'m02-q30'",
+              "{id:'m02-q29', diff:'hard', q:'Des pièces douanières manquent pour des exportations déclarées exonérées. Quel est le premier réflexe ?',\n    opts:['Calculer immédiatement 8,1% sur tout le montant','Reconstituer le dossier de preuve, vérifier les conditions de l’art. 23 et ne chiffrer une correction qu’après qualification de la base et des périodes','Ignorer le problème','Transformer l’export en art. 21'],\n    correct:1, art:'art. 23 LTVA',\n    expl:'L’absence d’une pièce déterminée n’est pas une formule de rappel. Il faut d’abord établir si l’exonération reste suffisamment prouvée; seulement ensuite calculer une éventuelle correction selon la base correcte et les périodes.'},\n  {id:'m02-q30'",
+              'q29 export evidence')
+          sub(r"\{id:'m02-q33'.*?\},\n  \{id:'m02-q34'",
+              "{id:'m02-q33', diff:'hard', q:'Une association reçoit des subventions et supporte des coûts communs. Quelle démarche est correcte ?',\n    opts:['Appliquer automatiquement un prorata subventions/CA','Qualifier la subvention, affecter directement les coûts puis documenter une méthode de réduction appropriée pour le reliquat commun','Supprimer tout le DIP','Aucune réduction n’est jamais possible'],\n    correct:1, art:'art. 33 LTVA',\n    expl:'Le calcul dépend des faits et de la méthode admise. M02 enseigne le réflexe; M05 traite les méthodes de répartition et M03 la traduction dans le décompte.'},\n  {id:'m02-q34'",
+              'q33 art33 method')
+
+          # Flashcards / vocab terminology and education/invoice updates
+          rep("def:'Exclu (art. 21) = hors champ effectif = pas de TVA + PAS DE DIP. Exonéré (art. 23) = dans le champ à 0% = pas de TVA + DIP à analyser selon art. 29. Distinction centrale en examen et en pratique.'",
+              "def:'Prestations exclues art. 21 = exclusion légale; DIP lié en principe exclu en l’absence d’option/règle particulière. Prestations exonérées art. 23 = impôt suisse non dû et DIP en principe maintenu si les conditions sont remplies. Ne pas employer « hors champ » comme synonyme de l’art. 21.'",
+              'flashcard exclu/exonere', 1)
+          rep("def:'Formation initiale (écoles reconnues, ch. 10) + perfectionnement professionnel (ch. 11). EXCLU si contenu pédagogique formalisé. Consulting déguisé en formation = imposable 8,1%.'",
+              "def:'La qualification formation / enseignement dépend du contenu réel et de la finalité pédagogique selon l’art. 21 et la pratique AFC. La reconnaissance ou l’absence de reconnaissance n’est pas un test suffisant. Conseil individualisé et formation structurée doivent être distingués.'",
+              'flashcard education', 1)
+          rep('<div class="vc-use">Opération hors champ effectif TVA — pas de TVA, pas de DIP. liste légale exhaustives. Option art. 22 partielle.</div>', '<div class="vc-use">Prestation exclue selon une catégorie légale de l’art. 21. Pas de TVA sur la prestation non optée et DIP lié en principe exclu. Ne pas confondre avec une non-contre-prestation.</div>', 'vocab excluded', 1)
+          rep('<div class="vc-use">Facture comportant les 7 points de contrôle usuels art. 26 LTVA. Condition sine qua non de la déduction du DIP.</div>', '<div class="vc-use">Facture répondant aux indications de l’art. 26. La grille de 7 points est un outil de contrôle; le droit au DIP dépend aussi de l’art. 28 et de la preuve matérielle. Une lacune formelle n’entraîne pas automatiquement la perte du DIP.</div>', 'vocab invoice', 1)
+          rep('<div class="vc-use">Document de correction d\'une facture émise (annulation totale ou partielle). Outil officiel de correction TVA.</div>', '<div class="vc-use">Document de correction / avoir relié à la facture initiale. La correction doit être traçable et cohérente dans la comptabilité et le traitement TVA.</div>', 'vocab credit note', 1)
+
+          # Global clean-up of remaining brittle wording
+          t = t.replace('2026 : 4,0% en principe', 'taux DFF à contrôler')
+          t = t.replace('Pour 2026, le taux de principe est 4,0%.', 'Le taux applicable doit être vérifié pour la période concernée.')
+          t = t.replace('opération hors champ effectif', 'prestation exclue')
+          t = t.replace('hors champ effectif TVA', 'exclue selon l’art. 21')
+          t = t.replace('DIP en cascade', 'DIP à sécuriser')
+
+          p.write_text(t, encoding='utf-8')
+          print('Applied changes:', len(changes))
+          for c in changes: print(' -', c)
+          PY
+
+          # QA: dangerous stale teaching points must be gone
+          ! grep -q "engagement clair 10 ans dans le contrat de bail" m02-qualification-operations.html
+          ! grep -q "Subventions / (Subventions + CA imposable au sens large)" m02-qualification-operations.html
+          ! grep -q "Condition sine qua non de la déduction du DIP" m02-qualification-operations.html
+          ! grep -q "Pour 2026, le taux de principe est 4,0%" m02-qualification-operations.html
+          ! grep -q "ch. 405 — Correction IP" m02-qualification-operations.html
+
+          # HTML/JS sanity: extract the inline JS and ask Node to parse it
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t = Path('m02-qualification-operations.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>(.*?)</script>', t, re.S)
+          Path('/tmp/m02-inline.js').write_text('\n'.join(scripts), encoding='utf-8')
+          print('inline scripts:', len(scripts), 'bytes:', Path('/tmp/m02-inline.js').stat().st_size)
+          PY
+          node --check /tmp/m02-inline.js
+
+      - name: Commit audited M02
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m02-qualification-operations.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit M02 qualification evidence pedagogy and scope"
+          git push
