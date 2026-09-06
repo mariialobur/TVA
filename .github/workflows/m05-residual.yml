@@ -19,6 +19,7 @@ jobs:
           python3 tools/m05_residual_patch.py
           python3 tools/m05_residual_patch2.py
           python3 tools/m05_final_cleanup.py
+          python3 tools/m05_final_cleanup2.py
       - name: Validate residual M05
         run: |
           python3 - <<'PY'
