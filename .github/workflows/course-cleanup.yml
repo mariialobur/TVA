@@ -1,0 +1,149 @@
+name: Normalize TVA course
+
+on:
+  push:
+    paths:
+      - '.course-cleanup-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Normalize branding, manifest and navigation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          BRAND = "Formation de spécialiste TVA suisse"
+          DASH_LINK = '<a href="index.html" style="display:block;color:var(--gold);text-decoration:none;text-align:center;font-size:11px;font-weight:600;margin-bottom:7px">← Dashboard</a>'
+
+          module_titles = {
+            "m01-introduction-tva-suisse.html": "M01 — Introduction TVA suisse",
+            "m02-qualification-operations.html": "M02 — Qualification des opérations TVA",
+            "m03-decomptes-methodes-tva.html": "M03 — Décomptes TVA & Méthodes",
+            "m04-tva-comptabilite-suisse.html": "M04 — TVA & Comptabilité suisse",
+            "m05-deduction-impot-prealable-dip.html": "M05 — Déduction de l’impôt préalable (DIP)",
+            "m06-territorialite-tva-internationale.html": "M06 — Territorialité & TVA internationale suisse",
+            "m07-holdings-groupes-tva.html": "M07 — Holdings & groupes TVA",
+            "m08-immobilier-construction-tva.html": "M08 — Immobilier & construction",
+            "m09-secteurs-sensibles-tva.html": "M09 — Secteurs sensibles",
+            "m10-digital-plateformes-ecommerce.html": "M10 — Digital, plateformes & e-commerce",
+            "m11-controle-afc-tva.html": "M11 — Contrôle AFC",
+            "m12-jurisprudence-lab-tva.html": "M12 — Jurisprudence Lab TVA",
+            "m13-communication-fiscale-cabinet.html": "M13 — Communication fiscale & cabinet",
+            "m14-examen-blanc-synthese-finale.html": "M14 — Examen blanc & synthèse finale",
+          }
+
+          # Global visible branding cleanup in text files.
+          targets = [Path("index.html"), Path("legal-qa-checklist.html"), Path("README.md"), Path("AUDIT-TECHNIQUE.md")]
+          targets += [Path(p) for p in module_titles]
+          for p in targets:
+            if not p.exists():
+              continue
+            s = p.read_text(encoding="utf-8")
+            s = s.replace("TVA Expert Academy", BRAND)
+            s = s.replace("TVA Academy", BRAND)
+            s = s.replace("Sector Lab TVA suisse", BRAND)
+            s = s.replace("tvaAcademyDashboardV11Clean", "tvaSpecialisteTvaDashboardV1")
+            p.write_text(s, encoding="utf-8")
+
+          # Clean, consistent browser titles for all modules.
+          for filename, base_title in module_titles.items():
+            p = Path(filename)
+            s = p.read_text(encoding="utf-8")
+            new_title = f"{base_title} · {BRAND}"
+            s = re.sub(r"<title>.*?</title>", f"<title>{new_title}</title>", s, count=1, flags=re.S)
+            p.write_text(s, encoding="utf-8")
+
+          # Ensure dashboard return exists in the three modules that had inconsistent navigation.
+          for filename in ["m01-introduction-tva-suisse.html", "m07-holdings-groupes-tva.html", "m08-immobilier-construction-tva.html"]:
+            p = Path(filename)
+            s = p.read_text(encoding="utf-8")
+            if 'href="index.html"' not in s:
+              if '<div class="sb-foot">' in s:
+                s = s.replace('<div class="sb-foot">', '<div class="sb-foot">' + DASH_LINK, 1)
+              else:
+                raise SystemExit(f"Cannot locate sidebar footer in {filename}")
+            p.write_text(s, encoding="utf-8")
+
+          # Dashboard: course name is the primary identity, not an academy label.
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+          s = re.sub(r"<title>.*?</title>", f"<title>{BRAND}</title>", s, count=1, flags=re.S)
+          s = re.sub(r'<div class="kicker">.*?</div>', '<div class="kicker">Cours de formation · 14 modules</div>', s, count=1, flags=re.S)
+          s = re.sub(r'<h1>.*?</h1>', f'<h1>{BRAND}</h1>', s, count=1, flags=re.S)
+          p.write_text(s, encoding="utf-8")
+
+          # README and technical audit headings.
+          p = Path("README.md")
+          s = p.read_text(encoding="utf-8")
+          s = re.sub(r'^# .*$', f'# {BRAND}', s, count=1, flags=re.M)
+          p.write_text(s, encoding="utf-8")
+
+          p = Path("AUDIT-TECHNIQUE.md")
+          s = p.read_text(encoding="utf-8")
+          s = re.sub(r'^# .*$', f'# Audit technique pré-publication — {BRAND}', s, count=1, flags=re.M)
+          p.write_text(s, encoding="utf-8")
+
+          # Legal QA page branding.
+          p = Path("legal-qa-checklist.html")
+          s = p.read_text(encoding="utf-8")
+          s = re.sub(r'<title>.*?</title>', f'<title>Legal QA checklist — {BRAND}</title>', s, count=1, flags=re.S)
+          s = re.sub(r'<h1>.*?</h1>', f'<h1>Legal QA checklist — {BRAND}</h1>', s, count=1, flags=re.S)
+          p.write_text(s, encoding="utf-8")
+
+          # Rebuild manifest from the actual module files; no stale checksums.
+          modules = []
+          for filename, base_title in module_titles.items():
+            mid = filename[:3].upper()
+            modules.append({
+              "id": mid,
+              "file": filename,
+              "title": f"{base_title} · {BRAND}"
+            })
+          manifest = {
+            "project": BRAND,
+            "type": "static-training-site",
+            "dashboard": "index.html",
+            "module_count": 14,
+            "modules": modules,
+            "qa": "legal-qa-checklist.html",
+            "notes": [
+              "All module HTML files are self-contained.",
+              "Relative dashboard links normalized for GitHub Pages project-site deployment.",
+              "Checksums are intentionally omitted: module content is versioned by Git commits."
+            ]
+          }
+          Path("manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          # Guardrails: no academy branding remains, manifest has no sha256, required files exist.
+          corpus = "\n".join(p.read_text(encoding="utf-8") for p in targets if p.exists()) + Path("manifest.json").read_text(encoding="utf-8")
+          if re.search(r'Academy', corpus, flags=re.I):
+            raise SystemExit("Academy branding still present")
+          if 'sha256' in Path("manifest.json").read_text(encoding="utf-8"):
+            raise SystemExit("Stale sha256 field still present")
+          for filename in module_titles:
+            if not Path(filename).exists():
+              raise SystemExit(f"Missing module: {filename}")
+          PY
+
+      - name: Commit normalized course
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html legal-qa-checklist.html README.md AUDIT-TECHNIQUE.md manifest.json m*.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Normalize TVA specialist course"
+            git push
+          fi
