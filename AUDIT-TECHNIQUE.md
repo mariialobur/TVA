@@ -1,4 +1,4 @@
-# Audit technique pré-publication — TVA Academy
+# Audit technique pré-publication — Formation de spécialiste TVA suisse
 
 Date de préparation : 2026-09-06
 

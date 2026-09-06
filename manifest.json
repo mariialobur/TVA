@@ -1,5 +1,5 @@
 {
-  "project": "TVA Academy — Parcours Spécialiste TVA Suisse",
+  "project": "Formation de spécialiste TVA suisse",
   "type": "static-training-site",
   "dashboard": "index.html",
   "module_count": 14,
@@ -7,91 +7,78 @@
     {
       "id": "M01",
       "file": "m01-introduction-tva-suisse.html",
-      "title": "M01 — Introduction TVA suisse · TVA Expert Academy",
-      "sha256": "ab017e25d03ec5adeba897ec9a197c598bd5940a137581c19d9e6d60d45b8b0e"
+      "title": "M01 — Introduction TVA suisse · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M02",
       "file": "m02-qualification-operations.html",
-      "title": "M02 — Qualification des opérations TVA · TVA Academy",
-      "sha256": "e1e24d7adc296c222f997929fe4b3c1769d35b2f8f2d9388ba4387ad07d9e4a6"
+      "title": "M02 — Qualification des opérations TVA · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M03",
       "file": "m03-decomptes-methodes-tva.html",
-      "title": "M03 — Décomptes TVA & Méthodes · TVA Academy",
-      "sha256": "603ce128073347aee779a87f90790b5947b36e4fab6fafd8a4a576db739864fe"
+      "title": "M03 — Décomptes TVA & Méthodes · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M04",
       "file": "m04-tva-comptabilite-suisse.html",
-      "title": "M04 — TVA & Comptabilité suisse · TVA Academy v4.3",
-      "sha256": "4672c904b110ed22f4b56ef4d37793a93c2332025bfe800a02cf3504fa7f9988"
+      "title": "M04 — TVA & Comptabilité suisse · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M05",
       "file": "m05-deduction-impot-prealable-dip.html",
-      "title": "M05 v4.5 — DIP · Dossier premium · TVA Academy",
-      "sha256": "debeeca3c111f84e1ced2663cd7e99628daf386811f2b3553cf6b9d8d90d1d45"
+      "title": "M05 — Déduction de l’impôt préalable (DIP) · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M06",
       "file": "m06-territorialite-tva-internationale.html",
-      "title": "M06 — Territorialité & TVA internationale suisse · v4.3 · TVA Academy",
-      "sha256": "9aacb79e4615a1efc374c976bed3b76174e4ac0dd7243000874543887dc8be94"
+      "title": "M06 — Territorialité & TVA internationale suisse · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M07",
       "file": "m07-holdings-groupes-tva.html",
-      "title": "M07 — TVA Holdings & Groupes TVA · TVA Academy",
-      "sha256": "384d1d413dfe274641707ef56224905f414ac7386aacfbeafd6f2f82a23309c3"
+      "title": "M07 — Holdings & groupes TVA · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M08",
       "file": "m08-immobilier-construction-tva.html",
-      "title": "M08 — TVA Immobilier & Construction · TVA Expert Academy",
-      "sha256": "6cb2ed4c4fb65a7120340509997c0ff206534d2edb9d7a5429fe2710554c7236"
+      "title": "M08 — Immobilier & construction · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M09",
       "file": "m09-secteurs-sensibles-tva.html",
-      "title": "M09 — Secteurs sensibles · Sector Lab TVA suisse",
-      "sha256": "ddc5ad61f8ed4e9a365f3c04341e3bfa68761cbe44f9f50fba9cefa8fd1a7cc7"
+      "title": "M09 — Secteurs sensibles · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M10",
       "file": "m10-digital-plateformes-ecommerce.html",
-      "title": "M10 — Digital, plateformes & e-commerce · TVA Academy",
-      "sha256": "5a4c754444f6460bfda9a37591decbb1c2e5f0b0574918b53ad1ef2b2343617b"
+      "title": "M10 — Digital, plateformes & e-commerce · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M11",
       "file": "m11-controle-afc-tva.html",
-      "title": "M11 — Contrôle AFC · TVA Academy",
-      "sha256": "1531c0fd25c00bb9759b3b0d3bc93f87e1940f442036c09a06f6c15413340dd7"
+      "title": "M11 — Contrôle AFC · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M12",
       "file": "m12-jurisprudence-lab-tva.html",
-      "title": "M12 — Jurisprudence Lab TVA · 18 références vérifiées",
-      "sha256": "f28935b032b478e232ef06ba46ba74985b79bc5ab976b75d37b56d69999fb466"
+      "title": "M12 — Jurisprudence Lab TVA · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M13",
       "file": "m13-communication-fiscale-cabinet.html",
-      "title": "M13 — Communication fiscale & Cabinet · TVA Academy",
-      "sha256": "8ac6a90a8427696e8ee1d226c673cf41b0b6b35e89c20d5085d59efd90f83ea0"
+      "title": "M13 — Communication fiscale & cabinet · Formation de spécialiste TVA suisse"
     },
     {
       "id": "M14",
       "file": "m14-examen-blanc-synthese-finale.html",
-      "title": "M14 — Examen blanc · Synthèse finale · TVA Academy",
-      "sha256": "67b7fb0862a235e42297008cb90c38ee5ec74c902592e98bd3c9e2bf29196594"
+      "title": "M14 — Examen blanc & synthèse finale · Formation de spécialiste TVA suisse"
     }
   ],
   "qa": "legal-qa-checklist.html",
   "notes": [
     "All module HTML files are self-contained.",
-    "Relative dashboard links normalized for GitHub Pages project-site deployment."
+    "Relative dashboard links normalized for GitHub Pages project-site deployment.",
+    "Checksums are intentionally omitted: module content is versioned by Git commits."
   ]
 }

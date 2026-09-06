@@ -1,4 +1,4 @@
-# TVA Academy — Parcours Spécialiste TVA Suisse
+# Formation de spécialiste TVA suisse
 
 Site statique de formation consacré à la TVA suisse, structuré en **14 modules (M01–M14)** avec cas pratiques, autotests et examen blanc.
 
