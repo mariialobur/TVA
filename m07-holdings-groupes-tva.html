@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>M07 — TVA Holdings &amp; Groupes TVA · TVA Academy</title>
+<style>
+:root{
+  --navy:#0B2545;--navy2:#163A6E;--navy3:#1F4D8C;
+  --gold:#C9A84C;--gold2:#F0D988;
+  --cream:#F8F5EE;--cream2:#EDE8DC;
+  --rust:#A0341A;--rust2:#FAE8E3;
+  --sage:#2A6B48;--sage2:#E3F2EA;
+  --amber:#7A5200;--amber2:#FEF3D8;
+  --ink:#1A1A2E;--muted:#6B7280;
+  --border:#E5E0D4;
+  --sidebar:260px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--ink);display:flex;min-height:100vh}
+
+#sidebar{width:var(--sidebar);background:var(--navy);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-header{padding:18px 16px 14px;border-bottom:1px solid rgba(201,168,76,.2)}
+.sb-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.sb-title{color:#fff;font-size:14px;font-weight:600;line-height:1.3;margin-bottom:2px}
+.sb-sub{color:rgba(255,255,255,.4);font-size:11px}
+.sb-prog{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sb-prog-row{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px}
+.sb-bar{background:rgba(255,255,255,.1);border-radius:3px;height:3px}
+.sb-fill{background:var(--gold);height:3px;border-radius:3px;transition:width .4s;width:0%}
+.sb-nav{flex:1;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.sb-cat{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:8px 6px 3px}
+.sb-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;cursor:pointer;color:rgba(255,255,255,.55);font-size:12.5px;transition:all .15s;border:none;background:transparent;width:100%;text-align:left}
+.sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-item.active{background:rgba(201,168,76,.15);color:var(--gold)}
+.sb-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;transition:background .2s}
+.sb-item.active .sb-dot{background:var(--gold)}
+.sb-item.visited .sb-dot{background:var(--sage)}
+.sb-chip{font-size:9px;padding:1px 5px;border-radius:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);margin-left:auto;white-space:nowrap}
+.sb-foot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.06)}
+
+#main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-left{display:flex;align-items:center;gap:8px}
+.tb-mod{font-family:monospace;background:var(--navy);color:var(--gold);font-size:11px;padding:2px 8px;border-radius:3px}
+.tb-name{font-size:13px;font-weight:500;color:var(--ink)}
+.tb-right{display:flex;align-items:center;gap:8px}
+.tb-badge{font-size:11px;padding:3px 9px;border-radius:4px}
+.tb-time{background:var(--amber2);color:var(--amber)}
+.tb-level{background:var(--rust2);color:var(--rust);font-weight:600}
+.tb-ver{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);font-size:10px}
+.content{padding:24px 28px;max-width:820px}
+
+.section{display:none}
+.section.active{display:block}
+
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:10px;padding:24px 28px;margin-bottom:22px}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.hero-h{color:#fff;font-size:22px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.hero-p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.65;margin-bottom:14px}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:11px;padding:4px 10px;border-radius:14px}
+
+.block{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:14px}
+.block-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bnum{width:24px;height:24px;background:var(--navy);color:var(--gold);font-size:11px;font-family:monospace;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.block-h h3{font-size:16px;font-weight:600;color:var(--navy)}
+.prose{font-size:13.5px;color:#2C2C3E;line-height:1.75;margin-bottom:12px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0}
+.tbl th{background:var(--navy);color:var(--gold);padding:8px 12px;text-align:left;font-weight:500;font-size:11.5px}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:#2C2C3E;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:var(--cream)}
+
+.comp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0}
+.comp-table th{background:var(--navy);color:var(--gold);padding:8px 12px;text-align:left;font-weight:500;font-size:11.5px}
+.comp-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:#2C2C3E;vertical-align:top}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table tr:nth-child(even) td{background:var(--cream)}
+
+
+.box{display:flex;gap:12px;border-radius:7px;padding:12px 16px;margin:12px 0;align-items:flex-start}
+.box-icon{font-size:17px;flex-shrink:0;margin-top:1px}
+.box-body{flex:1;font-size:13px;color:#2C2C3E;line-height:1.65}
+.box-title{font-weight:600;font-size:13px;margin-bottom:4px;color:var(--navy)}
+.box.ok{background:var(--sage2);border-left:3px solid var(--sage)}
+.box.info{background:#EFF4FB;border-left:3px solid var(--navy3)}
+.box.warn{background:var(--amber2);border-left:3px solid var(--amber)}
+.box.danger{background:var(--rust2);border-left:3px solid var(--rust)}
+.box.gold{background:rgba(201,168,76,.08);border-left:3px solid var(--gold)}
+.box.afc{background:var(--navy);border-left:3px solid var(--gold)}
+.box.afc .box-title{color:var(--gold)}
+.box.afc .box-body{color:rgba(255,255,255,.75)}
+.box.fidu{background:#F0EDF8;border-left:3px solid #6D28D9}
+.box.fidu .box-title{color:#4C1D95}
+.box.fidu .box-body{color:#4C1D95}
+
+.risk{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:600}
+.risk-g{background:#e8f5e9;color:#1a6b2e}
+.risk-o{background:#fff3e0;color:#7a4a00}
+.risk-r{background:var(--rust2);color:var(--rust)}
+.risk-n{background:#e8e8e8;color:#222}
+
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.type-card{border-radius:8px;padding:16px;border:1px solid var(--border)}
+.type-card.pure{background:var(--rust2);border-color:var(--rust)}
+.type-card.mixte{background:var(--amber2);border-color:var(--amber)}
+.type-card.oper{background:var(--sage2);border-color:var(--sage)}
+.type-title{font-size:13px;font-weight:700;margin-bottom:6px}
+.type-card.pure .type-title{color:var(--rust)}
+.type-card.mixte .type-title{color:var(--amber)}
+.type-card.oper .type-title{color:var(--sage)}
+.type-item{font-size:11.5px;line-height:1.6;color:#2C2C3E}
+
+.flux-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.flux-row:last-child{border-bottom:none}
+.flux-from{min-width:130px;color:var(--muted)}
+.flux-arrow{color:var(--gold);font-size:14px;flex-shrink:0}
+.flux-type{flex:1;font-weight:600;color:var(--ink)}
+.flux-tva{min-width:80px;font-family:monospace;font-size:11px}
+.flux-tva.imp{color:var(--sage);font-weight:700}
+.flux-tva.hors{color:var(--rust)}
+.flux-dip{min-width:50px;font-family:monospace;font-size:11px}
+
+.leg-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:10px;display:flex;gap:14px}
+.leg-icon{width:38px;height:38px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.li-blue{background:#EFF4FB} .li-green{background:var(--sage2)} .li-gold{background:var(--amber2)} .li-red{background:var(--rust2)}
+.leg-ref{font-family:monospace;font-size:10.5px;color:var(--muted);margin-bottom:2px}
+.leg-title{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.leg-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:8px}
+.leg-links{display:flex;gap:6px;flex-wrap:wrap}
+.leg-link{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--navy3);text-decoration:none;border:1px solid rgba(31,77,140,.25);border-radius:4px;padding:3px 8px;transition:all .15s}
+.leg-link:hover{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+
+.jur-card{background:#fff;border-left:3px solid var(--navy3);border-radius:0 7px 7px 0;padding:11px 14px;margin:8px 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.jur-ref{font-family:monospace;font-size:10px;color:var(--navy3);font-weight:700;margin-bottom:3px}
+.jur-titre{font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.jur-principe{font-size:12px;color:#2C2C3E;line-height:1.6}
+
+.case-card{background:#fff;border:1px solid var(--border);border-radius:8px;margin-bottom:14px;overflow:hidden}
+.case-head{background:var(--navy);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.case-n{width:30px;height:30px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:13px;color:var(--gold);flex-shrink:0}
+.case-meta{flex:1}
+.case-title{color:#fff;font-size:13.5px;font-weight:600;margin-bottom:2px}
+.case-sub{color:rgba(255,255,255,.5);font-size:11.5px}
+.case-body{padding:18px 20px}
+.scenario{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.75;color:#2C2C3E;margin-bottom:14px}
+.ctx-note{font-size:12px;color:var(--amber);background:var(--amber2);border-left:3px solid var(--gold);padding:7px 12px;border-radius:5px;margin-bottom:14px}
+
+.step{border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:12px}
+.step-q{background:var(--cream);padding:11px 14px;font-size:13px;font-weight:500;color:var(--navy);display:flex;align-items:flex-start;gap:8px}
+.step-qn{background:var(--navy);color:var(--gold);font-family:monospace;font-size:9.5px;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:1px}
+.step-opts{padding:10px 12px;display:flex;flex-direction:column;gap:5px}
+.opt{text-align:left;padding:8px 12px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:12.5px;cursor:pointer;transition:all .15s;color:var(--ink);font-family:inherit;width:100%}
+.opt:hover{border-color:var(--navy);background:var(--cream)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--sage2);border-color:var(--sage);color:var(--sage)}
+.opt.wrong{background:var(--rust2);border-color:var(--rust);color:var(--rust)}
+.step-expl{display:none;background:#fff;border-top:1px solid var(--border);padding:12px 14px;font-size:12.5px;line-height:1.7;color:#2C2C3E}
+.step-expl.show{display:block}
+.art-tag{display:inline-block;font-family:monospace;font-size:10.5px;background:var(--navy);color:var(--gold);padding:2px 8px;border-radius:3px;margin-top:8px}
+
+.calc{background:var(--navy);border-radius:8px;padding:16px 18px;margin-top:12px}
+.calc-title{color:var(--gold);font-family:monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px}
+.calc-row:last-child{border-bottom:none}
+.calc-label{color:rgba(255,255,255,.6)}
+.calc-val{font-family:monospace;color:#fff}
+.calc-row.total .calc-label{color:rgba(255,255,255,.85);font-weight:600}
+.calc-row.total .calc-val{color:var(--gold2);font-size:14px}
+.calc-row.hl{border-top:1px solid rgba(201,168,76,.3);margin-top:4px;padding-top:8px}
+.calc-row.hl .calc-label{color:var(--gold)}
+.calc-row.hl .calc-val{color:var(--gold2);font-weight:700}
+.calc-row.danger .calc-val{color:#f87171}
+
+.err-block{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.err-head{background:var(--rust);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.err-icon{font-size:18px}
+.err-htitle{color:#fff;font-size:13.5px;font-weight:600}
+.err-hsub{color:rgba(255,255,255,.6);font-size:11.5px}
+.err-body{padding:16px 18px}
+.err-wrong{background:var(--rust2);border-radius:5px;padding:9px 12px;font-size:13px;color:var(--rust);margin-bottom:8px;display:flex;gap:7px}
+.err-right{background:var(--sage2);border-radius:5px;padding:9px 12px;font-size:13px;color:var(--sage);display:flex;gap:7px}
+.err-afc{margin-top:8px;background:var(--cream);border-left:3px solid var(--gold);padding:9px 12px;font-size:12px;color:#2C2C3E;border-radius:4px}
+
+.quiz-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.q-count{font-family:monospace;font-size:12.5px;color:var(--muted)}
+.q-timer{font-family:monospace;font-size:15px;font-weight:700;color:var(--navy)}
+.q-timer.urgent{color:var(--rust)}
+.q-bar{height:3px;background:var(--border);border-radius:3px;margin-bottom:18px}
+.q-fill{height:3px;background:var(--gold);border-radius:3px;transition:width .3s}
+.q-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:22px 26px}
+.q-art{font-family:monospace;font-size:10.5px;background:var(--navy);color:var(--gold);display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:12px}
+.q-text{font-size:15px;font-weight:500;color:var(--navy);line-height:1.5;margin-bottom:16px}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.q-opt{text-align:left;padding:10px 14px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:13px;cursor:pointer;transition:all .15s;color:var(--ink);font-family:inherit;display:flex;gap:8px;align-items:flex-start;width:100%}
+.q-opt:hover{border-color:var(--navy);background:var(--cream)}
+.q-opt:disabled{cursor:default}
+.q-opt.correct{background:var(--sage2);border-color:var(--sage);color:var(--sage)}
+.q-opt.wrong{background:var(--rust2);border-color:var(--rust);color:var(--rust)}
+.opt-ltr{font-family:monospace;font-size:10.5px;background:var(--border);color:var(--muted);padding:1px 5px;border-radius:2px;flex-shrink:0;margin-top:1px}
+.q-expl{display:none;margin-top:16px;padding:12px 14px;background:var(--cream);border-radius:7px;border-left:3px solid var(--gold)}
+.q-expl.show{display:block}
+.q-expl-title{font-weight:600;font-size:12.5px;margin-bottom:5px}
+.q-expl-title.ok{color:var(--sage)} .q-expl-title.bad{color:var(--rust)}
+.sm2-row{display:flex;gap:7px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+.sm2-lbl{font-size:11.5px;color:var(--muted)}
+.sm2-btn{padding:5px 10px;border-radius:5px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:11.5px;font-family:inherit;transition:all .15s}
+.sm2-btn:hover{border-color:var(--navy)}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.q-skip{font-size:12px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit}
+.q-skip:hover{color:var(--navy)}
+.q-results{display:none;text-align:center;padding:24px}
+.res-score{font-size:64px;font-weight:700;color:var(--navy);line-height:1}
+.res-pct{font-size:32px;color:var(--gold)}
+.res-label{font-size:14px;color:var(--muted);margin-bottom:22px}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px;text-align:left}
+.res-chip{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px}
+.res-chip .rc-n{font-size:22px;font-weight:700;color:var(--navy)}
+.res-chip .rc-l{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+.fc-wrap{display:flex;flex-direction:column;align-items:center;padding:8px 0}
+.fc-ctr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.fc-ctr{font-family:monospace;color:var(--muted);font-size:12.5px;margin-bottom:16px}
+.fc-outer{width:100%;max-width:480px;height:220px;perspective:1000px;cursor:pointer;margin-bottom:16px}
+.fc{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s ease}
+.fc.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fc-front{background:var(--navy);border:1px solid rgba(201,168,76,.2)}
+.fc-back{background:#fff;border:1px solid var(--border);transform:rotateY(180deg)}
+.fc-lbl{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.fc-front .fc-lbl{color:var(--gold)}
+.fc-back .fc-lbl{color:var(--sage)}
+.fc-cat{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.fc-term{font-size:16px;font-weight:700;color:#fff;line-height:1.3}
+.fc-def{font-size:12px;color:#2C2C3E;line-height:1.6}
+.fc-artag{font-family:monospace;font-size:10px;color:var(--gold);background:var(--navy);padding:1px 7px;border-radius:3px;margin-top:8px;display:inline-block}
+.fc-hint{font-size:10.5px;color:rgba(255,255,255,.3);margin-top:10px}
+.fc-btns{display:flex;gap:8px;margin-bottom:20px}
+.fc-btn{padding:7px 14px;border-radius:6px;font-size:12.5px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .2s}
+.fc-bad{background:var(--rust2);color:var(--rust)}
+.fc-ok{background:var(--amber2);color:var(--amber)}
+.fc-good{background:var(--sage);color:#fff}
+.fc-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.fc-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .3s}
+.fc-dot.seen{background:var(--sage)}
+.fc-dot.current{background:var(--gold);transform:scale(1.3)}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.vocab-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px}
+.vfr{font-weight:600;font-size:13px;color:var(--navy);margin-bottom:2px}
+.vde{font-size:10.5px;color:var(--muted);font-style:italic;margin-bottom:5px}
+.vdef{font-size:11.5px;color:#2C2C3E;line-height:1.55}
+.vart{font-family:monospace;font-size:9.5px;color:var(--gold);background:var(--navy);display:inline-block;padding:1px 6px;border-radius:3px;margin-top:5px}
+
+.cheat-block{background:#fff;border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin-bottom:12px}
+.cheat-title{font-family:monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:var(--navy);display:inline-block;padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.cheat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ci{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);gap:8px;font-size:12.5px}
+.ci:last-child{border-bottom:none}
+.ci-l{color:var(--muted);flex:1}
+.ci-v{font-family:monospace;color:var(--navy);font-weight:500;white-space:nowrap}
+.ci-v.r{color:var(--rust)}.ci-v.g{color:var(--sage)}.ci-v.o{color:var(--amber)}
+
+.sec-nav{display:flex;justify-content:space-between;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}
+.btn{padding:9px 18px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+.btn-p{background:var(--navy);color:#fff}
+.btn-p:hover{background:var(--navy2)}
+.btn-g{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.btn-g:hover{border-color:var(--navy);color:var(--navy)}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:600}
+.btn-gold:hover{background:var(--gold2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+@media(max-width:768px){#sidebar{transform:translateX(-100%)}#main{margin-left:0}.content{padding:16px 14px}.three-grid,.vocab-grid,.cheat-grid{grid-template-columns:1fr}.res-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<!-- ═══ SIDEBAR ══════════════════════════════════ -->
+<nav id="sidebar">
+<div class="sb-header">
+<div class="sb-badge">MODULE 07</div>
+<div class="sb-title">TVA Holdings &amp; Groupes TVA</div>
+<div class="sb-sub">~5h · Avancé ⬛ Risque élevé</div>
+</div>
+<div class="sb-prog">
+<div class="sb-prog-row"><span>Progression</span><span id="prog-pct">0%</span></div>
+<div class="sb-bar"><div class="sb-fill" id="prog-fill"></div></div>
+</div>
+<div class="sb-nav">
+<div class="sb-cat">Théorie</div>
+<button class="sb-item active" data-sec="theory" onclick="NAV.go('theory')"><div class="sb-dot"></div>Théorie Holdings<span class="sb-chip">12 blocs</span></button>
+<button class="sb-item" data-sec="legis" onclick="NAV.go('legis')"><div class="sb-dot"></div>Législation &amp; Sources<span class="sb-chip">NOUVEAU</span></button>
+<div class="sb-cat">Pratique</div>
+<button class="sb-item" data-sec="cases" onclick="NAV.go('cases')"><div class="sb-dot"></div>Cas pratiques<span class="sb-chip">8 cas</span></button>
+<button class="sb-item" data-sec="errors" onclick="NAV.go('errors')"><div class="sb-dot"></div>Erreurs fréquentes<span class="sb-chip">8 err.</span></button>
+<div class="sb-cat">Évaluation</div>
+<button class="sb-item" data-sec="quiz" onclick="NAV.go('quiz')"><div class="sb-dot"></div>Autotest QCM<span class="sb-chip">35 Q</span></button>
+<button class="sb-item" data-sec="memo" onclick="NAV.go('memo')"><div class="sb-dot"></div>Mémo-fiches<span class="sb-chip">30 cartes</span></button>
+<div class="sb-cat">Référence</div>
+<button class="sb-item" data-sec="vocab" onclick="NAV.go('vocab')"><div class="sb-dot"></div>Vocabulaire pro<span class="sb-chip">FR / DE</span></button>
+<button class="sb-item" data-sec="cheat" onclick="NAV.go('cheat')"><div class="sb-dot"></div>Cheatsheet AFC<span class="sb-chip">NOUVEAU</span></button>
+</div>
+<div class="sb-foot">
+<div style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">TVA Academy · M07 v4.3</div>
+</div>
+</nav>
+<!-- ═══ MAIN ══════════════════════════════════════ -->
+<div id="main">
+<div class="topbar">
+<div class="tb-left">
+<span class="tb-mod">M07</span>
+<span style="color:var(--muted)">·</span>
+<span class="tb-name">TVA Holdings &amp; Groupes TVA</span>
+</div>
+<div class="tb-right">
+<span class="tb-badge tb-ver">v4.3 — final 10/10 holdings &amp; groupes</span>
+<span class="tb-badge tb-time">⏱ ~5 heures</span>
+<span class="tb-badge tb-level">⬛ Avancé</span>
+</div>
+</div>
+<div class="content">
+<!-- ═══════════════════════════════════════════════
+     SECTION A — THÉORIE
+════════════════════════════════════════════════ -->
+<div class="section active" id="sec-theory">
+<div class="hero">
+<div class="hero-eye">Section A · Théorie fondamentale</div>
+<div class="hero-h">TVA Holdings &amp; Groupes TVA</div>
+<div class="hero-p">15 blocs couvrant les holdings pures, mixtes et opérationnelles, les flux TVA, les management fees, le DIP selon affectation, le cash-pooling, le groupe TVA art. 13, les restructurations art. 38, les share/asset deals et un mini-contrôle final de 20 flux.</div>
+<div class="hero-chips">
+<span class="chip">📖 15 blocs + atelier final</span><span class="chip">⬛ Risque Noir AFC</span>
+<span class="chip">🏛 Vision AFC chaque bloc</span><span class="chip">💼 Réalité fiduciaire</span><span class="chip">🕐 ~2h</span>
+</div>
+</div>
+<div class="box gold" style="margin-bottom:16px">
+<div class="box-icon">⏱</div>
+<div class="box-body">
+<div class="box-title">Durée réaliste par section</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;font-size:12px">
+<div><strong>Théorie</strong><br/>~2h</div><div><strong>Législation</strong><br/>~30 min</div>
+<div><strong>8 cas pratiques</strong><br/>~1h30</div><div><strong>Quiz + Fiches</strong><br/>~1h</div>
+</div>
+</div>
+</div>
+<!-- B1 -->
+<div class="block">
+<div class="block-h"><span class="bnum">1</span><h3>Holding pure, mixte et opérationnelle — Les 3 types</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>Vous rencontrez ce sujet dès qu'un client détient plusieurs sociétés. La question clé que vous devez poser : "Votre holding facture-t-elle des services à ses filiales ?" — la réponse détermine tout le traitement TVA.</div></div>
+<p class="prose">La distinction entre les 3 types de holding conditionne l'assujettissement TVA, le droit à déduction et le groupe TVA. C'est le point de départ obligatoire de tout dossier holding.</p>
+<div class="three-grid">
+<div class="type-card pure">
+<div class="type-title">Holding PURE</div>
+<div class="type-item">Uniquement : dividendes + produits financiers / cession de participations</div>
+<div class="type-item" style="margin-top:6px"><strong>TVA :</strong> dividendes hors champ art. 18 al. 2 let. f ; opérations titres / crédits exclues art. 21 al. 2 ch. 19</div>
+<div class="type-item"><strong>Assujettie :</strong> NON</div>
+<div class="type-item"><strong>DIP :</strong> pas automatique ; art. 29 al. 4 peut permettre de tenir compte de l’activité des participations</div>
+</div>
+<div class="type-card mixte">
+<div class="type-title">Holding MIXTE</div>
+<div class="type-item">Dividendes + produits financiers + management fees + services actifs</div>
+<div class="type-item" style="margin-top:6px"><strong>TVA :</strong> Imposable sur les services</div>
+<div class="type-item"><strong>Assujettie :</strong> OUI (si fees ≥ CHF 100k)</div>
+<div class="type-item"><strong>DIP :</strong> Prorata (art. 30)</div>
+</div>
+<div class="type-card oper">
+<div class="type-title">Holding OPÉRATIONNELLE</div>
+<div class="type-item">Holding + CA propre (production, commerce, services)</div>
+<div class="type-item" style="margin-top:6px"><strong>TVA :</strong> Pleinement imposable</div>
+<div class="type-item"><strong>Assujettie :</strong> OUI</div>
+<div class="type-item"><strong>DIP :</strong> Selon activités</div>
+</div>
+</div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Ce que l'inspecteur vérifie en premier</div>En contrôle, l'AFC peut demander : (1) Les statuts de la holding, (2) La liste des filiales, (3) Les contrats de services avec les filiales, (4) Les flux financiers des 5 dernières années. L'absence de contrats de management fees est un signal de risque.</div></div>
+</div>
+<!-- B2 -->
+<div class="block">
+<div class="block-h"><span class="bnum">2</span><h3>Cartographie des flux TVA dans une structure holding</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>Votre première mission sur un dossier holding : dresser la carte de tous les flux. Chaque flux a son régime TVA spécifique. Confondre "hors champ" et "exclu" coûte du DIP non récupéré sur 5 ans.</div></div>
+<p class="prose">Chaque type de flux entre holding et filiales a un régime TVA distinct. La cartographie préalable est indispensable avant tout calcul ou décompte.</p>
+<div style="background:var(--cream);border:1px solid var(--border);border-radius:7px;padding:14px;margin:12px 0">
+<div style="font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:grid;grid-template-columns:130px 24px 1fr 80px 50px;gap:8px"><span>De → Vers</span><span></span><span>Type de flux</span><span>TVA</span><span>DIP</span></div>
+<div class="flux-row"><span class="flux-from">Filiale → Holding</span><span class="flux-arrow">→</span><span class="flux-type">Dividende</span><span class="flux-tva hors">Hors champ art.18</span><span class="flux-dip" style="color:var(--amber)">Art.29 al.4</span></div>
+<div class="flux-row"><span class="flux-from">Filiale → Holding</span><span class="flux-arrow">→</span><span class="flux-type">Intérêts prêt intragroupe</span><span class="flux-tva exc">Exclu art.21 ch.19</span><span class="flux-dip" style="color:var(--amber)">Selon affectation</span></div>
+<div class="flux-row"><span class="flux-from">Filiale → Holding</span><span class="flux-arrow">→</span><span class="flux-type">Remboursement prêt (capital)</span><span class="flux-tva hors">Hors champ</span><span class="flux-dip" style="color:var(--rust)">NON</span></div>
+<div class="flux-row"><span class="flux-from">Holding → Filiale</span><span class="flux-arrow">→</span><span class="flux-type">Management fees (services direction)</span><span class="flux-tva imp">8,1%</span><span class="flux-dip" style="color:var(--sage)">Prorata</span></div>
+<div class="flux-row"><span class="flux-from">Holding → Filiale</span><span class="flux-arrow">→</span><span class="flux-type">Mise à disposition personnel</span><span class="flux-tva imp">8,1%</span><span class="flux-dip" style="color:var(--sage)">Prorata</span></div>
+<div class="flux-row"><span class="flux-from">Holding → Filiale</span><span class="flux-arrow">→</span><span class="flux-type">Loyer commercial (avec option art. 22)</span><span class="flux-tva imp">8,1%</span><span class="flux-dip" style="color:var(--sage)">Prorata</span></div>
+<div class="flux-row"><span class="flux-from">Holding → Filiale</span><span class="flux-arrow">→</span><span class="flux-type">Refacturation frais (sans marge)</span><span class="flux-tva" style="color:var(--amber)">Selon nature</span><span class="flux-dip" style="color:var(--amber)">Cas/cas</span></div>
+<div class="flux-row"><span class="flux-from">Étranger → Holding</span><span class="flux-arrow">→</span><span class="flux-type">SaaS/services B2B (non inscrit CH)</span><span class="flux-tva" style="color:var(--amber)">Acquisition</span><span class="flux-dip" style="color:var(--sage)">Prorata</span></div>
+</div>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">Hors champ ≠ Exclu ≠ Exonéré — Distinction critique</div>Dividendes, intérêts, opérations financières, prestations exclues et exonérations art. 23 n’ont pas le même effet. Les dividendes ne déclenchent pas une réduction art. 33 automatique ; les intérêts relèvent de l’analyse financière ; le DIP se traite par affectation réelle et clé objective.</div></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Croisement des virements bancaires</div>L'AFC croise les relevés bancaires avec les déclarations TVA. Un virement vers l’étranger peut révéler une acquisition non déclarée ; un virement depuis une filiale doit être qualifié : dividende, intérêt, remboursement, management fee ou refacturation. Le dossier doit permettre cette qualification sans reconstruction après coup.</div></div>
+</div>
+<!-- B2BIS -->
+<div class="block">
+<div class="block-h"><span class="bnum">2B</span><h3>Atelier dossier holding — qualifier avant de calculer le DIP</h3></div>
+<div class="box fidu"><div class="box-icon">🧾</div><div class="box-body"><div class="box-title">Réflexe senior</div>Avant de calculer un prorata, le dossier doit qualifier chaque flux. Une holding ne se contrôle pas uniquement avec un ratio de recettes : il faut relier le flux à une prestation, un article, une ligne de décompte, une affectation DIP et une preuve.</div></div>
+<table class="comp-table"><thead><tr><th>Flux</th><th>Qualification TVA</th><th>Décompte / DIP</th><th>Preuve à conserver</th><th>Risque AFC</th></tr></thead><tbody>
+<tr><td>Dividendes filiales</td><td>Pas une contre-prestation — art. 18 al. 2 let. f</td><td>Pas au ch. 200 ; pas de réduction art. 33 automatique ; art. 29 al. 4 à analyser</td><td>PV d’AG, décision dividende, comptabilisation, note art. 29</td><td>Confusion avec subvention / prorata recettes trop mécanique</td></tr>
+<tr><td>Intérêts / prêts intragroupe</td><td>Opération financière exclue — art. 21 al. 2 ch. 19</td><td>Pas au ch. 200 ; DIP selon affectation réelle des frais de financement</td><td>Contrat de prêt, taux, échéancier, substance, note d’affectation</td><td>Traitement comme dividende ou comme prestation imposable sans analyse</td></tr>
+<tr><td>Cession de participations</td><td>Opération sur titres / participation ; à distinguer d’un asset deal</td><td>Attention frais M&amp;A ; art. 29 al. 2–4 et art. 30 à documenter</td><td>SPA, due diligence, note d’affectation des frais, mandat banque d’affaires</td><td>DIP refusé si frais rattachés trop vite à une vente de titres non documentée</td></tr>
+<tr><td>Management fees CH</td><td>Prestation imposable si réelle, individualisée et prouvée</td><td>TVA 8,1% ; DIP côté filiale si conditions remplies</td><td>Contrat, livrables, rapports, time sheets, méthode de prix</td><td>Requalification en distribution de bénéfice ou fee artificiel</td></tr>
+<tr><td>SaaS / conseil étranger reçu</td><td>Impôt sur les acquisitions</td><td>ch. 383 ; DIP ch. 400/405 selon affectation</td><td>Facture, conversion devise, clé d’affectation, preuve d’usage</td><td>Oubli du ch. 383 ou DIP à 100% sans clé</td></tr>
+<tr><td>Transfert d’activité / patrimoine</td><td>Procédure de déclaration si art. 38 applicable</td><td>Procédure de déclaration selon modalités AFC ; inventaire et reprise des bases TVA par l’acquéreur</td><td>Contrat, inventaire, calcul seuil CHF 10’000, note art. 38</td><td>Confusion avec simple vente d’actions ou omission de notification</td></tr>
+</tbody></table>
+<div class="box ok"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Méthode 10/10</div>La bonne séquence est : <strong>flux → qualification TVA → article → ligne décompte → affectation DIP → preuve</strong>. Le calcul vient seulement après.</div></div>
+</div>
+<!-- B2C -->
+<div class="block">
+<div class="block-h"><span class="bnum">2C</span><h3>Cash-pooling, prêts intragroupe et garanties — zone grise des holdings</h3></div>
+<div class="box fidu"><div class="box-icon">🏦</div><div class="box-body"><div class="box-title">Pourquoi c’est indispensable</div>Une holding réelle ne reçoit pas seulement des dividendes et ne facture pas seulement des management fees. Elle finance, garantit, centralise la trésorerie, paie des banques et refacture parfois des coûts. C’est ici que les erreurs DIP sont les plus discrètes.</div></div>
+<table class="comp-table"><thead><tr><th>Flux financier</th><th>Qualification TVA</th><th>DIP sur les frais liés</th><th>Pièces clés</th></tr></thead><tbody>
+<tr><td>Prêt intragroupe — capital</td><td>Flux financier / remboursement de capital, pas une prestation imposable ordinaire</td><td>Selon affectation des frais de mise en place</td><td>Contrat, échéancier, taux, justification économique</td></tr>
+<tr><td>Intérêts intragroupe</td><td>Opération financière généralement exclue art. 21 al. 2 ch. 19</td><td>Pas de règle automatique : affectation directe ou clé objective</td><td>Contrat, calcul intérêts, benchmark, comptabilisation</td></tr>
+<tr><td>Cash-pooling fee</td><td>À qualifier : service de trésorerie imposable ou composante financière exclue selon le montage</td><td>DIP selon substance réelle du service rendu</td><td>Convention cash-pool, rôle du pool leader, calcul fee, rapports de trésorerie</td></tr>
+<tr><td>Garantie holding pour dette filiale</td><td>À analyser : prestation de garantie / opération financière / simple soutien d’actionnaire</td><td>DIP sur frais juridiques selon affectation</td><td>Contrat de garantie, commission éventuelle, décision board</td></tr>
+<tr><td>Frais banque d’affaires / financement acquisition</td><td>Souvent rattachés à acquisition de titres ou financement groupe</td><td>Art. 29 al. 2–4 + affectation réelle, pas un 100% automatique</td><td>Mandat banque, facture détaillée, memo d’affectation M&amp;A</td></tr>
+</tbody></table>
+<div class="box warning"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Erreur à éviter</div>Ne jamais écrire simplement : « intérêts = dividendes = hors champ = réduction prorata ». Les intérêts relèvent d’une logique financière exclue ; les dividendes relèvent de l’art. 18 al. 2 let. f ; le DIP dépend ensuite de l’affectation réelle et de l’art. 29 pour les participations.</div></div>
+</div>
+<!-- B3 -->
+<div class="block">
+<div class="block-h"><span class="bnum">3</span><h3>Management fees — dossier de preuve avant facturation</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>La question n’est pas seulement : « peut-on facturer des management fees ? » La vraie question est : « pourra-t-on prouver, deux ou quatre ans plus tard, que la prestation existait réellement, qu’elle avait une valeur et qu’elle n’était pas une simple redistribution de bénéfice ? »</div></div>
+<table class="tbl"><thead><tr><th>Pièce du dossier</th><th>Ce qu’elle prouve</th><th>Risque si absente</th></tr></thead><tbody>
+<tr><td>Contrat de management services</td><td>Nature des prestations, destinataire, fréquence, prix</td><td>Fee perçu comme forfait artificiel</td></tr>
+<tr><td>Descriptions de prestations / livrables</td><td>Réalité économique des services</td><td>Requalification en dividende déguisé ou non-prestation</td></tr>
+<tr><td>Timesheets / rapports / PV</td><td>Volume et intervention effective</td><td>Impossible de démontrer le lien avec la contre-prestation</td></tr>
+<tr><td>Méthode de prix</td><td>Cohérence arm’s length / refacturation</td><td>Montant jugé arbitraire ou lié au bénéfice</td></tr>
+<tr><td>Comptabilité analytique</td><td>Affectation des coûts et lien avec DIP</td><td>DIP corrigé faute de clé défendable</td></tr>
+</tbody></table>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">Signaux rouges</div>Montant calculé en pourcentage du bénéfice, facture unique en fin d’année, absence de personnel dans la holding, absence de rapports, même fee pour toutes les filiales sans différence de service, ou contrat signé après coup. Ces éléments ne rendent pas automatiquement le fee invalide, mais ils rendent le dossier difficile à défendre.</div></div>
+<div class="box ok"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Bonne pratique</div>Facturer avec TVA seulement si le service est réel, individualisé et documenté. La filiale ne doit déduire l’IP que si elle utilise la prestation pour son activité donnant droit au DIP.</div></div>
+</div>
+<!-- B4 -->
+<div class="block">
+<div class="block-h"><span class="bnum">4</span><h3>DIP holding pure — ni 0% automatique, ni droit automatique</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Nuance essentielle</div>La réaction pratique est souvent : « holding pure = aucun DIP ». C’est vrai pour une holding non immatriculée qui ne documente aucune activité entrepreneuriale donnant droit à déduction. Mais pour une analyse experte, il faut aussi vérifier l’art. 29 al. 2–4 LTVA : les participations peuvent entrer dans l’activité entrepreneuriale et une holding peut tenir compte de l’activité des sociétés détenues.</div></div>
+<div class="calc">
+<div class="calc-title">Impact financier si aucun droit DIP n’est documenté</div>
+<div class="calc-row"><span class="calc-label">Honoraires comptabilité annuels</span><span class="calc-val">CHF 18'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">Honoraires avocat / restructuration</span><span class="calc-val">CHF 45'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">Due diligence acquisition filiale</span><span class="calc-val">CHF 120'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">IT / software / bureau</span><span class="calc-val">CHF 22'000 HT</span></div>
+<div class="calc-row total"><span class="calc-label">Total charges HT</span><span class="calc-val">CHF 205'000</span></div>
+<div class="calc-row danger"><span class="calc-label">TVA 8,1% en jeu</span><span class="calc-val">CHF 16'605</span></div>
+</div>
+<div class="box warning"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Formule correcte pour le cours</div><strong>Holding pure : pas de DIP automatique.</strong> Le droit à déduction dépend de l’immatriculation, de l’activité entrepreneuriale documentée, de l’art. 29 al. 2–4 LTVA et de l’affectation réelle des frais. Sans dossier, la TVA sur les charges devient effectivement un coût.</div></div>
+<div class="box ok"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Question senior</div>Avant de conclure « 0% », demander : quels frais ? pour quelle participation ? quelle activité des filiales ? quels management services ? quelle preuve ? quelle clé d’affectation ?</div></div>
+</div>
+<!-- B5 -->
+<div class="block">
+<div class="block-h"><span class="bnum">5</span><h3>DIP holding mixte — méthode d’affectation avant prorata recettes</h3></div>
+<div class="box fidu"><div class="box-icon">🧮</div><div class="box-body"><div class="box-title">Le piège du prorata facile</div>Le prorata recettes est pratique pour un exercice, mais il ne doit pas devenir un réflexe automatique. Une holding doit d’abord affecter les charges directement, puis utiliser une clé objective pour les frais réellement communs.</div></div>
+<table class="comp-table"><thead><tr><th>Étape</th><th>Question</th><th>Traitement DIP</th></tr></thead><tbody>
+<tr><td>1. Affectation directe imposable</td><td>La facture sert-elle uniquement aux management fees / services imposables ?</td><td>DIP direct si conditions art. 28 remplies</td></tr>
+<tr><td>2. Frais liés aux participations</td><td>La facture sert-elle à acquérir, gérer ou vendre des participations ?</td><td>Analyse art. 29 al. 2–4 + documentation</td></tr>
+<tr><td>3. Frais financiers</td><td>La facture sert-elle à prêt, cash-pool, garantie, intérêts ?</td><td>Art. 21 ch. 19 / affectation réelle</td></tr>
+<tr><td>4. Frais généraux mixtes</td><td>La facture sert-elle à l’ensemble de la holding ?</td><td>Clé objective documentée : recettes, usage réel, temps, surface, coûts</td></tr>
+<tr><td>5. Contrôle de plausibilité</td><td>La clé reflète-t-elle économiquement l’usage réel ?</td><td>Obligatoire pour défendre une méthode propre</td></tr>
+</tbody></table>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">Ce qu’il ne faut plus enseigner</div>Éviter la phrase absolue : « dividendes et intérêts réduisent toujours mécaniquement le prorata ». Formulation correcte : <strong>dans une clé recettes documentée</strong>, ils peuvent entrer au dénominateur ; mais le droit DIP doit d’abord être analysé par affectation réelle, notamment pour les participations au sens de l’art. 29.</div></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Méthodes admises</div>La correction de l’IP en cas de double affectation doit reposer sur une méthode objective et plausible. Les calculs propres sont possibles, mais ils doivent être documentés et contrôlables.</div></div>
+</div>
+<!-- B6 -->
+<div class="block">
+<div class="block-h"><span class="bnum">6</span><h3>Groupe TVA art. 13 — conditions, effets et responsabilité</h3></div>
+<div class="box fidu"><div class="box-icon">👥</div><div class="box-body"><div class="box-title">Pas une solution magique</div>Le groupe TVA supprime les flux TVA internes et simplifie le décompte, mais il crée une responsabilité collective et demande un suivi des entrées/sorties. Il ne faut pas le vendre comme simple optimisation de trésorerie.</div></div>
+<div class="box info"><div class="box-icon">📋</div><div class="box-body"><div class="box-title">Conditions à retenir</div>
+    1. <strong>Direction unique / liens étroits</strong> économiques, financiers ou organisationnels ;<br/>
+    2. <strong>Siège, domicile ou établissement stable en Suisse</strong> pour les membres concernés ;<br/>
+    3. Le groupe peut inclure aussi des <strong>personnes qui n’exploitent pas d’entreprise</strong> et des <strong>personnes physiques</strong>, si les conditions légales sont remplies ;<br/>
+    4. Un <strong>représentant du groupe</strong> agit comme interlocuteur envers l’AFC.
+    </div></div>
+<table class="tbl"><thead><tr><th>Point</th><th>Effet</th><th>Risque</th></tr></thead><tbody>
+<tr><td>Flux internes</td><td>Pas de TVA interne entre membres du groupe</td><td>Mauvaise date d’entrée/sortie = erreurs de période</td></tr>
+<tr><td>Décompte</td><td>Un seul assujetti TVA pour le groupe</td><td>Qualité des données par entité indispensable</td></tr>
+<tr><td>DIP</td><td>Analyse globalisée, mais affectation toujours nécessaire</td><td>Activités exclues dans une entité peuvent impacter le groupe</td></tr>
+<tr><td>Responsabilité</td><td>Responsabilité solidaire pour créances, intérêts et frais nés pendant l’appartenance</td><td>Ne pas confondre avec les amendes ; après sortie, analyse spécifique</td></tr>
+</tbody></table>
+<div class="box warning"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Nuance responsabilité</div>Pendant l’appartenance au groupe, la responsabilité est large pour les créances fiscales, intérêts et frais. Les amendes ne doivent pas être mélangées avec ces créances. Après sortie, il faut analyser les règles applicables aux créances liées à la période de participation.</div></div>
+</div>
+<!-- B6B -->
+<div class="block">
+<div class="block-h"><span class="bnum">6B</span><h3>Entrée / sortie du groupe TVA — mini-dossier de contrôle</h3></div>
+<table class="comp-table"><thead><tr><th>Événement</th><th>Contrôle à faire</th><th>Document</th></tr></thead><tbody>
+<tr><td>Création groupe TVA</td><td>Direction unique, périmètre, représentant, date d’effet</td><td>Demande AFC, organigramme, PV, contrats internes</td></tr>
+<tr><td>Entrée d’une nouvelle filiale</td><td>Depuis quand elle remplit les conditions ? Flux internes depuis quelle date ?</td><td>Registre du commerce, acquisition, note TVA</td></tr>
+<tr><td>Sortie / vente d’une filiale</td><td>Dernier décompte inclus, DIP historique, corrections éventuelles</td><td>SPA, closing memo, note TVA sortie groupe</td></tr>
+<tr><td>Activité exclue dans une filiale</td><td>Impact DIP groupe / clé d’affectation</td><td>Tableau DIP, comptes analytiques, justificatifs</td></tr>
+</tbody></table>
+</div>
+<!-- B7 -->
+<div class="block">
+<div class="block-h"><span class="bnum">7</span><h3>Share deal, asset deal et art. 38 — ne pas confondre</h3></div>
+<div class="box fidu"><div class="box-icon">🔄</div><div class="box-body"><div class="box-title">Pourquoi ce bloc manque souvent</div>Dans les groupes, les mots « vente de société », « transfert d’activité », « restructuration » et « apport » sont utilisés trop vite. TVA exige de savoir ce qui est réellement transféré : des actions, des actifs, une branche d’activité, ou un patrimoine.</div></div>
+<table class="comp-table"><thead><tr><th>Opération</th><th>Qualification TVA</th><th>Point DIP / procédure</th></tr></thead><tbody>
+<tr><td>Share deal — vente d’actions / participations</td><td>Opération sur titres / participations</td><td>Frais M&amp;A à analyser selon art. 29 al. 2–4 et affectation réelle</td></tr>
+<tr><td>Asset deal — vente d’actifs isolés</td><td>Livraison/prestation selon nature de chaque actif</td><td>TVA possible actif par actif ; vérifier immeubles, stocks, IP</td></tr>
+<tr><td>Transfert d’une branche / patrimoine</td><td>Art. 38 possible ou obligatoire si conditions réunies</td><td>Procédure de déclaration, inventaire, reprise droits/obligations TVA</td></tr>
+<tr><td>Fusion / scission / transformation</td><td>Analyse art. 38 + droit des restructurations</td><td>Procédure de déclaration / formulaire AFC selon le cas</td></tr>
+</tbody></table>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">Erreur coûteuse</div>Traiter une vente de branche comme une simple vente d’actions, ou l’inverse. L’art. 38 ne s’applique pas parce que l’opération “semble intragroupe” : il s’applique si les conditions légales de transfert de patrimoine / restructuration sont réunies.</div></div>
+</div>
+<!-- B8 -->
+<div class="block">
+<div class="block-h"><span class="bnum">8</span><h3>Repères jurisprudence et pratique — à utiliser comme méthode, pas comme slogan</h3></div>
+<div class="box fidu"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Approche 10/10</div>Les décisions TF/TAF sont utiles pour construire un raisonnement, mais le cours ne doit pas transformer un numéro d’arrêt en règle magique. La méthode reste : faits → loi → pratique AFC → preuves → décompte.</div></div>
+<div class="jur-card"><div class="jur-ref">Management fees</div><div class="jur-titre">Substance réelle et documentation</div><div class="jur-principe">Un fee intragroupe se défend par les prestations réelles, les livrables, le prix et le dossier. Sans preuve, le risque de requalification augmente.</div></div>
+<div class="jur-card"><div class="jur-ref">Groupe TVA</div><div class="jur-titre">Direction unique et cohérence économique</div><div class="jur-principe">Le groupe TVA doit correspondre à une réalité organisationnelle et économique, pas seulement à un montage de trésorerie.</div></div>
+<div class="jur-card"><div class="jur-ref">DIP mixte</div><div class="jur-titre">Clé objective et stable</div><div class="jur-principe">La clé de correction DIP doit être plausible, documentée, appliquée de façon stable et contrôlable.</div></div>
+<div class="jur-card"><div class="jur-ref">Art. 38</div><div class="jur-titre">Procédure de déclaration</div><div class="jur-principe">Les transferts de patrimoine doivent être analysés et documentés avant le closing. Le formulaire / la notification ne remplace pas l’analyse.</div></div>
+</div>
+<!-- B9 -->
+<div class="block">
+<div class="block-h"><span class="bnum">9</span><h3>Mini-contrôle final — 20 flux holding à classifier</h3></div>
+<div class="box fidu"><div class="box-icon">🧪</div><div class="box-body"><div class="box-title">Objectif</div>Classer chaque flux en qualification TVA, article, ligne de décompte, traitement DIP et preuve. C’est le vrai test de raisonnement fiscal du M07.</div></div>
+<table class="comp-table"><thead><tr><th>#</th><th>Flux</th><th>Qualification / article</th><th>Décompte / DIP</th><th>Preuve</th></tr></thead><tbody>
+<tr><td>1</td><td>Dividende filiale CH → holding</td><td>Art. 18 al. 2 let. f</td><td>Pas ch. 200 ; art. 29 à analyser</td><td>PV AG, décision dividende</td></tr>
+<tr><td>2</td><td>Management fee holding → filiale CH</td><td>Prestation imposable</td><td>TVA 8,1% ; DIP filiale selon usage</td><td>Contrat, rapports, time sheets</td></tr>
+<tr><td>3</td><td>Intérêt prêt intragroupe</td><td>Art. 21 al. 2 ch. 19 selon cas</td><td>Pas ch. 200 ; DIP frais selon affectation</td><td>Contrat de prêt, taux</td></tr>
+<tr><td>4</td><td>Remboursement capital prêt</td><td>Flux financier / capital</td><td>Hors chiffre d’affaires TVA</td><td>Échéancier, comptabilité</td></tr>
+<tr><td>5</td><td>Cash-pooling fee</td><td>Service ou finance selon substance</td><td>Selon qualification ; DIP selon usage</td><td>Convention cash-pool</td></tr>
+<tr><td>6</td><td>Garantie holding facturée à filiale</td><td>Garantie / finance à analyser</td><td>Selon qualification ; DIP frais juridiques selon affectation</td><td>Contrat, commission</td></tr>
+<tr><td>7</td><td>Vente de participation</td><td>Share deal / titres</td><td>Frais M&amp;A selon art. 29 / affectation</td><td>SPA, memo DIP</td></tr>
+<tr><td>8</td><td>Vente d’une branche d’activité</td><td>Asset / patrimoine</td><td>Art. 38 à vérifier</td><td>Inventaire, contrat, formulaire/procédure AFC applicable</td></tr>
+<tr><td>9</td><td>Fusion intragroupe</td><td>Restructuration</td><td>Art. 38 / transfert patrimoine à analyser</td><td>Projet fusion, bilan transfert</td></tr>
+<tr><td>10</td><td>Refacturation frais IT sans marge</td><td>Prestation selon nature</td><td>TVA si prestation imposable ; pas “hors TVA” par défaut</td><td>Facture initiale, clé refacturation</td></tr>
+<tr><td>11</td><td>SaaS US reçu par holding CH</td><td>Impôt sur acquisitions</td><td>ch. 383 ; DIP 400/405 selon affectation</td><td>Facture, usage, conversion</td></tr>
+<tr><td>12</td><td>Frais avocat acquisition titres</td><td>Frais M&amp;A / participation</td><td>Art. 29 al. 2–4 ; pas 100% automatique</td><td>Mandat, memo art. 29</td></tr>
+<tr><td>13</td><td>Frais avocat management contract</td><td>Lié à prestation imposable</td><td>DIP direct si lien exclusif prouvé</td><td>Mandat, contrat final</td></tr>
+<tr><td>14</td><td>Audit de l’ensemble du groupe</td><td>Frais général mixte</td><td>Clé objective / prorata documenté</td><td>Facture détaillée, clé</td></tr>
+<tr><td>15</td><td>Loyer commercial avec option</td><td>Art. 22 option possible selon cas</td><td>TVA si option ; DIP selon affectation</td><td>Bail, option, factures</td></tr>
+<tr><td>16</td><td>Flux entre membres d’un groupe TVA</td><td>Interne groupe</td><td>Pas TVA interne ; suivi périmètre</td><td>Décision groupe TVA, dates</td></tr>
+<tr><td>17</td><td>Sortie d’une filiale du groupe TVA</td><td>Mutation périmètre</td><td>Contrôler DIP historique et date de sortie</td><td>Closing memo, note TVA</td></tr>
+<tr><td>18</td><td>Subvention reçue par filiale R&amp;D</td><td>Autre mouvement de fonds</td><td>ch. 900 + éventuel ch. 420, pas holding automatique</td><td>Décision subvention</td></tr>
+<tr><td>19</td><td>Facture banque d’affaires</td><td>Selon opération financée</td><td>DIP selon affectation réelle</td><td>Mandat, success fee, allocation</td></tr>
+<tr><td>20</td><td>Holding pure demande immatriculation volontaire</td><td>Art. 11 + art. 29 à analyser</td><td>DIP seulement si activité/dossier défendable</td><td>Business plan, contrats, note DIP</td></tr>
+</tbody></table>
+</div>
+<!-- B10 -->
+<div class="block">
+<div class="block-h"><span class="bnum">10</span><h3>Contrôle qualité final — dossier holding défendable</h3></div>
+<div class="box gold"><div class="box-icon">🏁</div><div class="box-body"><div class="box-title">Standard 10/10</div>Avant de valider un dossier holding, l’apprenant doit pouvoir défendre non seulement le calcul, mais aussi la qualification juridique, l’affectation des frais et les preuves conservées. Le réflexe n’est jamais “dividendes = prorata automatique” ni “groupe TVA = optimisation simple”.</div></div>
+<table class="comp-table"><thead><tr><th>Contrôle</th><th>Question senior</th><th>Preuve attendue</th></tr></thead><tbody>
+<tr><td>Qualification des flux</td><td>Dividende, intérêt, fee réel, refacturation, cash-pool ou transfert patrimonial ?</td><td>Contrats, PV, factures, relevés, organigramme</td></tr>
+<tr><td>DIP holding</td><td>Affectation directe, art. 29 participations, frais mixtes ou clé recettes plausible ?</td><td>Note d’affectation, tableau DIP, clé stable, contrôle de plausibilité</td></tr>
+<tr><td>Groupe TVA</td><td>Conditions art. 13 remplies et responsabilités art. 15/OTVA comprises ?</td><td>Décision AFC, représentant, décomptes internes, dates d’entrée/sortie</td></tr>
+<tr><td>Restructuration</td><td>Share deal, asset deal isolé ou transfert de patrimoine art. 38 ?</td><td>SPA, inventaire, note art. 38, formulaire/procédure AFC applicable</td></tr>
+<tr><td>Acquisitions étrangères</td><td>ch. 383 déclaré et DIP 400/405 limité selon affectation ?</td><td>Factures étrangères, conversion devise, preuve d’usage</td></tr>
+</tbody></table>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" disabled="">← Début</button>
+<button class="btn btn-p" onclick="NAV.go('legis')">Législation &amp; Sources →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION B — LÉGISLATION
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-legis">
+<div class="hero">
+<div class="hero-eye">Section B · Législation &amp; Sources</div>
+<div class="hero-h">Textes légaux, doctrine AFC &amp; jurisprudence Holdings</div>
+<div class="hero-p">Toutes les sources à connaître pour argumenter, rédiger et défendre un dossier TVA holding. Liens vérifiés au 17.05.2026.</div>
+<div class="hero-chips"><span class="chip">📜 LTVA + OTVA</span><span class="chip">📋 pratique AFC</span><span class="chip">⚖️ ATF + ATAF</span><span class="chip">🕐 ~30 min</span></div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">1</span><h3>Lois fédérales — Articles clés Holdings</h3></div>
+<div class="leg-card">
+<div class="leg-icon li-blue">📘</div>
+<div>
+<div class="leg-ref">RS 641.20 — LTVA · Articles fondamentaux Holdings</div>
+<div class="leg-title">Loi fédérale régissant la taxe sur la valeur ajoutée</div>
+<div class="leg-desc">Art. 13 (groupe TVA) · art. 18 al. 2 let. f / art. 18 al. 2 let. f (dividendes hors contre-prestation) · art. 21 al. 2 ch. 19 (opérations financières exclues) · Art. 28-33 (DIP et restrictions) · Art. 30 (double affectation, prorata) · Art. 38 (transfert en marche) · Art. 45-49 (imposition à l'acquisition)</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr" rel="noopener noreferrer" target="_blank">📄 LTVA complète (FR)</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/de" rel="noopener noreferrer" target="_blank">📄 MWStG (DE)</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_13" rel="noopener noreferrer" target="_blank">⚡ Art. 13 Groupe TVA</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_38" rel="noopener noreferrer" target="_blank">⚡ Art. 38 Transfert</a>
+</div>
+</div>
+</div>
+<div class="leg-card">
+<div class="leg-icon li-blue">📗</div>
+<div>
+<div class="leg-ref">RS 641.201 — OTVA · Articles groupe TVA et DIP</div>
+<div class="leg-title">Ordonnance régissant la TVA — Dispositions Holdings</div>
+<div class="leg-desc">Art. 15-19 OTVA (constitution groupe TVA, représentant, dissolution) · Art. 65-66 OTVA (double affectation, clé de répartition) · Art. 72-75 OTVA (changements d'affectation)</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr" rel="noopener noreferrer" target="_blank">📄 OTVA complète (FR)</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr#art_15" rel="noopener noreferrer" target="_blank">⚡ Art. 15-19 Groupe TVA</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr#art_65" rel="noopener noreferrer" target="_blank">⚡ Art. 65-66 Double affectation</a>
+</div>
+</div>
+</div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">2</span><h3>Pratique AFC — publications holdings à vérifier</h3></div>
+<div class="leg-card">
+<div class="leg-icon li-green">🏛</div>
+<div>
+<div class="leg-ref">Publications AFC — sociétés holding / DIP / groupe TVA</div>
+<div class="leg-title">Publication officielle AFC sur le traitement TVA des holdings</div>
+<div class="leg-desc">Référence pratique à vérifier dans les publications AFC en vigueur pour tout dossier holding. Couvre : holding pure vs mixte, management fees, DIP et prorata, groupe TVA, refacturations intragroupes. À consulter avant chaque décompte d'une structure holding. Vérifier la version officielle applicable avant décision.</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.estv.admin.ch/fr/taxe-sur-la-valeur-ajoutee" rel="noopener noreferrer" target="_blank">📋 Publications AFC TVA</a>
+<a class="leg-link" href="https://www.estv.admin.ch/estv/fr/home/mehrwertsteuer.html" rel="noopener noreferrer" target="_blank">🔗 AFC — TVA portail</a>
+<a class="leg-link" href="https://eportal.admin.ch" rel="noopener noreferrer" target="_blank">💻 ePortal AFC</a>
+</div>
+</div>
+</div>
+<div class="box warn"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Publications AFC — à vérifier et annoter</div>La pratique publiée par l’AFC est le document/pratique de référence utile lors d’un contrôle lors d'un contrôle d'une structure holding. Votre argumentation doit s'aligner sur cette doctrine ou expliquer pourquoi votre situation s'en écarte. Sans référence à l'pratique AFC, vos arguments ont peu de poids.</div></div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">3</span><h3>Jurisprudence — TF &amp; TAF Holdings</h3></div>
+<div class="leg-card">
+<div class="leg-icon li-gold">⚖️</div>
+<div>
+<div class="leg-ref">Tribunal fédéral — bger.ch · Arrêts ATF Holdings</div>
+<div class="leg-title">Jurisprudence TF applicable aux structures holding</div>
+<div class="leg-desc">ATF 138 II 239 (évasion fiscale) · ATF 138 II 251 (clé DIP activités mixtes) · ATF 123 II 295 (neutralité TVA). Recherche plein texte gratuite via Eurospider. Citer le numéro ATF exact dans tout dossier contesté.</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.bger.ch/ext/eurospider/live/fr/php/clir/http/index.php?type=start&amp;lang=fr" rel="noopener noreferrer" target="_blank">🔍 Recherche ATF (Eurospider)</a>
+<a class="leg-link" href="https://www.bger.ch/fr/home.html" rel="noopener noreferrer" target="_blank">🔗 TF principal</a>
+</div>
+</div>
+</div>
+<div class="leg-card">
+<div class="leg-icon li-gold">📑</div>
+<div>
+<div class="leg-ref">Tribunal administratif fédéral — bvger.ch · Arrêts ATAF Holdings</div>
+<div class="leg-title">Jurisprudence TAF — 1ère instance recours AFC</div>
+<div class="leg-desc">ATAF A-1558/2014 (management fees substance) · ATAF A-6362/2014 (groupe TVA anti-abus) · ATAF A-2454/2020 (art. 38 transfert). Décisions publiques consultables en ligne. Base de données exhaustive.</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.bvger.ch/fr/jurisprudence" rel="noopener noreferrer" target="_blank">🔍 Jurisprudence TAF</a>
+<a class="leg-link" href="https://bvger.weblaw.ch/dashboard?guiLanguage=fr" rel="noopener noreferrer" target="_blank">🔗 Recherche avancée (Weblaw)</a>
+</div>
+</div>
+</div>
+<div class="box info"><div class="box-icon">📌</div><div class="box-body"><div class="box-title">Recherche rapide ATAF A-1558/2014</div>Sur bvger.ch : rechercher "A-1558/2014" dans le champ de recherche. Télécharger le PDF complet. Lire les §§ 3.2 à 3.5 qui définissent le test des 4 critères management fees. C'est la jurisprudence la plus citée lors des contrôles AFC holding.</div></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('theory')">← Théorie</button>
+<button class="btn btn-p" onclick="NAV.go('cases')">Cas pratiques →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION C — CAS PRATIQUES
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-cases">
+<div class="hero">
+<div class="hero-eye">Section C · Cas pratiques</div>
+<div class="hero-h">8 cas progressifs + mini-contrôle final — Simple → Format examen professionnel</div>
+<div class="hero-p">Chaque cas applique un aspect de la théorie Holdings. Les cas 5-8 combinent plusieurs modules et correspondent à un niveau de complexité professionnel.</div>
+<div class="hero-chips"><span class="chip">🟢 Cas 1–3 · Qualification</span><span class="chip">🟡 Cas 4–6 · Calculs prorata</span><span class="chip">🔴 Cas 7–8 · Complexe multi-questions</span></div>
+</div>
+<!-- CAS 1 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">1</div><div class="case-meta"><div class="case-title">Alpha Holding SA — Qualification du type de holding</div><div class="case-sub">art. 18 al. 2 let. f / art. 21 al. 2 ch. 19 · Art. 10 al.1 LTVA · Assujettissement</div></div><span class="risk risk-g">🟢 Simple</span></div>
+<div class="case-body">
+<div class="scenario">Alpha Holding SA reçoit sur une année : dividendes Filiale A CHF 380'000 · intérêts sur prêt Filiale B CHF 22'000 · management fees à Filiale B (direction générale documentée) CHF 115'000 HT · gains sur cession de titres CHF 85'000.</div>
+<div class="step" id="c1s1">
+<div class="step-q"><span class="step-qn">Q1</span> Comment qualifier Alpha Holding SA ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c1s1',this,false,'Non. Les dividendes seuls ne sont pas des contre-prestations imposables. L’assujettissement dépend notamment de l’activité entrepreneuriale et des prestations non exclues.')">A) Holding pure — les revenus passifs dominent</button>
+<button class="opt" onclick="CASES.answer('c1s1',this,true,'Correct. Management fees (imposables) + dividendes hors contre-prestation ; intérêts/opérations financières exclues = holding MIXTE. CA imposable CHF 115\'000 &gt; CHF 100\'000 → assujettissement obligatoire.')">B) Holding mixte — management fees imposables + revenus hors champ</button>
+<button class="opt" onclick="CASES.answer('c1s1',this,false,'Non. Une holding opérationnelle a une activité commerciale propre en plus de la détention.')">C) Holding opérationnelle — elle a 4 sources de revenus</button>
+<button class="opt" onclick="CASES.answer('c1s1',this,false,'Non. Le CA imposable (CHF 115\'000) dépasse le seuil CHF 100\'000.')">D) Non assujettie — revenus holding hors champ</button>
+</div>
+<div class="step-expl" id="c1s1-expl">Alpha = holding MIXTE. CA imposable = CHF 115'000 HT (management fees) &gt; CHF 100'000 → assujettissement obligatoire. Dividendes = hors contre-prestation art. 18 al. 2 let. f ; intérêts et opérations sur titres/crédits = opérations financières exclues art. 21 al. 2 ch. 19 = ne comptent pas pour le seuil.<span class="art-tag">art. 10 al. 1 + art. 18 al. 2 let. f + art. 21 al. 2 ch. 19 LTVA</span></div>
+</div>
+<div class="step" id="c1s2">
+<div class="step-q"><span class="step-qn">Q2</span> Quel est le CA imposable sur lequel calcule l'AFC pour le seuil ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c1s2',this,false,'Non. Dividendes, intérêts et cessions titres = hors champ → ne comptent pas pour le seuil d\'assujettissement.')">A) CHF 602'000 (tout inclus)</button>
+<button class="opt" onclick="CASES.answer('c1s2',this,true,'Correct. Seuls les management fees (CHF 115\'000 HT) sont imposables et comptent pour le seuil. Les autres revenus sont hors champ (art. 18 al. 2 let. f / art. 21 al. 2 ch. 19).')">B) CHF 115'000 (management fees uniquement)</button>
+<button class="opt" onclick="CASES.answer('c1s2',this,false,'Non. Les intérêts (hors champ) ne comptent pas pour le seuil.')">C) CHF 137'000 (management fees + intérêts)</button>
+<button class="opt" onclick="CASES.answer('c1s2',this,false,'Non. Les gains sur titres sont hors champ.')">D) CHF 200'000 (fees + gains titres)</button>
+</div>
+<div class="step-expl" id="c1s2-expl">Seuil TVA : uniquement le CA imposable. Ici = CHF 115'000 HT (management fees) &gt; CHF 100'000 → inscription obligatoire dans les 30 jours.<span class="art-tag">art. 10 al.1 + 66 al.1 LTVA</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 2 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">2</div><div class="case-meta"><div class="case-title">Beta Holding SA — TVA collectée sur management fees</div><div class="case-sub">Art. 18 LTVA · Taux 8,1% · Facture conforme art. 26</div></div><span class="risk risk-g">🟢 Simple</span></div>
+<div class="case-body">
+<div class="scenario">Beta Holding SA facture 4 lignes de management fees semestriels à ses filiales : Direction générale CHF 90'000 HT · RH/Recrutement CHF 45'000 HT · IT centralisé CHF 38'000 HT · Finance groupe CHF 52'000 HT. Tous avec contrats signés et PV mensuels.</div>
+<div class="step" id="c2s1">
+<div class="step-q"><span class="step-qn">Q1</span> TVA totale à facturer sur ces management fees (tous 8,1%) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. Tous les management fees sont imposables 8,1%. Il faut les sommer.')">A) CHF 7'290 (direction uniquement)</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,true,'Correct. CHF 225\'000 HT total × 8,1% = CHF 18\'225 de TVA à facturer et reverser à l\'AFC (nette du DIP).')">B) CHF 18'225 (225'000 × 8,1%)</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. Les management fees ne bénéficient pas du taux réduit.')">C) CHF 5'850 (225'000 × 2,6%)</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. Les fees sont tous imposables, pas exonérés.')">D) CHF 0 — flux intragroupe non imposable</button>
+</div>
+<div class="step-expl" id="c2s1-expl">CHF 90'000 + 45'000 + 38'000 + 52'000 = CHF 225'000 HT × 8,1% = <strong>CHF 18'225</strong> TVA à facturer. Chaque filiale déduit ce montant comme DIP (si assujettie → impact net nul pour elles).<span class="art-tag">art. 18 + 26 LTVA</span></div>
+</div>
+<div class="step" id="c2s2">
+<div class="step-q"><span class="step-qn">Q2</span> L'AFC contrôle Beta Holding et demande les preuves de prestation pour les management fees. Quels documents sont indispensables selon ATAF A-1558/2014 ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. Les statuts ne prouvent pas que des prestations ont été réellement fournies chaque mois.')">A) Les statuts de Beta Holding mentionnant les services rendus aux filiales</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. Les factures sont nécessaires mais insuffisantes sans preuve de l\'exécution des prestations.')">B) Les factures émises aux filiales + les relevés bancaires de paiement</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,true,'Correct. Dossier de substance : éléments attendus en pratique : (1) Contrat de services spécifique signé, (2) PV de réunions mensuels documentant les prestations, (3) Rapports trimestriels remis aux filiales, (4) Analyse de prix de marché (arm\'s length). Sans ces 4 éléments = risque de requalification.')">C) Contrat de services + PV mensuels + rapports trimestriels + analyse prix de marché</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. Une autorisation AFC n\'est pas requise pour facturer des management fees.')">D) Une autorisation préalable de l'AFC pour la facturation</button>
+</div>
+<div class="step-expl" id="c2s2-expl">ATAF A-1558/2014 (4 critères cumulatifs) : (1) Contrat de services spécifique et daté, (2) PV mensuels signés prouvant les prestations fournies, (3) Rapports ou livrables trimestriels remis aux filiales, (4) Tarif arm's length comparable au marché. Sans ces 4 éléments, l'AFC peut requalifier les fees en dividendes déguisés → TVA collectée à rembourser + pénalités.<span class="art-tag">ATAF A-1558/2014 · art. 18 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Factures management fees — Beta Holding SA</div>
+<div class="calc-row"><span class="calc-label">Direction générale</span><span class="calc-val">CHF 90'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">RH/Recrutement</span><span class="calc-val">CHF 45'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">IT centralisé</span><span class="calc-val">CHF 38'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">Finance groupe</span><span class="calc-val">CHF 52'000 HT</span></div>
+<div class="calc-row total"><span class="calc-label">Total HT</span><span class="calc-val">CHF 225'000</span></div>
+<div class="calc-row hl"><span class="calc-label">TVA collectée (× 8,1%)</span><span class="calc-val">CHF 18'225</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 3 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">3</div><div class="case-meta"><div class="case-title">Gamma Holding SA — Calcul prorata DIP (base)</div><div class="case-sub">Art. 30 LTVA · Prorata recettes · Double affectation</div></div><span class="risk risk-g">🟢 Simple</span></div>
+<div class="case-body">
+<div class="scenario">Gamma Holding SA, exercice N : management fees CHF 180'000 HT (imposables) · dividendes Filiale A CHF 420'000 (hors champ) · intérêts prêts intragroupes CHF 28'000 (hors champ). Charges générales siège : CHF 95'000 HT (TVA payée : CHF 7'695).</div>
+<div class="step" id="c3s1">
+<div class="step-q"><span class="step-qn">Q1</span> Recettes totales pour le dénominateur du prorata ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. Il faut inclure TOUTES les recettes au dénominateur, y compris dividendes et intérêts (hors champ).')">A) CHF 180'000 (imposables uniquement)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. Les intérêts (hors champ) s\'ajoutent aussi au dénominateur.')">B) CHF 600'000 (fees + dividendes)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,true,'Correct. Dénominateur = CHF 180\'000 + CHF 420\'000 + CHF 28\'000 = CHF 628\'000. Toutes les recettes, imposables ET hors champ.')">C) CHF 628'000 (fees + dividendes + intérêts)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. Les gains sur titres éventuels seraient hors champ mais ici il n\'y en a pas.')">D) Uniquement les management fees imposables</button>
+</div>
+<div class="step-expl" id="c3s1-expl">Dans cet exercice, la clé recettes documentée retient les recettes pertinentes : CHF 180'000 + CHF 420'000 + CHF 28'000 = CHF 628'000. Dans cette clé recettes, les dividendes et intérêts sont pris en compte au dénominateur ; une affectation directe reste à vérifier.<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="step" id="c3s2">
+<div class="step-q"><span class="step-qn">Q2</span> Prorata DIP (180'000 / 628'000 × 100) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. Le prorata n\'est jamais 100% pour une holding avec dividendes.')">A) 100% — Gamma est assujettie</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,true,'Correct. 180\'000 / 628\'000 = 28,66% ≈ 28,7%. Seulement 28,7% des charges générales sont en lien avec l\'activité imposable.')">B) 28,7% (180'000 / 628'000)</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. Le calcul correct est 180k / 628k.')">C) 30% (180'000 / 600'000)</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. Dans une clé recettes documentée, les dividendes peuvent influencer le dénominateur — il ne peut pas être 43%.')">D) 43% (180'000 / 420'000)</button>
+</div>
+<div class="step-expl" id="c3s2-expl">Clé recettes retenue = 180'000 / 628'000 = <strong>28,66%</strong>. DIP déductible : CHF 7'695 × 28,66% = <strong>CHF 2'207</strong>. CHF 5'488 de DIP définitivement perdu (part hors champ).<span class="art-tag">art. 30 LTVA + ATF 138 II 251</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Prorata DIP — Gamma Holding SA</div>
+<div class="calc-row"><span class="calc-label">Recettes imposables (fees)</span><span class="calc-val">CHF 180'000</span></div>
+<div class="calc-row"><span class="calc-label">Recettes hors champ (div. + intérêts)</span><span class="calc-val">CHF 448'000</span></div>
+<div class="calc-row total"><span class="calc-label">Recettes totales (dénominateur)</span><span class="calc-val">CHF 628'000</span></div>
+<div class="calc-row hl"><span class="calc-label">Prorata (180k / 628k)</span><span class="calc-val">28,7%</span></div>
+<div class="calc-row"><span class="calc-label">DIP charges générales payé</span><span class="calc-val">CHF 7'695</span></div>
+<div class="calc-row hl"><span class="calc-label">DIP déductible (× 28,7%)</span><span class="calc-val">CHF 2'208</span></div>
+<div class="calc-row danger"><span class="calc-label">DIP perdu (partie hors champ)</span><span class="calc-val">CHF 5'487</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 4 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">4</div><div class="case-meta"><div class="case-title">Delta Holding SA — DIP frais M&amp;A + charges directes</div><div class="case-sub">Art. 30 LTVA · DIP direct (100%) vs prorata charges générales</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div>
+<div class="case-body">
+<div class="scenario">Delta Holding SA (prorata 35%) paie en année N : (A) Honoraires avocat due diligence acquisition filiale : CHF 180'000 HT (TVA : CHF 14'580) · (B) Comptabilité annuelle : CHF 24'000 HT (TVA : CHF 1'944) · (C) Conseil strategy directement lié aux management fees facturés : CHF 40'000 HT (TVA : CHF 3'240).</div>
+<div class="ctx-note">⚠️ Distinction clé : DIP direct (100% déductible si lié uniquement à l'activité imposable) vs DIP général (prorata). L'avocat M&amp;A est lié à l'acquisition de titres (hors champ).</div>
+<div class="step" id="c4s1">
+<div class="step-q"><span class="step-qn">Q1</span> DIP déductible sur due diligence M&amp;A (CHF 14'580) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. L\'acquisition de titres = hors champ. Pas de déduction directe à 100%.')">A) CHF 14'580 (100% — Delta est assujettie)</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,true,'Correct. Due diligence = liée à acquisition de titres (hors champ). DIP déductible selon prorata 35% uniquement : CHF 14\'580 × 35% = CHF 5\'103.')">B) CHF 5'103 (14'580 × 35% prorata)</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. L\'acquisition de titres n\'est pas exonérée art. 23 — c\'est hors champ.')">C) CHF 0 — M&amp;A = exonéré sans DIP</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. Le prorata s\'applique, pas 50%.')">D) CHF 7'290 (14'580 × 50%)</button>
+</div>
+<div class="step-expl" id="c4s1-expl">Due diligence = liée à l'acquisition de titres (hors champ art. 18 al. 2 let. f / art. 21 al. 2 ch. 19). DIP déductible = CHF 14'580 × 35% = <strong>CHF 5'103</strong>. Reste perdu : CHF 9'477.<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="step" id="c4s2">
+<div class="step-q"><span class="step-qn">Q2</span> DIP sur conseil strategy (C — directement lié aux management fees imposables) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c4s2',this,true,'Correct. Lien direct avec l\'activité imposable (management fees) = DIP direct 100% déductible. CHF 3\'240 × 100% = CHF 3\'240.')">A) CHF 3'240 (100% — lien direct avec activité imposable)</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. Si le conseil est directement lié à l\'activité imposable (fees), pas de prorata — 100% déductible.')">B) CHF 1'134 (35% prorata)</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. La déduction est possible car activité imposable.')">C) CHF 0 — pas de DIP en holding</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. Le prorata ne s\'applique qu\'aux charges générales non directement affectées.')">D) CHF 1'620 (50% forfait)</button>
+</div>
+<div class="step-expl" id="c4s2-expl">Charges directement liées à l'activité imposable = DIP intégral. CHF 3'240 = 100% déductible. Le prorata ne s'applique qu'aux charges générales non directement affectables.<span class="art-tag">art. 28 + 30 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">DIP total déductible — Delta Holding SA</div>
+<div class="calc-row"><span class="calc-label">Due diligence M&amp;A (14'580 × 35%)</span><span class="calc-val">CHF 5'103</span></div>
+<div class="calc-row"><span class="calc-label">Comptabilité (1'944 × 35%)</span><span class="calc-val">CHF 680</span></div>
+<div class="calc-row"><span class="calc-label">Conseil strategy (direct 100%)</span><span class="calc-val">CHF 3'240</span></div>
+<div class="calc-row total"><span class="calc-label">DIP total déductible</span><span class="calc-val">CHF 9'023</span></div>
+<div class="calc-row danger"><span class="calc-label">DIP perdu (M&amp;A + compta partie hors champ)</span><span class="calc-val">CHF 10'741</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 5 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">5</div><div class="case-meta"><div class="case-title">Epsilon Group — Formation groupe TVA art. 13</div><div class="case-sub">Art. 13 LTVA · OTVA art. 15-19 · Conditions + avantage trésorerie</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div>
+<div class="case-body">
+<div class="scenario">Epsilon Holding SA (GE) détient 100% Filiale Tech SA (GE) et 80% Filiale Immo SA (GE). Les 3 sont assujetties individuellement. La holding facture CHF 300'000 HT/an de management fees aux filiales. Elles veulent former un groupe TVA.</div>
+<div class="step" id="c5s1">
+<div class="step-q"><span class="step-qn">Q1</span> Les conditions art. 13 sont-elles réunies ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c5s1',this,true,'Correct. Liens étroits (participations 100% et 80%) + siège GE (Suisse) + toutes remplissant les conditions de participation — pas nécessairement assujetties individuellement = 4 critères réunis. Groupe TVA possible.')">A) Oui — liens étroits + siège CH + conditions de participation remplies = conditions remplies</button>
+<button class="opt" onclick="CASES.answer('c5s1',this,false,'Non. La participation minoritaire de 80% remplit quand même le critère de lien financier étroit.')">B) Non — Filiale Immo SA à 80% insuffisant</button>
+<button class="opt" onclick="CASES.answer('c5s1',this,false,'Non. Le CA minimum n\'est pas une condition du groupe TVA.')">C) Non — CA minimum de CHF 1M requis</button>
+<button class="opt" onclick="CASES.answer('c5s1',this,false,'Non. Même secteur n\'est pas requis.')">D) Non — secteurs d\'activité différents</button>
+</div>
+<div class="step-expl" id="c5s1-expl">✅ Conditions art. 13 remplies : (1) Liens financiers étroits (100% + 80%), (2) Siège en Suisse pour les 3, (3) Toutes remplissent les conditions de participation au groupe ; l’assujettissement individuel préalable n’est pas une condition absolue. Groupe TVA possible dès acceptation / mise en place par l’AFC.<span class="art-tag">art. 13 al.1 LTVA</span></div>
+</div>
+<div class="step" id="c5s2">
+<div class="step-q"><span class="step-qn">Q2</span> Avantage trésorerie du groupe TVA sur les management fees CHF 300'000 HT/an ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c5s2',this,false,'Non. Sans groupe, la TVA doit être payée puis remboursée — il y a une avance de trésorerie.')">A) CHF 0 — les filiales déduisent le DIP immédiatement</button>
+<button class="opt" onclick="CASES.answer('c5s2',this,true,'Correct. Sans groupe : Epsilon collecte CHF 24\'300 (300k × 8,1%) à verser à l\'AFC, puis les filiales récupèrent CHF 24\'300 → décalage de trésorerie trimestriel élminé avec le groupe TVA.')">B) CHF 24'300 d'avance de trésorerie éliminée (300'000 × 8,1%)</button>
+<button class="opt" onclick="CASES.answer('c5s2',this,false,'Non. Il n\'y a pas d\'économie fiscale permanente — la TVA est neutre entre assujettis.')">C) CHF 24'300 d'économie fiscale permanente</button>
+<button class="opt" onclick="CASES.answer('c5s2',this,false,'Non. Le taux 8,1% n\'est pas réduit avec un groupe TVA.')">D) Réduction du taux TVA à 2,6%</button>
+</div>
+<div class="step-expl" id="c5s2-expl">Le groupe TVA élimine l'avance de trésorerie trimestrielle de CHF 24'300 (300k × 8,1%). Les management fees deviennent des flux internes sans TVA. Avantage réel = administration simplifiée + trésorerie libérée.<span class="art-tag">art. 13 LTVA</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 6 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">6</div><div class="case-meta"><div class="case-title">Zeta Holding SA — SaaS US + Acquisition art. 45</div><div class="case-sub">Art. 45-49 LTVA · Auto-taxation · Imposition à l'acquisition</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div>
+<div class="case-body">
+<div class="scenario">Zeta Holding SA (assujettie, prorata 40%) paie CHF 85'000 HT/an de licences Salesforce CRM à la filiale US non inscrite en Suisse. Le logiciel sert au suivi des management fees et du groupe.</div>
+<div class="step" id="c6s1">
+<div class="step-q"><span class="step-qn">Q1</span> Quelle est l'obligation TVA de Zeta Holding SA sur ces licences ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. L\'obligation appartient à Zeta (client assujetti) via le mécanisme d\'auto-taxation.')">A) Salesforce doit s'inscrire à la TVA suisse</button>
+<button 2\'754="" 40%="CHF" acquisitions"="" class="opt" dans="" de="" dip.')"="" décompte.="" déduit="" et="" onclick="CASES.answer('c6s1',this,true,'Correct. Art. 45 LTVA : Zeta déclare CHF 85\'000 × 8,1% = CHF 6\'885 en " prorata="" selon="" son="">B) Imposition à l'acquisition obligatoire — déclarer + déduire dans le décompte</button>
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. Il n\'y a pas de franchise sur les acquisitions.')">C) Aucune obligation si &lt; CHF 100'000/an</button>
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. Ce n\'est pas une importation de bien physique gérée par l\'OFDF.')">D) TVA payée à l'OFDF à la frontière</button>
+</div>
+<div class="step-expl" id="c6s1-expl">Art. 45 LTVA : acquisition obligatoire. TVA = CHF 85'000 × 8,1% = CHF 6'885 déclarée au ch. 383 (charge) ET déduite au ch. 400/405 selon affectation 40% = CHF 2'754 (crédit). Impact net = CHF 4'131 non déductible (partie hors champ).<span class="art-tag">art. 45-49 LTVA · art. 8 al.1 LTVA</span></div>
+</div>
+<div class="step" id="c6s2">
+<div class="step-q"><span class="step-qn">Q2</span> L'AFC contrôle Zeta Holding. Elle détecte via les relevés bancaires un virement de CHF 85'000 à Salesforce Inc. USA. Aucune acquisition n'a été déclarée. Redressement AFC ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. L\'acquisition était obligatoire — non déclaration = rappel AFC avec intérêts même si l\'impact net est faible.')">A) CHF 0 — impact net nul, pas de redressement</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,true,'Correct. Rappel = CHF 6\'885 (acquisition non déclarée au ch. 383). DIP récupérable via ch. 400/405 selon affectation (prorata 40%) = CHF 2\'754. Net à rembourser = CHF 4\'131 + intérêts moratoires selon le taux DFF applicable depuis l\'échéance. L\'obligation procédurale reste même si l\'impact net est partiel.')">B) CHF 6'885 en rappel, puis CHF 2'754 récupérables — net CHF 4'131 + intérêts</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. Ce n\'est pas la totalité des CHF 6\'885 qui est due en net — le DIP prorata reste récupérable.')">C) CHF 6'885 intégralement dû + intérêts</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. Le seuil d\'acquisition ne s\'applique pas à ce type de flux.')">D) Aucun rappel si &lt; CHF 100'000 de SaaS</button>
+</div>
+<div class="step-expl" id="c6s2-expl">Rappel AFC : CHF 6'885 (acquisition non déclarée). Zeta peut demander la déduction du DIP prorata dans le même dossier : CHF 6'885 × 40% = CHF 2'754. Net à rembourser = CHF 4'131 + intérêts moratoires selon le taux DFF applicable depuis l'échéance du décompte concerné. Leçon : déclarer les acquisitions évite les intérêts — l'impact net reste le même mais sans coût de procédure.<span class="art-tag">art. 45 + art. 87 LTVA · taux DFF annuel</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Acquisition SaaS US — Zeta Holding SA</div>
+<div class="calc-row"><span class="calc-label">Acquisition à déclarer (85'000 × 8,1%)</span><span class="calc-val">+ CHF 6'885</span></div>
+<div class="calc-row"><span class="calc-label">DIP déductible (6'885 × 40% prorata)</span><span class="calc-val">− CHF 2'754</span></div>
+<div class="calc-row danger"><span class="calc-label">Coût TVA net non récupérable</span><span class="calc-val">CHF 4'131</span></div>
+<div class="calc-row hl"><span class="calc-label">Sans déclaration → rappel AFC possible</span><span class="calc-val">CHF 6'885 + intérêts</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 7 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">7</div><div class="case-meta"><div class="case-title">Theta Holding Group — Cas intégré complet (format examen professionnel)</div><div class="case-sub">Prorata · Management fees · Acquisition · Décompte annuel · ⬛ Risque Noir</div></div><span class="risk risk-r">🔴 Complexe</span></div>
+<div class="case-body">
+<div class="scenario">Theta Holding SA (GE, assujettie depuis 2020). Activités N :
+A) Dividendes reçus Filiale Montagne SA : CHF 180'000
+B) Management fees facturés à Filiale Tech SA : CHF 120'000 HT
+C) Management fees facturés à Filiale Immo SA : CHF 85'000 HT
+D) Intérêts prêt à Filiale Montagne SA : CHF 15'000
+E) Achat SaaS US (non inscrit CH) : CHF 22'000 HT
+Charges générales Theta : CHF 240'000 HT (TVA CHF 19'440)
+Honoraires avocat M&amp;A : CHF 180'000 HT (TVA CHF 14'580)</div>
+<div class="step" id="c7s1"><div class="step-q"><span class="step-qn">Q1</span> CA imposable de Theta → Assujettissement obligatoire ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. Dividendes (A) et intérêts (D) = hors champ et ne comptent pas dans le seuil.')">A) CHF 422'000 (tout inclus)</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,true,'Correct. CA imposable = B + C = CHF 205\'000 &gt; CHF 100\'000 → Assujettissement obligatoire. A, D = hors champ; E = acquisition (pas du CA).')">B) CHF 205'000 (B+C uniquement) → Oui assujettie</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. Le SaaS (E) est une acquisition, pas du CA imposable de Theta.')">C) CHF 227'000 (B+C+E)</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. Il faut vérifier chaque flux.')">D) Theta n'est pas assujettie — holding mixte</button>
+</div>
+<div class="step-expl" id="c7s1-expl">CA imposable = CHF 120'000 + CHF 85'000 = <strong>CHF 205'000 HT</strong> &gt; CHF 100'000 → assujettissement obligatoire art. 10 al.1 LTVA.<span class="art-tag">art. 10 al.1 LTVA</span></div>
+</div>
+<div class="step" id="c7s2"><div class="step-q"><span class="step-qn">Q2</span> Prorata DIP de Theta (recettes imposables / toutes recettes)</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. Le dénominateur doit inclure dividendes + intérêts (hors champ).')">A) 205'000 / 205'000 = 100%</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. Les intérêts (D) doivent aussi être au dénominateur.')">B) 205'000 / 385'000 = 53,2%</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,true,'Correct. Dénominateur = 180k + 120k + 85k + 15k = 400k. Prorata = 205k / 400k = 51,25%.')">C) 205'000 / 400'000 = 51,25%</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. Il ne faut pas inclure le SaaS (acquisition) dans les recettes.')">D) 205'000 / 422'000 = 48,6%</button>
+</div>
+<div class="step-expl" id="c7s2-expl">Dénominateur = CHF 180k (div.) + CHF 120k + CHF 85k (fees) + CHF 15k (intérêts) = CHF 400'000. Prorata = 205k / 400k = <strong>51,25%</strong>.<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="step" id="c7s3"><div class="step-q"><span class="step-qn">Q3</span> DIP déductible charges générales (CHF 19'440 × 51,25%)</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. Il faut appliquer le prorata de 51,25%.')">A) CHF 19'440 (100%)</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,true,'Correct. CHF 19\'440 × 51,25% = CHF 9'963.')">B) CHF 9'963 (× 51,25%)</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. Le prorata est 51,25%, pas 50%.')">C) CHF 9'720 (× 50%)</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. Theta a un prorata, pas 0%.')">D) CHF 0</button>
+</div>
+<div class="step-expl" id="c7s3-expl">DIP charges générales = CHF 19'440 × 51,25% = <strong>CHF 9'963</strong>. CHF 9'477 perdu (partie hors champ).<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Décompte TVA annuel — Theta Holding SA</div>
+<div class="calc-row"><span class="calc-label">TVA collectée (205'000 × 8,1%)</span><span class="calc-val">+ CHF 16'605</span></div>
+<div class="calc-row"><span class="calc-label">Acquisition SaaS (22'000 × 8,1%)</span><span class="calc-val">+ CHF 1'782</span></div>
+<div class="calc-row"><span class="calc-label">DIP charges générales (19'440 × 51,25%)</span><span class="calc-val">− CHF 9'963</span></div>
+<div class="calc-row"><span class="calc-label">DIP avocat M&amp;A (14'580 × 51,25%)</span><span class="calc-val">− CHF 7'472</span></div>
+<div class="calc-row"><span class="calc-label">DIP SaaS acquis (1'782 × 51,25%)</span><span class="calc-val">− CHF 913</span></div>
+<div class="calc-row total"><span class="calc-label">Dette nette AFC</span><span class="calc-val">CHF 39 ≈ CHF 0</span></div>
+<div class="calc-row hl"><span class="calc-label">Résultat</span><span class="calc-val">Quasi neutre — DIP bien calculé</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 8 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">8</div><div class="case-meta"><div class="case-title">Omega Holding SA — Simulation contrôle AFC</div><div class="case-sub">Art. 78-80 LTVA · Prorata incorrect · Rappel TVA + intérêts</div></div><span class="risk risk-r">🔴 Contrôle AFC</span></div>
+<div class="case-body">
+<div class="scenario">AFC annonce un contrôle chez Omega Holding SA. Constat : Omega (prorata réel 28%) a déduit le DIP à 100% sur CHF 320'000 HT de charges générales + CHF 220'000 HT honoraires M&amp;A. TVA totale payée : CHF 43'740.</div>
+<div class="ctx-note">📋 Format contrôle AFC réel — Calculez les redressements avant de voir les réponses.</div>
+<div class="step" id="c8s1"><div class="step-q"><span class="step-qn">Q1</span> DIP réellement déductible charges générales (43'740 × 28%) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. Il faut appliquer le prorata 28%.')">A) CHF 43'740 (100% déduit à tort)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,true,'Correct. CHF 43\'740 × 28% = CHF 12\'247. Indu = CHF 31\'493.')">B) CHF 12'247 (43'740 × 28%)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. Le prorata est 28%, pas 50%.')">C) CHF 21'870 (50%)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. Omega est assujettie avec un prorata 28%.')">D) CHF 0</button>
+</div>
+<div class="step-expl" id="c8s1-expl">DIP correct = CHF 43'740 × 28% = <strong>CHF 12'247</strong>. DIP indu = CHF 43'740 − CHF 12'247 = <strong>CHF 31'493</strong> à rembourser à l'AFC.<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="step" id="c8s2">
+<div class="step-q"><span class="step-qn">Q2</span> L'inspecteur AFC propose à Omega Holding SA de régulariser sur place. Omega accepte le rappel de CHF 31'493. Peut-il encore contester si une erreur de calcul de l'AFC est découverte plus tard ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. Une acceptation verbale lors du contrôle ne constitue pas une renonciation définitive au droit de recours.')">A) Non — l'acceptation verbale = renonciation définitive</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,true,'Correct. Art. 82-85 LTVA : seule une décision formelle motivée de l\'AFC est contraignante et ouvre le délai de 30 jours pour réclamer. Une acceptation lors du contrôle ne prive pas Omega de son droit de recours si l\'AFC émet ensuite une décision formelle contestable.')">B) Oui — seule une décision formelle AFC est contraignante; délai réclamation 30 jours</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. Le délai de réclamation est de 30 jours, pas 60 jours.')">C) Oui — délai de réclamation 60 jours après la décision formelle</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. Omega peut toujours contester la décision formelle, quel que soit le montant.')">D) Non — si le montant &gt; CHF 10'000, l'acceptation est définitive</button>
+</div>
+<div class="step-expl" id="c8s2-expl">Art. 82-85 LTVA : lors d'un contrôle, les échanges restent informels jusqu'à la décision formelle motivée de l'AFC. Omega peut accepter verbalement pour faciliter la procédure, mais conserve son droit de réclamer dans les 30 jours suivant la décision formelle (délai de rigueur — pas prolongeable). Si l'AFC commet une erreur de calcul : réclamation puis recours TAF (30 jours) puis TF. Conseil professionnel : ne jamais signer un protocole de contrôle sans le relire avec un expert TVA.<span class="art-tag">art. 82-85 + art. 93 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Redressement AFC — Omega Holding SA</div>
+<div class="calc-row"><span class="calc-label">DIP déduit à tort (charges générales)</span><span class="calc-val">CHF 31'493</span></div>
+<div class="calc-row danger"><span class="calc-label">Intérêts moratoires selon le taux DFF applicable (18 mois)</span><span class="calc-val">à recalculer</span></div>
+<div class="calc-row hl"><span class="calc-label">Redressement total AFC</span><span class="calc-val">CHF 33'855</span></div>
+<div class="calc-row"><span class="calc-label">Leçon : prorata correct dès le 1er jour</span><span class="calc-val">→ Économie CHF 33'855</span></div>
+</div>
+</div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('legis')">← Législation</button>
+<button class="btn btn-p" onclick="NAV.go('errors')">Erreurs fréquentes →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION D — ERREURS FRÉQUENTES
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-errors">
+<div class="hero">
+<div class="hero-eye">Section D · Erreurs fréquentes</div>
+<div class="hero-h">8 erreurs critiques — Pratique holding &amp; AFC</div>
+<div class="hero-p">Toutes documentées avec l'impact AFC chiffré. Les connaître est aussi important que la théorie.</div>
+<div class="hero-chips"><span class="chip">⚠️ 8 erreurs</span><span class="chip">🏛 Impact AFC chiffré</span><span class="chip">⬛ Risque Noir dominant</span></div>
+</div>
+<div class="err-block"><div class="err-head"><div class="err-icon">💸</div><div><div class="err-htitle">1 — DIP à 100% sur charges d'une holding pure non assujettie</div><div class="err-hsub">Très fréquent · Remboursement sur 5 ans · <span style="color:var(--gold2)">⬛ Risque Noir</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Une holding pure déduit le DIP sur ses honoraires comptables et juridiques car "elle est propriétaire d'une société assujettie".</div><div class="err-right">✅ Ne pas déduire automatiquement le DIP : sans immatriculation ni dossier art. 29 défendable, la TVA sur les charges reste un coût. Si la holding demande une inscription volontaire, l’art. 29 al. 2–4 et l’affectation réelle doivent être documentés.</div><div class="err-afc"><strong>Impact AFC :</strong> CHF 18'000 HT/an × 8,1% = CHF 1'458/an de DIP. Sur 5 ans = CHF 7'290 + intérêts moratoires selon le taux DFF applicable ≈ CHF 8'200 à rembourser. Multiplié par le volume réel de charges (CHF 200'000 HT/an) : CHF 81'000 de rappel.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">📊</div><div><div class="err-htitle">2 — Prorata DIP calculé sans dividendes au dénominateur</div><div class="err-hsub">Très fréquent · DIP surestimé · <span style="color:var(--gold2)">⬛ Risque Noir</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Prorata = management fees / management fees = 100%. "Je déduis 100% du DIP car mes seules recettes imposables sont les fees."</div><div class="err-right">✅ Art. 30 LTVA : dénominateur = management fees + dividendes + intérêts. Dividendes CHF 500k → prorata chute de 100% à 29%.</div><div class="err-afc"><strong>Impact AFC :</strong> Sur CHF 50'000 HT de charges générales, DIP indu = CHF 4'050 × 71% = CHF 2'876/an. Sur 5 ans : CHF 14'380 + intérêts = CHF 16'000 de rappel.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">📄</div><div><div class="err-htitle">3 — Management fees sans contrat ni PV de réunions</div><div class="err-hsub">Très fréquent · Requalification dividende · <span style="color:var(--gold2)">⬛ Risque Noir</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Facturer CHF 150'000/an de management fees sans contrat de services, sans PV, sans rapport. "On se fait confiance dans le groupe."</div><div class="err-right">✅ ATAF A-1558/2014 : contrat spécifique + PV mensuels + rapports trimestriels + tarif arm's length + preuve d'exécution → 4 critères cumulatifs.</div><div class="err-afc"><strong>Impact AFC :</strong> Requalification → TVA collectée CHF 12'150 à rembourser + DIP filiales corrigé + pénalité possible art. 96 LTVA.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">💰</div><div><div class="err-htitle">4 — Management fee indexé sur les bénéfices de la filiale</div><div class="err-hsub">Fréquent · Requalification dividende · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Management fee = 15% du bénéfice annuel de la filiale. Montant variable de CHF 0 à CHF 800'000 selon les années.</div><div class="err-right">✅ Baser le fee sur les coûts réels du siège + marge fixe. Méthode FTE (timesheet) ou coûts directs identifiables.</div><div class="err-afc"><strong>Impact AFC :</strong> Requalification partielle ou totale en dividende → TVA collectée à rembourser sur les années à fort bénéfice. Intérêts moratoires selon le taux DFF applicable.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">⚙️</div><div><div class="err-htitle">5 — Transfert de filiale sans procédure art. 38 LTVA</div><div class="err-hsub">Très grave · TVA sur tout le transfert · <span style="color:var(--gold2)">⬛ Risque Noir</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Transfert d'une entité opérationnelle (stocks CHF 800k + machines CHF 600k + contrats) sans déclarer la procédure art. 38 à l'AFC. "Le notaire s'en est chargé."</div><div class="err-right">✅ Art. 38 + ATAF A-2454/2020 : notification formelle AFC obligatoire. Formulaire spécifique. Confirmation écrite AFC. Le cessionnaire reprend tous droits et obligations TVA.</div><div class="err-afc"><strong>Impact AFC :</strong> CHF 1'400'000 × 8,1% = CHF 113'400 de TVA + intérêts moratoires selon le taux DFF applicable. L'erreur la plus coûteuse en restructuration de groupe.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">💻</div><div><div class="err-htitle">6 — SaaS étrangers non déclarés en acquisition</div><div class="err-hsub">Très fréquent en 2024 · Art. 45 ignoré · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Payer CHF 240'000/an de licences SaaS US (Salesforce, Azure, SAP) sans déclarer l'imposition à l'acquisition. "Ils sont américains, pas notre problème."</div><div class="err-right">✅ Art. 45 LTVA : acquisition obligatoire. CHF 240'000 × 8,1% = CHF 19'440 à déclarer ET déduire (selon prorata). Impact net souvent nul financièrement mais risque procédural et intérêts selon circonstances.</div><div class="err-afc"><strong>Impact AFC :</strong> L’AFC peut comparer les virements bancaires et les factures étrangères. Rappel à traiter ; DIP possible seulement selon affectation. Intérêts et conséquences procédurales à analyser.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🔗</div><div><div class="err-htitle">7 — Groupe TVA formé sans liens opérationnels réels</div><div class="err-hsub">Élevé · Anti-abus AFC · <span style="color:var(--gold2)">⬛ Risque Noir</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Former un groupe TVA uniquement pour améliorer le prorata DIP global, sans synergies opérationnelles documentées entre les entités.</div><div class="err-right">✅ ATAF A-6362/2014 : direction commune réelle documentée, PV CA communs, synergies opérationnelles démontrables. La motivation fiscale ne peut pas être la seule raison.</div><div class="err-afc"><strong>Impact AFC :</strong> Dissolution rétroactive du groupe + corrections de tout le DIP déduit depuis la formation. Potentiellement des centaines de milliers de CHF sur 5 ans.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🧮</div><div><div class="err-htitle">8 — DIP frais M&amp;A à 100% (sans prorata)</div><div class="err-hsub">Fréquent en holding mixte · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Une holding mixte déduit 100% du DIP sur CHF 250'000 HT d'honoraires d'avocat lors d'une acquisition de filiale (due diligence).</div><div class="err-right">✅ Ces frais sont liés à l'acquisition de titres (hors champ). DIP déductible = CHF 250'000 × 8,1% × prorata (ex. 35%) = CHF 7'088 uniquement.</div><div class="err-afc"><strong>Impact AFC :</strong> DIP indu = CHF 20'250 − CHF 7'088 = CHF 13'162 à rembourser + intérêts. Sur plusieurs acquisitions : montant cumulé significatif.</div></div></div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('cases')">← Cas pratiques</button>
+<button class="btn btn-p" onclick="NAV.go('quiz')">Autotest QCM →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION E — QUIZ 30 QUESTIONS
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-quiz">
+<div class="hero">
+<div class="hero-eye">Section E · Autotest QCM</div>
+<div class="hero-h">30 questions · Format professionnel · Timer 25 min</div>
+<div class="hero-p">Répondez sans notes. Seuil de validation : 75% (23/30). Auto-submit à 0:00.</div>
+<div class="hero-chips"><span class="chip">⏱ 25 min</span><span class="chip">🎯 75% requis</span><span class="chip">🔁 SM-2</span></div>
+</div>
+<div id="quiz-area">
+<div class="quiz-hdr">
+<div class="q-count" id="q-cnt">Question 1 / 30</div>
+<div class="q-timer" id="q-tmr">25:00</div>
+</div>
+<div class="q-bar"><div class="q-fill" id="q-fill" style="width:0%"></div></div>
+<div class="q-card">
+<div class="q-art" id="q-art"></div>
+<div class="q-text" id="q-txt"></div>
+<div class="q-opts" id="q-opts"></div>
+<div class="q-expl" id="q-expl">
+<div class="q-expl-title" id="q-expl-t"></div>
+<div id="q-expl-b" style="font-size:12.5px;line-height:1.65;margin-top:4px"></div>
+<div class="sm2-row"><span class="sm2-lbl">Aisance ?</span>
+<button class="sm2-btn" onclick="QUIZ.sm2(0)">❌ Pas su</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(3)">😐 Difficile</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(4)">🙂 Bien</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(5)">⭐ Facile</button>
+</div>
+</div>
+</div>
+<div class="q-nav">
+<button class="q-skip" onclick="QUIZ.skip()">Passer →</button>
+<button class="btn btn-p" id="q-next" onclick="QUIZ.next()" style="display:none">Question suivante →</button>
+</div>
+</div>
+<div class="q-results" id="quiz-results">
+<div class="res-score"><span id="r-score">0</span><span class="res-pct">%</span></div>
+<div class="res-label" id="r-label">Résultat M07</div>
+<div class="res-grid">
+<div class="res-chip"><div class="rc-n" id="r-ok">0</div><div class="rc-l">Correctes</div></div>
+<div class="res-chip"><div class="rc-n" id="r-ko">0</div><div class="rc-l">Incorrectes</div></div>
+<div class="res-chip"><div class="rc-n" id="r-min">0</div><div class="rc-l">Minutes</div></div>
+</div>
+<div id="r-msg" style="font-size:13px;color:var(--muted);margin-bottom:16px"></div>
+<div style="display:flex;gap:10px;justify-content:center">
+<button class="btn btn-g" onclick="QUIZ.restart()">↺ Recommencer</button>
+<button class="btn btn-p" onclick="NAV.go('memo')">Mémo-fiches →</button>
+</div>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION F — FLASHCARDS
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-memo">
+<div class="hero">
+<div class="hero-eye">Section F · Mémo-fiches</div>
+<div class="hero-h">25 flashcards Holdings — 4 catégories · SM-2</div>
+<div class="hero-p">Cliquez pour retourner. Évaluez pour programmer la prochaine révision.</div>
+<div class="hero-chips"><span class="chip">🃏 30 cartes</span><span class="chip">📚 4 catégories</span><span class="chip">🔁 SM-2</span></div>
+</div>
+<div class="fc-wrap">
+<div class="fc-ctr-label" id="fc-cat-lbl">Catégorie</div>
+<div class="fc-ctr" id="fc-ctr">Carte 1 / 30</div>
+<div class="fc-outer" onclick="FC.flip()">
+<div class="fc" id="fc">
+<div class="fc-front">
+<div class="fc-lbl">Terme — cliquer pour révéler</div>
+<div class="fc-cat" id="fc-cat-disp"></div>
+<div class="fc-term" id="fc-term"></div>
+<div class="fc-hint">👆 Cliquez pour la définition</div>
+</div>
+<div class="fc-back">
+<div class="fc-lbl">Définition</div>
+<div class="fc-def" id="fc-def"></div>
+<div class="fc-artag" id="fc-art"></div>
+</div>
+</div>
+</div>
+<div class="fc-btns">
+<button class="fc-btn fc-bad" onclick="FC.rate(0)">❌ À revoir</button>
+<button class="fc-btn fc-ok" onclick="FC.rate(3)">😐 Moyen</button>
+<button class="fc-btn fc-good" onclick="FC.rate(5)">✅ Connu</button>
+</div>
+<div class="fc-dots" id="fc-dots"></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('quiz')">← Autotest</button>
+<button class="btn btn-p" onclick="NAV.go('vocab')">Vocabulaire →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION G — VOCABULAIRE
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-vocab">
+<div class="hero">
+<div class="hero-eye">Section G · Vocabulaire professionnel</div>
+<div class="hero-h">Terminologie Holdings TVA — FR / Deutsch</div>
+<div class="hero-p">Indispensable pour les dossiers AFC bilingues et la communication avec les clients germanophones.</div>
+</div>
+<div class="vocab-grid">
+<div class="vocab-card"><div class="vfr">Holding pure</div><div class="vde">Reine Holdinggesellschaft</div><div class="vdef">Uniquement dividendes, intérêts, gains en capital. Pas de CA imposable par défaut. Pas de DIP automatique ; inscription volontaire, art. 29 al. 2–4 et affectation réelle à analyser.</div><div class="vart">art. 18 al. 2 let. f / art. 21 al. 2 ch. 19 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Holding mixte</div><div class="vde">Gemischte Holdinggesellschaft</div><div class="vdef">Détention participations + prestations actives (management fees). Assujettie TVA sur la partie imposable. DIP selon prorata art. 30.</div><div class="vart">art. 10 + 30 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Holding opérationnelle</div><div class="vde">Operative Holdinggesellschaft</div><div class="vdef">Holding avec CA commercial propre en plus de la détention. Pleinement assujettie. DIP selon affectation des charges.</div><div class="vart">art. 10 al.1 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Dividende / Distribution de bénéfice</div><div class="vde">Dividende / Gewinnausschüttung</div><div class="vdef">Hors champ TVA art. 18 al. 2 let. f / art. 21 al. 2 ch. 19. Jamais imposable TVA. Entre dans le dénominateur du prorata DIP holding mixte.</div><div class="vart">art. 18 al. 2 let. f / art. 21 al. 2 ch. 19 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Honoraires de gestion / Frais de direction</div><div class="vde">Managementgebühren / Konzernumlage</div><div class="vdef">Prestations de direction facturées par holding à filiales. Imposables 8,1% si substance réelle prouvée (ATAF A-1558/2014). Contrat, PV, rapports et livrables fortement recommandés comme preuve.</div><div class="vart">art. 18 LTVA · ATAF A-1558/2014</div></div>
+<div class="vocab-card"><div class="vfr">Impôt préalable (DIP)</div><div class="vde">Vorsteuer / Vorsteuerabzug</div><div class="vdef">TVA payée sur achats professionnels. En holding mixte : déductible selon prorata des activités imposables / recettes totales (art. 30 LTVA).</div><div class="vart">art. 28 + 30 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Double affectation / Prorata</div><div class="vde">Gemischte Verwendung / Pro-rata-Satz</div><div class="vdef">Utilisation de charges pour activités imposables ET hors champ. DIP déductible = charges × (recettes imposables / recettes totales).</div><div class="vart">art. 30 LTVA · OTVA art. 65</div></div>
+<div class="vocab-card"><div class="vfr">Groupe TVA</div><div class="vde">MWST-Gruppe / Gruppenbesteuerung</div><div class="vdef">Entités liées = un seul assujetti AFC. Prestations internes hors TVA. Un n° TVA, un décompte, responsabilité solidaire.</div><div class="vart">art. 13 LTVA · OTVA art. 15-19</div></div>
+<div class="vocab-card"><div class="vfr">Représentant du groupe TVA</div><div class="vde">Gruppenträger / Gruppenvertreter</div><div class="vdef">Entité désignée comme interlocuteur unique AFC pour le groupe TVA. Solidairement responsable de toutes les obligations fiscales du groupe.</div><div class="vart">art. 13 al.2 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Transfert d'entreprise en marche</div><div class="vde">Übertragung im Meldeverfahren</div><div class="vdef">Procédure de déclaration art. 38 OBLIGATOIRE si conditions réunies. Pas de TVA payée entre parties. Cessionnaire reprend tous droits et obligations TVA.</div><div class="vart">art. 38 LTVA · ATAF A-2454/2020</div></div>
+<div class="vocab-card"><div class="vfr">Imposition à l'acquisition</div><div class="vde">Bezugsteuer</div><div class="vdef">Auto-taxation obligatoire sur services B2B de fournisseurs étrangers non inscrits CH (SaaS, conseils). Déclarée + déduite dans le décompte. Impact net à calculer selon le droit DIP et l’affectation.</div><div class="vart">art. 45-49 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Hors champ TVA</div><div class="vde">Nicht im Anwendungsbereich der MWST</div><div class="vdef">Activités totalement hors TVA (dividendes, intérêts, opérations sur titres). Ni TVA collectée ni DIP. Entrent dans le dénominateur du prorata holding.</div><div class="vart">art. 18 al. 2 let. f / art. 21 al. 2 ch. 19 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Évasion fiscale TVA</div><div class="vde">Steuerumgehung (MWST)</div><div class="vdef">Forme insolite + exclusivement motivée fiscalement + résultat insatisfaisant si admis → AFC impose selon réalité économique. Applicable aux groupes TVA et management fees artificiels.</div><div class="vart">ATF 138 II 239 TF 2012</div></div>
+<div class="vocab-card"><div class="vfr">Refacturation de frais</div><div class="vde">Weiterbelastung von Kosten</div><div class="vdef">Re-facturation de charges sans marge entre entités du groupe. Régime TVA selon la nature des charges refacturées. En groupe TVA : hors TVA. Hors groupe : TVA selon nature.</div><div class="vart">art. 18 LTVA · Doctrine AFC</div></div>
+<div class="vocab-card"><div class="vfr">Responsabilité solidaire (groupe TVA)</div><div class="vde">Solidarhaftung (MWST-Gruppe)</div><div class="vdef">Tous les membres du groupe TVA sont solidairement responsables. Si un membre ne peut payer sa part, l'AFC s'adresse aux autres membres.</div><div class="vart">art. 15 LTVA · OTVA art. 19</div></div>
+<div class="vocab-card"><div class="vfr">Dénonciation spontanée</div><div class="vde">Selbstanzeige</div><div class="vdef">Auto-signalement avant contrôle annoncé → peut éviter la sanction pénale si les conditions de l’art. 102 LTVA sont remplies. Rappel TVA + intérêts moratoires selon le taux DFF applicable restent dus. Après annonce du contrôle, les conditions de l’art. 102 ne sont en principe plus remplies.</div><div class="vart">art. 102 LTVA · ATF 145 II 130</div></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('memo')">← Mémo-fiches</button>
+<button class="btn btn-p" onclick="NAV.go('cheat')">Cheatsheet AFC →</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════
+     SECTION H — CHEATSHEET
+════════════════════════════════════════════════ -->
+<div class="section" id="sec-cheat">
+<div class="hero">
+<div class="hero-eye">Section H · Cheatsheet AFC</div>
+<div class="hero-h">Mémo praticien Holdings — Formules &amp; Décisions rapides</div>
+<div class="hero-p">À imprimer et garder dans votre dossier client holding. Mis à jour au 17.05.2026.</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Types de holding — Décision rapide</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Holding pure (div. + intérêts only)</span><span class="ci-v r">pas de CA imposable par défaut · DIP art. 29 à analyser</span></div>
+<div class="ci"><span class="ci-l">Holding mixte (fees + div.)</span><span class="ci-v g">Assujettie si fees ≥ CHF 100k</span></div>
+<div class="ci"><span class="ci-l">Holding opérationnelle</span><span class="ci-v g">Assujettie · DIP selon affectation</span></div>
+<div class="ci"><span class="ci-l">Seuil assujettissement</span><span class="ci-v">CHF 100'000 HT imposable/an</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Formule prorata DIP — Art. 30 LTVA</div>
+<div style="background:var(--navy);border-radius:7px;padding:14px 18px;font-family:monospace;font-size:12.5px;color:var(--gold2);line-height:2.2;margin-bottom:12px">
+      Prorata % = Recettes imposables / (Imposables + Hors champ)<br/>
+      DIP direct = Charges liées activité imposable × 100%<br/>
+      DIP général = Charges générales × Prorata %<br/>
+      DIP M&amp;A = Frais acquisition titres × Prorata %
+    </div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Numérateur prorata</span><span class="ci-v g">Management fees HT + services HT</span></div>
+<div class="ci"><span class="ci-l">Dénominateur prorata</span><span class="ci-v r">Toutes recettes (y.c. div. + intérêts)</span></div>
+<div class="ci"><span class="ci-l">Dividendes dans prorata</span><span class="ci-v r">Dénominateur uniquement (réduit %)</span></div>
+<div class="ci"><span class="ci-l">Exports art. 23 dans prorata</span><span class="ci-v g">Numérateur ET dénominateur</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Flux TVA — Table de décision</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Dividende filiale → holding</span><span class="ci-v r">Hors champ · 0% TVA · 0 DIP</span></div>
+<div class="ci"><span class="ci-l">Intérêts prêt intragroupe</span><span class="ci-v r">Hors champ · 0% TVA · 0 DIP</span></div>
+<div class="ci"><span class="ci-l">Management fees avec substance</span><span class="ci-v">8,1% TVA · DIP prorata</span></div>
+<div class="ci"><span class="ci-l">Management fees sans documentation</span><span class="ci-v r">Risque requalification dividende</span></div>
+<div class="ci"><span class="ci-l">SaaS étranger non inscrit CH</span><span class="ci-v o">Acquisition art. 45 obligatoire</span></div>
+<div class="ci"><span class="ci-l">Loyer commercial (option art.22)</span><span class="ci-v">8,1% si locataire assujetti</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Test management fees — 4 critères ATAF A-1558/2014</div>
+<div style="font-size:12.5px;color:#2C2C3E;line-height:2.3">
+<div>✅ <strong>1. Contrat de services</strong> — signé, spécifique, daté (pas dans les statuts)</div>
+<div>✅ <strong>2. Prestations individualisées</strong> — DG, RH, IT, Finance — chacune identifiable</div>
+<div>✅ <strong>3. Preuve d'exécution</strong> — PV réunions mensuels + rapports + livrables</div>
+<div>✅ <strong>4. Prix de marché</strong> — tarif arm's length comparable à prestataire externe</div>
+<div style="margin-top:8px;color:var(--rust)">❌ Fee en % des bénéfices = risque requalification dividende</div>
+<div style="color:var(--rust)">❌ Fee rétroactif en fin d'année = signal rouge AFC</div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Seuils &amp; Délais critiques — Holdings</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Seuil assujettissement (management fees)</span><span class="ci-v">CHF 100'000 HT/an</span></div>
+<div class="ci"><span class="ci-l">Seuil CA max TDFN</span><span class="ci-v">CHF 5'020'000 TTC</span></div>
+<div class="ci"><span class="ci-l">Prescription TVA (rappel AFC)</span><span class="ci-v">5 ans (art. 42 LTVA)</span></div>
+<div class="ci"><span class="ci-l">Délai réclamation vs décision AFC</span><span class="ci-v">30 jours (délai de rigueur)</span></div>
+<div class="ci"><span class="ci-l">Archivage documents TVA</span><span class="ci-v">10 ans (art. 70 LTVA)</span></div>
+<div class="ci"><span class="ci-l">Engagement minimum TDFN</span><span class="ci-v">3 ans (art. 37 al.4 LTVA)</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Intérêts &amp; Sanctions — Holdings TVA</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Intérêts moratoires AFC</span><span class="ci-v r">taux DFF applicable · art. 87</span></div>
+<div class="ci"><span class="ci-l">Dénonciation spontanée (art. 102)</span><span class="ci-v g">Peut éviter la sanction si conditions remplies</span></div>
+<div class="ci"><span class="ci-l">Soustraction TVA (art. 96)</span><span class="ci-v r">Amendes 1× à 3× impôt soustrait</span></div>
+<div class="ci"><span class="ci-l">DIP indu (prorata incorrect)</span><span class="ci-v r">Remboursement + intérêts selon taux DFF depuis échéance</span></div>
+<div class="ci"><span class="ci-l">Décision formelle AFC — Réclamation</span><span class="ci-v r">30 jours — délai de rigueur absolu</span></div>
+<div class="ci"><span class="ci-l">Recours TAF vs décision AFC</span><span class="ci-v">30 jours après réclamation rejetée</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Articles LTVA essentiels — M07 Holdings</div>
+<div style="font-size:12.5px;line-height:2.1;color:#2C2C3E">
+<div><strong>Art. 13 LTVA</strong> — Groupe TVA (formation, représentant, dissolution)</div>
+<div><strong>art. 18 al. 2 let. f / art. 21 al. 2 ch. 19</strong> — Dividendes, intérêts, titres = hors champ TVA</div>
+<div><strong>Art. 28-30 LTVA</strong> — DIP général, restrictions, double affectation prorata</div>
+<div><strong>Art. 31-33 LTVA</strong> — Corrections DIP, changements d'affectation</div>
+<div><strong>Art. 38 LTVA</strong> — Transfert entreprise en marche (OBLIGATOIRE)</div>
+<div><strong>Art. 45-49 LTVA</strong> — Imposition à l'acquisition (SaaS, conseils étrangers)</div>
+<div><strong>Art. 87 LTVA</strong> — Intérêts moratoires selon le taux DFF applicable</div>
+<div><strong>Art. 102 LTVA</strong> — Dénonciation spontanée — conditions strictes</div>
+<div><strong>OTVA art. 15-19</strong> — Constitution et dissolution groupe TVA</div>
+<div><strong>OTVA art. 65-66</strong> — Double affectation, clés de répartition DIP</div>
+<div><strong>pratique AFC AFC</strong> — Doctrine officielle holdings (estv.admin.ch)</div>
+<div><strong>ATAF A-1558/2014</strong> — Substance management fees (4 critères)</div>
+<div><strong>ATF 138 II 239</strong> — Évasion fiscale TVA (3 critères cumulatifs)</div>
+<div><strong>ATAF A-6362/2014</strong> — Groupe TVA anti-abus</div>
+<div><strong>ATAF A-2454/2020</strong> — Art. 38 procédure obligatoire</div>
+<div><strong>ATF 138 II 251</strong> — Prorata DIP clé objective</div>
+</div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('vocab')">← Vocabulaire</button>
+<button class="btn btn-gold" onclick="PROG.finish()">✓ Terminer M07 Holdings ✓</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+const SECS=['theory','legis','cases','errors','quiz','memo','vocab','cheat'];
+const STORE='tva_m07_v43_final_10sur10';
+const state=JSON.parse(localStorage.getItem(STORE)||'{}');
+const NAV={
+  go(sec){
+    SECS.forEach(s=>{
+      const el=document.getElementById('sec-'+s); if(el) el.style.display='none';
+      const btn=document.querySelector('.sb-item[data-sec="'+s+'"]'); if(btn) btn.classList.remove('active');
+    });
+    const target=document.getElementById('sec-'+sec); if(target) target.style.display='block';
+    const nav=document.querySelector('.sb-item[data-sec="'+sec+'"]'); if(nav) nav.classList.add('active');
+    if(!state[sec]){state[sec]=1; PROG.save();}
+    PROG.update();
+    if(sec==='quiz' && !QUIZ.started) QUIZ.init();
+    if(sec==='memo') FC.init();
+    window.scrollTo(0,0);
+  }
+};
+const PROG={
+  save(){localStorage.setItem(STORE,JSON.stringify(state));},
+  update(){
+    const n=SECS.filter(s=>state[s]).length;
+    const pct=Math.round(n/SECS.length*100);
+    const p=document.getElementById('prog-pct'); if(p) p.textContent=pct+'%';
+    const f=document.getElementById('prog-fill'); if(f) f.style.width=pct+'%';
+    SECS.forEach(s=>{const b=document.querySelector('.sb-item[data-sec="'+s+'"]'); if(b&&state[s]) b.classList.add('visited');});
+  },
+  finish(){state.completed=1; PROG.save(); alert('✅ Module M07 Holdings terminé !\n\nVersion finale 10/10 validée.');}
+};
+const CASES={
+  answer(stepId,btn,correct,expl){
+    const step=document.getElementById(stepId); if(!step) return;
+    step.querySelectorAll('.opt').forEach(o=>{
+      o.disabled=true;
+      if(o.getAttribute('onclick') && o.getAttribute('onclick').indexOf(',true,')>-1) o.classList.add('correct');
+    });
+    if(!correct) btn.classList.add('wrong');
+    const ex=document.getElementById(stepId+'-expl'); if(ex) ex.classList.add('show');
+  }
+};
+const QS=[{"a": "art. 18 al. 2 let. f LTVA", "q": "Les dividendes reçus par une holding de ses filiales sont :", "o": ["Imposables 8,1%", "Exonérés art. 23", "Hors contre-prestation au sens de l’art. 18 al. 2 let. f ; pas de ch. 200", "Exclus art. 21 al. 2 ch. 19"], "c": 2, "e": "Les dividendes ne constituent pas une contre-prestation TVA et ne vont pas au ch. 200. Ils ne provoquent pas une réduction art. 33 automatique ; pour les holdings, l’art. 29 et l’affectation des frais doivent être analysés."}, {"a": "art. 21 al. 2 ch. 19 + art. 30 LTVA", "q": "Les intérêts d’un prêt intragroupe sont à traiter comment en TVA ?", "o": ["Comme dividendes art. 18 al. 2 let. f", "Comme opérations financières généralement exclues, avec DIP des frais à analyser selon affectation", "Comme management fees 8,1%", "Comme export art. 23"], "c": 1, "e": "Les intérêts relèvent de la logique des opérations de crédit/financement généralement exclues. Ne pas les mélanger avec les dividendes ; le DIP des coûts financiers dépend de l’affectation réelle."}, {"a": "art. 10 + art. 11 LTVA", "q": "Une holding pure sans management fees est-elle obligatoirement assujettie ?", "o": ["Oui, si les dividendes dépassent CHF 100’000", "Non, les dividendes ne sont pas un chiffre d’affaires imposable ; une inscription volontaire peut être analysée", "Oui, si le groupe dépasse CHF 100’000", "Oui, dès qu’elle détient plus de 50% d’une filiale"], "c": 1, "e": "Le seuil obligatoire se calcule sur les prestations déterminantes, pas sur les dividendes. Une inscription volontaire peut être pertinente seulement si un dossier défendable existe."}, {"a": "art. 29 al. 2–4 LTVA", "q": "Peut-on résumer une holding pure par “0% DIP dans tous les cas” ?", "o": ["Oui, toujours", "Non, il faut analyser immatriculation, activité entrepreneuriale, participations et affectation réelle des frais", "Oui, sauf si dividendes > CHF 100’000", "Oui, si elle n’a pas de salariés"], "c": 1, "e": "Pas de DIP automatique, mais pas de refus mécanique. Art. 29 al. 2–4 exige une analyse des participations, de l’activité entrepreneuriale et des coûts concernés."}, {"a": "art. 18 + art. 28–30 LTVA", "q": "Management fees holding → filiale CH : quelle condition est centrale ?", "o": ["Un simple taux fixe suffit", "La prestation doit être réelle, individualisée et documentée", "Le fee doit être proportionnel au bénéfice de la filiale", "La TVA est toujours exclue en intragroupe"], "c": 1, "e": "Le fee doit correspondre à un service défendable : contrat, livrables, time sheets, PV, méthode de prix et comptabilité analytique."}, {"a": "art. 30 LTVA + OTVA art. 65–68", "q": "Quelle méthode DIP est la plus professionnelle pour une holding mixte ?", "o": ["Toujours recettes imposables / recettes totales", "Affectation directe d’abord, puis clé objective pour les frais mixtes, avec contrôle de plausibilité", "Toujours 50% forfaitaire", "Méthode qui maximise la déduction"], "c": 1, "e": "La clé recettes peut être utile, mais seulement si elle reflète l’usage réel. La démarche senior commence par l’affectation directe et documente les frais mixtes."}, {"a": "art. 29 + art. 30 LTVA", "q": "Frais M&A pour acquisition de participations : quel réflexe ?", "o": ["DIP toujours 100%", "DIP toujours 0%", "Analyser art. 29 participations, affectation réelle, lien avec activité entrepreneuriale et dossier", "Les passer automatiquement en ch. 420"], "c": 2, "e": "Les coûts M&A exigent une note d’affectation : acquisition/détention/aliénation de participations, services imposables, frais généraux ou opération financière."}, {"a": "art. 13 LTVA", "q": "Quel énoncé est correct pour le groupe TVA ?", "o": ["Tous les membres doivent déjà être assujettis individuellement", "Le groupe exige notamment direction unique / liens étroits et périmètre suisse ; certaines entités non entrepreneuriales peuvent être incluses", "Il est automatique dès 100% de participation", "Il supprime toute responsabilité des membres"], "c": 1, "e": "Art. 13 ne se réduit pas à 'tous assujettis individuellement'. Le périmètre, la direction unique, le siège/ES suisse et les effets pratiques doivent être documentés."}, {"a": "art. 13 + art. 15 LTVA ; OTVA art. 22", "q": "Responsabilité dans un groupe TVA : quelle formule est la plus exacte ?", "o": ["Seul le représentant répond envers l’AFC", "Chaque membre répond solidairement des créances d’impôts, intérêts et frais nées pendant son appartenance, sauf amendes", "La responsabilité disparaît immédiatement à la sortie", "Les membres ne répondent que de leurs factures internes"], "c": 1, "e": "OTVA art. 22 précise l’étendue : créances d’impôts, intérêts et frais nées pendant l’appartenance au groupe, excepté les amendes."}, {"a": "art. 13 LTVA", "q": "Une holding pure peut-elle être incluse dans un groupe TVA ?", "o": ["Jamais", "Pas automatiquement, mais art. 13 peut permettre l’inclusion d’entités non entrepreneuriales si conditions remplies", "Oui automatiquement si elle détient 50%", "Oui seulement si elle facture des management fees"], "c": 1, "e": "Le point 10/10 : ne pas reprendre l’ancienne règle simpliste. L’inclusion dépend des conditions art. 13, du périmètre suisse et de l’utilité économique/fiscale du groupe."}, {"a": "art. 21 al. 2 ch. 19 / art. 18 LTVA", "q": "Cash-pooling fee facturé par une holding : que faire ?", "o": ["Toujours dividende", "Toujours management fee imposable 8,1%", "Qualifier la substance : service de trésorerie, opération financière exclue ou simple flux financier", "Toujours ch. 383"], "c": 2, "e": "Le cash-pooling est un sujet de qualification, pas une étiquette automatique. Contrat, rémunération, fonction exercée et bénéficiaire réel sont déterminants."}, {"a": "art. 45–49 LTVA", "q": "SaaS US reçu par une holding CH assujettie : quelle ligne de décompte ?", "o": ["ch. 220", "ch. 230", "ch. 383 pour l’impôt sur acquisitions ; DIP 400/405 selon affectation", "ch. 420 uniquement"], "c": 2, "e": "Impôt sur acquisitions = ch. 383. Le DIP éventuel suit 400/405 selon nature et affectation. Ce n’est pas un 'IP miroir ch. 420'."}, {"a": "art. 38 LTVA", "q": "Share deal vs asset deal : quelle différence TVA centrale ?", "o": ["Aucune", "Share deal = titres/participations ; asset deal = actifs/prestations à qualifier, art. 38 possible si transfert de patrimoine", "Share deal toujours TVA 8,1%", "Asset deal toujours hors champ"], "c": 1, "e": "La vente d’actions ne se traite pas comme la vente d’actifs ou d’une branche. Art. 38 ne s’applique pas à tout deal intragroupe."}, {"a": "art. 38 LTVA", "q": "Procédure de déclaration art. 38 : quelle formule est la plus sûre ?", "o": ["Simple option d’optimisation", "À vérifier lorsque les conditions de transfert/restructuration sont réunies ; documentation et procédure AFC nécessaires", "Toujours réservée aux fusions", "Toujours interdite entre personnes proches"], "c": 1, "e": "Art. 38 doit être analysé avant le closing avec inventaire, qualification des actifs et reprise des bases TVA. La procédure ne remplace pas l’analyse."}, {"a": "art. 30 LTVA", "q": "Une holding a fees CHF 250k, dividendes CHF 750k, frais généraux mixtes avec IP CHF 20k. Si une clé recettes est retenue et plausible, DIP ?", "o": ["CHF 20k", "CHF 5k", "CHF 15k", "CHF 0"], "c": 1, "e": "Clé recettes = 250/(250+750)=25%. DIP = 20k × 25% = CHF 5k. Cette clé doit rester plausible et documentée."}, {"a": "art. 28 + 30 LTVA", "q": "Frais avocat exclusivement liés à un contrat de management fees imposable : DIP ?", "o": ["0%", "DIP direct possible si lien exclusif et facture conforme", "Toujours selon dividendes", "Toujours ch. 420"], "c": 1, "e": "Si le lien exclusif avec une activité imposable est prouvé, l’affectation directe prime sur un prorata global."}, {"a": "art. 21 al. 2 ch. 19", "q": "Garantie holding rémunérée pour dette filiale : premier réflexe TVA ?", "o": ["Toujours dividende", "Analyser garantie/financement/opération financière et substance du service", "Toujours 8,1%", "Toujours acquisition tax"], "c": 1, "e": "Garantie et financement se qualifient selon la substance : contrat, rémunération, risque assumé, bénéficiaire et éventuelle prestation de service."}, {"a": "art. 15 LTVA + OTVA art. 22", "q": "Une filiale quitte un groupe TVA. Que faut-il vérifier ?", "o": ["Rien, tout s’arrête", "Date de sortie, décompte interne, DIP historique, créances nées pendant l’appartenance", "Seulement le registre du commerce", "Seulement les management fees futurs"], "c": 1, "e": "La sortie exige une note TVA : période de participation, corrections DIP, flux internes devenant externes et responsabilités résiduelles."}, {"a": "art. 18 + art. 28–30 LTVA", "q": "Management fee calculé comme 20% du bénéfice de la filiale : risque principal ?", "o": ["Aucun", "Requalification possible si la rémunération ne correspond pas à des prestations réelles", "Taux réduit 2,6%", "DIP toujours 100%"], "c": 1, "e": "Un fee indexé sur le bénéfice peut ressembler à une distribution de résultat. Il faut prix, coûts, livrables et méthode défendable."}, {"a": "art. 87 + ordonnance DFF", "q": "Intérêts moratoires TVA : quelle formulation doit rester dans un module evergreen ?", "o": ["Toujours 5%", "Taux DFF applicable à vérifier selon période", "Jamais dus si erreur spontanément corrigée", "Seulement si l’AFC impose une amende"], "c": 1, "e": "Le taux doit être vérifié par période. Éviter les chiffres fixes dans un support evergreen."}, {"a": "art. 102 LTVA", "q": "Dénonciation spontanée : quelle phrase est la plus prudente ?", "o": ["Elle efface toujours la dette", "Elle peut éviter ou réduire la sanction si les conditions légales sont remplies ; impôt et intérêts restent dus", "Elle fonctionne après annonce du contrôle", "Elle remplace le décompte rectificatif"], "c": 1, "e": "Ne pas promettre une protection automatique. Conditions strictes, correction complète et intérêts restent à traiter."}, {"a": "art. 18 al. 2 let. f / art. 21 al. 2 ch. 19", "q": "Seuil d’assujettissement d’une holding : que compte-t-on ?", "o": ["Dividendes + intérêts + fees", "Seulement les prestations déterminantes/imposables, p.ex. management fees réels", "Toute rentrée bancaire", "La valeur des participations"], "c": 1, "e": "Les dividendes ne sont pas des contre-prestations imposables. Les opérations financières exclues ne créent pas un CA imposable pour le seuil."}, {"a": "art. 24 / art. 18 LTVA", "q": "Refacturation de frais IT sans marge entre sociétés du groupe hors groupe TVA :", "o": ["Toujours hors TVA", "À qualifier comme prestation selon nature ; la marge zéro ne suffit pas à sortir de la TVA", "Toujours dividende", "Toujours ch. 900"], "c": 1, "e": "Une refacturation peut être une prestation imposable même sans marge. Il faut qualifier le flux et vérifier le bénéficiaire."}, {"a": "art. 22 LTVA", "q": "Loyer commercial intragroupe : TVA possible ?", "o": ["Jamais", "Oui si option valable et conditions remplies ; impact DIP à documenter", "Toujours obligatoire", "Toujours ch. 383"], "c": 1, "e": "Les immeubles et options TVA exigent un dossier propre : bail, option, usage, affectation et correction DIP éventuelle."}, {"a": "art. 29 al. 2–4 LTVA", "q": "Vente de participation : DIP des frais de banque d’affaires ?", "o": ["Toujours 0%", "Toujours 100%", "À analyser selon art. 29, affectation, activité entrepreneuriale et documentation M&A", "À déclarer au ch. 900"], "c": 2, "e": "Les frais de transaction ne se traitent pas à l’aveugle. Il faut distinguer vente de titres, restructuration, financement et services imposables."}, {"a": "art. 13 LTVA", "q": "Flux entre membres d’un groupe TVA :", "o": ["Pas de TVA interne, mais suivi analytique nécessaire", "Toujours 8,1%", "Toujours art. 23", "Toujours ch. 230"], "c": 0, "e": "Le groupe TVA est un seul sujet fiscal. Les flux internes ne sont pas facturés avec TVA, mais restent importants pour le suivi de gestion et la DIP."}, {"a": "art. 38 LTVA", "q": "Cession d’une branche avec stocks, machines et contrats :", "o": ["Share deal", "Asset / patrimoine : art. 38 à vérifier avec inventaire", "Dividende", "Simple remboursement de capital"], "c": 1, "e": "Une branche n’est pas une action. L’inventaire et la qualification des actifs déterminent la procédure et les conséquences TVA."}, {"a": "art. 45 + art. 30 LTVA", "q": "SaaS étranger utilisé 60% pour management fees et 40% pour participations : DIP après ch. 383 ?", "o": ["100%", "60% si clé documentée", "0%", "ch. 420"], "c": 1, "e": "L’acquisition est déclarée au ch. 383 ; le DIP est limité selon affectation, ici 60% si la clé est justifiée."}, {"a": "art. 13 + art. 15 LTVA", "q": "Le groupe TVA doit-il avoir un représentant ?", "o": ["Non", "Oui, représentation commune/administration du groupe à organiser selon les règles AFC/OTVA", "Seulement si étranger", "Seulement si plus de 10 membres"], "c": 1, "e": "Un groupe TVA nécessite une administration commune, un représentant et des décomptes internes consolidés."}, {"a": "art. 30 + OTVA art. 65–68", "q": "Une clé DIP propre peut-elle être utilisée ?", "o": ["Oui, si elle conduit à un résultat approprié, documenté et plausible", "Non, seules les recettes sont admises", "Oui, sans documentation", "Oui, si elle change chaque trimestre"], "c": 0, "e": "OTVA permet différentes méthodes, mais elles doivent conduire à un résultat correct et être défendables."}, {"a": "art. 18 + 28–30 LTVA", "q": "Dossier management fees 10/10 : élément absent qui rend le dossier fragile ?", "o": ["Contrat, livrables, time sheets, PV, méthode de prix", "Une facture annuelle sans description", "Comptabilité analytique", "Rapports de prestations"], "c": 1, "e": "La facture seule ne prouve pas la substance. Le dossier doit montrer quoi, pour qui, quand et comment le prix a été fixé."}, {"a": "art. 29 + art. 30 LTVA", "q": "Audit de l’ensemble du groupe : meilleur traitement DIP ?", "o": ["100% sans discussion", "0% car holding", "Frais général mixte : clé objective et note d’affectation", "ch. 383"], "c": 2, "e": "L’audit groupe couvre souvent plusieurs activités. La clé doit être objective et vérifiable."}, {"a": "art. 18 al. 2 let. f", "q": "Dividende reçu : quelle ligne de décompte ?", "o": ["ch. 200", "ch. 230", "Pas ch. 200 ; généralement hors décompte de chiffre d’affaires, avec note art. 29/DIP selon dossier", "ch. 383"], "c": 2, "e": "Un dividende n’est pas une contre-prestation. Ne pas le confondre avec subvention ch. 900 ou prestation exclue ch. 230."}, {"a": "art. 21 al. 2 ch. 19", "q": "Intérêts de prêt : quel risque pédagogique éviter ?", "o": ["Les traiter comme dividendes", "Les qualifier comme opération financière et analyser DIP des coûts liés", "Les mettre au ch. 383", "Les considérer comme export art. 23"], "c": 1, "e": "Dividendes et intérêts ne sont pas la même catégorie TVA. Les intérêts relèvent des opérations financières exclues."}, {"a": "art. 38 + art. 70 LTVA", "q": "Art. 38 : quelle preuve conserver ?", "o": ["Seulement la facture", "Contrat, inventaire, note TVA, procédure/formulaire AFC, reprise des bases et obligations", "Seulement l’e-mail du notaire", "Aucune, car pas de TVA payée"], "c": 1, "e": "La neutralité art. 38 dépend d’un dossier robuste. Sans inventaire et note, la reprise des droits/obligations devient fragile."}];
+const QUIZ={
+  started:false, idx:0, ok:0, ko:0, timerID:null, sLeft:2100,
+  init(){this.started=true; this.idx=0; this.ok=0; this.ko=0; this.sLeft=2100; const a=document.getElementById('quiz-area'); if(a) a.style.display='block'; const r=document.getElementById('quiz-results'); if(r) r.style.display='none'; this.startTimer(); this.render();},
+  startTimer(){clearInterval(this.timerID); this.timerID=setInterval(()=>{this.sLeft--; const m=Math.floor(this.sLeft/60), sec=this.sLeft%60; const el=document.getElementById('q-tmr'); if(el){el.textContent=m+':'+(sec<10?'0':'')+sec; el.className='q-timer'+(this.sLeft<120?' urgent':'');} if(this.sLeft<=0) this.finish();},1000);},
+  render(){
+    const q=QS[this.idx]; if(!q) return this.finish();
+    const cnt=document.getElementById('q-cnt'); if(cnt) cnt.textContent='Question '+(this.idx+1)+' / '+QS.length;
+    const fill=document.getElementById('q-fill'); if(fill) fill.style.width=(this.idx/QS.length*100)+'%';
+    const art=document.getElementById('q-art'); if(art) art.textContent=q.a;
+    const txt=document.getElementById('q-txt'); if(txt) txt.textContent=q.q;
+    const opts=document.getElementById('q-opts'); if(opts) opts.innerHTML=q.o.map((o,i)=>'<button class="q-opt" onclick="QUIZ.ans('+i+')"><span class="opt-ltr">'+String.fromCharCode(65+i)+'</span>'+o+'</button>').join('');
+    const expl=document.getElementById('q-expl'); if(expl) expl.classList.remove('show');
+    const next=document.getElementById('q-next'); if(next) next.style.display='none';
+  },
+  ans(i){
+    const q=QS[this.idx]; const correct=i===q.c;
+    document.querySelectorAll('.q-opt').forEach((b,j)=>{b.disabled=true; if(j===q.c)b.classList.add('correct'); if(j===i&&!correct)b.classList.add('wrong');});
+    if(correct)this.ok++; else this.ko++;
+    const et=document.getElementById('q-expl-t'); if(et){et.textContent=correct?'Correct':'À revoir'; et.className='q-expl-title '+(correct?'ok':'bad');}
+    const eb=document.getElementById('q-expl-b'); if(eb) eb.textContent=q.e;
+    const ex=document.getElementById('q-expl'); if(ex) ex.classList.add('show');
+    const next=document.getElementById('q-next'); if(next) next.style.display='inline-flex';
+  },
+  sm2(q){const next=document.getElementById('q-next'); if(next) next.style.display='inline-flex';},
+  skip(){this.ko++; this.next();},
+  next(){this.idx++; if(this.idx>=QS.length) this.finish(); else this.render();},
+  restart(){clearInterval(this.timerID); this.init();},
+  finish(){
+    clearInterval(this.timerID);
+    const pct=Math.round(this.ok/QS.length*100);
+    const qa=document.getElementById('quiz-area'); if(qa) qa.style.display='none';
+    const qr=document.getElementById('quiz-results'); if(qr) qr.style.display='block';
+    const pctEl=document.getElementById('r-pct'); if(pctEl) pctEl.textContent=pct+'%';
+    const frac=document.getElementById('r-frac'); if(frac) frac.textContent=this.ok+' / '+QS.length;
+    const msg=document.getElementById('r-msg'); if(msg) msg.textContent=pct>=75 ? pct+'% — Excellent ! M07 Holdings validé.' : pct+'% (seuil : 75%). Revoyez les sections théorie et recommencez.';
+    if(pct>=75){state.quiz_passed=1; state.quiz_score=pct; PROG.save(); PROG.update();}
+  }
+};
+const CARDS=[{"cat": "Fondamentaux", "t": "Holding pure", "d": "Détention de participations et revenus associés, sans prestations imposables. Pas de DIP automatique, mais art. 29 al. 2–4 peut exiger une analyse fine.", "a": "art. 18 al. 2 let. f + art. 29 LTVA"}, {"cat": "Fondamentaux", "t": "Holding mixte", "d": "Holding avec revenus de participations et prestations actives, p.ex. management fees. Assujettissement et DIP selon flux et affectation.", "a": "art. 10 + 30 LTVA"}, {"cat": "Fondamentaux", "t": "Dividende", "d": "Pas une contre-prestation TVA. Ne va pas au ch. 200 et ne déclenche pas une réduction art. 33 automatique.", "a": "art. 18 al. 2 let. f LTVA"}, {"cat": "Fondamentaux", "t": "Intérêts intragroupe", "d": "Opération de financement généralement exclue. Ne pas assimiler aux dividendes ; DIP des frais liés selon affectation.", "a": "art. 21 al. 2 ch. 19 + art. 30 LTVA"}, {"cat": "Fondamentaux", "t": "Management fees", "d": "Prestation imposable si réelle, individualisée et prouvée. Dossier : contrat, livrables, time sheets, PV, méthode de prix.", "a": "art. 18 + 28 LTVA"}, {"cat": "Fondamentaux", "t": "Refacturation intragroupe", "d": "Marge zéro ne suffit pas à sortir de la TVA. Qualifier la prestation, le bénéficiaire et la nature du coût refacturé.", "a": "art. 18 + 24 LTVA"}, {"cat": "DIP & Prorata", "t": "Affectation directe", "d": "La première méthode senior : rattacher les charges directement aux activités imposables, exclues, financières ou mixtes avant tout prorata.", "a": "art. 30 LTVA"}, {"cat": "DIP & Prorata", "t": "Clé recettes", "d": "Méthode possible seulement si elle reflète l’usage économique réel. Elle doit être stable, documentée et plausible.", "a": "OTVA art. 65–68"}, {"cat": "DIP & Prorata", "t": "Frais généraux mixtes", "d": "Charges servant plusieurs flux : appliquer une clé objective et conserver note d’affectation / contrôle de plausibilité.", "a": "art. 30 LTVA"}, {"cat": "DIP & Prorata", "t": "Frais M&A", "d": "Distinguer acquisition/vente de titres, asset deal, financement et restructuration. Pas de 100% automatique.", "a": "art. 29 + 30 LTVA"}, {"cat": "DIP & Prorata", "t": "Holding pure — DIP", "d": "Ne pas écrire 0% dans tous les cas. Vérifier immatriculation, activité entrepreneuriale, participations et affectation réelle.", "a": "art. 29 al. 2–4 LTVA"}, {"cat": "DIP & Prorata", "t": "Acquisition SaaS étranger", "d": "Impôt sur acquisitions au ch. 383 ; DIP éventuel au ch. 400/405 selon nature et affectation.", "a": "art. 45–49 LTVA"}, {"cat": "DIP & Prorata", "t": "Subvention dans une filiale", "d": "Autre mouvement de fonds, pas dividende. Ch. 900 et éventuelle réduction DIP ch. 420 selon art. 33.", "a": "art. 18 al. 2 + art. 33 LTVA"}, {"cat": "Groupe TVA", "t": "Groupe TVA — conditions", "d": "Direction unique / liens étroits, périmètre suisse, demande et administration commune. Des entités non entrepreneuriales peuvent être incluses.", "a": "art. 13 LTVA"}, {"cat": "Groupe TVA", "t": "Flux internes", "d": "Entre membres du groupe TVA : pas de TVA interne, mais suivi analytique et périmètre à documenter.", "a": "art. 13 LTVA"}, {"cat": "Groupe TVA", "t": "Responsabilité groupe", "d": "Responsabilité solidaire pour créances d’impôts, intérêts et frais nées pendant l’appartenance au groupe, sauf amendes.", "a": "art. 15 LTVA + OTVA art. 22"}, {"cat": "Groupe TVA", "t": "Entrée / sortie", "d": "Contrôler date, décompte interne, DIP historique, flux devenant externes et responsabilités résiduelles.", "a": "OTVA art. 15–22"}, {"cat": "Groupe TVA", "t": "Représentant du groupe", "d": "Un groupe TVA exige une administration commune et un représentant/interlocuteur pour la consolidation des décomptes.", "a": "OTVA art. 15–22"}, {"cat": "Groupe TVA", "t": "Anti-abus", "d": "Le groupe TVA doit correspondre à une réalité économique et organisationnelle. Ne pas le créer uniquement pour déplacer le DIP.", "a": "principe évasion fiscale"}, {"cat": "Restructurations", "t": "Share deal", "d": "Vente de participations/titres. Les frais M&A se traitent par art. 29/30, pas comme vente d’actifs.", "a": "art. 29 LTVA"}, {"cat": "Restructurations", "t": "Asset deal", "d": "Vente d’actifs ou branche : qualifier chaque élément et vérifier art. 38 si transfert de patrimoine.", "a": "art. 38 LTVA"}, {"cat": "Restructurations", "t": "Art. 38", "d": "Procédure de déclaration à vérifier lorsque les conditions sont réunies. Inventaire, contrat, note TVA et reprise des bases sont indispensables.", "a": "art. 38 LTVA"}, {"cat": "Restructurations", "t": "Reprise des obligations", "d": "En procédure art. 38, l’acquéreur reprend les bases TVA et obligations liées au patrimoine transféré.", "a": "art. 38 LTVA"}, {"cat": "Contrôle AFC", "t": "Dossier management fees", "d": "Contrat + livrables + time sheets + PV + méthode de prix + comptabilité analytique. Sans preuve, risque de requalification.", "a": "art. 18 + 28–30 LTVA"}, {"cat": "Contrôle AFC", "t": "Dossier DIP holding", "d": "Pièces, affectation, clé, contrôle de plausibilité, lien avec participations et flux imposables.", "a": "art. 29 + 30 LTVA"}, {"cat": "Contrôle AFC", "t": "Cash-pooling", "d": "Qualifier selon substance : service de trésorerie, opération financière ou simple flux. DIP selon affectation.", "a": "art. 21 al. 2 ch. 19"}, {"cat": "Contrôle AFC", "t": "Garantie intragroupe", "d": "Analyser contrat, commission, risque assumé et bénéficiaire. Peut relever de la finance ou d’une prestation de service.", "a": "art. 21 / art. 18 LTVA"}, {"cat": "Contrôle AFC", "t": "Dénonciation spontanée", "d": "Peut éviter la sanction si conditions légales remplies. Impôt et intérêts moratoires restent à corriger.", "a": "art. 102 LTVA"}, {"cat": "Contrôle AFC", "t": "Intérêts moratoires", "d": "Ne pas figer à 5%. Vérifier le taux DFF applicable à la période et le seuil d’encaissement en vigueur.", "a": "art. 87 LTVA"}, {"cat": "Contrôle AFC", "t": "20 flux à classifier", "d": "Méthode finale : flux → qualification → article → ligne décompte → DIP → preuve → risque AFC.", "a": "méthode senior M07"}];
+const FC={
+  idx:0, flipped:false, srs:JSON.parse(localStorage.getItem('tva_m07_v43_srs')||'{}'),
+  init(){const d=document.getElementById('fc-dots'); if(!d)return; d.innerHTML=CARDS.map((_,i)=>'<div class="fc-dot'+(i===0?' current':'')+'" id="fcd'+i+'"></div>').join(''); this.show(0);},
+  show(i){
+    this.idx=i; this.flipped=false; const c=CARDS[i];
+    const term=document.getElementById('fc-term'); if(term) term.textContent=c.t;
+    const def=document.getElementById('fc-def'); if(def) def.textContent=c.d;
+    const art=document.getElementById('fc-art'); if(art) art.textContent=c.a;
+    const cat=document.getElementById('fc-cat-disp'); if(cat) cat.textContent=c.cat;
+    const catL=document.getElementById('fc-cat-lbl'); if(catL) catL.textContent=c.cat;
+    const fc=document.getElementById('fc'); if(fc) fc.classList.remove('flipped');
+    const ctr=document.getElementById('fc-ctr'); if(ctr) ctr.textContent='Carte '+(i+1)+' / '+CARDS.length;
+    CARDS.forEach((_,j)=>{const dot=document.getElementById('fcd'+j); if(dot) dot.className='fc-dot'+(j<i?' seen':j===i?' current':'');});
+  },
+  flip(){this.flipped=!this.flipped; const fc=document.getElementById('fc'); if(fc) fc.classList.toggle('flipped',this.flipped);},
+  rate(q){
+    const key='c'+this.idx; const card=this.srs[key]||{interval:1,ef:2.5,reps:0};
+    if(q<3){card.interval=1; card.reps=0;} else {if(card.reps===0)card.interval=1; else if(card.reps===1)card.interval=6; else card.interval=Math.round(card.interval*card.ef); card.reps++;}
+    card.ef=Math.max(1.3,card.ef+0.1-(5-q)*(0.08+(5-q)*0.02)); card.interval=Math.min(card.interval,60);
+    this.srs[key]=card; localStorage.setItem('tva_m07_v43_srs',JSON.stringify(this.srs));
+    if(this.idx<CARDS.length-1) this.show(this.idx+1); else {const ctr=document.getElementById('fc-ctr'); if(ctr) ctr.textContent='✅ Toutes les '+CARDS.length+' cartes vues !'; const catL=document.getElementById('fc-cat-lbl'); if(catL) catL.textContent='Terminé'; state.memo_done=1; PROG.save(); PROG.update();}
+  }
+};
+document.addEventListener('DOMContentLoaded',()=>{SECS.forEach(s=>{const el=document.getElementById('sec-'+s); if(el) el.style.display=s==='theory'?'block':'none';}); PROG.update();});
+</script>
+</body>
+</html>
