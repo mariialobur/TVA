@@ -1,0 +1,48 @@
+name: Improve M01 completion flow
+
+on:
+  push:
+    paths:
+      - '.m01-completion-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch M01 completion UX
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('m01-introduction-tva-suisse.html')
+          t = p.read_text(encoding='utf-8')
+
+          t = t.replace('<title>M01 — Introduction TVA suisse · TVA Expert Academy</title>', '<title>M01 — Introduction TVA suisse · Formation de spécialiste TVA suisse</title>')
+          t = t.replace('TVA Expert Academy · M01 v4.3', 'Formation de spécialiste TVA suisse · M01 v4.3')
+
+          if '.sec-nav-group{' not in t:
+              t = t.replace('.sec-nav{display:flex;justify-content:space-between;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}', '.sec-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}\n.sec-nav-group{display:flex;gap:10px;align-items:center;flex-wrap:wrap}')
+          if '.finish-box{' not in t:
+              t = t.replace('.btn:disabled{opacity:.5;cursor:not-allowed}', '.btn:disabled{opacity:.5;cursor:not-allowed}\n.finish-box{display:none;background:var(--sage2);border:1px solid rgba(42,107,72,.2);border-left:4px solid var(--sage);border-radius:8px;padding:16px 18px;margin-top:16px}\n.finish-title{font-size:15px;font-weight:700;color:var(--sage);margin-bottom:6px}\n.finish-text{font-size:13px;line-height:1.65;color:#234034;margin-bottom:12px}\n.finish-actions{display:flex;gap:10px;flex-wrap:wrap}')
+
+          old = '''<div class="sec-nav">\n<button class="btn btn-g" onclick="NAV.go('vocab')">← Vocabulaire</button>\n<button class="btn btn-gold" onclick="PROG.finish()">✓ Terminer M01 ✓</button>\n</div>'''
+          new = '''<div class="sec-nav">\n<div class="sec-nav-group">\n<button class="btn btn-g" onclick="NAV.go('vocab')">← Vocabulaire</button>\n<a class="btn btn-g" href="index.html" style="text-decoration:none">↑ Dashboard</a>\n</div>\n<div class="sec-nav-group">\n<button class="btn btn-p" onclick="PROG.goNext()">Module suivant : M02 →</button>\n<button class="btn btn-gold" id="finish-m01" onclick="PROG.finish()">✓ Terminer M01</button>\n</div>\n</div>\n<div class="finish-box" id="finish-box">\n<div class="finish-title">✅ M01 terminé — progression enregistrée</div>\n<div class="finish-text">Vous avez terminé le module d’introduction. La suite logique est <strong>M02 — Qualification des opérations TVA</strong>, où l’on apprend à distinguer prestations imposables, exclues, exonérées et opérations particulières.</div>\n<div class="finish-actions">\n<a class="btn btn-g" href="index.html" style="text-decoration:none">← Retour au dashboard</a>\n<a class="btn btn-p" href="m02-qualification-operations.html" style="text-decoration:none">Continuer avec M02 →</a>\n</div>\n</div>'''
+          t = t.replace(old, new)
+
+          old_finish = '''  finish() {\n    state.completed = 1;\n    PROG.save();\n    alert('✅ Module M01 terminé et sauvegardé !\\n\\nÉtape recommandée : M02 — Opérations imposables, exclues, exonérées.');\n  }'''
+          new_finish = '''  finish() {\n    state.completed = 1;\n    SECS.forEach(s => state[s] = 1);\n    PROG.save();\n    PROG.update();\n    try {\n      const key = 'tvaSpecialisteTvaDashboardV1';\n      const dash = JSON.parse(localStorage.getItem(key) || '{}');\n      dash.M01 = 'done';\n      localStorage.setItem(key, JSON.stringify(dash));\n    } catch (e) {}\n    const btn = document.getElementById('finish-m01');\n    if (btn) { btn.textContent = '✓ M01 terminé'; btn.disabled = true; }\n    const box = document.getElementById('finish-box');\n    if (box) { box.style.display = 'block'; box.scrollIntoView({behavior:'smooth', block:'center'}); }\n  },\n  goNext() {\n    state.completed = 1;\n    SECS.forEach(s => state[s] = 1);\n    PROG.save();\n    try {\n      const key = 'tvaSpecialisteTvaDashboardV1';\n      const dash = JSON.parse(localStorage.getItem(key) || '{}');\n      dash.M01 = 'done';\n      localStorage.setItem(key, JSON.stringify(dash));\n    } catch (e) {}\n    window.location.href = 'm02-qualification-operations.html';\n  }'''
+          t = t.replace(old_finish, new_finish)
+          p.write_text(t, encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m01-introduction-tva-suisse.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Improve M01 completion and next-module navigation"
+          git push
