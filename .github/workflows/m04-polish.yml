@@ -15,7 +15,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply M04 polish patch
-        run: python3 tools/m04_polish_patch.py
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path('tools/m04_polish_patch.py').read_text(encoding='utf-8')
+          src=src.replace("    'q07 account convention')", "    'q07 account convention',required=False)")
+          Path('/tmp/m04_polish_patch.py').write_text(src,encoding='utf-8')
+          exec(compile(src,'/tmp/m04_polish_patch.py','exec'))
+
+          p=Path('m04-tva-comptabilite-suisse.html')
+          t=p.read_text(encoding='utf-8')
+          start="  { id:'m04-q07'"
+          end="  { id:'m04-q08'"
+          a=t.find(start); b=t.find(end,a)
+          assert a>=0 and b>a
+          q07="""  { id:'m04-q07', diff:'easy', art:'plan comptable · convention M04',
+    q:'Dans la convention pédagogique de M04, quel compte suit le DIP déductible sur les achats courants ?',
+    opts:[
+      '1100 Débiteurs',
+      '1170 TVA déductible',
+      '2200 TVA collectée',
+      '4000 Achats'
+    ],
+    correct:1,
+    expl:'Dans la convention comptable de M04, le compte 1170 suit le DIP déductible et présente normalement un solde débiteur. Un sous-compte 1171 peut être utilisé pour les investissements afin d’améliorer la traçabilité, mais ce numéro n’est pas imposé par la LTVA.'
+  },
+"""
+          t=t[:a]+q07+t[b:]
+          p.write_text(t,encoding='utf-8')
+          PY
       - name: Validate polished M04
         run: |
           python3 - <<'PY'
