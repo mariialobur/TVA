@@ -1,0 +1,49 @@
+name: Last QA M02
+
+on:
+  push:
+    paths:
+      - .m02-last-qa-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Correct export citation and inspect health wording
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('m02-qualification-operations.html')
+          t=p.read_text(encoding='utf-8')
+          t=t.replace('art. 23 al. 2 let. a LTVA','art. 23 al. 2 ch. 1 LTVA')
+          t=t.replace('art. 23 al. 2 let. a','art. 23 al. 2 ch. 1')
+          t=t.replace('B) Exonérée art. 23 ch. 1 — DIP en principe conservé, preuve douanière requise','B) Exonérée art. 23 al. 2 ch. 1 — DIP en principe conservé si les conditions sont remplies et l’exportation suffisamment prouvée')
+          t=t.replace('Conditions : (1) preuve d\'exportation documentée (déclaration douanière OFDF, CMR), (2) bien transporté ou expédié à l\'étranger.','Conditions : (1) exportation suffisamment documentée par les pièces disponibles, notamment douanières et de transport selon le cas, (2) bien transporté ou expédié à l’étranger.')
+          p.write_text(t,encoding='utf-8')
+          PY
+          echo '--- remaining LPMed / aesthetic / art23 references ---'
+          grep -n -E "LPMéd|esthétique|art\. 23 al\. 2" m02-qualification-operations.html | head -n 120 || true
+      - name: Validate JavaScript
+        run: |
+          ! grep -q "art. 23 al. 2 let. a" m02-qualification-operations.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('m02-qualification-operations.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          Path('/tmp/m02.js').write_text('\n'.join(scripts),encoding='utf-8')
+          PY
+          node --check /tmp/m02.js
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m02-qualification-operations.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Correct M02 export citation and evidence wording"
+          git push
