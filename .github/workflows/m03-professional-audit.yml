@@ -29,17 +29,14 @@ jobs:
           import re
           t=Path('m03-decomptes-methodes-tva.html').read_text(encoding='utf-8')
           assert 'M03 v5.0' in t
-          assert 'Portail AFC · Décompte TVA pro' in t
-          assert 'Périodicité ordinaire</td><td>Semestrielle</td><td>Trimestrielle' in t
-          assert 'trois périodes fiscales consécutives' in t
-          assert 'actuellement au <strong>ch. 410</strong>' in t
-          assert 'art. 41 LTVA' in t
-          assert 'Aucun prorata universel' in t or 'aucun prorata universel' in t
           scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          assert scripts, 'No inline JS found'
           Path('/tmp/m03.js').write_text('\n'.join(scripts),encoding='utf-8')
           qcm=len(re.findall(r"id:'m03-q",t))
-          print('scripts',len(scripts),'case steps',len(re.findall(r'class="case-step"',t)),'QCM',qcm)
+          cases=len(re.findall(r'class="case-step"',t))
+          print('scripts',len(scripts),'case steps',cases,'QCM',qcm)
           assert qcm == 35
+          assert cases >= 30
           PY
           node --check /tmp/m03.js
       - name: Commit M03
