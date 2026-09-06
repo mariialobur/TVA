@@ -14,51 +14,73 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Run final current-law patch
+      - name: Apply consistency patch
         run: |
-          git show c7960af01ebc22485993c0acad4f5f5f21140f9b:.github/workflows/m02-final-qa.yml > /tmp/m02-old-workflow.yml
           python3 - <<'PY'
           from pathlib import Path
-          src = Path('/tmp/m02-old-workflow.yml').read_text(encoding='utf-8').splitlines()
-          start = next(i for i, line in enumerate(src) if "python3 - <<'PY'" in line) + 1
-          end = next(i for i in range(start, len(src)) if src[i].strip() == 'PY')
-          code = []
-          for line in src[start:end]:
-              code.append(line[10:] if line.startswith('          ') else line)
-          Path('/tmp/m02-final-patch.py').write_text('\n'.join(code) + '\n', encoding='utf-8')
-          print('extracted patch lines:', len(code))
-          PY
-          python3 /tmp/m02-final-patch.py
+          p = Path('m02-qualification-operations.html')
+          t = p.read_text(encoding='utf-8')
+          changes = []
+          def rep(a,b,label):
+              global t
+              n=t.count(a)
+              if n:
+                  t=t.replace(a,b)
+                  changes.append((label,n))
+              else:
+                  print('WARN missing', label)
 
-      - name: Validate M02
+          rep('distinguer les actes médicaux exclus (art. 21 al. 2 ch. 3) des prestations imposables (esthétique, vente de produits).',
+              'distinguer les traitements médicaux exclus des ventes de produits imposables et apprendre le piège particulier des actes esthétiques réalisés par un médecin ou médecin-dentiste autorisé selon l’art. 34 al. 3 let. a OTVA.',
+              'case2 objective')
+          rep('B) Exclu du champ (art. 21 al. 2 ch. 3) — soins par professionnel LPMéd',
+              'B) Exclu du champ (art. 21 al. 2 ch. 3) — traitement par médecin-dentiste autorisé, conditions OTVA remplies',
+              'case2 q1 option')
+          rep('Les soins dentaires dispensés par un dentiste reconnu LPMéd sont exclus du champ TVA (art. 21 al. 2 ch. 3 LTVA).',
+              'Dans l’hypothèse donnée, les soins dentaires dispensés par le médecin-dentiste autorisé remplissent les conditions de l’art. 21 al. 2 ch. 3 LTVA et des art. 34–35 OTVA.',
+              'case2 q1 explanation')
+
+          rep('Vente de produits dermatologiques sur prescription : CHF 65\'000',
+              'Vente séparée de produits dermatologiques commerciaux qui, dans ce cas, ne sont pas qualifiés de médicaments : CHF 65\'000',
+              'case8 products')
+          rep('Consultations médicales LPMéd (CHF 850\'000) — quel régime et conséquence DIP ?',
+              'Consultations médicales réalisées par les médecins autorisés du cabinet (CHF 850\'000) — quel régime et conséquence DIP ?',
+              'case8 q1 wording')
+          rep('Soins médicaux par professionnel reconnu LPMéd = exclus art. 21 al. 2 ch. 3 LTVA.',
+              'Dans l’hypothèse donnée, les traitements médicaux sont fournis par des médecins autorisés et les conditions des art. 34–35 OTVA sont remplies : ils relèvent de l’art. 21 al. 2 ch. 3 LTVA.',
+              'case8 q1 explanation')
+          rep('IP équipement esthétique → activité imposable (déductible 100%).',
+              'IP directement lié aux actes esthétiques réalisés par les médecins autorisés → même analyse que ces prestations dans ce cas, donc pas de déduction sur cette seule affectation; IP directement lié aux ventes commerciales imposables → déductible sous les conditions générales.',
+              'case8 IP consistency')
+          rep('Exportation de services de téléconsultation à des clients UE B2B : CHF 48\'000',
+              'Prestations de téléconsultation B2B à des clients établis dans l’UE : CHF 48\'000',
+              'case8 teleconsult wording')
+
+          rep('Les intérêts intragroupe entrent dans le DIP forfaitaire de la holding mixte (voir M07). Documentation des prêts (contrat, taux arm\'s length) obligatoire.',
+              'L’impact des intérêts intragroupe sur le DIP et la méthode de répartition de la holding doit être traité en M07 à partir de l’activité entrepreneuriale et de l’affectation des coûts. Contrat, conditions financières et justification du taux doivent être documentés de manière exploitable.',
+              'case7 holding scope')
+
+          p.write_text(t,encoding='utf-8')
+          print('changes',changes)
+          PY
+      - name: Validate
         run: |
-          ! grep -q "A-6218/2011" m02-qualification-operations.html
-          ! grep -q "CHF 720'000 × 8,1%" m02-qualification-operations.html
-          ! grep -q "CHF 8'000-12'000" m02-qualification-operations.html
-          ! grep -q 'prestations en réalité "exonérées art. 23"' m02-qualification-operations.html
-          ! grep -q "Médecine esthétique = imposable 8,1%" m02-qualification-operations.html
-          ! grep -q "prorata objectif selon CA imposable / CA total" m02-qualification-operations.html
-          ! grep -q "art. 10 al. 1 LTVA" m02-qualification-operations.html
+          ! grep -q "prestations imposables (esthétique, vente de produits)" m02-qualification-operations.html
+          ! grep -q "IP équipement esthétique → activité imposable" m02-qualification-operations.html
+          ! grep -q "Consultations médicales LPMéd" m02-qualification-operations.html
           python3 - <<'PY'
           from pathlib import Path
           import re
-          t = Path('m02-qualification-operations.html').read_text(encoding='utf-8')
-          scripts = re.findall(r'<script>(.*?)</script>', t, re.S)
-          Path('/tmp/m02-final.js').write_text('\n'.join(scripts), encoding='utf-8')
-          print('inline scripts:', len(scripts))
+          t=Path('m02-qualification-operations.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          Path('/tmp/m02.js').write_text('\n'.join(scripts),encoding='utf-8')
           PY
-          node --check /tmp/m02-final.js
-
-      - name: Commit final M02 QA
+          node --check /tmp/m02.js
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add m02-qualification-operations.html
-          if git diff --cached --quiet; then
-            echo "No changes"
-            exit 0
-          fi
-          git commit -m "Finalize M02 against current AFC and OTVA practice"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Align M02 health cases with current OTVA rule"
           git push
