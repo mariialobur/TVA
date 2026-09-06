@@ -303,7 +303,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <body>
 <nav id="sidebar">
 <div class="sidebar-header">
-<div class="sidebar-badge">⬡ Module 04 <span class="sidebar-version">v4.0</span></div>
+<div class="sidebar-badge">⬡ Module 04 <span class="sidebar-version">v5.0</span></div>
 <div class="sidebar-title">TVA &amp; Comptabilité suisse</div>
 <div class="sidebar-sub">~5–6 heures · 🟡 Risque moyen</div>
 </div>
@@ -327,6 +327,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="sidebar-footer">
 <a class="btn-home" href="index.html">← Retour au cours</a>
+<div style="margin-top:9px;text-align:center;font-size:10px;line-height:1.55;color:rgba(255,255,255,.42)">Conception : <a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">Mariia Lobur</a> · <a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">GitHub</a></div>
 </div>
 </nav>
 <div id="main">
@@ -337,7 +338,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <span class="topbar-name">TVA &amp; Comptabilité suisse</span>
 </div>
 <div class="topbar-right">
-<span class="version-badge">v4.3 — Contrôle fiscal expert</span>
+<span class="version-badge">v5.0 — Comptabilité &amp; traçabilité TVA</span>
 <span class="hours-badge">⏱ ~5–6 h</span>
 <span class="level-badge">🟡 Risque moyen</span>
 </div>
@@ -347,8 +348,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="section active" id="sec-theory">
 <div class="section-hero">
 <div class="hero-eyebrow">Section A — Théorie comptable TVA</div>
-<div class="hero-title">TVA &amp; Comptabilité suisse</div>
-<div class="hero-desc">Maîtriser le plan comptable suisse PME pour la TVA, les comptes 2200/1170 (TVA collectée/déductible), les écritures de TVA, la concordance CA TVA/comptable, l'intégration ERP (Bexio, Abacus, Crésus, Winbiz), les exigences OR art. 957-961b et l'archivage légal. Module pré-requis pour M11 (contrôle AFC).</div>
+<h1 class="hero-title">TVA &amp; Comptabilité suisse</h1>
+<div class="hero-desc">Transformer des pièces comptables en une piste d’audit TVA défendable : logique débit/crédit, comptes TVA de travail, paramétrage ERP, rapprochement comptabilité ↔ Décompte TVA pro, bouclement et archivage. Les numéros de comptes utilisés dans M04 sont des conventions pédagogiques, pas des numéros imposés par la loi. M05 approfondit le droit au DIP; M11 traite le contrôle AFC.</div>
 <div class="hero-meta">
 <div class="meta-chip"><span class="ic">📖</span> 8 blocs théoriques</div>
 <div class="meta-chip"><span class="ic">⚖️</span> OR art. 957-961b · LTVA 70-72</div>
@@ -356,6 +357,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="meta-chip"><span class="ic">🟡</span> Risque moyen</div>
 </div>
 </div>
+<div class="box gold">
+<div class="box-icon">🎯</div><div class="box-body"><div class="box-title">Objectifs de M04 — ce que vous devez savoir faire</div>
+<p>À la fin du module, vous devez pouvoir <strong>lire une pièce et son écriture</strong>, distinguer TVA due et DIP, rapprocher les journaux/comptes du <strong>Décompte TVA pro</strong>, documenter un écart de bouclement et évaluer si l’archivage permet de reconstruire la piste d’audit. M04 enseigne la <strong>traçabilité comptable</strong>; la qualification du droit au DIP relève de M05 et la procédure de contrôle/sanctions de M11.</p></div></div>
 <div class="theory-block">
 <h3><span class="num">0</span>Atelier dossier comptable — pièces réelles à lire avant le décompte <span class="block-risk risk-orange">🟠 Pratique</span></h3>
 <div class="box fidu">
@@ -385,7 +389,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <td>Facture fournisseur CH</td>
 <td>Honoraires informatiques · CHF 3'000 HT · TVA 8,1% = CHF 243</td>
 <td class="acc-num">Dr 6500 Charges IT 3'000<br/>Dr 1170 TVA déductible 243<br/>Cr 2000 Fournisseurs 3'243</td>
-<td>IP selon nature : ch. 400 si charge de matériel/prestation ; ch. 405 si investissement/autre charge d’exploitation</td>
+<td>Dans cet exemple d’honoraires IT : généralement ch. 405 (autres charges d’exploitation), sous réserve du droit à déduction. Le ch. 400 vise l’IP sur coûts en matériel et prestations de services au sens du décompte.</td>
 </tr>
 </tbody>
 </table>
@@ -397,7 +401,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <td>Facture SaaS étrangère</td>
 <td>Abonnement logiciel · CHF 2'000 · prestataire étranger · service localisé chez le destinataire suisse</td>
 <td class="acc-num">Dr 6570 Logiciels 2'000<br/>Cr 2000 Fournisseurs 2'000<br/><em>Si DIP admis :</em><br/>Dr 1170 TVA déductible 162<br/>Cr 2200 TVA due acquisition 162</td>
-<td>Impôt sur acquisitions : ch. 383 ; IP éventuel : ch. 400/405 selon nature et droit à déduction</td>
+<td>Impôt sur acquisitions : ch. 383 pour les taux actuels; DIP éventuel : ici généralement ch. 405, si le droit à déduction est ouvert. Le libellé du portail de la période prime.</td>
 </tr>
 </tbody>
 </table>
@@ -405,9 +409,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <table class="comp-table">
 <thead><tr><th>Compte</th><th>Mouvement</th><th>Montant TVA</th><th>Contrôle</th></tr></thead>
 <tbody>
-<tr><td class="acc-num">2200 TVA collectée / due</td><td>Vente CH + acquisition étrangère</td><td>Cr 972</td><td>810 sur ventes + 162 acquisition</td></tr>
-<tr><td class="acc-num">1170 TVA déductible</td><td>Achats CH + acquisition étrangère</td><td>Dr 405</td><td>243 achat CH + 162 acquisition si DIP admis</td></tr>
-<tr><td class="acc-num">2201 Décompte TVA</td><td>Solde à payer avant corrections</td><td>Cr 567</td><td>972 − 405 = 567</td></tr>
+<tr><td class="acc-num">2200 TVA collectée / due</td><td>Vente CH</td><td>Cr 810</td><td>TVA due sur la vente</td></tr>
+<tr><td class="acc-num">2202 Impôt sur acquisitions</td><td>Service étranger</td><td>Cr 162</td><td>Compte interne utilisé dans M04 pour le ch. 383</td></tr>
+<tr><td class="acc-num">1170 TVA déductible</td><td>Achat CH + acquisition étrangère</td><td>Dr 405</td><td>243 achat CH + 162 acquisition si DIP admis</td></tr>
+<tr><td class="acc-num">2201 Décompte TVA</td><td>Solde à payer avant corrections</td><td>Cr 567</td><td>810 + 162 − 405 = 567</td></tr>
 </tbody>
 </table>
 <div class="box warning">
@@ -425,19 +430,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>Toute entreprise suisse doit tenir une comptabilité conforme au <strong>Code des obligations (CO/OR)</strong>. Les exigences varient selon la taille : (1) <strong>petites entités</strong> (CA &lt; CHF 500'000) tiennent une comptabilité "recettes-dépenses" simplifiée, (2) <strong>entités standards</strong> tiennent une comptabilité commerciale complète (art. 957a OR), (3) <strong>moyennes/grandes entreprises</strong> soumises à révision ordinaire (CA &gt; CHF 40 mio + bilan &gt; CHF 20 mio + 250 employés FTE — 2 critères sur 3).</p>
+<p>Le <strong>Code des obligations (CO/OR)</strong> distingue la forme juridique et la taille. Les <strong>personnes morales</strong> tiennent une comptabilité et présentent des comptes selon les art. 957 ss CO. Pour les <strong>entreprises individuelles et sociétés de personnes</strong>, la comptabilité complète s’impose lorsque le chiffre d’affaires dépasse CHF 500'000; en dessous, une comptabilité simplifiée des recettes, dépenses et du patrimoine reste requise. M04 se concentre sur la piste d’audit TVA, pas sur les seuils de révision.</p>
 </div>
 </div>
-<p class="prose">Les <strong>art. 957-963b OR</strong> définissent les obligations de tenue de la comptabilité commerciale en Suisse. L'art. 957 al. 1 OR impose la tenue d'une comptabilité à toute personne morale et à toute entreprise individuelle/société de personnes dont le CA dépasse CHF 500'000. La comptabilité doit présenter fidèlement la situation économique de l'entreprise (art. 958 OR — principe de l'<em>image fidèle</em>).</p>
+<p class="prose">Les <strong>art. 957 ss CO</strong> encadrent la tenue de la comptabilité et la présentation des comptes. L’art. 957a exige notamment un enregistrement intégral, fidèle et systématique, la justification par pièces, la clarté et la traçabilité. L’art. 958 fixe l’objectif des comptes annuels : présenter la situation économique de façon qu’un tiers puisse s’en faire une <strong>opinion fondée</strong>. Il ne faut pas transformer cette formule en promesse IFRS de « true and fair view ».</p>
 <table class="comp-table">
 <thead><tr><th>Article OR</th><th>Contenu</th><th>Impact M04</th></tr></thead>
 <tbody>
 <tr><td class="art-cell">art. 957 OR</td><td>Obligation de tenir une comptabilité (seuil CA CHF 500'000)</td><td>Cadre général de toutes les écritures TVA</td></tr>
 <tr><td class="art-cell">art. 957a OR</td><td>Principes : intégralité, fiabilité, clarté, justification</td><td>Écritures TVA doivent être justifiées pièce à pièce</td></tr>
-<tr><td class="art-cell">art. 958 OR</td><td>Présentation fidèle (image fidèle / true and fair view)</td><td>Comptes TVA ne doivent pas masquer la réalité</td></tr>
-<tr><td class="art-cell">art. 958c OR</td><td>Principes : continuité d'exploitation, prudence, comparabilité</td><td>Cohérence des écritures TVA d'un exercice à l'autre</td></tr>
+<tr><td class="art-cell">art. 958 OR</td><td>Objectif des comptes annuels : permettre à un tiers de se faire une opinion fondée</td><td>Les soldes et rapprochements TVA doivent être explicables et traçables</td></tr>
+<tr><td class="art-cell">art. 958a / 958c OR</td><td>Continuité d’exploitation (958a) et principes d’établissement des comptes, dont clarté, intégralité, fiabilité, importance relative, prudence et permanence (958c)</td><td>Documenter les méthodes comptables et changements qui affectent la TVA</td></tr>
 <tr><td class="art-cell">art. 958f OR</td><td><strong>Conservation 10 ans</strong> (livres + pièces comptables)</td><td>Archivage des décomptes TVA + pièces justificatives</td></tr>
-<tr><td class="art-cell">art. 959 OR</td><td>Structure du bilan (actifs, passifs)</td><td>Comptes TVA = passifs courants (compte 220x)</td></tr>
+<tr><td class="art-cell">art. 959 OR</td><td>Notion et structure du bilan</td><td>Une position TVA peut être une dette ou une créance selon le solde net et l’organisation comptable</td></tr>
 <tr><td class="art-cell">art. 959a OR</td><td>Structure minimale du bilan</td><td>"Dettes envers la TVA" ligne distincte au bilan</td></tr>
 <tr><td class="art-cell">art. 960 OR</td><td>Évaluation des actifs et passifs</td><td>Dette TVA évaluée à la valeur nominale</td></tr>
 <tr><td class="art-cell">art. 959c / 961a-b OR</td><td>Annexe — principes et informations significatives</td><td>Méthode TVA documentée ; mention en annexe si l’information est requise ou significative</td></tr>
@@ -447,20 +452,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">📋</div>
 <div class="box-body">
 <div class="box-title">Lien LTVA ↔ OR — Cohérence obligatoire</div>
-<p>L'<strong>art. 70 LTVA</strong> renvoie aux principes comptables du CO : <em>"L'assujetti doit tenir ses livres comptables conformément aux principes généralement admis dans le commerce"</em>. Pratiquement : toute écriture TVA doit respecter à la fois (1) les exigences fiscales LTVA (taux, ventilation, ch. décompte) et (2) les exigences comptables OR (chronologie, justification, conservation). Une écriture TVA correcte fiscalement mais non conforme OR peut être rejetée par l'AFC en cas de contrôle.</p>
+<p>L'<strong>art. 70 LTVA</strong> renvoie aux principes comptables du CO : <em>"L'assujetti doit tenir ses livres comptables conformément aux principes généralement admis dans le commerce"</em>. Pratiquement : toute écriture TVA doit respecter à la fois (1) les exigences fiscales LTVA (taux, ventilation, ch. décompte) et (2) les exigences comptables OR (chronologie, justification, conservation). Une comptabilité insuffisamment traçable peut perdre de sa force probante et obliger l’assujetti à reconstituer les faits par d’autres preuves; si les bases ne peuvent pas être établies de façon fiable, une estimation fiscale peut devenir nécessaire.</p>
 </div>
 </div>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Synthèse — OR vs LTVA : obligations comptables croisées</h4>
 <table class="acc-table">
 <thead><tr><th>Obligation</th><th>Source OR</th><th>Source LTVA</th><th>Sanction si défaut</th></tr></thead>
 <tbody>
-<tr><td>Tenue d'une comptabilité</td><td class="acc-num">art. 957 OR</td><td class="acc-num">art. 70 al. 1</td><td>Amende OR + taxation d'office TVA</td></tr>
+<tr><td>Tenue d'une comptabilité</td><td class="acc-num">art. 957 OR</td><td class="acc-num">art. 70 al. 1</td><td>Amende OR + fixation par voie d’estimation TVA</td></tr>
 <tr><td>Principes (intégralité, fiabilité)</td><td class="acc-num">art. 957a OR</td><td class="acc-num">art. 70 al. 1</td><td>Perte force probante</td></tr>
-<tr><td>Image fidèle (true and fair view)</td><td class="acc-num">art. 958 OR</td><td>—</td><td>Rejet comptes</td></tr>
-<tr><td>Conservation pièces</td><td class="acc-num">art. 958f OR (10 ans)</td><td class="acc-num">art. 70 al. 2 (10 ans) / al. 3 (immo)</td><td>Taxation d'office art. 86 al. 2</td></tr>
+<tr><td>Opinion fondée d’un tiers sur la situation économique</td><td class="acc-num">art. 958 OR</td><td>—</td><td>Risque de comptes insuffisamment explicables / probants</td></tr>
+<tr><td>Conservation pièces</td><td class="acc-num">art. 958f OR (10 ans)</td><td class="acc-num">art. 70 al. 2 (10 ans) / al. 3 (immo)</td><td>Fixation par voie d’estimation art. 79</td></tr>
 <tr><td>Changement de méthode TVA</td><td class="acc-num">art. 958c / 959c OR</td><td>—</td><td>Documentation interne ; mention en annexe si requise ou significative</td></tr>
 <tr><td>Décompte périodique</td><td>—</td><td class="acc-num">art. 71 + 71a</td><td>Amende art. 98</td></tr>
-<tr><td>Concordance annuelle</td><td>—</td><td class="acc-num">art. 72 (240 jours)</td><td>Risque contrôle</td></tr>
+<tr><td>Concordance annuelle</td><td>—</td><td class="acc-num">art. 72 : période contenant le 180e jour; repère pratique AFC de 240 jours</td><td>Corriger les différences et conserver le rapprochement</td></tr>
 <tr><td>Bilan — dettes TVA</td><td class="acc-num">art. 959a OR</td><td>—</td><td>Image faussée</td></tr>
 </tbody>
 </table>
@@ -468,17 +473,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">🏛️</div>
 <div class="box-body">
 <div class="box-title">Vision AFC — Documentation comptable lors d'un contrôle</div>
-<p>L'AFC <strong>exige la production complète de la comptabilité</strong> lors d'un contrôle TVA : (1) Grand-livre des comptes TVA (2200, 2201, 1170, 1171, etc.), (2) Journaux des ventes et des achats détaillés, (3) Pièces justificatives (factures émises et reçues), (4) Rapprochement décomptes ↔ comptabilité. Une comptabilité non conforme OR = présomption d'erreur ou de soustraction → taxation d'office possible (art. 86 al. 2 LTVA).</p>
+<p>L'AFC <strong>exige la production complète de la comptabilité</strong> lors d'un contrôle TVA : (1) Grand-livre des comptes TVA (2200, 2201, 1170, 1171, etc.), (2) Journaux des ventes et des achats détaillés, (3) Pièces justificatives (factures émises et reçues), (4) Rapprochement décomptes ↔ comptabilité. Une comptabilité non conforme OR = présomption d'erreur ou de soustraction → fixation par voie d’estimation possible (art. 79 LTVA).</p>
 </div>
 </div>
-<div class="box gold">
-<div class="box-icon">⚖️</div>
-<div class="box-body">
-<div class="box-title">Principe fondateur — Neutralité TVA (ATF 123 II 295)</div>
-<p>L'<strong>arrêt fondateur ATF 123 II 295</strong> du Tribunal fédéral consacre la <strong>neutralité TVA</strong> comme principe fondamental : la TVA n'est <strong>pas une charge</strong> pour l'entreprise assujettie (sauf pour les activités exclues art. 21). Conséquence comptable directe : <strong>la TVA déductible (1170) ne doit JAMAIS être enregistrée en charges</strong> — elle est traitée comme un actif (créance envers AFC). Toute écriture qui violerait cette neutralité crée un risque de correction comptable, de refus ou de limitation du DIP et de questionnement en cas de contrôle AFC. Ce principe guide tout M04.</p>
-</div>
-</div>
-</div>
+<div class="box gold"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Neutralité économique — seulement dans la mesure du droit au DIP</div><p>La TVA <strong>déductible</strong> n’est en principe pas une charge définitive : elle est suivie séparément comme créance / poste de décompte. En revanche, une TVA <strong>non déductible</strong> (activité exclue, usage privé, limitation ou correction du DIP) peut devenir un élément du coût ou de la valeur d’un actif selon le traitement comptable applicable. Le réflexe professionnel n’est donc jamais « TVA = toujours neutre », mais « quel droit au DIP est réellement ouvert ? » — sujet approfondi en M05.</p></div></div>
 <!-- BLOC 2 — Plan comptable suisse PME -->
 <div class="theory-block">
 <h3><span class="num">2</span>Plan comptable suisse PME — Comptes TVA essentiels <span class="block-risk risk-green">🟢 Vert</span></h3>
@@ -486,30 +484,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>Le <strong>Plan comptable suisse PME</strong> (édité par veb.ch, KMU-Handbuch) est une référence pratique très répandue dans les PME suisses. Vous le rencontrerez dans Bexio, Abacus, Crésus, Winbiz et tous les ERP fiduciaires. Pour la TVA, la classe 2 (passifs) abrite les <strong>comptes TVA collectée</strong> et la classe 1 (actifs) les <strong>comptes TVA déductible</strong>. Le numéro de compte est libre mais la structure standard est universellement adoptée.</p>
+<p>Le <strong>Plan comptable suisse PME</strong> (édité par veb.ch, KMU-Handbuch) est une référence pratique très répandue dans les PME suisses. Vous le rencontrerez dans Bexio, Abacus, Crésus, Winbiz et tous les ERP fiduciaires. Pour la TVA, la classe 2 (passifs) abrite les <strong>comptes TVA collectée</strong> et la classe 1 (actifs) les <strong>comptes TVA déductible</strong>. Les numéros de comptes sont des conventions de travail : ils varient selon le plan comptable, la fiduciaire et l’ERP. La logique débit/crédit et la traçabilité vers le décompte priment sur le numéro.</p>
 </div>
 </div>
 <p class="prose">Comprendre la <strong>logique des comptes TVA</strong> est essentielle : la TVA collectée sur les ventes représente une <strong>dette envers l'AFC</strong> (passif), tandis que la TVA déductible sur les achats représente une <strong>créance envers l'AFC</strong> (actif). La différence nette (positive = à payer, négative = à recevoir) est régularisée au compte 2201 lors du décompte trimestriel.</p>
 <div class="box info">
 <div class="box-icon">📚</div>
 <div class="box-body">
-<div class="box-title">Référence officielle — Plan comptable PME veb.ch</div>
+<div class="box-title">Référence pratique — Plan comptable PME suisse</div>
 <p>Le plan comptable standard suisse est édité par <strong>veb.ch</strong> (Association suisse des experts en finance et controlling) en collaboration avec le <strong>KMU-Handbuch</strong>. Document de référence courant pour de nombreuses PME suisses. Les numéros de comptes sont des conventions — légalement libres — mais leur respect facilite tous les échanges (fiduciaires, audit, AFC, banques). Pour les groupes consolidés ou normes spécifiques (Swiss GAAP RPC, IFRS) : adaptations possibles tout en gardant la logique.</p>
 </div>
 </div>
-<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Comptes TVA standards — Plan PME Suisse</h4>
+<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Exemple de comptes TVA — convention utilisée dans M04</h4>
 <table class="acc-table">
 <thead><tr><th>N° compte</th><th>Libellé</th><th>Nature</th><th>Solde normal</th></tr></thead>
 <tbody>
 <tr><td class="acc-num">1020</td><td>Banque — Compte courant</td><td>Actif courant</td><td>Débiteur</td></tr>
 <tr><td class="acc-num">1100</td><td>Créances clients (Débiteurs)</td><td>Actif courant</td><td>Débiteur</td></tr>
 <tr><td class="acc-num">1170</td><td>TVA déductible sur achats biens et prestations</td><td>Actif courant</td><td>Débiteur</td></tr>
-<tr><td class="acc-num">1171</td><td>TVA déductible sur achats d'investissements</td><td>Actif courant</td><td>Débiteur</td></tr>
+<tr><td class="acc-num">1171</td><td>Sous-compte de DIP sur investissements <em>— convention possible selon le plan/ERP</em></td><td>Actif courant</td><td>Débiteur</td></tr>
 <tr><td class="acc-num">1176</td><td>TVA à récupérer (créance AFC) <em>— optionnel</em></td><td>Actif courant</td><td>Débiteur</td></tr>
 <tr><td class="acc-num">2000</td><td>Créanciers (Dettes fournisseurs)</td><td>Passif courant</td><td>Créditeur</td></tr>
 <tr><td class="acc-num">2200</td><td>TVA due (collectée sur ventes)</td><td>Passif courant</td><td>Créditeur</td></tr>
 <tr><td class="acc-num">2201</td><td>Décompte TVA (compte de régularisation)</td><td>Passif courant</td><td>Variable</td></tr>
-<tr><td class="acc-num">2202</td><td>TVA acquisitions étrangères (ch. 383)</td><td>Passif courant</td><td>Créditeur</td></tr>
+<tr><td class="acc-num">2202</td><td>Compte interne d’impôt sur les acquisitions <em>— convention M04</em></td><td>Passif courant</td><td>Créditeur</td></tr>
 </tbody>
 </table>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Comptes de produits (classe 3) — Ventilation TVA</h4>
@@ -530,17 +528,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-body">
 <div class="box-title">Bonne pratique — Sous-comptes par taux et par activité</div>
 <p>Pour les entreprises avec <strong>activités mixtes</strong> ou <strong>plusieurs taux</strong>, créez des sous-comptes : 3000.1 (ventes 8,1% activité A), 3000.2 (ventes 8,1% activité B), 1170.1 (IP imposable), 1170.2 (IP exclu), 1170.3 (IP commun à proratiser). Cela facilite radicalement le décompte trimestriel et la concordance annuelle. Les ERP modernes (Bexio, Abacus) le permettent nativement.</p>
-<p style="margin-top:10px"><strong>Sous-comptes 2200 par taux</strong> — pratique recommandée pour entreprises multi-taux : <strong>2200.1</strong> TVA collectée 8,1% (→ ch. 303 (dès 2024 ; ch. 303 ancien régime)), <strong>2200.2</strong> TVA collectée 2,6% (→ ch. 313 (dès 2024 ; ch. 313 ancien régime)), <strong>2200.3</strong> TVA collectée 3,8% (→ ch. 343 (dès 2024 ; ch. 343 ancien régime)). Permet une concordance immédiate ligne par ligne sans calcul manuel et facilite l'audit AFC.</p>
+<p style="margin-top:10px"><strong>Sous-comptes par taux/activité</strong> — une bonne pratique possible consiste à séparer les ventes et la TVA par taux ou activité. Les numéros 2200.1/2200.2/2200.3 utilisés ici sont purement internes. Pour le décompte, les chiffres 303/313/343 servent de repères pour les taux 8,1%/2,6%/3,8% depuis 2024; le libellé du Portail AFC de la période reste déterminant.</p>
 </div>
 </div>
-<div class="box afc">
-<div class="box-icon">🏛️</div>
-<div class="box-body">
-<div class="box-title">Vision AFC — Codes TVA dans le plan comptable</div>
-<p>L'AFC apprécie que chaque compte de produit (classe 3) et de charge (classe 4-6) ait un <strong>code TVA</strong> associé (UN1 8,1%, UN2 2,6%, UN3 3,8%, ESP exonéré, EXC exclu, HCA hors champ). En contrôle, l'auditeur vérifie la cohérence entre le code TVA paramétré dans l'ERP et le ch. de décompte effectivement utilisé. Toute incohérence = signal d'erreur systémique.</p>
-</div>
-</div>
-</div>
+<div class="box afc"><div class="box-icon">🏛️</div><div class="box-body"><div class="box-title">Vision contrôle — Mapping ERP ↔ décompte</div><p>Ce qui doit être défendable n’est pas un code « UN1/UN2 » imposé par l’AFC, mais le <strong>mapping</strong> entre l’opération, son traitement TVA, le compte/axe analytique, le code configuré dans le logiciel et la rubrique du Décompte TVA pro. Les noms de codes varient selon l’ERP et sa version. Une configuration erronée peut reproduire la même erreur sur des centaines d’écritures.</p></div></div>
 <!-- BLOC 3 — Écritures TVA standards -->
 <div class="theory-block">
 <h3><span class="num">3</span>Écritures TVA standards — Ventes &amp; Achats <span class="block-risk risk-orange">🟠 Orange</span></h3>
@@ -551,7 +542,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p>Les <strong>écritures TVA</strong> sont le cœur du travail comptable quotidien. Chaque facture émise génère une écriture TVA collectée (créditeur 2200), chaque facture reçue une écriture TVA déductible (débiteur 1170). À la fin du trimestre, ces comptes sont soldés et leur différence régularisée via le compte 2201 lors du paiement à l'AFC. Erreur fréquente : mauvaise ventilation par taux → l'ERP doit être paramétré correctement.</p>
 </div>
 </div>
-<p class="prose">Le <strong>schéma standard</strong> de l'écriture TVA est universel en comptabilité suisse. Pour une <strong>vente</strong> au taux normal (8,1%), trois mouvements obligatoires : (1) <strong>Débit Débiteurs/Caisse</strong> du TTC, (2) <strong>Crédit Ventes</strong> du HT, (3) <strong>Crédit TVA collectée 2200</strong> de la TVA. Pour un <strong>achat</strong>, c'est l'inverse côté actif : Débit Charges (HT) + Débit TVA déductible 1170 (TVA) / Crédit Fournisseurs (TTC).</p>
+<p class="prose">Le <strong>schéma pédagogique</strong> utilisé dans M04 est très courant, mais les numéros et comptes techniques peuvent varier selon l’ERP. Pour une <strong>vente</strong> au taux normal (8,1%), la logique est : (1) <strong>Débit Débiteurs/Caisse</strong> du TTC, (2) <strong>Crédit Ventes</strong> du HT, (3) <strong>Crédit TVA collectée 2200</strong> de la TVA. Pour un <strong>achat</strong>, c'est l'inverse côté actif : Débit Charges (HT) + Débit TVA déductible 1170 (TVA) / Crédit Fournisseurs (TTC).</p>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Exemple 1 — Vente CHF 10'000 HT au taux 8,1%</h4>
 <table class="acc-table">
 <thead><tr><th>N° compte</th><th>Libellé</th><th class="acc-debit">Débit (CHF)</th><th class="acc-credit">Crédit (CHF)</th></tr></thead>
@@ -587,7 +578,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💡</div>
 <div class="box-body">
 <div class="box-title">Logique de l'auto-imposition acquisition étrangère</div>
-<p>L'acquisition d'un service étranger (AWS, Adobe, Stripe US) génère une <strong>double écriture TVA</strong> : (1) compte 2202 crédité de la TVA "fictive" qui aurait été facturée si le prestataire était suisse (= ch. 383 du décompte). En parallèle, l'impôt préalable peut être déduit via les lignes 400/405 selon la nature de la dépense, si les conditions de l'art. 28 LTVA sont remplies. <strong>Effet net financier souvent nul</strong> pour activité 100% imposable, mais l'<strong>obligation déclarative</strong> reste entière. Voir M03 cas 10 (SaaS Cloud).</p>
+<p>L'acquisition d'un service étranger (AWS, Adobe, Stripe US) génère une <strong>double écriture TVA</strong> : (1) compte 2202 crédité de la impôt sur les acquisitions calculé par le destinataire qui aurait été facturée si le prestataire était suisse (= ch. 383 du décompte). En parallèle, l'impôt préalable peut être déduit via les lignes 400/405 selon la nature de la dépense, si les conditions de l'art. 28 LTVA sont remplies. <strong>Effet net financier souvent nul</strong> pour activité 100% imposable, mais l'<strong>obligation déclarative</strong> reste entière. Voir M03 cas 10 (SaaS Cloud).</p>
 </div>
 </div>
 <div class="box afc">
@@ -605,7 +596,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>À chaque <strong>fin de trimestre</strong>, vous procédez au "<strong>solde des comptes TVA</strong>" : le compte 2200 (TVA collectée) est débité de son solde, le compte 1170 (TVA déductible) est crédité de son solde, et la différence nette est virée au compte 2201 (Décompte TVA). Lors du paiement à l'AFC, le 2201 est soldé contre la banque. Cette procédure de "<strong>clôture intermédiaire TVA</strong>" est cruciale pour la concordance annuelle (M03).</p>
+<p>Une méthode de travail fréquente consiste, à la fin de la période de décompte, à solder les comptes techniques de TVA contre un compte de régularisation (2201 dans M04), puis à solder ce dernier lors du paiement ou remboursement. <strong>Ce schéma n’est pas un plan d’écritures imposé par l’AFC</strong> : un ERP peut conserver d’autres comptes techniques. L’exigence professionnelle est que le solde se réconcilie avec le décompte et reste traçable.</p>
 </div>
 </div>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Écriture de solde — Fin Q1 2026 (Exemple)</h4>
@@ -632,16 +623,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">📊</div>
 <div class="box-body">
 <div class="box-title">Variante — Crédit TVA en faveur de l'assujetti</div>
-<p>Si TVA déductible &gt; TVA collectée (typique des startups, exportateurs, gros investissements), le compte 2201 affichera un <strong>solde débiteur</strong> = <strong>créance envers l'AFC</strong>. Lors du remboursement par l'AFC : Débit 1020 Banque / Crédit 2201 — la créance est éteinte. Délai de remboursement AFC moyen : 4-8 semaines après dépôt du décompte (plus rapide en méthode mensuelle).</p>
+<p>Si TVA déductible &gt; TVA collectée (typique des startups, exportateurs, gros investissements), le compte 2201 affichera un <strong>solde débiteur</strong> = <strong>créance envers l'AFC</strong>. Lors du remboursement par l'AFC : Débit 1020 Banque / Crédit 2201 — la créance est éteinte. Le délai effectif dépend du traitement du dossier, des contrôles et d’éventuelles compensations; M04 ne promet pas un délai de remboursement fixe.</p>
 </div>
 </div>
 <h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Au bouclement annuel — Régularisations TVA</h4>
-<p class="prose">Au 31.12 (clôture annuelle), les <strong>4 décomptes trimestriels</strong> ont été soldés et payés. Reste à effectuer la <strong>concordance annuelle</strong> (art. 72 LTVA — voir M03) : (1) Cumul du CA TVA déclaré (ch. 200 Q1+Q2+Q3+Q4), (2) Comparaison au CA comptable annuel (somme des comptes 3000-3999 nets des escomptes), (3) Identification des écarts, (4) Dépôt du décompte rectificatif / concordance annuelle dans les 240 jours uniquement si une différence doit être corrigée.</p>
+<p class="prose">Au bouclement, la <strong>concordance annuelle</strong> relie les décomptes à la comptabilité. L’art. 72 rattache la correction à la période de décompte dans laquelle tombe le <strong>180e jour</strong> suivant la clôture; en pratique, l’AFC utilise aussi le repère de <strong>240 jours</strong> pour considérer la période finalisée si aucun décompte rectificatif n’est reçu. Si aucune erreur n’est constatée, aucun décompte rectificatif annuel n’est nécessaire.</p>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
 <div class="box-title">Vision AFC — Soldes des comptes TVA au bilan</div>
-<p>À la date du bilan (31.12), les soldes des comptes TVA doivent refléter <strong>uniquement</strong> les opérations du <strong>dernier trimestre</strong> (Q4 dépôt 28.02.N+1) et éventuellement des corrections de concordance. Un solde 2200 anormalement élevé au bilan = signal rouge AFC (factures émises mais non déclarées). Un solde 1170 anormalement bas = IP non récupéré (manque à gagner). Tout solde résiduel doit être documenté en annexe.</p>
+<p>À la date du bilan, les soldes TVA doivent être <strong>réconciliables</strong> avec les périodes non encore décomptées, paiements/remboursements en transit et corrections documentées. Un solde inhabituel n’est pas une infraction en soi : il déclenche un rapprochement. La documentation se conserve dans le dossier de clôture; une mention en annexe n’est requise que si les règles comptables l’exigent ou si l’information est significative.</p>
 </div>
 </div>
 </div>
@@ -661,44 +652,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tbody>
 <tr><td>Ch. 200 Q1 (jan-mars 2025)</td><td class="acc-debit">245'000</td><td></td></tr>
 <tr><td>Ch. 200 Q2 (avr-juin 2025)</td><td class="acc-debit">280'000</td><td></td></tr>
-<tr><td>Ch. 200 Q3 (juil-sept 2025)</td><td class="acc-debit">220'000</td><td></td></tr>
+<tr><td>Ch. 200 Q3 (juil-sept 2025)</td><td class="acc-debit">240'000</td><td></td></tr>
 <tr><td>Ch. 200 Q4 (oct-déc 2025)</td><td class="acc-debit">315'000</td><td></td></tr>
-<tr class="total-row"><td><strong>Total CA TVA déclaré</strong></td><td class="acc-debit"><strong>1'060'000</strong></td><td></td></tr>
+<tr class="total-row"><td><strong>Total ch. 200 déclaré</strong></td><td class="acc-debit"><strong>1'080'000</strong></td><td></td></tr>
 <tr><td>Compte 3000 — Ventes 8,1% (HT)</td><td></td><td class="acc-credit">1'075'000</td></tr>
 <tr><td>Compte 3200 — Exonéré art. 23</td><td></td><td class="acc-credit">5'000</td></tr>
-<tr><td>Compte 3800 — Escomptes accordés (réducteur)</td><td></td><td class="acc-credit">−20'000</td></tr>
-<tr class="total-row"><td><strong>CA comptable net</strong></td><td></td><td class="acc-credit"><strong>1'060'000</strong></td></tr>
-<tr><td colspan="3" style="text-align:center;color:var(--sage);font-weight:600">✓ Écart = 0 — Concordance OK — Pas de correction à effectuer</td></tr>
+<tr><td>Compte 3800 — Réductions de contre-prestation</td><td></td><td class="acc-credit">20'000 à contrôler séparément au ch. 235</td></tr>
+<tr class="total-row"><td><strong>Contre-prestations comptabilisées à rapprocher du ch. 200</strong></td><td></td><td class="acc-credit"><strong>1'080'000</strong></td></tr>
+<tr><td colspan="3" style="text-align:center;color:var(--sage);font-weight:600">✓ ch. 200 ↔ contre-prestations comptabilisées : écart 0. Les réductions ch. 235 font l’objet d’un contrôle séparé.</td></tr>
 </tbody>
 </table>
 <div class="box info" style="background:#1A1A2E;border-left-color:var(--gold);color:#fff">
 <div class="box-icon" style="color:var(--gold)">🧮</div>
 <div class="box-body">
 <div class="box-title" style="color:var(--gold)">Formule mathématique — Équation de concordance</div>
-<p style="color:rgba(255,255,255,.9);font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;padding:12px 0">
-<strong style="color:var(--gold-lite)">Σ ch. 200 (4 trim.)</strong> = CA compt. brut (Σ comptes 3xxx)<br/>
-            − Escomptes accordés (compte 3800 → ch. 235)<br/>
-            − Rabais &amp; ristournes (compte 3805 → ch. 235)<br/>
-            − Notes de crédit / annulations<br/>
-            ± Régularisations &amp; corrections d'exercice<br/>
-            + Prestations à soi-même / double affectation (art. 31 → ch. 415)<br/>
-            + Acquisitions étrangères (art. 45 → ch. 383 ; IP éventuel via 400/405)
-        </p>
-<p style="color:rgba(255,255,255,.85);font-size:12.5px;margin-top:8px"><strong style="color:var(--gold)">Si écart ≠ 0</strong> → identification origine + Formulaire 550_03 dans 240 jours. <strong style="color:var(--gold)">Si écart = 0</strong> → aucun rectificatif ; conserver le tableau de concordance dans le dossier interne.</p>
+<p style="color:rgba(255,255,255,.9);font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;padding:12px 0"><strong style="color:var(--gold-lite)">Contrôle A — chiffre d’affaires</strong><br/>Σ ch. 200 ↔ contre-prestations comptabilisées qui doivent entrer au ch. 200, avec un pont documenté pour les différences de présentation, cut-off et mouvements qui ne sont pas des contre-prestations.<br/><br/><strong style="color:var(--gold-lite)">Contrôle B — déductions et impôt</strong><br/>Vérifier séparément ch. 220/221/225/230/235/280, puis le calcul de l’impôt et le DIP. <strong>Le ch. 383 (impôt sur les acquisitions) et les corrections de DIP ne s’ajoutent pas au chiffre d’affaires comptable.</strong></p><p style="color:rgba(255,255,255,.85);font-size:12.5px;margin-top:8px"><strong style="color:var(--gold)">Si un écart fiscal existe</strong> → identifier la période et déposer la correction appropriée. Pour la concordance annuelle : art. 72 = période contenant le 180e jour; l’AFC utilise aussi le repère pratique de 240 jours.</p>
 </div>
 </div>
 <div class="box gold">
 <div class="box-icon">⭐</div>
 <div class="box-body">
 <div class="box-title">Procédure systématique de concordance — 5 étapes</div>
-<p><strong>Étape 1</strong> : Extraire le CA déclaré (ch. 200 cumulés 4 trimestres) via export AFC ePortal. <strong>Étape 2</strong> : Extraire le CA comptable annuel (balance comptes 3xxx via ERP). <strong>Étape 3</strong> : Lister les éléments réducteurs/correcteurs (escomptes, rabais, annulations, factures en transit). <strong>Étape 4</strong> : Calculer l'écart résiduel. <strong>Étape 5</strong> : Si écart ≠ 0 → rectificatif / concordance annuelle dans les 240 jours ; si écart = 0 → conservation interne du tableau.</p>
+<p><strong>Étape 1</strong> : Extraire le CA déclaré (ch. 200 cumulés 4 trimestres) via export AFC ePortal. <strong>Étape 2</strong> : Extraire le CA comptable annuel (balance comptes 3xxx via ERP). <strong>Étape 3</strong> : Lister les éléments réducteurs/correcteurs (escomptes, rabais, annulations, factures en transit). <strong>Étape 4</strong> : Calculer l'écart résiduel. <strong>Étape 5</strong> : si une erreur est constatée, corriger la période / concordance selon l’art. 72 et le Portail AFC; si aucune erreur n’est constatée, aucun décompte rectificatif annuel n’est requis, mais le tableau de rapprochement est conservé.</p>
 </div>
 </div>
 <div class="box warning">
 <div class="box-icon">⚠️</div>
 <div class="box-body">
 <div class="box-title">Sources d'écarts les plus fréquentes</div>
-<p>(1) <strong>Décalage temporel</strong> : facture émise le 30.12 mais saisie dans le décompte Q1 N+1. (2) <strong>Escomptes accordés/obtenus</strong> non régularisés au ch. 235. (3) <strong>Avoirs et notes de crédit</strong> non répercutés. (4) <strong>Activités exonérées / hors Suisse / exclues</strong> mal ventilées (ch. 220/221/225/230). (5) <strong>Rabais, avoirs, escomptes</strong> non repris au ch. 235. (6) <strong>Acquisitions étrangères</strong> ch. 383 omises. Audit systématique des comptes par groupe.</p>
+<p>(1) <strong>Décalage temporel</strong> : facture émise le 30.12 mais saisie dans le décompte Q1 N+1. (2) <strong>Escomptes accordés/obtenus</strong> non régularisés au ch. 235. (3) <strong>Avoirs et notes de crédit</strong> non répercutés. (4) <strong>Activités exonérées / hors Suisse / exclues</strong> mal ventilées (ch. 220/221/225/230). (5) <strong>Rabais, avoirs, escomptes</strong> non repris au ch. 235. (6) <strong>Contrôles séparés</strong> oubliés : impôt sur les acquisitions (ch. 383), DIP et corrections — ils n’expliquent pas à eux seuls un écart de chiffre d’affaires. Audit systématique des flux par groupe.</p>
 </div>
 </div>
 <div class="box afc">
@@ -725,7 +707,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <thead><tr><th>Étape</th><th>Action</th><th>Bénéfice</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Ouverture d'un <strong>compte bancaire séparé "TVA"</strong> (compte 1021 par ex.)</td><td>Ségrégation visuelle</td></tr>
-<tr><td>2</td><td>Virement automatique 8,1% sur chaque encaissement client</td><td>Discipline mensuelle</td></tr>
+<tr><td>2</td><td>Virement automatique d’un montant prudent adapté au mix de taux et au droit au DIP — pas nécessairement 8,1% de chaque encaissement</td><td>Discipline mensuelle</td></tr>
 <tr><td>3</td><td>Paiement AFC depuis ce compte uniquement</td><td>Jamais en découvert</td></tr>
 <tr><td>4</td><td>Reporting trimestriel : solde compte 1021 vs solde 2200</td><td>Alerte précoce</td></tr>
 </tbody>
@@ -733,8 +715,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box info">
 <div class="box-icon">💰</div>
 <div class="box-body">
-<div class="box-title">Méthode encaissement (art. 40 LTVA) — Levier cash-flow</div>
-<p>Pour les entreprises avec <strong>DSO long</strong> (BTP, B2B, consulting), la méthode encaissement (art. 40 LTVA) protège la trésorerie : la TVA est due seulement à l'encaissement effectif, jamais à la facturation. Cf. M03 cas 3 (BatiPro). Avantage cash-flow majeur. Voir aussi art. 27 LTVA pour récupération TVA sur créances irrécouvrables (faillites clients).</p>
+<div class="box-title">Décompte selon les contre-prestations reçues (art. 39; effets art. 40) — Levier cash-flow</div>
+<p>Pour les entreprises avec <strong>DSO long</strong> (BTP, B2B, consulting), le mode de décompte selon les <strong>contre-prestations reçues</strong> est choisi dans le cadre de l’art. 39; l’art. 40 règle les effets temporels sur la créance fiscale. Il peut améliorer le cash-flow lorsque les clients paient tard. Les pertes sur débiteurs / modifications ultérieures de contre-prestation se traitent selon <strong>l’art. 41 LTVA</strong> et la pratique AFC, pas selon l’art. 27.</p>
 </div>
 </div>
 <div class="box danger">
@@ -747,8 +729,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
-<div class="box-title">Vision AFC — Plans de paiement et tolérance</div>
-<p>L'AFC accepte des <strong>plans de paiement</strong> en cas de difficulté de trésorerie, mais sous conditions strictes : (1) demande motivée AVANT échéance (pas après sommation), (2) intérêts moratoires maintenus (4,0%/an en 2026), (3) plan maximum 24 mois, (4) historique de paiement examiné. Récurrence des plans de paiement = signal d'entreprise en difficulté → contrôle TVA renforcé probable.</p>
+<div class="box-title">Difficultés de paiement — traiter le dossier, pas mémoriser une durée</div><p>En cas de difficulté de trésorerie, contacter l’AFC rapidement et documenter la situation. Les modalités d’un éventuel arrangement dépendent du dossier et n’effacent pas automatiquement les intérêts. M04 ne présente ni une durée maximale universelle ni une promesse de tolérance; l’objectif est d’éviter que la dette TVA ne soit découverte à l’échéance.</p>
 </div>
 </div>
 </div>
@@ -759,7 +740,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">💼</div>
 <div class="box-body">
 <div class="box-title">Réalité fiduciaire</div>
-<p>En pratique, la grande majorité des PME suisses utilisent un ERP ou un logiciel comptable pour préparer la TVA. Le marché est dominé par : <strong>Bexio</strong> (cloud, leader sur le segment 1-50 employés), <strong>Abacus</strong> (on-premise + cloud, segment PME moyennes), <strong>Crésus</strong> (Suisse romande, segment artisanal), <strong>Winbiz</strong> (segment indépendants). Chaque ERP a sa logique de paramétrage TVA, mais tous suivent le même principe : <strong>code TVA par opération</strong> + <strong>génération automatique du décompte</strong> + <strong>export ePortal AFC</strong>.</p>
+<p>Les PME et fiduciaires utilisent des logiciels très différents (par ex. Bexio, Abacus, Crésus, Winbiz ou des ERP de groupe). <strong>Les fonctions, menus et codes TVA varient selon la version et la configuration.</strong> M04 n’enseigne donc pas une interface comme si elle était universelle : il enseigne les contrôles à effectuer dans n’importe quel système — méthode/périodicité, codes TVA, mapping des comptes, piste d’audit et rapprochement avec le Portail AFC.</p>
 </div>
 </div>
 <table class="comp-table">
@@ -772,41 +753,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tr><td><strong>SAP / Oracle</strong></td><td>Grandes entreprises</td><td>Multi-pays · Multi-devises · Audit trail complet</td><td>Adaptation paramétrage TVA suisse complexe</td></tr>
 </tbody>
 </table>
-<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Exemple concret — Paramétrage TVA dans Bexio (pas à pas)</h4>
-<table class="acc-table">
-<thead><tr><th>Étape</th><th>Menu Bexio</th><th>Action</th><th>Valeur</th></tr></thead>
-<tbody>
-<tr><td>1</td><td>Paramètres &gt; Société</td><td>Saisir N° TVA AFC</td><td>CHE-123.456.789 MWST</td></tr>
-<tr><td>2</td><td>Paramètres &gt; Comptabilité</td><td>Méthode TVA</td><td>Effective ou TDFN</td></tr>
-<tr><td>3</td><td>Paramètres &gt; Comptabilité</td><td>Périodicité décompte</td><td>Trimestrielle (défaut)</td></tr>
-<tr><td>4</td><td>Paramètres &gt; Comptabilité</td><td>Méthode contre-prestation</td><td>Convenue ou encaissement (autorisation AFC)</td></tr>
-<tr><td>5</td><td>Paramètres &gt; Codes TVA</td><td>Activer UN1 (8,1%)</td><td>Pour les ventes/achats CH imposables</td></tr>
-<tr><td>6</td><td>Paramètres &gt; Codes TVA</td><td>Activer UN2 (2,6%)</td><td>Pour denrées, livres, médicaments</td></tr>
-<tr><td>7</td><td>Paramètres &gt; Codes TVA</td><td>Activer UN3 (3,8%)</td><td>Pour hébergement</td></tr>
-<tr><td>8</td><td>Paramètres &gt; Codes TVA</td><td>Activer ESP (exonéré/hors champ)</td><td>Pour exports + services B2B étranger</td></tr>
-<tr><td>9</td><td>Comptabilité &gt; Plan</td><td>Assigner code par défaut au compte</td><td>3000→UN1, 3200→ESP, etc.</td></tr>
-<tr><td>10</td><td>Paramètres &gt; ePortal</td><td>Lier compte AFC via AGOV</td><td>Export direct du décompte</td></tr>
-</tbody>
-</table>
+<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Checklist de paramétrage — valable quel que soit l’ERP</h4><table class="acc-table"><thead><tr><th>Contrôle</th><th>Question à documenter</th><th>Preuve / sortie attendue</th></tr></thead><tbody><tr><td>Identité TVA</td><td>Le numéro TVA et l’entité juridique sont-ils corrects ?</td><td>Paramètres société + registre TVA</td></tr><tr><td>Méthode / périodicité</td><td>Effective/TDFN/TaF et période correspondent-elles à l’autorisation / situation AFC ?</td><td>Paramètres + Portail AFC</td></tr><tr><td>Mode convenu/reçu</td><td>Le traitement des factures et paiements est-il cohérent avec le mode choisi ?</td><td>Journaux clients/fournisseurs</td></tr><tr><td>Codes TVA</td><td>Chaque code envoie-t-il la base et l’impôt vers la bonne rubrique ?</td><td>Table de mapping / rapport de codes</td></tr><tr><td>Exceptions</td><td>Exports, hors Suisse, art. 21, acquisitions et corrections sont-ils séparés ?</td><td>Rapport d’exceptions</td></tr><tr><td>Rapprochement</td><td>Le décompte généré se rapproche-t-il des journaux et comptes ?</td><td>Export de contrôle avant dépôt</td></tr></tbody></table>
 <div class="box info">
 <div class="box-icon">⚙️</div>
 <div class="box-body">
-<div class="box-title">Paramétrage TVA dans un ERP — Checklist</div>
-<p>Quel que soit l'ERP, <strong>les paramètres TVA à vérifier</strong> sont les mêmes : (1) <strong>Codes TVA</strong> activés (UN1 8,1%, UN2 2,6%, UN3 3,8%, ESP exonéré art. 23, EXC exclu art. 21, HCA hors champ), (2) <strong>Méthode</strong> de décompte (effective/TDFN), (3) <strong>Périodicité</strong> (trimestrielle/semestrielle/annuelle), (4) <strong>Méthode contre-prestation</strong> (convenue/encaissement), (5) <strong>N° AFC</strong> de l'assujetti, (6) <strong>Liaison ePortal AFC</strong> pour export direct.</p>
+<div class="box-title">Paramétrage TVA — principe</div><p>Les codes tels que « UN1 », « ESP » ou autres ne sont pas des codes légaux universels. Le professionnel vérifie la <strong>signification réelle du code dans le logiciel utilisé</strong>, sa destination dans le décompte, les exceptions et le traitement des changements de taux. Une capture d’écran ne remplace pas une table de mapping versionnée.</p>
 </div>
 </div>
 <div class="box warning">
 <div class="box-icon">⚠️</div>
 <div class="box-body">
 <div class="box-title">Erreur fréquente — Code TVA mal paramétré sur un compte</div>
-<p>Cas typique : un compte 3000 (ventes) est paramétré avec le code TVA UN1 8,1% par défaut, MAIS certaines factures de ce compte concernent en réalité des exports (devraient être en ESP — exonéré art. 23). Sans vérification ligne par ligne, les exports de biens sont déclarés à tort au ch. 303 (imposable 8,1%) au lieu du ch. 220 (exonéré art. 23) → TVA versée à tort + DIP correctement déduit = trop-payé. À récupérer via Formulaire 550_03.</p>
+<p>Cas typique : un compte 3000 (ventes) est paramétré avec le code TVA UN1 8,1% par défaut, MAIS certaines factures de ce compte concernent en réalité des exports (devraient être en ESP — exonéré art. 23). Sans vérification ligne par ligne, les exports de biens sont déclarés à tort au ch. 303 (imposable 8,1%) au lieu du ch. 220 (exonéré art. 23) → TVA versée à tort + DIP correctement déduit = trop-payé. À corriger via le décompte rectificatif / la concordance appropriée dans Décompte TVA pro.</p>
 </div>
 </div>
 <div class="box afc">
 <div class="box-icon">🏛️</div>
 <div class="box-body">
-<div class="box-title">Vision AFC — Audit ERP lors d'un contrôle</div>
-<p>L'AFC, lors d'un contrôle, demande systématiquement l'<strong>accès à l'ERP</strong> et procède à des tests : (1) <strong>Vérification du paramétrage</strong> des codes TVA, (2) <strong>Échantillonnage</strong> de 20-50 écritures pour vérifier la cohérence code TVA / ventilation décompte, (3) <strong>Extraction</strong> du journal des ventes/achats pour rapprochement avec décomptes. Un ERP correctement paramétré + écritures cohérentes = contrôle court et serein. Paramétrage défaillant = contrôle long et coûteux.</p>
+<div class="box-title">Contrôle — fournir une piste d’audit exploitable</div><p>L’assujetti doit pouvoir fournir les renseignements et documents nécessaires au contrôle. Selon le dossier, cela peut passer par des exports structurés, journaux, grands-livres et pièces, ou par un accès technique convenu avec l’AFC. M04 ne présente pas un « login direct obligatoire » comme règle universelle : l’objectif est un accès proportionné aux données pertinentes et une piste d’audit complète.</p>
 </div>
 </div>
 </div>
@@ -825,34 +789,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <tbody>
 <tr><td>Livres comptables (grand-livre, journal)</td><td>10 ans</td><td class="art-cell">art. 958f OR</td><td>Papier ou électronique OLICO</td></tr>
 <tr><td>Pièces justificatives (factures, contrats)</td><td>10 ans</td><td class="art-cell">art. 958f OR</td><td>Papier ou électronique OLICO</td></tr>
-<tr><td>Décomptes TVA (Formulaire 100)</td><td>10 ans</td><td class="art-cell">art. 70 al. 2 LTVA</td><td>Papier ou ePortal AFC</td></tr>
-<tr><td>Concordance annuelle (Formulaire 550_03)</td><td>10 ans</td><td class="art-cell">art. 72 LTVA</td><td>Papier ou ePortal AFC</td></tr>
+<tr><td>Décomptes TVA (Décompte TVA pro / exports conservés)</td><td>10 ans</td><td class="art-cell">art. 70 al. 2 LTVA</td><td>Papier ou Portail AFC</td></tr>
+<tr><td>Concordance annuelle / décompte rectificatif art. 72</td><td>10 ans</td><td class="art-cell">art. 72 LTVA</td><td>Papier ou Portail AFC</td></tr>
 <tr><td>Factures liées à des biens immobiliers</td><td>"jusqu'à expiration droit de taxer" = 20 ans en pratique</td><td class="art-cell">art. 70 al. 3 LTVA</td><td>Papier ou électronique OLICO</td></tr>
 <tr><td>Rapport de gestion + comptes annuels signés</td><td>10 ans</td><td class="art-cell">art. 958f OR</td><td>Papier obligatoire (signature)</td></tr>
 <tr><td>Documents douaniers (imports/exports)</td><td>10 ans</td><td class="art-cell">art. 70 al. 2 LTVA</td><td>Papier ou électronique</td></tr>
 </tbody>
 </table>
-<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Matrice opérationnelle — Quoi conserver, où, combien de temps</h4>
-<table class="acc-table">
-<thead><tr><th>Document</th><th>Durée min</th><th>Format papier</th><th>Format électronique</th><th>Lieu recommandé</th></tr></thead>
-<tbody>
-<tr><td>Comptes annuels signés</td><td>10 ans</td><td>OBLIGATOIRE (signature)</td><td>Copie PDF/A admise</td><td>Coffre + cloud</td></tr>
-<tr><td>Grand-livre + journaux</td><td>10 ans</td><td>Admis</td><td>Admis OLICO</td><td>Cloud ERP certifié</td></tr>
-<tr><td>Factures émises</td><td>10 ans</td><td>Admis</td><td>Admis OLICO (PDF/A)</td><td>Cloud ERP + backup</td></tr>
-<tr><td>Factures reçues</td><td>10 ans</td><td>Admis</td><td>Admis OLICO</td><td>Cloud ERP + backup</td></tr>
-<tr><td>Décomptes TVA (Form. 100)</td><td>10 ans</td><td>Admis</td><td>ePortal AFC + PDF/A</td><td>ePortal AFC archive</td></tr>
-<tr><td>Concordance 550_03</td><td>10 ans</td><td>Admis</td><td>ePortal AFC + PDF/A</td><td>ePortal AFC archive</td></tr>
-<tr><td>Factures biens immobiliers</td><td><strong>20 ans</strong></td><td>Recommandé</td><td>Admis OLICO</td><td>Coffre + cloud</td></tr>
-<tr><td>Déclarations douanières (OFDF)</td><td>10 ans</td><td>Admis</td><td>e-dec AFD</td><td>e-dec + backup</td></tr>
-<tr><td>Contrats &amp; conventions</td><td>10 ans</td><td>Recommandé</td><td>PDF/A signé électron.</td><td>Coffre + cloud</td></tr>
-<tr><td>Statuts &amp; PV AG</td><td>10 ans après dissolution</td><td>OBLIGATOIRE</td><td>Copie admise</td><td>Coffre RC</td></tr>
-</tbody>
-</table>
+<h4 style="font-size:14px;color:var(--navy);margin:18px 0 8px;font-weight:600">Matrice opérationnelle — quoi conserver et comment le retrouver</h4><table class="acc-table"><thead><tr><th>Document</th><th>Durée / règle</th><th>Contrôle de conservation</th></tr></thead><tbody><tr><td>Grand-livre + journaux + pièces</td><td>10 ans en principe selon CO/LTVA</td><td>Lisibles, retrouvables, reliés à l’écriture et au décompte</td></tr><tr><td>Décomptes TVA + rectificatifs</td><td>10 ans en principe</td><td>Conserver exports/PDF et preuve de remise lorsque utile</td></tr><tr><td>Pièces immobilières</td><td>Règle prolongée de l’art. 70 al. 3 LTVA à contrôler selon le dossier</td><td>Politique spécifique immobilier</td></tr><tr><td>Documents douaniers électroniques</td><td>Selon durée applicable</td><td>Préserver le fichier électronique et sa vérifiabilité</td></tr><tr><td>Comptes annuels / rapports</td><td>Selon art. 958f CO</td><td>Respecter les exigences de forme et signature applicables</td></tr></tbody></table>
 <div class="box info">
 <div class="box-icon">💾</div>
 <div class="box-body">
-<div class="box-title">Archivage électronique — OLICO (RS 221.431)</div>
-<p>L'<strong>Ordonnance concernant la tenue et la conservation des livres de comptes (OLICO)</strong> autorise la conservation électronique sous conditions : (1) <strong>Intégrité</strong> garantie (pas de modification possible), (2) <strong>Disponibilité</strong> à tout moment pendant la durée légale, (3) <strong>Lisibilité</strong> assurée (format pérenne, p.ex. PDF/A), (4) <strong>Migration</strong> documentée en cas de changement de système. Les services cloud (Bexio, Abacus Cloud) répondent généralement à ces exigences avec un module d'archivage certifié.</p>
+<div class="box-title">Archivage électronique — OLICO (RS 221.431)</div><p>L’OLICO admet des supports <strong>modifiables et non modifiables</strong>. Sur un support modifiable, il faut des mesures permettant de prouver l’intégrité et la traçabilité des modifications; les documents doivent rester disponibles, lisibles et vérifiables pendant la durée de conservation. <strong>PDF/A n’est pas une obligation légale universelle</strong> et le nom d’un fournisseur cloud ne suffit jamais à démontrer la conformité : il faut examiner les fonctions d’archivage, droits, journaux, sauvegardes et procédures.</p>
 </div>
 </div>
 <div class="box gold">
@@ -866,7 +814,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="box-icon">🏛️</div>
 <div class="box-body">
 <div class="box-title">Vision AFC — Conséquences d'un défaut d'archivage</div>
-<p>Si l'AFC, lors d'un contrôle, constate une <strong>absence ou destruction prématurée</strong> de documents : (1) <strong>Taxation d'office</strong> probable (art. 86 al. 2 LTVA) — l'AFC estime la TVA due, généralement <strong>majorée</strong>, (2) <strong>Amende</strong> pour violation des obligations art. 98 LTVA (CHF 800 à 10'000), (3) <strong>Présomption de soustraction</strong> art. 96 si manque de pièces sur opérations significatives, (4) <strong>Extension du droit de contrôle</strong> à 10 ans (art. 78 LTVA). Conservation = assurance.</p>
+<p>Si l'AFC, lors d'un contrôle, constate une <strong>absence ou destruction prématurée</strong> de documents : (1) <strong>Fixation par voie d’estimation</strong> probable (art. 79 LTVA) — l'AFC estime la TVA due, généralement <strong>majorée</strong>, (2) <strong>Amende</strong> pour violation des obligations art. 98 LTVA (CHF 800 à 10'000), (3) <strong>Présomption de soustraction</strong> art. 96 si manque de pièces sur opérations significatives, (4) <strong>Extension du droit de contrôle</strong> à 10 ans (art. 78 LTVA). Conservation = assurance.</p>
 </div>
 </div>
 </div>
@@ -994,8 +942,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon blue">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 71 LTVA — RS 641.20</div>
-<div class="leg-title">Décompte par l'assujetti — Formulaire 100</div>
-<div class="leg-desc">Obligation de déposer le décompte trimestriel/semestriel (Formulaire 100). Lien avec la comptabilité : les chiffres du décompte doivent correspondre aux soldes des comptes TVA (2200, 1170, 2202). Cf. M03 pour les chiffres détaillés.</div>
+<div class="leg-title">Décompte par l’assujetti — Portail AFC</div>
+<div class="leg-desc">En 2026, le décompte est remis en ligne via <strong>Décompte TVA pro</strong> sur le Portail AFC. La comptabilité doit permettre de reconstituer les bases, l’impôt dû, le DIP et les corrections déclarées. Les numéros de comptes M04 ne sont qu’un exemple de cette piste d’audit.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_71" rel="noopener noreferrer" target="_blank">📄 Art. 71 LTVA</a>
 </div>
@@ -1005,8 +953,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon red">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 72 LTVA — RS 641.20</div>
-<div class="leg-title">Concordance annuelle — Formulaire 550_03</div>
-<div class="leg-desc">L'assujetti corrige les inexactitudes constatées dans le cadre de la <strong>concordance annuelle</strong> dans les <strong>240 jours</strong> suivant la fin de l'exercice. Cœur du M04 : rapprochement CA TVA déclaré (somme ch. 200) vs CA comptable annuel (comptes 3xxx).</div>
+<div class="leg-title">Concordance annuelle — décompte rectificatif art. 72</div>
+<div class="leg-desc">L’art. 72 rattache la correction à la <strong>période de décompte dans laquelle tombe le 180e jour</strong> suivant la fin de l’exercice. L’AFC utilise en outre le <strong>repère pratique de 240 jours</strong> : sans rectificatif reçu à ce moment, elle part du principe que les décomptes sont complets et corrects. Si aucune erreur n’est constatée, aucun rectificatif annuel n’est requis.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_72" rel="noopener noreferrer" target="_blank">📄 Art. 72 LTVA</a>
 </div>
@@ -1017,7 +965,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">Art. 98 LTVA — RS 641.20</div>
 <div class="leg-title">Violation des obligations de procédure</div>
-<div class="leg-desc">Sanctions pour : non-dépôt du décompte, non-tenue des livres, défaut d'archivage. <strong>Amende CHF 800 à 10'000</strong>. À ne pas confondre avec art. 96 LTVA (soustraction d'impôt) qui sanctionne le manque à gagner fiscal lui-même.</div>
+<div class="leg-desc">L’art. 98 vise certaines <strong>violations d’obligations de procédure</strong>. Le montant et l’applicabilité d’une sanction dépendent de la disposition, de la faute et des circonstances; M04 ne mémorise pas une prétendue fourchette « CHF 800–10’000 ». La qualification pénale détaillée est traitée en M11.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_98" rel="noopener noreferrer" target="_blank">📄 Art. 98 LTVA</a>
 </div>
@@ -1027,8 +975,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon red">📕</div>
 <div class="leg-content">
 <div class="leg-ref">Art. 96-99 LTVA — RS 641.20</div>
-<div class="leg-title">Hiérarchie des sanctions TVA — 3 niveaux</div>
-<div class="leg-desc">Système gradué des sanctions : (1) <strong>Art. 96</strong> — Soustraction d'impôt simple : amende 33% à 300% du montant éludé. (2) <strong>Art. 97</strong> — Soustraction qualifiée : intention répétée, organisation, fausses pièces — sanction renforcée. (3) <strong>Art. 99</strong> — Escroquerie fiscale : usage de titres faux → pénal art. 14 DPA. Conséquence en comptabilité : la dénonciation spontanée (art. 102) peut neutraliser le 96 et 97 si déposée avant tout contrôle annoncé.</div>
+<div class="leg-title">Droit pénal TVA — ne pas apprendre une fausse échelle</div>
+<div class="leg-desc"><strong>Art. 96</strong> règle différentes formes de soustraction avec des plafonds légaux selon le comportement; <strong>art. 97</strong> traite la fixation de la peine et certaines circonstances aggravantes; <strong>art. 98</strong> vise des obligations de procédure; <strong>art. 99</strong> concerne le <em>recel</em>. Les comportements impliquant de faux titres peuvent aussi relever du DPA. L’art. 102 prévoit un régime de dénonciation spontanée sous conditions cumulatives. M11 analyse la qualification pénale; M04 se limite à préserver une comptabilité probante.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_96" rel="noopener noreferrer" target="_blank">📄 Art. 96 LTVA</a>
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_97" rel="noopener noreferrer" target="_blank">📄 Art. 97 LTVA</a>
@@ -1039,9 +987,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-card">
 <div class="leg-icon gold">📘</div>
 <div class="leg-content">
-<div class="leg-ref">OLICO — RS 221.431</div>
-<div class="leg-title">Ordonnance sur la tenue et conservation des livres</div>
-<div class="leg-desc">Définit les conditions de l'<strong>archivage électronique</strong> conforme à l'OR art. 958f : (1) <strong>Intégrité</strong> (impossibilité de modification après archivage), (2) <strong>Disponibilité</strong> à tout moment pendant la durée légale, (3) <strong>Lisibilité</strong> (format pérenne, PDF/A recommandé), (4) <strong>Migration documentée</strong> en cas de changement de système. Les services cloud certifiés (Bexio Document, Abacus Cloud, DocBoxQ, Adcubum) répondent à OLICO. Solutions <em>non conformes</em> : Google Drive standard, Dropbox basic (manque intégrité + traçabilité). En 2026, la conformité OLICO implique aussi le respect de la <strong>nLPD</strong> (nouvelle loi sur la protection des données, en vigueur 01.09.2023).</div>
+<div class="leg-ref">OLICO — RS 221.431</div><div class="leg-title">Tenue et conservation électroniques</div><div class="leg-desc">L’OLICO encadre la conservation sur supports d’information. La conformité dépend de la <strong>vérifiabilité, de la lisibilité, de la disponibilité et de la maîtrise de l’intégrité/traçabilité</strong>, notamment lorsque le support est modifiable. Aucun logiciel ou service cloud n’est « conforme par son nom »; le dispositif concret doit être évalué.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2002/189/fr" rel="noopener noreferrer" target="_blank">📄 OLICO complète</a>
 </div>
@@ -1050,9 +996,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-card">
 <div class="leg-icon blue">📘</div>
 <div class="leg-content">
-<div class="leg-ref">OTVA — RS 641.201</div>
-<div class="leg-title">Ordonnance d'exécution LTVA — Art. 122-128 OTVA</div>
-<div class="leg-desc">Précise les modalités pratiques de la tenue de la comptabilité TVA : art. 122 (tenue des livres), art. 124-127 (saisie des opérations TVA), art. 128 (concordance annuelle — modalités du Formulaire 550_03). Complète l'art. 70 LTVA.</div>
+<div class="leg-ref">OTVA — RS 641.201</div><div class="leg-title">Procédures électroniques et données du décompte</div><div class="leg-desc">L’OTVA complète la LTVA notamment sur les pièces électroniques et procédures numériques (art. 122–123) et sur les valeurs à consigner dans le décompte selon la méthode appliquée (notamment art. 126–127 dans la structure actuelle). M04 évite donc d’attribuer à « 122–128 » une fausse liste de règles comptables ou un ancien formulaire.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/616/fr" rel="noopener noreferrer" target="_blank">📄 OTVA complète</a>
 </div>
@@ -1097,7 +1041,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">Info TVA AFC</div>
 <div class="leg-title">Info TVA 15 — Décompte et paiement de l'impôt</div>
-<div class="leg-desc">Doctrine AFC sur le décompte TVA (Formulaire 100), la concordance annuelle (Formulaire 550_03) et le lien avec la comptabilité. Référence pour la pratique fiduciaire quotidienne.</div>
+<div class="leg-desc">Doctrine AFC sur le décompte TVA (Décompte TVA pro), la concordance annuelle (concordance annuelle / décompte rectificatif art. 72) et le lien avec la comptabilité. Référence pour la pratique fiduciaire quotidienne.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.estv.admin.ch/estv/fr/accueil/taxe-sur-la-valeur-ajoutee/informations-specialisees/publications-tva.html" rel="noopener noreferrer" target="_blank">🔗 Infos TVA AFC</a>
 </div>
@@ -1130,8 +1074,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-icon red">⚖️</div>
 <div class="leg-content">
 <div class="leg-ref">ATAF A-3098/2020 — Tribunal administratif fédéral</div>
-<div class="leg-title">Taxation d'office en cas de comptabilité défaillante</div>
-<div class="leg-desc">En cas d'absence ou de comptabilité non conforme art. 957a OR, l'AFC peut procéder à une taxation d'office (art. 86 al. 2 LTVA). L'estimation doit reposer sur des éléments objectifs. Recours possible dans 30 jours.</div>
+<div class="leg-title">Fixation par voie d’estimation en cas de comptabilité défaillante</div>
+<div class="leg-desc">En cas d'absence ou de comptabilité non conforme art. 957a OR, l'AFC peut procéder à une fixation par voie d’estimation (art. 79 LTVA). L'estimation doit reposer sur des éléments objectifs. Recours possible dans 30 jours.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.bvger.ch" rel="noopener noreferrer" target="_blank">🔗 bvger.ch</a>
 </div>
@@ -1153,7 +1097,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="leg-content">
 <div class="leg-ref">ATF 138 II 465 — Tribunal fédéral</div>
 <div class="leg-title">Force probante de la comptabilité</div>
-<div class="leg-desc">Une comptabilité conforme aux art. 957a et 958 OR a une <strong>présomption de véracité</strong> que l'AFC doit renverser pour la contester. Inversement, une comptabilité défaillante perd cette force probante et expose à la taxation d'office.</div>
+<div class="leg-desc">Une comptabilité conforme aux art. 957a et 958 OR a une <strong>présomption de véracité</strong> que l'AFC doit renverser pour la contester. Inversement, une comptabilité défaillante perd cette force probante et expose à la fixation par voie d’estimation.</div>
 <div class="leg-links">
 <a class="leg-link" href="https://www.bger.ch" rel="noopener noreferrer" target="_blank">🔗 bger.ch</a>
 </div>
@@ -1386,7 +1330,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m4c4s1',this,false)">D) Oui seulement si le montant dépasse CHF 10'000</button>
 </div>
 <div class="step-explanation" id="m4c4s1-expl">
-            L'art. 45 LTVA impose l'auto-imposition des acquisitions de services étrangers, à déclarer dans la rubrique impôt sur les acquisitions, actuellement <strong>ch. 383</strong>, lorsqu’un service est acheté à un prestataire étranger sans établissement en Suisse, dès lors que le lieu de la prestation est en Suisse (art. 8 al. 1 — siège du destinataire). Adobe Irlande = prestataire étranger. Licence SaaS = service. Lieu = Suisse (siège DigitalConsult). Auto-imposition obligatoire <strong>indépendamment du montant</strong>.
+            L'art. 45 LTVA impose l'auto-imposition des acquisitions de services étrangers, à déclarer dans la rubrique impôt sur les acquisitions, actuellement <strong>ch. 383</strong>, lorsqu’un service est acheté à un prestataire étranger sans établissement en Suisse, dès lors que le lieu de la prestation est en Suisse (art. 8 al. 1 — siège du destinataire). Adobe Irlande = prestataire étranger. Licence SaaS = service. Lieu = Suisse (siège DigitalConsult). Ici, DigitalConsult est déjà inscrite à la TVA : elle doit déclarer l’acquisition. Le seuil annuel de CHF 10’000 concerne notamment les destinataires qui ne sont pas inscrits au registre TVA.
             <div class="art-ref">📋 art. 45 + 8 al. 1 LTVA</div>
 </div>
 </div>
@@ -1484,7 +1428,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 <div class="case-step" id="m4c5s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Quel est le délai pour déposer le Formulaire 550_03 ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Quel est le délai pour déposer le concordance annuelle / décompte rectificatif art. 72 ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c5s3',this,false)">A) 60 jours après clôture (28.02.2026)</button>
 <button class="step-opt" onclick="caseAnswer('m4c5s3',this,false)">B) 180 jours après clôture</button>
@@ -1718,25 +1662,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q1</span>L'AFC a-t-elle le droit de demander un accès direct à l'ERP ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c9s1',this,false)">A) Non — secret commercial</button>
-<button class="step-opt" onclick="caseAnswer('m4c9s1',this,true)">B) Oui — art. 78 LTVA + 68 LTVA : l'assujetti doit fournir tous renseignements et documents nécessaires, accès ERP inclus en lecture</button>
+<button class="step-opt" onclick="caseAnswer('m4c9s1',this,true)">B) L’assujetti doit fournir les renseignements et documents nécessaires; la forme technique (exports, lecture seule, accès encadré) se coordonne selon le contrôle</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s1',this,false)">C) Oui mais uniquement sur ordonnance judiciaire</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s1',this,false)">D) Non — l'AFC n'examine que les décomptes</button>
 </div>
 <div class="step-explanation" id="m4c9s1-expl">
-            L'<strong>art. 78 LTVA</strong> donne à l'AFC un large pouvoir de contrôle. L'<strong>art. 68 LTVA</strong> impose à l'assujetti l'obligation de renseignement. En pratique, l'AFC demande un <strong>accès lecture seule</strong> à l'ERP avec extraction des journaux (ventes, achats, grand-livre). Refus = présomption de soustraction + taxation d'office (art. 86 al. 2). <strong>Bonne pratique fiduciaire :</strong> préparer un export Excel structuré <em>avant</em> la visite pour limiter l'accès direct.
-            <div class="art-ref">📋 art. 68 + 78 LTVA</div>
+            Les art. 68 et 78 LTVA fondent l’obligation de renseigner et le contrôle. Cela ne signifie pas qu’un <strong>login ERP direct et illimité</strong> est une règle automatique. Le dossier doit permettre à l’AFC d’accéder aux données pertinentes sous une forme exploitable — exports structurés, journaux, pièces ou accès technique convenu. Une coopération insuffisante peut affaiblir la preuve et conduire, si les bases ne sont pas établissables, à une estimation selon l’art. 79. <div class="art-ref">📋 art. 68 + 78 + 79 LTVA</div>
 </div>
 </div>
 <div class="case-step" id="m4c9s2">
 <div class="step-question"><span class="step-q-num">Q2</span>Quels documents préparer prioritairement pour l'AFC ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c9s2',this,false)">A) Uniquement les 4 décomptes annuels</button>
-<button class="step-opt" onclick="caseAnswer('m4c9s2',this,true)">B) Dossier complet : décomptes + concordances 550_03 + grands-livres comptes TVA + journaux ventes/achats + factures (échantillon) + preuves exports (déclarations douanières art. 23)</button>
+<button class="step-opt" onclick="caseAnswer('m4c9s2',this,true)">B) Dossier complet : décomptes + concordances concordance annuelle + grands-livres comptes TVA + journaux ventes/achats + factures (échantillon) + preuves exports (déclarations douanières art. 23)</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s2',this,false)">C) Le bilan suffit</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s2',this,false)">D) Aucune préparation — fournir au fur et à mesure</button>
 </div>
 <div class="step-explanation" id="m4c9s2-expl">
-            La <strong>préparation complète du dossier</strong> est cruciale. Liste minimale : (1) <strong>4 années de décomptes</strong> trimestriels (Formulaires 100), (2) <strong>4 concordances</strong> annuelles (Formulaires 550_03 + papiers de travail), (3) <strong>Grands-livres</strong> des comptes TVA (1170, 2200, 2201, 2202), (4) <strong>Journaux</strong> ventes et achats détaillés, (5) <strong>Factures émises et reçues</strong> (au moins échantillon ciblé sur les exports), (6) <strong>Preuves d'exportation</strong> — déclarations douanières OFDF (cruciales pour défendre les CHF 3'360'000 d'exports), (7) Documentation paramétrage Abacus, (8) <strong>Tableaux d'amortissement</strong> et inventaire biens d'investissement (pour art. 32 LTVA — corrections d'affectation), (9) <strong>Déclarations d'importation (DI/DE)</strong> de l'OFDF, (10) <strong>Comptes annuels signés</strong> + rapport de gestion (papier obligatoire art. 958f OR), (11) Contrats significatifs (clients, fournisseurs, baux). Préparation en amont = contrôle court et serein.
+            La <strong>préparation complète du dossier</strong> est cruciale. Liste minimale : (1) <strong>4 années de décomptes</strong> trimestriels (décomptes TVA remis via le Portail AFC), (2) <strong>4 concordances</strong> annuelles (concordances annuelles / décomptes rectificatifs art. 72 + papiers de travail), (3) <strong>Grands-livres</strong> des comptes TVA (1170, 2200, 2201, 2202), (4) <strong>Journaux</strong> ventes et achats détaillés, (5) <strong>Factures émises et reçues</strong> (au moins échantillon ciblé sur les exports), (6) <strong>Preuves d'exportation</strong> — déclarations douanières OFDF (cruciales pour défendre les CHF 3'360'000 d'exports), (7) Documentation paramétrage Abacus, (8) <strong>Tableaux d'amortissement</strong> et inventaire biens d'investissement (pour art. 32 LTVA — corrections d'affectation), (9) <strong>Déclarations d'importation (DI/DE)</strong> de l'OFDF, (10) <strong>Comptes annuels signés</strong> + rapport de gestion (papier obligatoire art. 958f OR), (11) Contrats significatifs (clients, fournisseurs, baux). Préparation en amont = contrôle court et serein.
             <div class="art-ref">📋 art. 70 LTVA + art. 23 al. 3-4 LTVA + art. 32 LTVA</div>
 </div>
 </div>
@@ -1744,31 +1687,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q3</span>L'AFC découvre que 8 factures d'export (total CHF 240'000) <strong>n'ont pas de preuve douanière</strong> archivée. Conséquence ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c9s3',this,false)">A) Aucune — la facture suffit</button>
-<button class="step-opt" onclick="caseAnswer('m4c9s3',this,true)">B) Requalification en CA imposable 8,1% : rappel TVA 240'000 × 8,1% = CHF 19'440 + intérêts moratoires + amende possible</button>
+<button class="step-opt" onclick="caseAnswer('m4c9s3',this,true)">B) Reconstituer d’abord la preuve d’exportation; si l’exonération ne peut finalement pas être démontrée, déterminer alors la correction fiscale de la période</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s3',this,false)">C) Réduction de moitié du DIP</button>
 <button class="step-opt" onclick="caseAnswer('m4c9s3',this,false)">D) Simple avertissement</button>
 </div>
 <div class="step-explanation" id="m4c9s3-expl">
-            La preuve d'exportation art. 23 al. 3 LTVA + art. 80 OTVA exige une <strong>preuve documentée</strong> (déclaration douanière, attestation OFDF). Sans preuve : l'exonération est <strong>refusée</strong> et l'opération <strong>requalifiée en imposable</strong>. Rappel : <strong>240'000 × 8,1% = CHF 19'440</strong> de TVA due rétroactivement + intérêts moratoires 4,0%/an (4,5% pour 2025, 4,75% pour 2024-2023) + risque de sanction à analyser selon faute, avantage fiscal et circonstances. <strong>Leçon fiduciaire</strong> : archivage des preuves douanières est <em>non négociable</em> pour les exportateurs.
-            <div class="art-ref">📋 art. 23 al. 3 LTVA + 80 OTVA</div>
+            L’absence d’une pièce douanière dans le dossier est un <strong>signal de preuve insuffisante</strong>, pas une formule automatique « 240’000 × 8,1% ». Le praticien reconstitue d’abord le dossier (données OFDF disponibles, documents de transport/livraison, factures, client, paiements et autres preuves pertinentes). Si l’exonération de l’art. 23 ne peut pas être établie au terme de cette analyse, une correction fiscale peut être nécessaire. Intérêts et sanctions se déterminent ensuite séparément selon les périodes et la faute. <div class="art-ref">📋 art. 23 LTVA · preuve à documenter</div>
 </div>
 </div>
-<div class="calc-box">
-<div class="calc-title">📊 Rappel TVA TechExport — défaut de preuve exports</div>
-<div class="calc-row"><span class="calc-label">Exports non documentés (à requalifier)</span><span class="calc-val">CHF 240'000</span></div>
-<div class="calc-row"><span class="calc-label">TVA due (240'000 × 8,1%)</span><span class="calc-val">CHF 19'440</span></div>
-<div class="calc-row"><span class="calc-label">Intérêts moratoires estimés (~2 ans, taux mixtes)</span><span class="calc-val">~ CHF 1'650</span></div>
-<div class="calc-row total"><span class="calc-label">Coût total minimum</span><span class="calc-val">~ CHF 21'090</span></div>
-<div class="calc-row highlight"><span class="calc-label">+ Risque de sanction à analyser selon les circonstances</span><span class="calc-val">selon qualification du comportement</span></div>
+<div class="calc-box"><div class="calc-title">📊 Dossier de défense — ordre de travail</div><div class="calc-row"><span class="calc-label">1. Identifier les 8 opérations et périodes</span><span class="calc-val">CHF 240’000 à documenter</span></div><div class="calc-row"><span class="calc-label">2. Reconstituer la preuve export</span><span class="calc-val">OFDF · transport · livraison · client</span></div><div class="calc-row"><span class="calc-label">3. Quantifier seulement les opérations non défendables</span><span class="calc-val">base/taux selon faits</span></div><div class="calc-row total"><span class="calc-label">4. Intérêts / pénal</span><span class="calc-val">analyse séparée</span></div></div></div></div>
 </div>
-</div>
-</div>
-<!-- CAS 10 — Archivage défaillant + taxation d'office -->
+<!-- CAS 10 — Archivage défaillant + fixation par voie d’estimation -->
 <div class="case-block">
 <div class="case-header">
 <div class="case-num">10</div>
 <div class="case-meta">
-<div class="case-title">Restaurant La Tonnelle — Archivage défaillant et taxation d'office</div>
+<div class="case-title">Restaurant La Tonnelle — Archivage défaillant et fixation par voie d’estimation</div>
 <div class="case-subtitle">Restauration · Genève · Contrôle TVA 2026 · ⬛ Risque critique AFC</div>
 </div>
 </div>
@@ -1785,26 +1719,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q1</span>L'AFC peut-elle taxer d'office malgré les décomptes déposés ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c10s1',this,false)">A) Non — les décomptes ont été déposés</button>
-<button class="step-opt" onclick="caseAnswer('m4c10s1',this,true)">B) Oui — art. 86 al. 2 LTVA + ATAF A-3098/2020 : comptabilité non vérifiable = taxation d'office par estimation</button>
+<button class="step-opt" onclick="caseAnswer('m4c10s1',this,true)">B) Oui — art. 79 LTVA : comptabilité non vérifiable = fixation par voie d’estimation par estimation</button>
 <button class="step-opt" onclick="caseAnswer('m4c10s1',this,false)">C) Non — il faut prouver la fraude</button>
 <button class="step-opt" onclick="caseAnswer('m4c10s1',this,false)">D) Oui mais uniquement si CA &gt; CHF 5 mio</button>
 </div>
 <div class="step-explanation" id="m4c10s1-expl">
-<strong>Art. 86 al. 2 LTVA</strong> : si les éléments transmis sont manifestement incomplets ou que les résultats sont en désaccord avec les faits, l'AFC procède à une <strong>taxation d'office</strong>. La perte de pièces (même fortuite) constitue un manquement à l'art. 70 LTVA (conservation 10 ans) et à l'art. 958f OR. La <strong>force probante de la comptabilité est perdue</strong> (ATF 138 II 465). L'AFC estime alors le CA et l'IP par méthode comparative (ratios de branche). La force majeure (dégât des eaux) peut atténuer mais pas éliminer l'obligation : <strong>l'archivage sécurisé est une obligation de moyens</strong>.
-            <div class="art-ref">📋 art. 86 al. 2 LTVA + ATAF A-3098/2020 + ATF 138 II 465</div>
+<strong>Art. 86 al. 2 LTVA</strong> : si les éléments transmis sont manifestement incomplets ou que les résultats sont en désaccord avec les faits, l'AFC procède à une <strong>fixation par voie d’estimation</strong>. La perte de pièces (même fortuite) constitue un manquement à l'art. 70 LTVA (conservation 10 ans) et à l'art. 958f OR. La <strong>force probante de la comptabilité est perdue</strong> (ATF 138 II 465). L'AFC estime alors le CA et l'IP par méthode comparative (ratios de branche). La force majeure (dégât des eaux) peut atténuer mais pas éliminer l'obligation : <strong>l'archivage sécurisé est une obligation de moyens</strong>.
+            <div class="art-ref">📋 art. 79 LTVA + ATF 138 II 465</div>
 </div>
 </div>
 <div class="case-step" id="m4c10s2">
 <div class="step-question"><span class="step-q-num">Q2</span>L'AFC estime le CA réel 2022 à CHF 2'050'000 (ratios branche restauration) au lieu de CHF 1'850'000 déclaré. Impact ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('m4c10s2',this,false)">A) Aucun impact — c'est juste une estimation</button>
-<button class="step-opt" onclick="caseAnswer('m4c10s2',this,true)">B) Rappel TVA : (2'050'000 − 1'850'000) × 8,1% = CHF 16'200 sur écart CA + IP partiellement refusé faute de pièces + amende</button>
+<button class="step-opt" onclick="caseAnswer('m4c10s2',this,true)">B) Examiner la méthode d’estimation, reconstituer les recettes et le DIP avec toutes les preuves disponibles, puis chiffrer les différences réellement défendables</button>
 <button class="step-opt" onclick="caseAnswer('m4c10s2',this,false)">C) Rappel TVA = 2'050'000 × 8,1% = CHF 166'050</button>
 <button class="step-opt" onclick="caseAnswer('m4c10s2',this,false)">D) Simple correction sans coût</button>
 </div>
 <div class="step-explanation" id="m4c10s2-expl">
-            Le rappel porte uniquement sur l'<strong>écart entre CA estimé et CA déclaré</strong> : (2'050'000 − 1'850'000) × 8,1% = CHF 16'200. S'y ajoute généralement : (1) <strong>Refus partiel d'IP</strong> faute de pièces — en pratique AFC, reconstitution à documenter ; l'AFC peut refuser tout ou partie de l'IP si les preuves sont insuffisantes. Dans le scénario "pire cas" (seulement 35% justifié) : IP recalculé = 87'500 × 35% = 30'625 → reprise IP de 56'875. <strong>Scénario plus favorable</strong> (50% admis) : reprise IP = 87'500 × 50% = 43'750 — l'écart se négocie. (2) <strong>Intérêts moratoires</strong> ~4 ans × taux mixtes (4,75% / 4,5% / 4,0%). (3) <strong>Amende art. 98</strong> (violation obligations) CHF 800-10'000 + éventuelle art. 96 si soustraction. Coût total à estimer selon le montant repris, les intérêts, la qualité de la reconstitution et la qualification du comportement. <strong>Leçon</strong> : un dégât des eaux mal géré (sans backup OLICO) coûte 50× le prix d'une sauvegarde cloud conforme.
-            <div class="art-ref">📋 art. 86 + 96 + 98 LTVA</div>
+            Une estimation de CHF 2’050’000 n’est pas une simple multiplication mécanique par 8,1% : il faut vérifier le <strong>mix de taux, les opérations exclues/exonérées, la base HT/TTC et la méthode d’estimation</strong>. Pour le DIP, « 35% de factures retrouvées = 35% de DIP admis » n’est pas une règle. Reconstituer les preuves par duplicata fournisseurs, banque, e-mails, ERP, archives cloud et autres éléments fiables. Les conséquences pénales s’analysent séparément selon la faute; un sinistre peut être pertinent pour cette appréciation sans supprimer l’obligation de conservation. <div class="art-ref">📋 art. 70 + 79 LTVA · CO/OLICO</div>
 </div>
 </div>
 <div class="case-step" id="m4c10s3">
@@ -2062,7 +1995,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Vérifier le paramétrage des codes TVA dans l'ERP (UN1 pour 3000, ESP pour 3200). Reclasser les écritures erronées via journal général. Si correction porte sur exercice clos : <strong>Formulaire 550_03</strong> dans les 240 jours.</div>
+<div class="error-text">Vérifier le paramétrage des codes TVA dans l'ERP (UN1 pour 3000, ESP pour 3200). Reclasser les écritures erronées via journal général. Si correction porte sur exercice clos : <strong>concordance annuelle / décompte rectificatif art. 72</strong> dans les 240 jours.</div>
 </div>
 </div>
 </div>
@@ -2084,7 +2017,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">(1) Passer l'écriture complète : D 4500 HT + D 1170 TVA / C 2000 HT + C 2202 TVA. (2) Déclarer rétroactivement via Formulaire 550_03 pour les exercices ouverts. (3) <strong>Dénonciation spontanée art. 102</strong> à envisager seulement si les conditions sont réunies et avant tout contrôle annoncé.</div>
+<div class="error-text">(1) Passer l'écriture complète : D 4500 HT + D 1170 TVA / C 2000 HT + C 2202 TVA. (2) Déclarer rétroactivement via concordance annuelle / décompte rectificatif art. 72 pour les exercices ouverts. (3) <strong>Dénonciation spontanée art. 102</strong> à envisager seulement si les conditions sont réunies et avant tout contrôle annoncé.</div>
 </div>
 </div>
 </div>
@@ -2092,13 +2025,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-block">
 <div class="error-head">
 <div class="error-num">03</div>
-<div class="error-title">Concordance annuelle non déposée (550_03)</div>
+<div class="error-title">Concordance annuelle non déposée (concordance annuelle)</div>
 <div class="error-impact">Impact : risque de contrôle accru</div>
 </div>
 <div class="error-body">
 <div class="error-section">
 <div class="error-section-title">Symptôme</div>
-<div class="error-text">La fiduciaire dépose les 4 décomptes trimestriels mais omet de déposer le <strong>Formulaire 550_03</strong> (concordance annuelle) dans les 240 jours suivant la clôture. Si aucune erreur n’est constatée, le formulaire n’est pas nécessaire. Si des écarts existent et ne sont pas corrigés, le dossier devient plus difficile à défendre lors d’un contrôle AFC.</div>
+<div class="error-text">La fiduciaire dépose les 4 décomptes trimestriels mais omet de déposer le <strong>concordance annuelle / décompte rectificatif art. 72</strong> (concordance annuelle) dans les 240 jours suivant la clôture. Si aucune erreur n’est constatée, le formulaire n’est pas nécessaire. Si des écarts existent et ne sont pas corrigés, le dossier devient plus difficile à défendre lors d’un contrôle AFC.</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
@@ -2106,7 +2039,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Déposer le 550_03 même tardivement (mieux vaut tard que jamais). Documenter par écrit le motif du retard. Pour les exercices ouverts (5 ans), procéder à la concordance rétroactive systématique. Mettre en place une procédure interne fiduciaire de suivi.</div>
+<div class="error-text">Déposer le concordance annuelle même tardivement (mieux vaut tard que jamais). Documenter par écrit le motif du retard. Pour les exercices ouverts (5 ans), procéder à la concordance rétroactive systématique. Mettre en place une procédure interne fiduciaire de suivi.</div>
 </div>
 </div>
 </div>
@@ -2128,7 +2061,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Régulariser dans le décompte courant en saisissant les diminutions de contre-prestation au ch. 235 (réducteur). Pour les exercices clos : Formulaire 550_03. Vérifier le paramétrage ERP : Bexio/Abacus doivent lier automatiquement le compte 3800 au ch. 235. <strong>Récupération possible</strong> de la TVA versée en trop.</div>
+<div class="error-text">Régulariser dans le décompte courant en saisissant les diminutions de contre-prestation au ch. 235 (réducteur). Pour les exercices clos : concordance annuelle / décompte rectificatif art. 72. Vérifier le paramétrage ERP : Bexio/Abacus doivent lier automatiquement le compte 3800 au ch. 235. <strong>Récupération possible</strong> de la TVA versée en trop.</div>
 </div>
 </div>
 </div>
@@ -2150,7 +2083,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">(1) <strong>Analyse</strong> : extraire le grand-livre 2200 sur 12 mois et identifier les écritures non normales. (2) <strong>Solde de référence</strong> : le solde 2200 au 31.12 doit correspondre à la TVA collectée du Q4 uniquement (ou Q4 + corrections de concordance). (3) Si écart : enquête + correction via Formulaire 550_03. Documenter en annexe aux comptes annuels.</div>
+<div class="error-text">(1) <strong>Analyse</strong> : extraire le grand-livre 2200 sur 12 mois et identifier les écritures non normales. (2) <strong>Solde de référence</strong> : le solde 2200 au 31.12 doit correspondre à la TVA collectée du Q4 uniquement (ou Q4 + corrections de concordance). (3) Si écart : enquête + correction via concordance annuelle / décompte rectificatif art. 72. Documenter en annexe aux comptes annuels.</div>
 </div>
 </div>
 </div>
@@ -2159,16 +2092,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="error-head">
 <div class="error-num">06</div>
 <div class="error-title">Archivage électronique non conforme OLICO</div>
-<div class="error-impact">Impact : taxation d'office potentielle</div>
+<div class="error-impact">Impact : fixation par voie d’estimation potentielle</div>
 </div>
 <div class="error-body">
 <div class="error-section">
 <div class="error-section-title">Symptôme</div>
-<div class="error-text">Factures stockées en simple PDF sur un disque dur partagé sans système de gestion d'archivage : pas d'horodatage, pas de garantie d'intégrité, format propriétaire fermé. En cas de contrôle AFC, force probante contestée → risque taxation d'office.</div>
+<div class="error-text">Factures stockées en simple PDF sur un disque dur partagé sans système de gestion d'archivage : pas d'horodatage, pas de garantie d'intégrité, format propriétaire fermé. En cas de contrôle AFC, force probante contestée → risque fixation par voie d’estimation.</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Base légale</div>
-<div class="error-text">OLICO (RS 221.431) — conditions de l'archivage électronique : intégrité, disponibilité, lisibilité, migration. Art. 958f OR (10 ans). Art. 70 al. 2-3 LTVA (10 ans, 20 ans pour immobilier). ATAF A-3098/2020 (taxation d'office).</div>
+<div class="error-text">OLICO (RS 221.431) — conditions de l'archivage électronique : intégrité, disponibilité, lisibilité, migration. Art. 958f OR (10 ans). Art. 70 al. 2-3 LTVA (10 ans, 20 ans pour immobilier). ATAF A-3098/2020 (fixation par voie d’estimation).</div>
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
@@ -2327,14 +2260,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vocab-card">
 <div class="vc-fr">Décompte TVA</div>
 <div class="vc-de">MwSt-Abrechnung</div>
-<div class="vc-art">Formulaire 100</div>
-<div class="vc-use">Déclaration périodique (trimestrielle/semestrielle/annuelle) à l'AFC. Formulaire 100 ou ePortal.</div>
+<div class="vc-art">Décompte TVA pro</div>
+<div class="vc-use">Déclaration périodique (trimestrielle/semestrielle/annuelle) à l'AFC. Décompte TVA pro ou ePortal.</div>
 </div>
 <div class="vocab-card">
 <div class="vc-fr">Concordance annuelle</div>
 <div class="vc-de">Jahresabstimmung / Umsatzabstimmung</div>
 <div class="vc-art">art. 72 LTVA</div>
-<div class="vc-use">Rapprochement annuel CA TVA déclaré vs CA comptable. Formulaire 550_03 dans les 240 jours.</div>
+<div class="vc-use">Rapprochement annuel CA TVA déclaré vs CA comptable. concordance annuelle / décompte rectificatif art. 72 dans les 240 jours.</div>
 </div>
 <div class="vocab-card">
 <div class="vc-fr">Compte de régularisation TVA</div>
@@ -2397,16 +2330,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vc-use">Conservation 10 ans (20 ans biens immobiliers). Format papier ou électronique conforme OLICO.</div>
 </div>
 <div class="vocab-card">
-<div class="vc-fr">Taxation d'office</div>
+<div class="vc-fr">Fixation par voie d’estimation</div>
 <div class="vc-de">Ermessensveranlagung</div>
-<div class="vc-art">art. 86 al. 2 LTVA</div>
+<div class="vc-art">art. 79 LTVA</div>
 <div class="vc-use">Estimation AFC en cas de comptabilité défaillante. Présomption inversée : à l'assujetti de prouver le contraire.</div>
 </div>
 <div class="vocab-card">
-<div class="vc-fr">Image fidèle (true and fair view)</div>
-<div class="vc-de">Fair Presentation</div>
+<div class="vc-fr">Opinion fondée sur la situation économique</div>
+<div class="vc-de">Zuverlässige Beurteilung der wirtschaftlichen Lage</div>
 <div class="vc-art">art. 958 OR</div>
-<div class="vc-use">Principe fondamental : les comptes doivent refléter fidèlement la situation économique. Standard suisse impératif.</div>
+<div class="vc-use">Objectif légal des comptes annuels selon le CO : permettre à un tiers de se faire une opinion fondée. Ne pas confondre automatiquement avec le concept IFRS « true and fair view ».</div>
 </div>
 </div>
 <div class="section-nav">
@@ -2437,7 +2370,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="cheat-card">
 <div class="cheat-title">2 — Formules clés</div>
 <div class="cheat-body">
-<p style="font-family:'DM Mono',monospace;font-size:11.5px;background:var(--navy);color:var(--gold);padding:8px 10px;border-radius:4px;line-height:1.7">TTC = HT × (1 + taux)<br/>HT = TTC / (1 + taux)<br/>TVA = HT × taux = TTC × taux / (1+taux)<br/>TVA due = 2200 (créditeur) − 1170 (débiteur)<br/>Concordance : Σ ch.200 = CA compt. − escomptes (3800)</p>
+<p style="font-family:'DM Mono',monospace;font-size:11.5px;background:var(--navy);color:var(--gold);padding:8px 10px;border-radius:4px;line-height:1.7">TTC = HT × (1 + taux)<br/>HT = TTC / (1 + taux)<br/>TVA = HT × taux = TTC × taux / (1+taux)<br/>TVA due = 2200 (créditeur) − 1170 (débiteur)<br/>Concordance CA : Σ ch.200 ↔ contre-prestations comptabilisées; ch.383/DIP = contrôles séparés</p>
 </div>
 </div>
 <!-- Bloc 3 -->
@@ -2460,10 +2393,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <li>Cumul <strong>ch. 200</strong> des 4 décomptes trimestriels</li>
 <li>Extraction CA compt. annuel (somme classe 3)</li>
 <li>Soustraction des <strong>réducteurs</strong> : escomptes 3800, rabais, NC</li>
-<li>Ajout / contrôle des éléments spécifiques : ch. 205 pour prestations exclues imposées par option, ch. 383 pour acquisitions étrangères, ch. 415 pour corrections d’IP liées aux prestations à soi-même</li>
+<li>Contrôler séparément les déductions ch. 220/221/225/230/235/280, puis l’impôt sur acquisitions ch. 383 et les rubriques de DIP/corrections</li>
 <li>Vérification ventilation par taux (3000/3001/3002)</li>
 <li>Identification écarts résiduels + cause</li>
-<li>Si écart ≠ 0 → <strong>Formulaire 550_03</strong> dans 240 jours</li>
+<li>Si une erreur est constatée → correction selon art. 72 / Portail AFC : période contenant le 180e jour; repère pratique AFC de 240 jours</li>
 <li>Si écart = 0 → aucun rectificatif ; conservation du tableau interne</li>
 <li>Conservation papiers de travail 10 ans</li>
 </ol>
@@ -2476,9 +2409,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p><strong>Comptabilité obligatoire</strong> : CA &gt; CHF 500'000 (art. 957 OR)</p>
 <p><strong>Conservation</strong> : 10 ans (OR 958f + LTVA 70 al. 2)</p>
 <p><strong>Conservation immobilier</strong> : "jusqu'à expiration du droit de taxer" = 20 ans en pratique (LTVA 70 al. 3 + art. 32 LTVA)</p>
-<p><strong>Concordance annuelle</strong> : 240 jours après clôture (art. 72)</p>
+<p><strong>Concordance annuelle</strong> : art. 72 = période contenant le 180e jour; repère pratique AFC = 240 jours</p>
 <p><strong>Paiement décompte</strong> : 60 jours après fin période (art. 86)</p>
-<p><strong>Seuil intérêts moratoires</strong> : CHF 100 minimum perçu (art. 87 LTVA)</p>
+<p><strong>Intérêts</strong> : taux DFF applicable; l’AFC indique qu’un montant inférieur à CHF 100 n’est en principe pas perçu (ordonnance DFF)</p>
 <p><strong>Prescription</strong> : 5 ans (art. 42 LTVA)</p>
 </div>
 </div>
@@ -2487,11 +2420,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="cheat-title">6 — Sanctions &amp; risques</div>
 <div class="cheat-body">
 <p><strong>Intérêts moratoires 2026</strong> : 4,0%/an dès 61<sup>e</sup> jour, seuil minimum CHF 100 (art. 87 LTVA + DFF RS 631.014)</p>
-<p><strong>Violation obligations procédure</strong> : amende CHF 800-10'000 (art. 98)</p>
-<p><strong>Soustraction simple</strong> : 33%-300% du montant éludé (art. 96)</p>
+<p><strong>Violation obligations procédure</strong> : sanction de procédure à analyser selon l’art. 98 et les circonstances (art. 98)</p>
+<p><strong>Soustraction simple</strong> : sanction selon l’art. 96 et la qualification du comportement (art. 96)</p>
 <p><strong>Soustraction qualifiée</strong> : avec intention/répétition (art. 97)</p>
-<p><strong>Escroquerie fiscale</strong> : art. 99 LTVA — pénal</p>
-<p><strong>Comptabilité défaillante</strong> : taxation d'office (art. 86 al. 2)</p>
+<p><strong>Art. 99 LTVA</strong> : recel; les faux titres relèvent notamment du DPA selon le cas</p>
+<p><strong>Bases fiscales non fiables</strong> : fixation par voie d’estimation selon art. 79 LTVA</p>
 <p><strong>Dénonciation spontanée</strong> : exemption d'amende possible si les conditions de l'art. 102 sont remplies</p>
 </div>
 </div>
@@ -2509,7 +2442,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <p><strong>LTVA 71-72</strong> Décompte + concordance annuelle</p>
 <p><strong>LTVA 87</strong> Intérêts moratoires (seuil CHF 100)</p>
 <p><strong>LTVA 96-99</strong> Sanctions (simple/qualifiée/escroquerie)</p>
-<p><strong>OTVA 79 + 81</strong> Engagement minimum méthode TVA</p>
+<p><strong>OTVA / pratique AFC</strong> : règles de méthode et transitions à vérifier selon la période</p>
 <p><strong>OLICO</strong> RS 221.431 archivage électronique</p>
 </div>
 </div>
@@ -2518,8 +2451,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="cheat-title">8 — Checklist pré-contrôle AFC</div>
 <div class="cheat-body">
 <ul style="margin-left:18px">
-<li>4 années de décomptes Q (Formulaire 100)</li>
-<li>4 concordances annuelles (Formulaire 550_03 + WPs)</li>
+<li>4 années de décomptes Q (Décompte TVA pro)</li>
+<li>4 concordances annuelles (concordance annuelle / décompte rectificatif art. 72 + WPs)</li>
 <li>Grands-livres comptes TVA (1170, 2200, 2201, 2202)</li>
 <li>Journaux ventes + achats détaillés</li>
 <li>Échantillon factures émises/reçues</li>
@@ -2532,7 +2465,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="cheat-final">
 <button class="btn btn-gold btn-lg" onclick="window.print()">🖨️ Imprimer le cheatsheet</button>
-<p style="font-size:12px;color:var(--muted);margin-top:12px">Module M04 complété ! Prochaine étape recommandée : M05 (DIP) pour approfondir les corrections 400/405/415/420, puis M11 (contrôle AFC).</p>
+<p style="font-size:12px;color:var(--muted);margin-top:12px">Fin de M04 : la suite logique est M05 — Déduction de l’impôt préalable (DIP).</p>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px"><a class="btn btn-ghost" href="index.html" style="text-decoration:none">← Dashboard</a><button class="btn btn-primary" onclick="finishModule()">✓ Terminer M04</button><button class="btn btn-gold" onclick="goNextModule()">Continuer avec M05 →</button></div>
+<div id="m04-complete" class="box success" style="display:none;text-align:left;margin-top:16px"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">M04 enregistré comme terminé</div><p>La progression du module est à 100% et le dashboard est mis à jour. Le score du quiz reste enregistré séparément : terminer le module ne transforme pas un quiz non réussi en quiz réussi.</p><div style="margin-top:10px"><a class="btn btn-primary" href="m05-deduction-impot-prealable-dip.html" style="text-decoration:none">Aller à M05 — DIP →</a></div></div></div>
+<p style="font-size:11px;color:var(--muted);margin-top:16px">Conception : <a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer">Mariia Lobur</a> · <a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer">GitHub</a></p>
 </div>
 </div>
 </div>
@@ -2599,17 +2535,7 @@ const QUIZ_DATA=[
     correct:2,
     expl:'TTC = HT × (1 + taux) = 1\'000 × 1,081 = CHF 1\'081. Écriture complète : D 1100 CHF 1\'081 / C 3000 CHF 1\'000 / C 2200 CHF 81. Le client doit le TTC ; l\'entreprise enregistre le HT en produit (3000) et la TVA séparément (2200).'
   },
-  { id:'m04-q06', diff:'easy', art:'art. 72 LTVA',
-    q:'Dans quel délai la concordance annuelle TVA (Formulaire 550_03) doit-elle être déposée ?',
-    opts:[
-      '60 jours après clôture',
-      '180 jours après clôture',
-      '240 jours après fin de l\'exercice',
-      '12 mois après clôture'
-    ],
-    correct:2,
-    expl:'Art. 72 LTVA : la concordance annuelle doit être déposée dans les 240 jours suivant la fin de l\'exercice commercial. Pour un exercice clos au 31.12.2025 : échéance 28.08.2026. Au-delà, présomption de définitivité des décomptes périodiques (ATF 140 II 202).'
-  },
+  { id:'m04-q06', diff:'easy', art:'art. 72 LTVA', q:'Quel couple de repères faut-il retenir pour la concordance annuelle TVA ?', opts:['60 jours puis 90 jours','Art. 72 : période contenant le 180e jour; pratique AFC : repère de 240 jours','240 jours = délai légal unique dans tous les cas','12 mois sans autre repère'], correct:1, expl:'L’art. 72 rattache la correction à la période de décompte dans laquelle tombe le 180e jour suivant la clôture. L’AFC utilise aussi le repère pratique de 240 jours pour considérer la période finalisée en l’absence de rectificatif. Les deux repères doivent être compris ensemble.' },
   { id:'m04-q07', diff:'easy', art:'plan comptable PME',
     q:'Quel compte enregistre la TVA déductible sur achats de biens et prestations courantes ?',
     opts:[
@@ -2788,11 +2714,11 @@ const QUIZ_DATA=[
     correct:2,
     expl:'Art. 70 al. 3 LTVA : conservation "jusqu\'à l\'expiration du droit de taxer la créance fiscale" pour les pièces relatives aux biens immobiliers, soit <strong>20 ans en pratique</strong>. Cette durée correspond à la période de régularisation art. 32 LTVA (20 ans pour les corrections d\'affectation des biens immobiliers). En pratique, pour une entreprise avec activité immobilière, conservez TOUT pendant 20 ans pour simplifier la gestion.'
   },
-  { id:'m04-q23', diff:'med', art:'art. 86 al. 2 LTVA',
+  { id:'m04-q23', diff:'med', art:'art. 79 LTVA',
     q:'Une entreprise a perdu ses pièces comptables suite à un incendie. L\'AFC peut-elle :',
     opts:[
       'Annuler la TVA de l\'exercice',
-      'Procéder à une taxation d\'office par estimation (art. 86 al. 2)',
+      'Procéder à une taxation d\'office par estimation (art. 79)',
       'Pardonner totalement',
       'Faire payer une amende uniquement'
     ],
@@ -2803,12 +2729,12 @@ const QUIZ_DATA=[
     q:'Depuis le 01.01.2025, comment doit-on déposer le décompte TVA en pratique ?',
     opts:[
       'Papier obligatoire',
-      'Via ePortal AFC (eportal.admin.ch) avec identification AGOV — papier en principe plus admis',
+      'Via Portail AFC (eportal.admin.ch) avec identification AGOV — papier en principe plus admis',
       'Par e-mail au format PDF',
       'Par téléphone au numéro AFC'
     ],
     correct:1,
-    expl:'Art. 71a LTVA (en vigueur dès 01.01.2025) : dépôt obligatoire via ePortal AFC (eportal.admin.ch). Identification via <strong>AGOV</strong> (système fédéral d\'identité numérique lancé en novembre 2024, remplaçant progressivement CH-LOGIN). Tous formulaires (100, 550_03) déposés électroniquement. Papier en principe plus admis pour assujettis standards. Dérogations possibles sur demande expresse motivée.'
+    expl:'Art. 71a LTVA (en vigueur dès 01.01.2025) : dépôt obligatoire via Portail AFC (eportal.admin.ch). Identification via <strong>AGOV</strong> (système fédéral d\'identité numérique lancé en novembre 2024, remplaçant progressivement CH-LOGIN). Tous formulaires (100, concordance annuelle) déposés électroniquement. Papier en principe plus admis pour assujettis standards. Dérogations possibles sur demande expresse motivée.'
   },
 
   // ─── HARD (6) ─────────────────────────────────────
@@ -2823,7 +2749,7 @@ const QUIZ_DATA=[
     correct:1,
     expl:'L\'art. 32 LTVA prévoit des corrections d\'affectation sur les biens d\'investissement quand leur usage change (passage d\'usage imposable à exclu ou inversement). Période de régularisation : 20 ans pour immobilier, 5 ans pour mobilier. Avoir un compte 1171 distinct facilite radicalement le suivi de chaque acquisition d\'investissement (date, montant, IP déduit) et permet d\'appliquer correctement les corrections. Sans cette séparation : tableau de suivi externe lourd et erreurs probables.'
   },
-  { id:'m04-q26', diff:'hard', art:'art. 86 al. 2 + ATAF A-3098/2020',
+  { id:'m04-q26', diff:'hard', art:'art. 79 + ATAF A-3098/2020',
     q:'L\'AFC estime le CA réel à 110% du CA déclaré (taxation d\'office). Quelle est la base juridique et le recours possible ?',
     opts:[
       'Aucune base — l\'AFC ne peut pas estimer',
@@ -2832,7 +2758,7 @@ const QUIZ_DATA=[
       'Recours uniquement après 5 ans'
     ],
     correct:1,
-    expl:'Cadre juridique : art. 86 al. 2 LTVA (taxation d\'office en cas de comptabilité défaillante) + jurisprudence ATAF A-3098/2020 (l\'estimation doit reposer sur des éléments objectifs raisonnables). Voies de recours : (1) Réclamation auprès de l\'AFC dans les 30 jours (art. 83 LTVA), (2) Recours TAF si réclamation rejetée, (3) Recours TF en dernière instance. Stratégie : (a) Prouver que la comptabilité a une force probante suffisante (ATF 138 II 465), (b) Critiquer la méthode d\'estimation (ratios non comparables, échantillon biaisé), (c) Proposer méthode alternative reconstitutive (CA bancaire, déclarations sociales).'
+    expl:'Cadre juridique : art. 79 LTVA (taxation d\'office en cas de comptabilité défaillante) + jurisprudence ATAF A-3098/2020 (l\'estimation doit reposer sur des éléments objectifs raisonnables). Voies de recours : (1) Réclamation auprès de l\'AFC dans les 30 jours (art. 83 LTVA), (2) Recours TAF si réclamation rejetée, (3) Recours TF en dernière instance. Stratégie : (a) Prouver que la comptabilité a une force probante suffisante (ATF 138 II 465), (b) Critiquer la méthode d\'estimation (ratios non comparables, échantillon biaisé), (c) Proposer méthode alternative reconstitutive (CA bancaire, déclarations sociales).'
   },
   { id:'m04-q27', diff:'hard', art:'art. 33 + 30 LTVA cumulés',
     q:'Activité mixte : CA imposable 200, CA exclu 300, subvention 100. IP brut 50. Calcul DIP net ?',
@@ -2849,12 +2775,12 @@ const QUIZ_DATA=[
     q:'Lors d\'un contrôle TVA, l\'AFC demande l\'accès lecture à l\'ERP avec extraction des journaux. Le contribuable peut-il refuser ?',
     opts:[
       'Oui — secret commercial',
-      'Non — art. 78 + 68 LTVA imposent la coopération. Refus = présomption de soustraction + taxation d\'office (art. 86 al. 2). Stratégie : préparer extraits Excel structurés AVANT pour limiter l\'accès direct',
+      'Non — art. 78 + 68 LTVA imposent la coopération. Refus = présomption de soustraction + taxation d\'office (art. 79). Stratégie : préparer extraits Excel structurés AVANT pour limiter l\'accès direct',
       'Oui — uniquement sur autorisation judiciaire',
       'Cela dépend de la taille de l\'entreprise'
     ],
     correct:1,
-    expl:'Art. 78 LTVA donne à l\'AFC un large pouvoir de contrôle ; art. 68 LTVA impose l\'obligation de renseignement à l\'assujetti. Le refus d\'accès = (1) Présomption négative défavorable, (2) Taxation d\'office probable (art. 86 al. 2), (3) Amende art. 98 LTVA possible. Bonne pratique fiduciaire : (a) Préparer les extraits ERP structurés en amont (journaux ventes, achats, grand-livre des comptes TVA), (b) Limiter l\'accès direct au personnel ERP, (c) Présenter le dossier de manière organisée. La coopération maîtrisée permet de garder le contrôle de la narration tout en respectant les obligations légales.'
+    expl:'Art. 78 LTVA donne à l\'AFC un large pouvoir de contrôle ; art. 68 LTVA impose l\'obligation de renseignement à l\'assujetti. Le refus d\'accès = (1) Présomption négative défavorable, (2) Taxation d\'office probable (art. 79), (3) Amende art. 98 LTVA possible. Bonne pratique fiduciaire : (a) Préparer les extraits ERP structurés en amont (journaux ventes, achats, grand-livre des comptes TVA), (b) Limiter l\'accès direct au personnel ERP, (c) Présenter le dossier de manière organisée. La coopération maîtrisée permet de garder le contrôle de la narration tout en respectant les obligations légales.'
   },
   { id:'m04-q29', diff:'hard', art:'OLICO + art. 958f OR',
     q:'Une PME archive ses factures en PDF sur Google Drive partagé entre 3 personnes. Conformité OLICO ?',
@@ -2901,7 +2827,7 @@ const FLASH_DATA=[
     def:'Passif courant. TVA encaissée des clients = dette envers AFC. Solde créditeur. Soldé en fin de trimestre contre le 2201 (régularisation).' },
   { id:'fc06', cat:'Plan comptable &amp; écritures', term:'Compte 1170 — TVA déductible',
     art:'compte 1170',
-    def:'Actif courant. TVA payée sur achats = créance envers AFC. Solde débiteur. Soldé en fin de trimestre contre le 2201. Compte 1171 pour investissements (art. 32 LTVA).' },
+    def:'Actif courant dans la convention M04 lorsque le DIP est déductible. Solde débiteur; peut être soldé contre un compte de décompte selon l’organisation comptable. Un sous-compte distinct pour investissements est une convention ERP, pas une exigence de l’art. 32.' },
   { id:'fc07', cat:'Plan comptable &amp; écritures', term:'Écriture vente HT + TVA',
     art:'partie double',
     def:'D 1100/1020 TTC / C 3000 HT (taux normal) ou C 3001 (taux réduit) / C 2200 TVA. Total débit = total crédit.' },
@@ -2910,36 +2836,32 @@ const FLASH_DATA=[
     def:'SaaS/services achetés à l\'étranger → auto-imposition. Écriture : D 4500 HT / D 1170 TVA / C 2000 HT / C 2202 TVA. Effet net souvent nul si l’activité donne droit au DIP, mais déclaration obligatoire (ch. 383 + IP via ch. 400/405). Risque de correction et qualification pénale à analyser selon circonstances en cas d’omission.' },
 
   // ─── Concordance & bouclement (4) ─────────────────
-  { id:'fc09', cat:'Concordance &amp; bouclement', term:'Concordance annuelle 550_03',
+  { id:'fc09', cat:'Concordance &amp; bouclement', term:'Concordance annuelle concordance annuelle',
     art:'art. 72 LTVA',
-    def:'Délai 240 jours après fin exercice. Σ ch. 200 (4 trim.) = CA comptable net (3xxx − rabais/escomptes/avoirs). Si écart → rectificatif / concordance annuelle ; si écart 0 → tableau interne conservé. Au-delà : décomptes présumés définitifs (ATF 140 II 202).' },
+    def:'Art. 72 : corriger dans la période contenant le 180e jour après la clôture; l’AFC utilise aussi le repère pratique de 240 jours pour la finalisation. Rapprocher ch. 200 aux contre-prestations comptabilisées, puis contrôler séparément déductions, impôt et DIP.' },
   { id:'fc10', cat:'Concordance &amp; bouclement', term:'Solde trimestriel TVA',
     art:'pratique fiduciaire',
     def:'En fin de Q : D 2200 (annule) / C 1170 (annule) / C 2201 (net dû). Paiement : D 2201 / C 1020 Banque. Échéance 60 jours après fin Q (art. 86 LTVA).' },
   { id:'fc11', cat:'Concordance &amp; bouclement', term:'Escomptes accordés',
     art:'art. 41 LTVA + ch. 235',
-    def:'Réducteurs de contre-prestation. Compte 3800. Ch. 235 du décompte (réducteur TVA collectée). Erreur fréquente : oublier la régularisation → TVA versée en trop, récupérable via 550_03.' },
+    def:'Réducteurs de contre-prestation. Compte 3800. Ch. 235 du décompte (réducteur TVA collectée). Erreur fréquente : oublier la régularisation → TVA versée en trop, récupérable via concordance annuelle.' },
   { id:'fc12', cat:'Concordance &amp; bouclement', term:'Solde 2200 au bilan',
     art:'art. 959a OR',
     def:'Au 31.12, solde 2200 ≈ TVA collectée Q4 (à régulariser au décompte Q4). Solde anormal = signal rouge. Apparaît dans "autres dettes à court terme" ou ligne distincte "Dettes TVA".' },
 
   // ─── ERP & archivage (4) ──────────────────────────
-  { id:'fc13', cat:'ERP &amp; archivage', term:'Codes TVA Bexio',
-    art:'pratique ERP',
-    def:'UN1 = 8,1% imposable, UN2 = 2,6%, UN3 = 3,8%, EXP = export art. 23 (ch. 220), HS = lieu hors Suisse (ch. 221), EXC = art. 21 non opté (ch. 230), SUB = subvention/don hors contre-prestation (900/910 + éventuel ch. 420). Erreur de code = erreur décompte.' },
+  { id:'fc13', cat:'ERP &amp; archivage', term:'Codes TVA ERP — mapping', art:'pratique ERP', def:'Les noms de codes varient selon le logiciel et sa version. Documenter pour chaque code : qualification, taux, rubrique du Décompte TVA pro, compte par défaut et exceptions. Le mapping versionné est plus important que le nom du code.' },
   { id:'fc14', cat:'ERP &amp; archivage', term:'OLICO — Archivage électronique',
     art:'OLICO RS 221.431',
     def:'4 conditions cumulatives : intégrité garantie, disponibilité 10 ans, lisibilité (PDF/A), traçabilité accès. Non conforme = force probante perdue (ATF 138 II 465) = taxation d\'office possible.' },
-  { id:'fc15', cat:'ERP &amp; archivage', term:'ERP suisses standards',
-    art:'pratique fiduciaire',
-    def:'Bexio (cloud, 1-50 employés, leader PME), Abacus (PME moyennes, cloud + on-prem), Crésus (Romandie, artisans), Winbiz (TPE/micro). Tous génèrent décompte automatique + export ePortal.' },
+  { id:'fc15', cat:'ERP &amp; archivage', term:'ERP — réflexe de contrôle', art:'pratique fiduciaire', def:'Bexio, Abacus, Crésus, Winbiz ou autre : vérifier la version, les fonctions réellement activées, le mapping des codes, la méthode/périodicité et la sortie de rapprochement. Ne jamais supposer qu’un logiciel « garantit » la conformité TVA.' },
   { id:'fc16', cat:'ERP &amp; archivage', term:'Taxation d\'office',
-    art:'art. 86 al. 2 LTVA',
+    art:'art. 79 LTVA',
     def:'En cas de comptabilité défaillante (perte, incomplète, non conforme), AFC estime CA et IP par méthode comparative (ratios de branche). En pratique : refus partiel ou total de l\'IP possible selon la qualité de la reconstitution. Recours : 30j réclamation art. 83. Force majeure atténue mais n\'élimine pas l\'obligation art. 70.' }
 ];
 
 // ─── State & SM-2 ───────────────────────────────────
-let state={schemaVersion:'v4_3',theory:0,legis:0,cases:0,errors:0,quiz:0,memo:0,vocab:0,cheat:0,quiz_passed:0,quiz_score:0,memo_seen:0,last_section:'theory'};
+let state={schemaVersion:'v5_0',theory:0,legis:0,cases:0,errors:0,quiz:0,memo:0,vocab:0,cheat:0,quiz_passed:0,quiz_score:0,memo_seen:0,completed:0,last_section:'theory'};
 let srsData={};
 
 function loadState(){
@@ -2954,7 +2876,7 @@ function saveState(){
 function updateProgress(){
   const keys=['theory','legis','cases','errors','quiz','memo','vocab','cheat'];
   const done=keys.filter(k=>state[k]===1).length;
-  const pct=Math.round(done/keys.length*100);
+  const pct=state.completed?100:Math.round(done/keys.length*100);
   const fill=document.getElementById('prog-fill');
   const pctEl=document.getElementById('prog-pct');
   if(fill)fill.style.width=pct+'%';
@@ -3081,7 +3003,7 @@ function finishQuiz(){
   let html='<div class="results-card">';
   html+='<div class="results-score-circle '+(passed?'passed':'')+'"><div class="r-pct">'+pct+'%</div><div class="r-frac">'+correct+'/'+QUIZ_DATA.length+'</div></div>';
   html+='<div class="results-title">'+(passed?'🎉 Module validé !':'⚠️ Score insuffisant')+'</div>';
-  html+='<div class="results-detail">'+(passed?'Vous maîtrisez la comptabilité TVA suisse au niveau attendu pour le diplôme de spécialiste TVA. Continuez avec le M05 (DIP) ou M11 (Contrôle AFC).':'Score ≥ 75% requis pour validation. Révisez les blocs théoriques 3-5 (écritures, concordance) et reprenez le quiz.')+'</div>';
+  html+='<div class="results-detail">'+(passed?'Vous avez atteint le seuil de validation interne de M04. Continuez avec M05 (DIP); M11 approfondira le contrôle AFC. Cette validation de module n’est pas un diplôme officiel.':'Score ≥ 75% requis pour validation. Révisez les blocs théoriques 3-5 (écritures, concordance) et reprenez le quiz.')+'</div>';
   html+='<div class="results-stats">';
   html+='<div class="rs-card"><div class="rs-num">'+correct+'</div><div class="rs-lbl">Correctes</div></div>';
   html+='<div class="rs-card"><div class="rs-num">'+(QUIZ_DATA.length-correct)+'</div><div class="rs-lbl">Incorrectes</div></div>';
@@ -3200,12 +3122,35 @@ function filterCat(cat){
   renderFc();
 }
 
+// ─── Module completion / dashboard sync ─────────────
+function syncDashboardDone(){
+  try{
+    const k='tvaSpecialisteTvaDashboardV1';
+    const d=JSON.parse(localStorage.getItem(k)||'{}');
+    d.M04='done';
+    localStorage.setItem(k,JSON.stringify(d));
+  }catch(e){}
+}
+function finishModule(){
+  state.completed=1;
+  saveState();
+  syncDashboardDone();
+  const box=document.getElementById('m04-complete');
+  if(box)box.style.display='flex';
+  updateProgress();
+}
+function goNextModule(){
+  finishModule();
+  window.location.href='m05-deduction-impot-prealable-dip.html';
+}
+
 // ─── Init ───────────────────────────────────────────
 loadState();
 updateProgress();
 if(state.last_section&&state.last_section!=='theory'){
   setTimeout(()=>goto(state.last_section),50);
 }
+if(state.completed){const box=document.getElementById('m04-complete');if(box)box.style.display='flex';}
 </script>
 </body>
 </html>
