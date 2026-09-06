@@ -1,0 +1,205 @@
+name: Professional audit M01
+
+on:
+  push:
+    paths:
+      - '.m01-professional-audit-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply fiscal legal pedagogical and UX audit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('m01-introduction-tva-suisse.html')
+          t = p.read_text(encoding='utf-8')
+          changes = []
+
+          def rep(old, new, label):
+              global t
+              if old in t:
+                  t = t.replace(old, new, 1)
+                  changes.append(label)
+              else:
+                  print('WARN missing:', label)
+
+          # Author visible inside the module
+          rep(
+              '<div style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">Formation de spécialiste TVA suisse · M01 v4.3</div>',
+              '<div style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">Formation de spécialiste TVA suisse · M01 v4.4</div><div style="font-size:10.5px;text-align:center;margin-top:6px"><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">Mariia Lobur · LinkedIn ↗</a> <span style="color:rgba(255,255,255,.25)">·</span> <a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">GitHub ↗</a></div>',
+              'author credit'
+          )
+          t = t.replace('M01 v4.3', 'M01 v4.4')
+
+          # Pedagogical objectives
+          marker = '''</div>\n<div class="block">\n<div class="block-h"><span class="bnum">0</span><h3>Méthode TVA en 7 questions — réflexe du spécialiste</h3></div>'''
+          objectives = '''</div>\n<div class="block">\n<div class="block-h"><span class="bnum">✓</span><h3>Objectifs de M01 — ce que vous devez savoir faire</h3></div>\n<p class="prose">À la fin de ce module, l’objectif n’est pas de « connaître toute la TVA », mais de posséder un socle fiable pour les modules suivants.</p>\n<div class="box info"><div class="box-icon">🎯</div><div class="box-body"><strong>Vous devez être capable de :</strong><br/>1) distinguer impôt, assujettissement et opération imposable ; 2) identifier le taux applicable sans confondre taux et qualification ; 3) calculer un seuil d’assujettissement simple ; 4) expliquer la différence entre exclu, exonéré et hors territoire ; 5) retrouver la source suisse pertinente et signaler une zone qui exige une vérification AFC.</div></div>\n<div class="box warn"><div class="box-icon">🧭</div><div class="box-body"><div class="box-title">Ce que M01 introduit seulement</div>TDFN, international, immobilier, acquisition, contrôle AFC et corrections sont volontairement abordés comme <strong>signaux à reconnaître</strong>. Leur traitement complet appartient aux modules spécialisés. M01 ne doit pas servir à trancher seul un dossier complexe.</div></div>\n</div>\n<div class="block">\n<div class="block-h"><span class="bnum">0</span><h3>Méthode TVA en 7 questions — réflexe du spécialiste</h3></div>'''
+          rep(marker, objectives, 'objectives')
+
+          # Theory legal precision
+          rep(
+              '<tr><td>Périodicité</td><td>Effective : trimestrielle · TDFN : semestrielle · annuelle possible sur demande</td><td>Annuelle</td></tr>',
+              '<tr><td>Périodicité</td><td>Effective : en principe trimestrielle · TDFN : semestrielle · décompte annuel possible sous conditions</td><td>Annuelle</td></tr>',
+              'reporting periodicity'
+          )
+          rep(
+              "La Suisse n'est pas membre de l'UE. La LTVA (RS 641.20) est une loi <strong>souveraine et indépendante</strong>. Les directives TVA européennes n'ont aucune force juridique en Suisse et ne peuvent jamais être invoquées devant l'AFC ou les tribunaux.",
+              "La Suisse n'est pas membre de l'UE. Pour déterminer un traitement TVA suisse, la base juridique est la <strong>LTVA/OTVA</strong>, complétée par la pratique AFC et la jurisprudence. Le droit TVA de l'UE n'est pas contraignant en Suisse et ne remplace jamais une base légale suisse; il peut toutefois être pertinent à titre comparatif ou lorsqu'une entreprise suisse doit respecter des obligations TVA dans l'UE.",
+              'EU law precision'
+          )
+          t = t.replace('<tr><td>Taux normal depuis 01.01.2024</td><td><strong>8,1%</strong></td><td>15%–27% selon État</td></tr>', '<tr><td>Taux normal depuis 01.01.2024</td><td><strong>8,1%</strong></td><td>Varie selon l’État membre; règles UE distinctes</td></tr>')
+          t = t.replace('<tr><td>Seuil assujettissement</td><td><strong>CHF 100\'000 général</strong><br/><small>CHF 250\'000 pour associations sportives/culturelles sans but lucratif gérées bénévolement et institutions d\'utilité publique</small></td><td>0 à 85\'000€ selon État</td></tr>', '<tr><td>Seuil assujettissement</td><td><strong>CHF 100\'000 général</strong><br/><small>CHF 250\'000 pour certaines associations/institutions</small></td><td>Règles UE et nationales à analyser séparément</td></tr>')
+          t = t.replace('<tr><td>Guichet unique</td><td>Non applicable (hors UE)</td><td>OSS/IOSS depuis 2021</td></tr>', '<tr><td>OSS / IOSS</td><td>Pas un régime de TVA suisse; peut concerner une entreprise suisse pour ses obligations UE</td><td>Régimes UE</td></tr>')
+          rep(
+              'Ne jamais invoquer une directive européenne comme base légale suisse. Pour un dossier suisse, citer <strong>la LTVA, l\'OTVA, les publications AFC et la jurisprudence applicable</strong>.',
+              'Ne pas utiliser une directive européenne comme <strong>base décisive</strong> d’un traitement TVA suisse. Pour un dossier suisse, partir de la LTVA/OTVA, puis contrôler la pratique AFC et la jurisprudence pertinente. Les règles UE sont un autre système et peuvent créer des obligations parallèles pour une entreprise suisse.',
+              'EU warning'
+          )
+          rep(
+              "Le taux applicable dépend en principe de la date d'<strong>exécution</strong> de la prestation, pas de la date de facturation. Une prestation exécutée en décembre 2023 et facturée en janvier 2024 reste à l'ancien taux normal 7,7%. Les logiciels, modèles Excel et codes TVA doivent donc être contrôlés lors de chaque changement de taux.",
+              "Le taux applicable dépend en principe de la période d'<strong>exécution</strong> de la prestation, pas simplement de la date figurant sur la facture. Lors d’un changement de taux, les prestations périodiques, acomptes et prestations couvrant plusieurs périodes exigent une ventilation selon les règles transitoires publiées par l’AFC. L’exemple 2023/2024 reste pédagogique; pour un changement futur, contrôler les instructions AFC en vigueur.",
+              'rate transition nuance'
+          )
+          rep(
+              "Est assujetti obligatoirement toute personne physique ou morale exploitant une entreprise à titre indépendant lorsque le <strong>chiffre d'affaires déterminant atteint le seuil applicable</strong>. Le seuil général est de CHF 100'000/an, mais certaines associations sportives ou culturelles sans but lucratif gérées bénévolement ainsi que les institutions d'utilité publique bénéficient d'un seuil spécial de CHF 250'000/an. Le seuil doit toujours être qualifié à partir des prestations non exclues et de leur lien avec le territoire suisse (art. 10 LTVA).",
+              "L’assujettissement ne se résume pas au moment où un compteur de chiffre d’affaires franchit CHF 100'000. Il faut d’abord déterminer l’existence d’une activité entrepreneuriale, calculer le <strong>chiffre d’affaires déterminant selon l’art. 10 LTVA</strong>, puis fixer séparément la date de début de l’assujettissement. Le seuil général est de CHF 100'000/an; un seuil spécial de CHF 250'000 s’applique à certaines associations sportives/culturelles sans but lucratif gérées bénévolement et aux institutions d’utilité publique.",
+              'assujettissement precision'
+          )
+          t = t.replace('<tr><td><strong>Entreprises étrangères / numérique</strong></td><td>Règles spécifiques selon prestations et clients</td><td>Art. 10, 20a, 45 LTVA</td><td>À qualifier avant inscription</td></tr>', '<tr><td><strong>Entreprises étrangères</strong></td><td>Seuil + lieu de la prestation + éventuelles exceptions</td><td>Art. 10, 7–8, 45 LTVA</td><td>Le chiffre d’affaires mondial et les prestations suisses doivent être distingués</td></tr>')
+          threshold_box = "<div class=\"box-body\"><div class=\"box-title\">Calcul du seuil déterminant</div><strong>Comptent :</strong> prestations imposables, prestations fournies à l'étranger qui seraient imposables si elles étaient fournies en Suisse, et opérations exonérées art. 23. <strong>Ne comptent pas :</strong> prestations exclues art. 21, subventions, dons, recettes non entrepreneuriales et opérations hors champ. <br/><strong>Attention :</strong> seuil général CHF 100'000; seuil CHF 250'000 pour associations sportives/culturelles sans but lucratif gérées bénévolement et institutions d'utilité publique.</div>"
+          if threshold_box in t and 'Seuil ≠ date de début' not in t:
+              t = t.replace(threshold_box, threshold_box + '</div><div class="box warn"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Seuil ≠ date de début</div>Le dépassement du seuil et la date d’effet de l’assujettissement sont deux questions distinctes. Pour une nouvelle activité, une entreprise existante ou une entreprise étrangère, la date d’effet doit être déterminée à partir de la LTVA et de la pratique AFC applicable au cas concret.</div>', 1)
+              changes.append('threshold/date distinction')
+          t = t.replace('<tr><td>Tribunal fédéral</td><td><strong>TF / BGer</strong></td><td>Recours final — droit uniquement</td><td>LTF RS 173.110</td></tr>', '<tr><td>Tribunal fédéral</td><td><strong>TF / BGer</strong></td><td>Recours selon la LTF; contrôle des faits limité</td><td>LTF RS 173.110</td></tr>')
+          rep(
+              "CHF 324 = CHF 4'000 × 8,1% — l'AFC perçoit exactement 8,1% du prix final. Chaque stade ne paie que la TVA sur la valeur qu'il a créée.",
+              "Dans cet <strong>exemple volontairement simplifié</strong> (même taux à tous les stades, plein droit au DIP, aucune exclusion), le total versé à l’AFC correspond à CHF 324. Dans un dossier réel, taux mixtes, exclusions, corrections et limitations du DIP peuvent rompre cette symétrie.",
+              'neutrality example nuance'
+          )
+          rep(
+              "Le TF rend des arrêts de principe (ATF) sur le droit TVA. Ils s'imposent à l'AFC. Recherche plein texte gratuite dans Eurospider. Citer le numéro ATF exact dans tout dossier contesté.",
+              "Le Tribunal fédéral fixe l’interprétation du droit fédéral dans les affaires qui lui sont soumises. Tous ses arrêts ne sont pas publiés aux ATF. Dans un dossier contesté, citer la <strong>référence de l’arrêt et le considérant pertinent</strong>, puis vérifier qu’il est transposable aux faits du dossier.",
+              'jurisprudence precision'
+          )
+
+          # Source hierarchy box
+          leg_marker = '<div class="block">\n<div class="block-h"><span class="bnum">1</span><h3>Lois fédérales — Hiérarchie des sources</h3></div>'
+          if leg_marker in t and 'Force des sources' not in t:
+              source_box = '<div class="box info"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Force des sources</div><strong>LTVA / OTVA / ordonnances</strong> = droit normatif. <strong>Publications AFC</strong> = pratique administrative utile pour appliquer le droit, mais elles ne remplacent pas la loi. <strong>Jurisprudence TF/TAF</strong> = interprétation judiciaire à lire dans le contexte des faits. Une page web ou un exemple AFC ne doit jamais être cité comme s’il s’agissait d’un article de loi.</div></div>\n'
+              t = t.replace(leg_marker, source_box + leg_marker, 1)
+              changes.append('source hierarchy')
+
+          # Case 1: registration start date
+          rep(
+              "L’assujetti doit s’annoncer spontanément à l’AFC dans les <strong>30 jours dès le début de l’assujettissement</strong>. La date d’effet doit être qualifiée selon la situation : pour une entreprise suisse existante, l’AFC indique que l’assujettissement obligatoire commence après l’expiration de l’exercice au cours duquel le seuil déterminant est atteint.<span class=\"art-tag\">art. 66 al. 1 LTVA</span>",
+              "L’assujetti doit s’annoncer spontanément à l’AFC dans les <strong>30 jours dès le début de l’assujettissement</strong>. Attention : ce délai ne permet pas, à lui seul, de déterminer la date d’effet. Celle-ci dépend notamment du démarrage de l’activité, des prévisions de chiffre d’affaires et de la situation d’une entreprise déjà existante. Dans un dossier réel, déterminer d’abord la date d’assujettissement, puis compter les 30 jours.<span class=\"art-tag\">art. 10, 14 et 66 LTVA</span>",
+              'case1 start date'
+          )
+
+          # Case 3: remove blanket medical-device and pharmacist assumptions
+          t = t.replace('médicaments sur ordonnance CHF 28\'000 HT · cosmétiques CHF 4\'500 HT · consultations pharmaceutiques CHF 1\'200 HT · matériel médical (bandages) CHF 3\'100 HT.', 'médicaments CHF 28\'000 HT · cosmétiques CHF 4\'500 HT · conseil commercial non thérapeutique facturé séparément CHF 1\'200 HT · bandages et matériel de soin ordinaire CHF 3\'100 HT.')
+          t = t.replace('Taux pour les consultations pharmaceutiques (conseils) ?', 'Taux pour le conseil commercial non thérapeutique facturé séparément ?')
+          t = t.replace("Conseil pharmaceutique = prestation de service → taux normal 8,1%.", "Dans l’hypothèse donnée, le conseil commercial non thérapeutique est une prestation de service au taux normal 8,1%.")
+          t = t.replace("Conseil = prestation de service → <strong>8,1% taux normal</strong>. L'exclusion art. 21 al. 2 let. a concerne les actes thérapeutiques de médecins reconnus, pas les pharmacies.<span class=\"art-tag\">art. 25 al. 1 LTVA</span>", "Dans l’hypothèse donnée, il s’agit d’un <strong>conseil non thérapeutique</strong> → 8,1%. Une prestation de santé ne doit jamais être qualifiée uniquement d’après le métier du prestataire : le contenu concret de la prestation et les conditions de l’art. 21/OTVA doivent être vérifiés.<span class=\"art-tag\">art. 21 + art. 25 LTVA</span>")
+          t = t.replace("<div class=\"calc-row\"><span class=\"calc-label\">Mat. médical (3'100 × 2,6%)</span><span class=\"calc-val\">CHF 80.60</span></div>", "<div class=\"calc-row\"><span class=\"calc-label\">Bandages / matériel ordinaire (3'100 × 8,1%)</span><span class=\"calc-val\">CHF 251.10</span></div>")
+          t = t.replace("<div class=\"calc-row total\"><span class=\"calc-label\">TVA collectée totale</span><span class=\"calc-val\">CHF 1'270.30</span></div>", "<div class=\"calc-row total\"><span class=\"calc-label\">TVA collectée totale</span><span class=\"calc-val\">CHF 1'440.80</span></div>")
+          if 'Le caractère « médical » d’un produit ne suffit pas' not in t:
+              t = t.replace("<div class=\"calc-title\">TVA mensuelle — Pharmacie Biomed</div>", "<div class=\"box warn\" style=\"margin-bottom:12px\"><div class=\"box-icon\">⚠️</div><div class=\"box-body\"><div class=\"box-title\">Piège de qualification</div>Le caractère « médical » d’un produit ne suffit pas à appliquer 2,6%. Le taux réduit vise notamment les médicaments au sens des règles applicables; un dispositif ou matériel de soin ordinaire peut rester au taux normal.</div></div><div class=\"calc-title\">TVA mensuelle — Pharmacie Biomed</div>", 1)
+
+          # Case 4: avoid real-estate shortcut
+          t = t.replace("vins à emporter CHF 3'200 HT · location salle sans restauration CHF 2'000. Taux applicables ?", "vins à emporter CHF 3'200 HT · location de vaisselle et de matériel de réception CHF 2'000 HT. Taux applicables ?")
+          t = t.replace("Si des places assises sont disponibles à proximité, l'AFC peut requalifier en 8,1%.", "La mise à disposition d’une infrastructure de consommation peut modifier la qualification. Les critères précis doivent être contrôlés dans la pratique AFC du secteur restauration.")
+          t = t.replace("<span class=\"calc-label\">Location salle (2'000 × 8,1%)</span>", "<span class=\"calc-label\">Location vaisselle / matériel (2'000 × 8,1%)</span>")
+
+          # Case 5 sponsorship assumption
+          t = t.replace("sponsoring CHF 22'000 · subvention cantonale CHF 15'000.", "sponsoring CHF 22'000 (contre-prestation publicitaire contractuelle) · subvention cantonale CHF 15'000.")
+
+          # Case 6: make DIP invoices clearly Swiss
+          t = t.replace("Frais liés au mandat français : déplacements CHF 3'500 TTC + logiciels CHF 1'800 TTC.", "Frais suisses liés au mandat français, facturés avec TVA suisse : déplacements CHF 3'500 TTC + logiciels CHF 1'800 TTC.")
+
+          # Case 7: worldwide threshold and place of electronic services
+          t = t.replace("DigitalFlow GmbH (Allemagne) vend des abonnements SaaS à des particuliers suisses B2C. CA déterminant Suisse année N : CHF 135'000. Non inscrite à la TVA suisse.", "DigitalFlow GmbH (Allemagne) vend des abonnements SaaS à des particuliers suisses B2C. CA mondial provenant de prestations non exclues : CHF 420'000, dont CHF 135'000 auprès de clients privés suisses. Non inscrite à la TVA suisse.")
+          t = t.replace("Une entreprise étrangère fournissant des prestations électroniques B2C à des clients suisses peut être assujettie en Suisse si le seuil déterminant est atteint; analyse complète en M06.", "Pour une entreprise étrangère, il faut distinguer le chiffre d’affaires mondial déterminant du chiffre d’affaires réalisé en Suisse, puis déterminer le lieu des prestations. Ici, le seuil mondial est dépassé et les prestations électroniques B2C suisses exigent une analyse d’assujettissement en Suisse; détails en M06.")
+          t = t.replace("<strong>Oui, à analyser comme cas international</strong> — les prestations électroniques B2C fournies à des clients suisses peuvent entraîner une obligation d'inscription TVA en Suisse lorsque le seuil déterminant est atteint. Le module M06 détaillera les conditions exactes, les exceptions et la régularisation possible avant contrôle AFC.<span class=\"art-tag\">art. 10 LTVA + art. 102 LTVA</span>", "<strong>Oui, l’inscription doit être analysée et, dans l’hypothèse donnée, l’assujettissement suisse est attendu.</strong> Le raisonnement correct est : chiffre d’affaires mondial déterminant → lieu des prestations électroniques B2C → éventuelles exceptions → date d’effet. Le chiffre d’affaires suisse de CHF 135'000 n’est pas, à lui seul, la définition du seuil pour une entreprise étrangère.<span class=\"art-tag\">art. 10 + règles de lieu LTVA · détails M06</span>")
+
+          # Case 8: avoid volatile interest and automatic neutrality
+          t = t.replace("Correct. Rappel TVA = différence 0,4% × CA concerné + intérêts moratoires selon le taux annuel applicable depuis chaque échéance.", "Correct. L’AFC corrige l’écart de taux sur les opérations concernées; le calcul dépend de la base HT/TTC et de la période d’exécution. Des intérêts moratoires peuvent s’ajouter selon le taux DFF applicable.")
+          t = t.replace("Rappel TVA = 0,4% × CA concerné + intérêts moratoires selon le taux annuel fixé par l'ordonnance DFF. Pour 2026, le taux est en principe de 4,0% et les intérêts ne sont en principe prélevés qu'à partir de CHF 100. Ex. sur CHF 500'000 CA : CHF 2'000 rappel + intérêts.", "L’écart doit être recalculé sur la base correcte des prestations concernées; <strong>0,4% du chiffre d’affaires brut n’est pas une formule universelle</strong>. Les intérêts moratoires suivent le taux fixé par le DFF pour la période concernée. Le taux en vigueur doit être contrôlé au moment du traitement.")
+          t = t.replace("DIP frais privés (4'200 × 0,081/1,081)</span><span class=\"calc-val\" style=\"color:#f87171\">CHF 314 dû", "DIP frais privés (4'200 × 0,081/1,081)</span><span class=\"calc-val\" style=\"color:#f87171\">CHF 314.71 à corriger")
+          t = t.replace("Acquisition (15'000 × 8,1%)</span><span class=\"calc-val\">CHF 1'215 (neutre net)", "Acquisition (15'000 × 8,1%)</span><span class=\"calc-val\">CHF 1'215; neutralité seulement si plein DIP")
+
+          # Frequent errors: remove overstatements
+          t = t.replace('1 — Mauvais taux après le 01.01.2024</div><div class="err-hsub">Très fréquent · 0,4% sur tout le CA', '1 — Mauvais taux après le 01.01.2024</div><div class="err-hsub">Très fréquent · écart sur opérations concernées')
+          t = t.replace("<strong>AFC :</strong> Recalcule la TVA à 8,1% sur tout le CA 2024. Manque (0,4% × CA) réclamé + intérêts moratoires selon le taux annuel applicable depuis chaque échéance trimestrielle.", "<strong>AFC :</strong> corrige le taux sur les prestations concernées. Le rappel dépend de la base HT/TTC, de la période d’exécution et des corrections de factures possibles; des intérêts moratoires peuvent s’ajouter.")
+          t = t.replace("<strong>AFC :</strong> Remboursement de tout le DIP déduit sur 5 ans + intérêts. Pour un cabinet médical : CHF 18'000+ de DIP à rembourser.", "<strong>AFC :</strong> correction du DIP indûment déduit sur les périodes encore ouvertes selon les règles de prescription, avec intérêts le cas échéant. Le montant dépend du dossier; éviter les chiffres «type» sans données réelles.")
+          t = t.replace("<strong>AFC :</strong> Vérifie les Z-rapports de caisse. Si pas de séparation → 8,1% appliqué à tout le CA alimentaire → redressement massif.", "<strong>AFC :</strong> peut comparer caisse, assortiment, infrastructure de consommation et pièces justificatives. Une séparation insuffisante peut conduire à une estimation ou à une requalification selon les faits.")
+          t = t.replace("✅ Seule la part professionnelle est déductible. Carnet de bord voiture + journal des repas d'affaires obligatoires.", "✅ L’usage entrepreneurial et privé doit être documenté et corrigé selon les règles de double affectation / prestation à soi-même. Un carnet de bord ou une documentation des frais peut être très utile, mais il n’existe pas une obligation générale de tenir exactement ces deux documents dans tous les cas.")
+          t = t.replace("✅ Art. 45 LTVA : déclarer dans le décompte + déduire simultanément comme DIP → neutre mais obligatoire procéduralement.", "✅ Si l’art. 45 LTVA s’applique, l’impôt sur les acquisitions doit être déclaré. Il n’est neutre que dans la mesure où le destinataire possède effectivement un droit à déduction du DIP.")
+          t = t.replace("<strong>AFC :</strong> Recoupe les virements à l'étranger avec les déclarations TVA. Rappel TVA + intérêts.", "<strong>AFC :</strong> peut rapprocher les achats étrangers, la comptabilité et les décomptes. Une acquisition non déclarée peut générer rappel et intérêts; la déduction correspondante dépend du droit au DIP.")
+          t = t.replace("8 — Sous-traitant étranger non déclaré", "8 — Prestataire étranger mal qualifié")
+          t = t.replace("❌ Payer CHF 80'000 à un sous-traitant étranger (travaux en Suisse) sans déclarer la TVA d'acquisition.", "❌ Appliquer automatiquement «fournisseur étranger = acquisition» ou, à l’inverse, ignorer toute TVA suisse sans analyser le lieu de la prestation et le statut TVA du fournisseur.")
+          t = t.replace("✅ Art. 45 LTVA : travaux physiques en Suisse par étranger = lieu de la prestation = Suisse → imposition à l'acquisition obligatoire.", "✅ Procéder dans l’ordre : nature de la prestation → lieu TVA → fournisseur inscrit ou non en Suisse → éventuelle imposition à l’acquisition. Les travaux immobiliers et livraisons avec installation nécessitent une analyse spécifique; ne pas les réduire à une règle unique.")
+          t = t.replace("<strong>AFC :</strong> CHF 80'000 × 8,1% = CHF 6'480 rappel. Souvent neutre après DIP mais pénalité procédurale.", "<strong>AFC :</strong> si l’art. 45 s’applique, l’impôt non déclaré peut être repris avec intérêts. La neutralité dépend du droit au DIP; d’autres cas peuvent entraîner l’assujettissement du fournisseur étranger lui-même.")
+
+          # Vocabulary / cheat sheet formalism and volatile data
+          t = t.replace("Requiert : nom+adresse fournisseur/client, date, description, base imposable, taux, TVA, n° TVA. Sans preuve suffisante → DIP à risque.", "La facture doit permettre d’identifier les parties, la prestation et le traitement TVA. Une lacune formelle ne doit pas être confondue avec la perte automatique du DIP : la preuve matérielle et une éventuelle correction restent déterminantes.")
+          t = t.replace("<div class=\"ci\"><span class=\"ci-l\">TDFN — CA max</span><span class=\"ci-v\">CHF 5'024'000</span></div>\n<div class=\"ci\"><span class=\"ci-l\">TDFN — dette max</span><span class=\"ci-v\">CHF 108'000</span></div>", "<div class=\"ci\"><span class=\"ci-l\">TDFN — limites d’admissibilité</span><span class=\"ci-v\">À vérifier dans Info TVA 12 / spécialisation TDFN</span></div>")
+          t = t.replace("<div class=\"ci\"><span class=\"ci-l\">Intérêt moratoire / rémunératoire 2026</span><span class=\"ci-v r\">4,0%/an</span></div>\n<div class=\"ci\"><span class=\"ci-l\">Seuil de perception/versement en principe</span><span class=\"ci-v\">CHF 100</span></div>\n<div class=\"ci\"><span class=\"ci-l\">Règle durable</span><span class=\"ci-v\">taux annuel DFF</span></div>", "<div class=\"ci\"><span class=\"ci-l\">Intérêt moratoire / rémunératoire</span><span class=\"ci-v r\">Taux DFF en vigueur à contrôler</span></div>\n<div class=\"ci\"><span class=\"ci-l\">Règle de travail</span><span class=\"ci-v\">ne jamais mémoriser un taux annuel comme permanent</span></div>")
+          t = t.replace("<div><strong>Art. 29</strong> — Restrictions DIP (usage privé)</div>", "<div><strong>Art. 29</strong> — Exclusion du droit à déduction</div>\n<div><strong>Art. 30</strong> — Double affectation</div>\n<div><strong>Art. 31</strong> — Prestation à soi-même / correction</div>")
+
+          # Quiz corrections
+          t = t.replace("{a:'art. 18 LTVA',q:'Une prestation de décembre 2023 est facturée en février 2024. Quel taux ?',o:['8,1% — date facture','7,7% — date exécution','Au choix','8,1% toujours pour 2024'],c:1,e:'Critère = date d\\'exécution, pas de facturation. Exécuté en 2023 → taux 7,7%.'}", "{a:'Changement de taux · pratique AFC',q:'Une prestation entièrement exécutée en décembre 2023 est facturée en février 2024. Quel taux normal ?',o:['8,1% — date facture','7,7% — période d’exécution','Au choix','8,1% toujours pour 2024'],c:1,e:'Pour cette hypothèse simple, la période d’exécution détermine le taux. Les prestations périodiques et acomptes exigent les règles transitoires AFC.'}")
+          t = t.replace("{a:'art. 87 LTVA + ordonnance DFF',q:'Comment traiter le taux d\\'intérêt moratoire TVA ?',o:['Toujours 5%/an fixe','Révisé par ordonnance; 4,0% en principe en 2026','Toujours 0% si correction spontanée','Décidé par le canton'],c:1,e:'Le taux n\\'est plus à mémoriser comme 5% fixe : il est révisé par ordonnance DFF. Pour 2026, il est en principe de 4,0%, avec seuil pratique de CHF 100.'}", "{a:'art. 87 LTVA + ordonnance DFF',q:'Comment traiter le taux d\\'intérêt moratoire TVA ?',o:['Toujours 5%/an fixe','Contrôler le taux DFF applicable à la période concernée','Toujours 0% si correction spontanée','Décidé par le canton'],c:1,e:'Le taux d’intérêt est fixé par le DFF et peut évoluer. Un praticien doit contrôler le taux applicable à la période au lieu de mémoriser un chiffre permanent.'}")
+          t = t.replace("{a:'art. 42 LTVA',q:'Quelle est la prescription ordinaire des créances TVA ?',o:['2 ans','3 ans','5 ans','10 ans'],c:2,e:'Art. 42 : prescription ordinaire 5 ans. Absolue 10 ans. Interrompue par actes d\\'enquête AFC.'}", "{a:'art. 42 LTVA',q:'Quelle est la prescription relative de la créance fiscale TVA, sous réserve des règles légales de suspension/interruption ?',o:['2 ans','3 ans','5 ans','10 ans'],c:2,e:'Art. 42 : délai relatif de 5 ans et délai absolu de 10 ans, sous réserve des causes légales de suspension et d’interruption.'}")
+          t = t.replace("{a:'art. 37 LTVA',q:'Condition pour utiliser la méthode TDFN ?',o:['Tout assujetti','CA TVA comprise ≤ CHF 5,024M et dette ≤ CHF 108\\'000','PME < 10 employés','Accord cantonal'],c:1,e:'Art. 37 : CA TVA comprise ≤ CHF 5\\'024\\'000 ET dette nette ≤ CHF 108\\'000. Engagement 3 ans minimum.'}", "{a:'art. 37 LTVA',q:'Quel réflexe distingue la méthode TDFN de la méthode effective ?',o:['Déduire chaque DIP réel séparément','Appliquer le TDFN à la contre-prestation TVA comprise selon les règles de la méthode','Facturer le TDFN au client','Ne jamais déclarer les acquisitions'],c:1,e:'Le TDFN sert au calcul de la dette envers l’AFC sur une base TVA comprise; il ne remplace pas le taux légal facturé au client. Les limites et règles d’admissibilité sont traitées en M03 et dans la spécialisation TDFN.'}")
+          t = t.replace("{a:'art. 45 LTVA',q:'Qu\\'est-ce que l\\'imposition à l\\'acquisition ?',o:['TVA à l\\'importation de biens','Auto-taxation sur services de fournisseurs étrangers non inscrits','TVA sur les achats immobiliers','Taxe sur les acquisitions d\\'entreprises'],c:1,e:'Art. 45 : auto-taxation par l\\'assujetti suisse sur services d\\'entreprises étrangères non inscrites.'}", "{a:'art. 45 LTVA',q:'Quel est le bon réflexe face à une facture d’un prestataire étranger ?',o:['Toujours la traiter comme importation de biens','Vérifier le lieu de la prestation, le statut TVA du fournisseur et si l’art. 45 s’applique','Toujours appliquer 8,1%','Toujours l’ignorer en TVA suisse'],c:1,e:'L’imposition à l’acquisition n’est pas une règle automatique pour tout fournisseur étranger. Il faut d’abord qualifier l’opération et le lieu, puis vérifier l’art. 45.'}")
+          t = t.replace("{a:'art. 26 LTVA',q:'Quel élément est OBLIGATOIRE sur une facture pour déduire le DIP ?',o:['Logo du fournisseur','Numéro TVA du fournisseur','Numéro de commande','Cachet'],c:1,e:'Art. 26 : le numéro TVA du fournisseur fait partie des éléments importants de preuve. En cas de lacune, demander une correction ou documenter la preuve; le DIP est à risque si la preuve reste insuffisante.'}", "{a:'art. 26 + art. 28 LTVA',q:'Une facture présente une lacune formelle. Quel est le bon réflexe pour le DIP ?',o:['Perdre automatiquement tout DIP','Demander une correction et sécuriser la preuve matérielle du traitement TVA','Inventer la mention manquante','Ignorer la facture'],c:1,e:'Une lacune formelle n’équivaut pas automatiquement à la perte du DIP. Il faut sécuriser la preuve, demander une correction si nécessaire et vérifier les conditions matérielles du droit à déduction.'}")
+          t = t.replace("{a:'art. 102 LTVA',q:'Quel est l\\'avantage d\\'une dénonciation spontanée ?',o:['Évite tout rappel TVA','Protection pénale si fait avant contrôle annoncé','Réduit les intérêts de 50%','Évite l\\'inscription TVA'],c:1,e:'Art. 102 : dénonciation avant contrôle = pas de soustraction pénale. Rappel TVA + intérêts restent dus.'}", "{a:'art. 102 LTVA',q:'Quel est l’intérêt principal d’une dénonciation spontanée lorsque toutes les conditions légales sont remplies ?',o:['Évite automatiquement le rappel TVA','Peut éviter la sanction pénale; impôt et intérêts restent en principe dus','Réduit automatiquement les intérêts de 50%','Évite l’inscription TVA'],c:1,e:'La protection pénale dépend de conditions précises, notamment du caractère spontané et de l’absence de connaissance préalable suffisante par l’autorité. L’impôt et les intérêts ne disparaissent pas.'}")
+          t = t.replace("{a:'art. 71 LTVA',q:'Périodicité standard du décompte TVA (méthode effective) ?',o:['Mensuelle','Trimestrielle','Semestrielle','Annuelle'],c:1,e:'Art. 71 : trimestrielle (standard). Semestrielle = TDFN. Annuelle sur demande pour petits assujettis.'}", "{a:'art. 71 ss LTVA',q:'Périodicité usuelle du décompte à la méthode effective ?',o:['Mensuelle','Trimestrielle','Semestrielle','Toujours annuelle'],c:1,e:'La méthode effective est en principe trimestrielle. Le décompte annuel existe sous conditions; la périodicité et les conditions sont traitées en M03.'}")
+          t = t.replace("{a:'art. 29 al. 3 LTVA',q:'Un dirigeant utilise la voiture de société à 30% privément. DIP déductible ?',o:['100% — société assujettie','70% — proportion pro','50% forfaitaire','0% — voiture privée'],c:1,e:'Art. 29 al. 3 : seule la part professionnelle est déductible. 30% privé → 70% de DIP déductible.'}", "{a:'art. 30–31 LTVA',q:'Un bien de l’entreprise est utilisé à la fois professionnellement et privément. Quel réflexe TVA ?',o:['Déduire 100% sans correction','Analyser la double affectation et corriger la part privée selon les règles applicables','Toujours limiter le DIP à 50%','Ne jamais déduire de DIP'],c:1,e:'L’usage mixte exige une analyse de la double affectation / correction; il n’existe pas un pourcentage forfaitaire universel applicable à tous les biens.'}")
+          t = t.replace("{a:'art. 72 LTVA',q:'Délai pour corriger spontanément une erreur TVA de l\\'année N-2 ?',o:['12 mois révolus — trop tard','Possible — jusqu\\'à 5 ans (prescription)','Seulement si AFC demande','Impossible après dépôt décompte'],c:1,e:'Art. 72 : corrections spontanées jusqu\\'à 5 ans (prescription). Signaler à l\\'AFC avec le décompte suivant.'}", "{a:'art. 72 LTVA',q:'Une erreur est découverte après le dépôt d’un décompte. Quel réflexe ?',o:['Attendre un contrôle AFC','Utiliser la procédure de rectification / concordance applicable et documenter la correction','Modifier seulement la comptabilité sans TVA','La correction est toujours impossible après dépôt'],c:1,e:'Une erreur doit être corrigée selon la procédure AFC appropriée. La concordance annuelle et la prescription sont des questions distinctes; le détail est traité en M03/M11.'}")
+          t = t.replace("{a:'art. 10 LTVA',q:'Une société française SaaS B2C avec CHF 135\\'000 de CA déterminant en Suisse doit-elle analyser une inscription TVA suisse ?',o:['Non — siège en France','Oui — seuil CHF 100\\'000 atteint','Non — reverse charge particuliers','Oui — seulement si établissement'],c:1,e:'Prestations électroniques B2C à des clients suisses : obligation TVA suisse possible si le seuil déterminant est atteint; analyse complète en M06.'}", "{a:'art. 10 + règles de lieu LTVA',q:'Pour une entreprise étrangère SaaS B2C, quel chiffre d’affaires faut-il d’abord examiner pour le seuil d’assujettissement ?',o:['Uniquement le CA suisse','Le chiffre d’affaires mondial déterminant, puis les prestations localisées en Suisse','Uniquement le CA UE','Uniquement les encaissements en CHF'],c:1,e:'Pour l’entreprise étrangère, le seuil se raisonne sur le chiffre d’affaires mondial déterminant; il faut ensuite analyser les prestations localisées en Suisse et les éventuelles exceptions.'}")
+
+          # Flashcards corrections
+          t = t.replace("{t:'TDFN / Saldo', d:'CA × taux forfaitaire = dette TVA. CA TVA comprise ≤ CHF 5,024M + dette ≤ CHF 108\\'000. Semestrielle. Engagement 3 ans.', a:'art. 37 LTVA'}", "{t:'TDFN / Saldo', d:'Méthode de décompte simplifiée : le TDFN s’applique à la contre-prestation TVA comprise selon les règles de la méthode. Le taux légal facturé au client reste distinct. Limites et admissibilité : vérifier Info TVA 12 / module dédié.', a:'art. 37 LTVA'}")
+          t = t.replace("{t:'Imposition à l\\'acquisition', d:'Auto-taxation sur services de fournisseurs étrangers non inscrits en Suisse. Déclarée dans le décompte.', a:'art. 45 LTVA'}", "{t:'Imposition à l’acquisition', d:'Mécanisme applicable à certaines acquisitions de prestations de l’étranger. Toujours vérifier nature, lieu, statut TVA du fournisseur et droit éventuel au DIP; ce n’est pas automatique pour toute facture étrangère.', a:'art. 45 LTVA'}")
+          t = t.replace("{t:'Intérêt moratoire AFC', d:'Taux fixé par ordonnance DFF et révisé périodiquement. Pour 2026 : 4,0% en principe; pas de perception si l’intérêt n’atteint pas CHF 100.', a:'art. 87 LTVA + ordonnance DFF'}", "{t:'Intérêt moratoire AFC', d:'Taux fixé par le DFF et susceptible d’évoluer. Toujours contrôler le taux applicable à la période concernée sur la source AFC/DFF en vigueur.', a:'art. 87 LTVA + ordonnance DFF'}")
+          t = t.replace("{t:'Dénonciation spontanée', d:'Auto-signalement avant contrôle annoncé → protection pénale. Rappel TVA + intérêts restent dus.', a:'art. 102 LTVA'}", "{t:'Dénonciation spontanée', d:'Peut produire un effet pénal favorable si toutes les conditions légales sont remplies et que la démarche est réellement spontanée. Impôt et intérêts restent en principe dus.', a:'art. 102 LTVA'}")
+          t = t.replace("{t:'Prescription ordinaire', d:'5 ans pour les créances TVA. Absolue = 10 ans. Interrompue par tout acte d\\'enquête AFC.', a:'art. 42 LTVA'}", "{t:'Prescription TVA', d:'Délai relatif de 5 ans et délai absolu de 10 ans, sous réserve des causes légales de suspension et d’interruption. Toujours vérifier la chronologie du dossier.', a:'art. 42 LTVA'}")
+          t = t.replace("{t:'Facture conforme (art. 26)', d:'Nom+adresse fournisseur/client, date, description prestation, base imposable, taux TVA, montant TVA, n° TVA fournisseur. Sans preuve suffisante = DIP à risque.', a:'art. 26 LTVA'}", "{t:'Facture et preuve du DIP', d:'La facture doit permettre de comprendre les parties, la prestation et le traitement TVA. En cas de lacune, sécuriser la preuve et demander une correction si nécessaire; éviter le formalisme automatique.', a:'art. 26 + art. 28 LTVA'}")
+          t = t.replace("{t:'Neutralité TVA', d:'L\\'assujetti collecte la TVA sur ventes et déduit le DIP sur achats → impact net = 0. Le consommateur final supporte la charge.', a:'art. 1 al. 2 LTVA'}", "{t:'Neutralité TVA', d:'La TVA vise la neutralité pour l’entreprise lorsque le droit au DIP est complet. Exclusions, usage privé, double affectation ou erreurs peuvent créer un coût réel.', a:'art. 1 et art. 28 ss LTVA'}")
+
+          # Completion block: competence-oriented handoff
+          t = t.replace("Vous avez terminé le module d’introduction. La suite logique est <strong>M02 — Qualification des opérations TVA</strong>, où l’on apprend à distinguer prestations imposables, exclues, exonérées et opérations particulières.", "Vous avez terminé le socle M01. Avant de continuer, vous devez pouvoir expliquer <strong>pourquoi</strong> une opération relève d’un taux, d’une exclusion, d’une exonération ou d’un lieu hors Suisse — et savoir quelle source contrôler. La suite logique est <strong>M02 — Qualification des opérations TVA</strong>.")
+
+          # Basic QA markers
+          p.write_text(t, encoding='utf-8')
+          print('Applied changes:', len(changes), changes)
+          PY
+
+          # Guard against the most dangerous stale teaching points
+          ! grep -q "Carnet de bord voiture + journal des repas d'affaires obligatoires" m01-introduction-tva-suisse.html
+          ! grep -q "travaux physiques en Suisse par étranger = lieu de la prestation = Suisse" m01-introduction-tva-suisse.html
+          ! grep -q "Engagement 3 ans" m01-introduction-tva-suisse.html
+          ! grep -q "Art. 29 al. 3 : seule la part professionnelle" m01-introduction-tva-suisse.html
+          ! grep -q "Non applicable (hors UE)" m01-introduction-tva-suisse.html
+
+      - name: Commit audited M01
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m01-introduction-tva-suisse.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Audit M01 fiscal legal pedagogy and UX"
+          git push
