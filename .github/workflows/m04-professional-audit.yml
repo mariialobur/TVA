@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Apply M04 professional audit
         run: |
-          base64 -d tools/m04_patch.py.gz.b64 | gzip -d > /tmp/m04_patch.py
+          cat tools/m04parts/part*.b64 | base64 -d | gzip -d > /tmp/m04_patch.py
           python3 /tmp/m04_patch.py
       - name: Validate M04
         run: |
