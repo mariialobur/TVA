@@ -1503,60 +1503,59 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 </div>
 </div>
-<!-- CAS 7 — Méthode encaissement -->
+<!-- CAS 7 — Mode de décompte selon les contre-prestations reçues -->
 <div class="case-block">
 <div class="case-header">
 <div class="case-num">07</div>
 <div class="case-meta">
-<div class="case-title">Consulting Pro SA — Passage à méthode encaissement art. 40</div>
+<div class="case-title">Consulting Pro SA — Passage aux contre-prestations reçues</div>
 <div class="case-subtitle">Consulting B2B · Vaud · 2026 · 🟡 Risque moyen</div>
 </div>
 </div>
 <div class="case-body">
 <div class="case-scenario">
-<strong>Contexte :</strong> Consulting Pro SA, conseil aux PME, DSO de 90 jours. Méthode convenue jusqu'à fin 2025. Demande formelle d'application de la <strong>méthode encaissement (art. 39 al. 2 LTVA)</strong> déposée à l'AFC en novembre 2025 (la méthode encaissement n'est pas un libre choix : <strong>autorisation AFC obligatoire</strong>, validation accordée pour 01.01.2026). <strong>Au 01.01.2026 :</strong>
-<br/>• Créances clients ouvertes (factures émises non encaissées) : <strong>CHF 540'000 TTC</strong> (dont CHF 40'500 TVA déjà déclarée en méthode convenue)
-          <br/>• Dettes fournisseurs ouvertes : <strong>CHF 162'000 TTC</strong> (dont CHF 12'150 TVA déjà déduite en méthode convenue)
-        </div>
-<div class="case-context">📚 <strong>Objectif :</strong> comprendre la correction d'entrée comptable lors du passage convenue → encaissement.</div>
+<strong>Contexte :</strong> Consulting Pro SA, conseil aux PME, DSO de 90 jours. Décompte selon les <strong>contre-prestations convenues</strong> jusqu'à fin 2025. La société a demandé à l'AFC l'autorisation de décompter selon les <strong>contre-prestations reçues</strong> au sens de l'art. 39 al. 2 LTVA; le changement prend effet au 01.01.2026.
+<br/><br/><strong>Au 01.01.2026 :</strong>
+<br/>• Créances clients ouvertes : <strong>CHF 540'000 TTC</strong>, déjà prises en compte sous l'ancien mode
+<br/>• Dettes fournisseurs ouvertes : <strong>CHF 162'000 TTC</strong>, dont l'impôt préalable a déjà été pris en compte sous l'ancien mode
+</div>
+<div class="case-context">📚 <strong>Objectif :</strong> sécuriser la bascule sans double déclaration ni double déduction.</div>
 <div class="case-step" id="m4c7s1">
-<div class="step-question"><span class="step-q-num">Q1</span>Pourquoi une "correction d'entrée" est-elle nécessaire ?</div>
+<div class="step-question"><span class="step-q-num">Q1</span>Quel est le premier contrôle à effectuer lors du passage convenues → reçues ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">A) Pas de correction nécessaire</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s1',this,true)">B) Pour éviter une double imposition / déduction : la TVA déjà déclarée (convenue) ne doit pas être redéclarée à l'encaissement</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">C) Pour transférer la TVA aux fournisseurs</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">D) Pour annuler les factures de 2025</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">A) Annuler toutes les factures ouvertes</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s1',this,true)">B) Établir l'état des débiteurs et créanciers ouverts à la date de bascule et appliquer les règles transitoires de l'art. 106 OTVA</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">C) Redéclarer toutes les créances au premier encaissement</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s1',this,false)">D) Modifier uniquement le compte bancaire</button>
 </div>
-<div class="step-explanation" id="m4c7s1-expl">
-            La <strong>correction d'entrée</strong> (art. 39 al. 2 + 40 al. 2 LTVA) évite la double comptabilisation : en méthode convenue, la TVA sur les factures de 2025 a déjà été déclarée à l'émission. En méthode encaissement à partir de 2026, si on déclarait à nouveau à l'encaissement, on paierait deux fois. La correction marque les créances/dettes "déjà déclarées" pour les neutraliser à l'encaissement. Documentation rigoureuse exigée par l'AFC.
-            <div class="art-ref">📋 art. 39 al. 2 + 40 al. 2 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c7s1-expl">Pour la <strong>méthode effective</strong>, l'art. 106 OTVA règle le changement de mode. Lors du passage des contre-prestations convenues aux contre-prestations reçues, les postes débiteurs existants sont neutralisés dans le décompte suivant afin qu'un encaissement ultérieur ne soit pas imposé une seconde fois; de même, les postes créanciers déjà pris en compte sont neutralisés pour éviter une double déduction de l'impôt préalable. La liste d'ouverture est donc une pièce de contrôle essentielle. <div class="art-ref">📋 art. 39 LTVA · art. 106 al. 2 OTVA</div></div>
 </div>
 <div class="case-step" id="m4c7s2">
-<div class="step-question"><span class="step-q-num">Q2</span>En février 2026, encaissement de CHF 108'000 TTC (facture de novembre 2025). Quelle écriture TVA ?</div>
+<div class="step-question"><span class="step-q-num">Q2</span>En février 2026, une créance de 2025 de CHF 108'000 TTC est encaissée. Quel traitement ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">A) D 1020 108'000 / C 1100 108'000 + écriture TVA 8'100</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s2',this,true)">B) D 1020 108'000 / C 1100 108'000 — uniquement (pas de nouvelle TVA : déjà déclarée 2025 en méthode convenue)</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">C) D 1020 108'000 / C 3000 100'000 / C 2200 8'100</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">D) D 1020 108'000 / C 3000 108'000</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">A) Déclarer à nouveau la TVA parce que l'encaissement a lieu en 2026</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s2',this,true)">B) Comptabiliser l'encaissement et s'assurer que la transition art. 106 neutralise cette ancienne créance dans le décompte TVA</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">C) Annuler la facture 2025</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s2',this,false)">D) Reporter l'encaissement en 2027</button>
 </div>
-<div class="step-explanation" id="m4c7s2-expl">
-            La TVA sur cette facture a déjà été <strong>déclarée en 2025 en méthode convenue</strong> (à l'émission). L'encaissement en 2026 est purement un mouvement de trésorerie : <strong>Débit 1020 Banque 108'000 / Crédit 1100 Débiteurs 108'000</strong>. Pas de nouvelle TVA collectée. La correction d'entrée a précisément pour but d'éviter une double déclaration. Pour les factures émises en 2026 (nouvelles), la méthode encaissement s'applique normalement.
-            <div class="art-ref">📋 art. 40 al. 2 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c7s2-expl">L'écriture de trésorerie reste <strong>D 1020 Banque / C 1100 Débiteurs</strong>. Sur le plan TVA, la créance figurait déjà dans l'ancien mode convenu; la mécanique transitoire de l'art. 106 al. 2 OTVA empêche de l'imposer une seconde fois lorsque le paiement arrive. Le contrôle doit être fait sur le décompte et sur la liste des postes ouverts, pas uniquement par une écriture standardisée. <div class="art-ref">📋 art. 106 al. 2 let. a OTVA</div></div>
 </div>
 <div class="case-step" id="m4c7s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Pour une nouvelle facture émise en mars 2026 (CHF 50'000 HT), encaissée en juin 2026. Quand la TVA est-elle due en méthode encaissement ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Une nouvelle facture 2026 est payée en juin. Quand naît la créance fiscale sous le nouveau mode ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">A) Mars 2026 (date de la facture)</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s3',this,true)">B) Juin 2026 (date de l'encaissement effectif) → ch. 200 et ch. 303 décompte Q2 2026</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">C) À la date de fin d'année</button>
-<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">D) En décembre 2026 obligatoirement</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">A) Toujours à la date de facture</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s3',this,true)">B) Au moment de l'encaissement, conformément aux effets temporels de l'art. 40 al. 2 LTVA</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">C) Seulement au bouclement annuel</button>
+<button class="step-opt" onclick="caseAnswer('m4c7s3',this,false)">D) À une date choisie librement par l'ERP</button>
 </div>
-<div class="step-explanation" id="m4c7s3-expl">
-            En méthode encaissement (art. 40 LTVA — appliquée sur autorisation AFC art. 39 al. 2), la TVA est due à <strong>la date de l'encaissement effectif</strong>. Encaissement en juin 2026 → déclaration au décompte Q2 2026 (échéance 31.08.2026). Avantage cash-flow : pas de TVA avancée pendant le DSO de 90 jours. Inconvénient : suivi rigoureux des encaissements requis. Documentation : journal des encaissements détaillé. <strong>Engagement minimum 1 an</strong> dans la méthode choisie avant changement (art. 39 al. 3 LTVA).
-            <div class="art-ref">📋 art. 40 al. 1 LTVA</div>
+<div class="step-explanation" id="m4c7s3-expl">L'art. 39 définit le <strong>mode de décompte</strong>; l'art. 40 en règle les effets temporels. Avec les contre-prestations reçues, la créance fiscale naît lors de l'encaissement et le droit au DIP lors du paiement, sous réserve des règles particulières. Le mode choisi doit être conservé pendant au moins une période fiscale (art. 39 al. 3). <div class="art-ref">📋 art. 39 al. 2-3 + art. 40 al. 2 LTVA</div></div>
 </div>
+<div class="calc-box">
+<div class="calc-title">📊 Dossier de bascule — pièces à conserver</div>
+<div class="calc-row"><span class="calc-label">Débiteurs ouverts au 01.01.2026</span><span class="calc-val">liste nominative + TVA déjà déclarée</span></div>
+<div class="calc-row"><span class="calc-label">Créanciers ouverts au 01.01.2026</span><span class="calc-val">liste + DIP déjà pris en compte</span></div>
+<div class="calc-row"><span class="calc-label">Premier décompte 2026</span><span class="calc-val">contrôle art. 106 OTVA</span></div>
+<div class="calc-row total"><span class="calc-label">Objectif</span><span class="calc-val">0 double imposition · 0 double DIP</span></div>
 </div>
 </div>
 </div>
@@ -1587,8 +1586,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <button class="step-opt" onclick="caseAnswer('m4c8s1',this,false)">D) D 1020 80'000 / C 2200 80'000</button>
 </div>
 <div class="step-explanation" id="m4c8s1-expl">
-            La subvention cantonale = flux <strong>hors champ TVA</strong> (art. 18 al. 2 let. a LTVA) — absence de contre-prestation au sens de l'art. 18 al. 1, donc pas de TVA collectée. Écriture : <strong>Débit 1020 Banque CHF 80'000</strong> / <strong>Crédit 3400 Subventions hors champ CHF 80'000</strong>. À suivre comme <strong>autre mouvement de fonds</strong> (ch. 900/910 selon le formulaire), et à documenter séparément de l’art. 21. <strong>Conséquence DIP</strong> : l'art. 33 LTVA impose une <strong>réduction du DIP par prorata</strong> car la subvention finance partiellement l'activité (cumul avec art. 30 si activité exclue présente). Distinguer subvention (art. 18 al. 2 let. a) vs don (let. d) — même traitement mais qualification juridique différente.
-            <div class="art-ref">📋 art. 18 al. 2 + 33 LTVA + ch. 420 / 900-910</div>
+            La subvention cantonale = flux <strong>hors champ TVA</strong> (art. 18 al. 2 let. a LTVA) — absence de contre-prestation au sens de l'art. 18 al. 1, donc pas de TVA collectée. Écriture : <strong>Débit 1020 Banque CHF 80'000</strong> / <strong>Crédit 3400 Subventions hors champ CHF 80'000</strong>. À suivre comme <strong>autre mouvement de fonds</strong> (ch. 900/910 selon le formulaire), et à documenter séparément de l’art. 21. <strong>Conséquence DIP</strong> : une subvention ou contribution assimilée au sens de l'art. 18 al. 2 let. a à c peut entraîner une <strong>réduction du DIP selon l'art. 33 al. 2</strong>; la méthode dépend de son affectation et des coûts concernés. Il faut la distinguer d'un <strong>don</strong> au sens de l'art. 18 al. 2 let. d : les éléments hors contre-prestation n'ont en principe pas d'effet sur le DIP, sous réserve précisément de l'exception prévue pour les subventions et contributions assimilées.
+            <div class="art-ref">📋 art. 18 al. 2 + art. 33 LTVA · ch. 420 / 900-910</div>
 </div>
 </div>
 <div class="case-step" id="m4c8s2">
@@ -1742,90 +1741,70 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="case-header">
 <div class="case-num">11</div>
 <div class="case-meta">
-<div class="case-title">CloudWare Sàrl — Intégration ERP TVA complète SaaS</div>
-<div class="case-subtitle">Startup SaaS B2B · Lausanne · Setup Q1 2026 · 🔴 Risque élevé</div>
+<div class="case-title">CloudWare Sàrl — Intégration ERP TVA d'un SaaS international</div>
+<div class="case-subtitle">Startup SaaS B2B · Lausanne · Setup 2026 · 🔴 Risque élevé</div>
 </div>
 </div>
 <div class="case-body">
 <div class="case-scenario">
-<strong>Contexte :</strong> CloudWare Sàrl, startup SaaS B2B (gestion projets), nouvellement assujettie 2026. Méthode effective convenue. Bexio cloud. <strong>Activités :</strong>
-<br/>• <strong>Abonnements SaaS clients suisses</strong> (assujettis TVA) : 8,1% imposable
-          <br/>• <strong>Abonnements SaaS clients UE</strong> (Allemagne, France, B2B) : lieu de prestation au siège destinataire (<strong>art. 8 al. 1 LTVA</strong>) → hors champ TVA suisse, ch. 221 du décompte
-          <br/>• <strong>Abonnements SaaS clients USA</strong> (B2B) : lieu de prestation hors CH (<strong>art. 8 al. 1 LTVA</strong>) → hors champ TVA suisse, ch. 221
-          <br/>• <strong>Infrastructure</strong> : AWS US (CHF 96'000/an), Stripe US frais bancaires (CHF 24'000/an), Notion US (CHF 6'000/an)
-          <br/>• <strong>Bureau suisse</strong> : loyer CHF 36'000/an (8,1% inclus), IT local CHF 12'000/an
-          <br/><br/><strong>CA prévisionnel 2026</strong> : Suisse CHF 800'000 · UE CHF 1'200'000 · USA CHF 600'000
-        </div>
-<div class="case-context">📚 <strong>Objectif :</strong> structurer l'intégration ERP, paramétrer codes TVA, anticiper le décompte Q1.</div>
+<strong>Contexte :</strong> CloudWare Sàrl, startup SaaS B2B, méthode effective selon les contre-prestations convenues. <strong>Activités 2026 :</strong>
+<br/>• clients suisses : CHF 800'000 HT, prestations imposables 8,1%
+<br/>• clients UE B2B : CHF 1'200'000, prestations localisées chez le destinataire à l'étranger
+<br/>• clients USA B2B : CHF 600'000, prestations localisées chez le destinataire à l'étranger
+<br/>• achats étrangers : AWS CHF 96'000, Stripe CHF 24'000 de frais à qualifier, Notion CHF 6'000
+<br/>• bureau suisse : loyer CHF 36'000 HT + IT local CHF 12'000 HT, TVA 8,1% facturée
+</div>
+<div class="case-context">📚 <strong>Objectif :</strong> séparer lieu de prestation, impôt sur les acquisitions, DIP et mapping ERP.</div>
 <div class="case-step" id="m4c11s1">
-<div class="step-question"><span class="step-q-num">Q1</span>Quelle structure de comptes de produit créer dans Bexio ?</div>
+<div class="step-question"><span class="step-q-num">Q1</span>Comment ventiler les ventes dans le plan comptable ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">A) Un seul compte 3000</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s1',this,true)">B) 3000 Ventes SaaS Suisse 8,1% (→ ch. 303) + 3200 Ventes SaaS UE — lieu hors CH art. 8 al. 1 (→ ch. 221) + 3201 Ventes SaaS USA — lieu hors CH (→ ch. 221)</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">C) 3000 Ventes mondiales + 3001 Ventes exonérées</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">D) Pas besoin de ventilation</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">A) Tout dans un seul compte sans distinction</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s1',this,true)">B) Séparer ventes suisses imposables et prestations UE/USA localisées à l'étranger, avec un mapping distinct vers le décompte</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">C) Traiter les services UE/USA comme des exportations de biens art. 23</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s1',this,false)">D) Ne comptabiliser que les ventes suisses</button>
 </div>
-<div class="step-explanation" id="m4c11s1-expl">
-<strong>Ventilation à 3 niveaux</strong> recommandée pour traçabilité et reporting management : (1) <strong>3000</strong> Ventes SaaS Suisse imposable 8,1% → code TVA UN1 → ch. 303. (2) <strong>3200</strong> Ventes SaaS UE — lieu de prestation hors CH (art. 8 al. 1 LTVA) → code TVA ESP → ch. 221. (3) <strong>3201</strong> Ventes SaaS USA (séparé pour analyse géographique) — même base juridique → code TVA ESP → ch. 221. Même code TVA pour UE et USA mais comptes séparés = meilleure analyse stratégique. <strong>Important :</strong> ce n'est pas une exonération art. 23 (qui concerne les biens exportés et certains cas particuliers) mais une opération <strong>hors champ TVA suisse</strong> car le lieu de la prestation est à l'étranger. Les comptes 3200 et 3201 cumulés alimentent le ch. 221 du décompte.
-            <div class="art-ref">📋 art. 8 al. 1 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c11s1-expl">Les services B2B soumis au principe du destinataire sont localisés au siège du client selon l'art. 8 al. 1 LTVA. Les prestations à l'étranger sont distinguées des <strong>exportations de biens art. 23</strong>. Dans le décompte actuel, les prestations fournies à l'étranger sont notamment déduites au <strong>ch. 221</strong>, tandis que les exportations exonérées art. 23 relèvent du ch. 220. Les numéros de comptes internes sont libres; le mapping doit être documenté. <div class="art-ref">📋 art. 8 al. 1 LTVA · ch. 220/221 Décompte TVA pro</div></div>
 </div>
 <div class="case-step" id="m4c11s2">
-<div class="step-question"><span class="step-q-num">Q2</span>Pour les achats étrangers (AWS, Stripe, Notion) : quel traitement ?</div>
+<div class="step-question"><span class="step-q-num">Q2</span>Pour AWS, Stripe et Notion, peut-on appliquer automatiquement 8,1% d'impôt sur les acquisitions à CHF 126'000 ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">A) Pas de TVA dès que le fournisseur est étranger</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s2',this,true)">B) Qualifier chaque prestation : AWS/Notion relèvent typiquement du principe du destinataire et peuvent générer l’impôt sur les acquisitions; les frais Stripe doivent être analysés selon leur nature avant de les inclure</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">C) Auto-imposer automatiquement les CHF 126'000 à 8,1% sans qualifier les services</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">D) L’impôt sur les acquisitions n’existe qu’au-delà de CHF 100'000</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">A) Oui — tout fournisseur étranger déclenche automatiquement l'art. 45</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s2',this,true)">B) Non — qualifier chaque prestation; AWS/Notion sont des cas typiques du principe du destinataire, tandis que les frais Stripe doivent être ventilés selon leur nature</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">C) Non — aucune prestation étrangère n'est concernée</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s2',this,false)">D) Seulement si le total dépasse CHF 100'000</button>
 </div>
-<div class="step-explanation" id="m4c11s2-expl">L’art. 45 ne signifie pas « fournisseur étranger = acquisition tax ». Il faut déterminer la <strong>nature de la prestation</strong>, son lieu et vérifier qu’elle n’est ni exclue ni exonérée. Les prestations cloud/SaaS régies par le principe du destinataire sont des cas typiques; les frais d’un prestataire de paiement doivent être ventilés selon la prestation réellement fournie. CloudWare étant déjà inscrite au registre TVA, le seuil de CHF 10'000 applicable aux destinataires non inscrits n’est pas le test du cas. Le DIP correspondant ne se déduit que dans la mesure où les conditions de l’art. 28 ss sont remplies. <div class="art-ref">📋 art. 45 LTVA · Info TVA 14 · M05/M06</div></div>
+<div class="step-explanation" id="m4c11s2-expl">L'impôt sur les acquisitions n'est pas dû sur une prestation simplement parce que le fournisseur est étranger. Il faut vérifier la <strong>nature</strong>, le <strong>lieu</strong> et si la prestation est exclue ou exonérée. L'AFC précise qu'une prestation exclue du champ de l'impôt ou exonérée ne déclenche pas cet impôt. CloudWare étant déjà inscrite au registre TVA, le seuil CHF 10'000 applicable aux destinataires non inscrits n'est pas le test du cas. <div class="art-ref">📋 art. 45 LTVA · pratique AFC impôt sur les acquisitions</div></div>
 </div>
 <div class="case-step" id="m4c11s3">
-<div class="step-question"><span class="step-q-num">Q3</span>L'IP sur le bureau suisse (loyer + IT) est-il intégralement déductible ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Les dépenses du bureau suisse peuvent-elles ouvrir le droit au DIP malgré les clients étrangers ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">A) Non — uniquement pour la part Suisse (CA Suisse / CA total)</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s3',this,true)">B) En principe oui si les dépenses servent aux prestations suisses imposables et aux prestations étrangères qui ouvriraient le droit au DIP; vérifier l’affectation réelle et l’art. 29 pour les prestations étrangères</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">C) Non — déductible uniquement pour activité Suisse</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">D) Déductible à 50%</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">A) Non — seule la part de chiffre d'affaires suisse ouvre le DIP</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s3',this,true)">B) En principe oui si les dépenses servent aux prestations suisses imposables et à des prestations étrangères qui ouvriraient le droit au DIP; vérifier l'affectation et l'art. 29</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">C) Toujours exactement 50%</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s3',this,false)">D) Les prestations étrangères transforment automatiquement le DIP en charge</button>
 </div>
-<div class="step-explanation" id="m4c11s3-expl">
-            Les <strong>services B2B exportés</strong> (UE et USA) ont leur <strong>lieu de la prestation à l'étranger</strong> (<strong>art. 8 al. 1 LTVA</strong> — siège du destinataire) : opérations <strong>hors champ TVA suisse</strong>. Ils figurent au <strong>ch. 221</strong> du décompte (par convention pratique AFC, ce chiffre regroupe les exports de biens art. 23 ET les services hors champ art. 8 al. 1). Effet IP : <strong>ouvrent en principe le droit au DIP si l’affectation et les preuves sont suffisantes</strong> (traitement identique à l'imposable selon art. 28 al. 1). Pas d'activité exclue art. 21 ni de subvention dans ce cas → <strong>aucune correction</strong> du DIP. IP déductible selon affectation et documentation. <strong>Avantage stratégique majeur</strong> pour les SaaS exportateurs : faible TVA collectée sur clients étrangers + récupération totale de l'IP suisse = position de crédit TVA récurrente avec l'AFC (remboursement possible).
-            <div class="art-ref">📋 art. 28 al. 1 + 30 LTVA (a contrario)</div>
-</div>
+<div class="step-explanation" id="m4c11s3-expl">Une prestation fournie à l'étranger ne fait pas automatiquement perdre le DIP. Pour les prestations qui seraient imposables si elles étaient fournies en Suisse, le droit à déduction peut être conservé dans les conditions légales, notamment selon l'art. 29. Il faut néanmoins contrôler l'affectation réelle et l'absence d'activités exclues ou non entrepreneuriales. Dans ce cas pédagogique, les CHF 48'000 HT de loyer/IT donnent un DIP suisse de <strong>CHF 3'888</strong> si toutes les conditions sont remplies. <div class="art-ref">📋 art. 28-30 LTVA · art. 29 pour prestations à l'étranger</div></div>
 </div>
 <div class="case-step" id="m4c11s4">
-<div class="step-question"><span class="step-q-num">Q4</span>Calcul de la TVA nette due 2026 (estimation)</div>
+<div class="step-question"><span class="step-q-num">Q4</span>Peut-on déjà calculer un ch. 383 exact avec les seules données du cas ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">A) CHF 64'800 (sur CA total 2,6 mio × 2,5%)</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s4',this,true)">B) TVA collectée Suisse 800'000 × 8,1% = 64'800 − IP loyer/IT (36'000 + 12'000) × 8,1% = 3'888 = CHF 60'912 due AFC</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">C) CHF 50'706</button>
-<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">D) Crédit de CHF 5'000 en faveur de CloudWare</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">A) Oui : CHF 10'206 obligatoirement</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s4',this,true)">B) Non : le montant exact dépend notamment de la qualification des frais Stripe; si tout impôt sur acquisitions admissible ouvre symétriquement le DIP, il est neutre dans le calcul net</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">C) Oui : CHF 0 obligatoirement</button>
+<button class="step-opt" onclick="caseAnswer('m4c11s4',this,false)">D) Le ch. 383 dépend uniquement du chiffre d'affaires suisse</button>
 </div>
-<div class="step-explanation" id="m4c11s4-expl">
-<strong>Décompte 2026 prévisionnel CloudWare :</strong>
-<br/>• TVA collectée ch. 303 = 800'000 × 8,1% = <strong>CHF 64'800</strong>
-<br/>• Prestations UE+USA ch. 221 = 1'800'000 (lieu hors Suisse, pas de TVA suisse)
-            <br/>• Ch. 383 (impôt sur les acquisitions) = 126'000 × 8,1% = CHF 10'206
-            <br/>• <strong>Total TVA due</strong> = 64'800 + 10'206 = <strong>CHF 75'006</strong>
-<br/>• IP ch. 400 = (36'000 + 12'000) × 8,1% ≈ <strong>CHF 3'888</strong>
-<br/>• IP sur acquisitions étrangères via ch. 400/405, si déductible = <strong>CHF 10'206</strong>
-<br/>• IP net = 3'888 + 10'206 = <strong>CHF 14'094</strong>
-<br/>• <strong>TVA nette due ch. 500</strong> = 75'006 − 14'094 = <strong>CHF 60'912</strong>
-<div class="art-ref">📋 Synthèse ch. 500 décompte</div>
-</div>
+<div class="step-explanation" id="m4c11s4-expl">Le chiffre exact de l'impôt sur les acquisitions doit attendre la qualification des frais Stripe. En revanche, sous l'hypothèse que les acquisitions imposables sont <strong>entièrement affectées à une activité ouvrant le DIP</strong>, l'impôt sur les acquisitions et le DIP correspondant se neutralisent. La dette nette pédagogique peut alors être lue comme TVA sur ventes suisses CHF 64'800 moins DIP suisse sur loyer/IT CHF 3'888 = <strong>CHF 60'912</strong>, sous réserve des autres opérations et corrections du dossier. <div class="art-ref">📋 art. 28 + 45 LTVA · qualification avant calcul</div></div>
 </div>
 <div class="calc-box">
-<div class="calc-title">📊 Décompte prévisionnel CloudWare 2026</div>
-<div class="calc-row"><span class="calc-label">Ch. 200 — CA brut total</span><span class="calc-val">CHF 2'600'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 221 — Prestations localisées hors Suisse (UE+USA)</span><span class="calc-val">CHF 1'800'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 303 — Imposable 8,1% (Suisse)</span><span class="calc-val">CHF 800'000</span></div>
-<div class="calc-row"><span class="calc-label">TVA collectée 8,1% (base ch. 303)</span><span class="calc-val">CHF 64'800</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 383 — Impôt sur les acquisitions (AWS/Stripe/Notion)</span><span class="calc-val">CHF 10'206</span></div>
-<div class="calc-row total"><span class="calc-label">Total TVA due — TVA collectée totale</span><span class="calc-val">CHF 75'006</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 400 — IP brut (loyer + IT)</span><span class="calc-val">CHF 3'888</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 400/405 — IP sur acquisitions, si déductible</span><span class="calc-val">CHF 10'206</span></div>
-<div class="calc-row total"><span class="calc-label">Ch. 479 — IP net déductible</span><span class="calc-val">CHF 14'094</span></div>
-<div class="calc-row highlight"><span class="calc-label">Ch. 500 — TVA nette due à l'AFC</span><span class="calc-val">CHF 60'912</span></div>
+<div class="calc-title">📊 Décompte prévisionnel — logique, pas fausse précision</div>
+<div class="calc-row"><span class="calc-label">Ch. 200 — contre-prestations mondiales du cas</span><span class="calc-val">CHF 2'600'000</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 221 — prestations localisées à l'étranger</span><span class="calc-val">CHF 1'800'000</span></div>
+<div class="calc-row"><span class="calc-label">Base suisse 8,1%</span><span class="calc-val">CHF 800'000</span></div>
+<div class="calc-row"><span class="calc-label">TVA sur ventes suisses</span><span class="calc-val">CHF 64'800</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 383 — acquisitions étrangères</span><span class="calc-val">à déterminer après qualification</span></div>
+<div class="calc-row"><span class="calc-label">DIP suisse loyer + IT</span><span class="calc-val">CHF 3'888</span></div>
+<div class="calc-row"><span class="calc-label">DIP sur acquisitions imposables</span><span class="calc-val">selon qualification + droit à déduction</span></div>
+<div class="calc-row highlight"><span class="calc-label">Net pédagogique si acquisitions tax/DIP se neutralisent</span><span class="calc-val">CHF 60'912</span></div>
 </div>
 </div>
 </div>
@@ -1834,109 +1813,74 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="case-header">
 <div class="case-num">12</div>
 <div class="case-meta">
-<div class="case-title">Industries Romandes SA — Synthèse examen professionnel</div>
-<div class="case-subtitle">Industrie manufacturière mixte · Vaud · Clôture 2025 · 🔴 Risque élevé</div>
+<div class="case-title">Industries Romandes SA — Synthèse de clôture professionnelle</div>
+<div class="case-subtitle">Industrie manufacturière · Vaud · Clôture 2025 · 🔴 Risque élevé</div>
 </div>
 </div>
 <div class="case-body">
 <div class="case-scenario">
-<strong>Contexte examen :</strong> Industries Romandes SA, fabrication d'équipements industriels. Méthode effective convenue, Abacus. Vous établissez la concordance annuelle 2025 et le décompte Q4 2025.
-          <br/><br/><strong>Données 2025 :</strong>
-<br/>• Compte 3000 — Ventes équipements suisses 8,1% : CHF 2'780'000
-          <br/>• Compte 3200 — Exports art. 23 (UE) : CHF 920'000 (preuves OFDF complètes)
-          <br/>• Compte 3400 — Subvention Innosuisse R&amp;D : CHF 145'000
-          <br/>• Compte 3800 — Escomptes accordés : CHF 38'000
-          <br/>• Compte 4000 — Achats matières (8,1% IP brut) : IP CHF 142'000
-          <br/>• Compte 4500 — SaaS étrangers : CHF 18'000 HT
-          <br/>• Compte 6500 — Loyer atelier (8,1%) : IP CHF 9'720
-          <br/>• Somme ch. 200 déclarée Q1-Q4 2025 : CHF 3'662'000
-        </div>
-<div class="case-context">📚 <strong>Objectif :</strong> concordance complète + décompte Q4 + Vision AFC.</div>
+<strong>Contexte :</strong> Industries Romandes SA, méthode effective selon les contre-prestations convenues. <strong>Données 2025 :</strong>
+<br/>• ventes suisses 8,1% avant escomptes : CHF 2'780'000
+<br/>• exportations de biens art. 23 : CHF 920'000, preuves OFDF disponibles
+<br/>• escomptes accordés sur les ventes suisses : CHF 38'000
+<br/>• subvention Innosuisse R&amp;D : CHF 145'000, mais le dossier fourni ne précise pas encore les coûts/projet financés
+<br/>• DIP sur matières : CHF 142'000; DIP sur loyer : CHF 9'720
+<br/>• SaaS étranger imposable au titre de l'art. 45 : CHF 18'000 HT; hypothèse pédagogique : DIP correspondant intégralement admis
+</div>
+<div class="case-context">📚 <strong>Objectif :</strong> séparer concordance du chiffre d'affaires, déductions, acquisitions et réduction du DIP liée à la subvention.</div>
 <div class="case-step" id="m4c12s1">
-<div class="step-question"><span class="step-q-num">Q1</span>CA comptable net à comparer au CA TVA déclaré (3'662'000) ?</div>
+<div class="step-question"><span class="step-q-num">Q1</span>Comment présenter la concordance ch. 200 / escomptes ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">A) CHF 3'700'000 (2'780 + 920)</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s1',this,true)">B) CHF 3'662'000 = 2'780'000 + 920'000 − 38'000 (escomptes) → concordance parfaite ✓</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">C) CHF 3'845'000 (incluant la subvention)</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">D) CHF 3'738'000</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">A) Déclarer directement CHF 3'662'000 au ch. 200 après escomptes</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s1',this,true)">B) Ch. 200 = CHF 3'700'000 de contre-prestations avant déductions; contrôler séparément CHF 920'000 au ch. 220 et CHF 38'000 de réductions au ch. 235</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">C) Ajouter la subvention au ch. 200</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s1',this,false)">D) Ajouter l'impôt sur acquisitions au chiffre d'affaires</button>
 </div>
-<div class="step-explanation" id="m4c12s1-expl">
-<strong>Concordance correcte :</strong> CA comptable net = 3000 (2'780'000) + 3200 (920'000) − 3800 (38'000 escomptes accordés) = <strong>CHF 3'662'000</strong>. La <strong>subvention 3400</strong> (CHF 145'000) <strong>n'entre pas</strong> dans le CA comptable au sens TVA — elle figure en compte distinct et dans les autres mouvements de fonds du décompte (ch. 900/910 selon qualification), avec éventuelle réduction du DIP au ch. 420. Égalité avec CA TVA déclaré : 3'662'000 = 3'662'000 → <strong>écart 0, concordance parfaite</strong>. Excellent indicateur favorable de qualité comptable, sans remplacer l’analyse des pièces.
-            <div class="art-ref">📋 art. 72 LTVA + art. 18 al. 2 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c12s1-expl">Le ch. 200 reprend le <strong>total des contre-prestations</strong> avant les déductions du bloc chiffre d'affaires. Ici : CHF 2'780'000 + CHF 920'000 = <strong>CHF 3'700'000</strong>. Les exportations art. 23 sont ensuite déduites au ch. 220 et les diminutions de contre-prestation sont contrôlées au ch. 235. La subvention est un mouvement hors contre-prestation et ne doit pas être mélangée au ch. 200. <div class="art-ref">📋 Décompte TVA pro · art. 23 + 41 + 72 LTVA</div></div>
 </div>
 <div class="case-step" id="m4c12s2">
-<div class="step-question"><span class="step-q-num">Q2</span>Prorata art. 33 LTVA (subvention) à appliquer sur l'IP ?</div>
+<div class="step-question"><span class="step-q-num">Q2</span>Peut-on calculer immédiatement la réduction du DIP art. 33 avec le seul montant de la subvention ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">A) Pas de réduction — subvention R&amp;D = exonérée</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s2',this,true)">B) Prorata = 145'000 / (145'000 + 3'700'000) = 3,77% → IP commun réduit de 3,77%</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">C) Prorata 25%</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">D) Subvention non concernée par art. 33</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">A) Oui — toujours subvention / (subvention + chiffre d'affaires)</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s2',this,true)">B) Non — il faut d'abord identifier l'affectation de la subvention Innosuisse et les coûts/domaines qu'elle finance</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">C) Non — les subventions n'ont jamais d'effet sur le DIP</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s2',this,false)">D) Oui — toujours 50%</button>
 </div>
-<div class="step-explanation" id="m4c12s2-expl">
-            La subvention Innosuisse est <strong>hors champ art. 18 al. 2</strong> mais déclenche la <strong>réduction art. 33 LTVA</strong>. Prorata = Subvention / (Subvention + CA total générant DIP) = 145'000 / (145'000 + 2'780'000 + 920'000) = 145'000 / 3'845'000 = <strong>3,77%</strong>. Note : on prend ici le CA total (imposable + exonéré art. 23, tous deux générant DIP). Dans ce cas pédagogique, la base retenue est le chiffre d'affaires économique brut donnant droit au DIP (imposable + export art. 23), avant escomptes. Une autre clé peut exister dans un dossier réel, mais elle doit être documentée et appliquée de manière cohérente.
-            <div class="art-ref">📋 art. 33 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c12s2-expl">L'art. 33 al. 2 prévoit une réduction du DIP pour les subventions et contributions assimilées, mais la <strong>méthode</strong> dépend de l'affectation. Pour une aide R&amp;D, le premier réflexe est d'identifier le projet ou domaine financé et les charges concernées. Une affectation directe prime lorsqu'elle est possible; une clé globale n'est retenue que si elle donne un résultat approprié et documenté. <div class="art-ref">📋 art. 33 LTVA · pratique AFC subventions</div></div>
 </div>
 <div class="case-step" id="m4c12s3">
-<div class="step-question"><span class="step-q-num">Q3</span>Calcul de l'IP net déductible 2025 ?</div>
+<div class="step-question"><span class="step-q-num">Q3</span>Quel montant de DIP peut-on chiffrer avant la réduction art. 33 ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">A) CHF 151'720 (somme IP)</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s3',this,true)">B) IP brut 151'720 − réduction art. 33 au ch. 420 (5'720) = 146'000 ; puis + IP acquisitions étrangères via ch. 400/405 = CHF 147'458</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">C) CHF 113'790</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">D) CHF 142'000 (uniquement matières)</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">A) CHF 146'000 après un prorata automatique de 3,77%</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s3',this,true)">B) CHF 153'178 avant réduction art. 33 : 151'720 de DIP suisse + 1'458 de DIP sur acquisition étrangère, sous les hypothèses du cas</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">C) CHF 142'000 uniquement</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s3',this,false)">D) CHF 0</button>
 </div>
-<div class="step-explanation" id="m4c12s3-expl">
-<strong>Calcul IP net :</strong>
-<br/>• IP brut ch. 400 = 142'000 (matières) + 9'720 (loyer) = <strong>CHF 151'720</strong>
-<br/>• Ch. 420 (réduction de la déduction IP — subvention art. 33) = 151'720 × 3,77% = <strong>CHF 5'720</strong>
-<br/>• IP après réduction subvention = 151'720 − 5'720 = <strong>CHF 146'000</strong>
-<br/>• IP sur acquisitions étrangères via ch. 400/405, si déductible = 18'000 × 8,1% = <strong>CHF 1'458</strong>
-<br/>• <strong>IP net déductible ch. 479</strong> = 146'000 + 1'458 = <strong>CHF 147'458</strong>
-<div class="art-ref">📋 art. 28 + 33 + 45 LTVA</div>
-</div>
+<div class="step-explanation" id="m4c12s3-expl">DIP suisse : CHF 142'000 + CHF 9'720 = <strong>CHF 151'720</strong>. Le SaaS étranger génère, dans l'hypothèse donnée, CHF 18'000 × 8,1% = <strong>CHF 1'458</strong> d'impôt sur acquisitions et un DIP miroir de même montant si le droit à déduction est intégral. Avant toute réduction liée à la subvention, le DIP chiffrable est donc <strong>CHF 153'178</strong>. Le ch. 420 reste à déterminer après analyse du financement. <div class="art-ref">📋 art. 28 + 33 + 45 LTVA</div></div>
 </div>
 <div class="case-step" id="m4c12s4">
-<div class="step-question"><span class="step-q-num">Q4</span>TVA nette due 2025 totale ?</div>
+<div class="step-question"><span class="step-q-num">Q4</span>Quel est le bon niveau de précision pour la dette TVA finale ?</div>
 <div class="step-options">
-<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">A) CHF 225'180</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s4',this,true)">B) TVA coll. (2'780'000 × 8,1% = 225'180) + ch. 383 acquisitions (1'458) − IP net (147'458) = CHF 79'180</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">C) CHF 296'730 (toute la TVA collectée)</button>
-<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">D) CHF 60'000</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">A) CHF 79'180 exactement</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s4',this,true)">B) Calculer un net provisoire avant art. 33, puis ajouter la réduction DIP documentée au ch. 420 pour obtenir la dette finale</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">C) Ignorer la subvention</button>
+<button class="step-opt" onclick="caseAnswer('m4c12s4',this,false)">D) Appliquer 3,77% à tout le DIP sans autre pièce</button>
 </div>
-<div class="step-explanation" id="m4c12s4-expl">
-<strong>Synthèse décompte annuel 2025 :</strong>
-<br/>• TVA collectée ch. 303 = 2'780'000 × 8,1% = <strong>CHF 225'180</strong>
-<br/>• Ch. 383 acquisitions étrangères = 18'000 × 8,1% = <strong>CHF 1'458</strong>
-<br/>• <strong>Total TVA due</strong> = 225'180 + 1'458 = <strong>CHF 226'638</strong>
-<br/>• IP net ch. 479 = <strong>CHF 147'458</strong> (calcul Q3)
-            <br/>• <strong>TVA nette due ch. 500</strong> = 226'638 − 147'458 = <strong>CHF 79'180</strong>
-<div class="art-ref">📋 Synthèse complète</div>
-</div>
+<div class="step-explanation" id="m4c12s4-expl">Après escomptes suisses de CHF 38'000, la base imposable 8,1% est CHF 2'742'000, soit <strong>CHF 222'102</strong> de TVA sur ventes. L'impôt sur acquisitions du SaaS est CHF 1'458, donc TVA due avant DIP = CHF 223'560. Avec un DIP avant réduction art. 33 de CHF 153'178, le <strong>net provisoire</strong> est CHF 70'382. La dette finale devient <strong>CHF 70'382 + la réduction DIP ch. 420 correctement documentée</strong>. <div class="art-ref">📋 calcul de clôture · art. 33 à finaliser</div></div>
 </div>
 <div class="calc-box">
-<div class="calc-title">📊 Décompte annuel 2025 — Industries Romandes SA</div>
-<div class="calc-row"><span class="calc-label">Ch. 200 — CA brut total (2'780+920+−38 esc.)</span><span class="calc-val">CHF 3'662'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 220 — Exportations art. 23 (UE)</span><span class="calc-val">CHF 920'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 900/910 — Subvention hors champ (Innosuisse)</span><span class="calc-val">CHF 145'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 303 — Imposable 8,1% (équipements suisses)</span><span class="calc-val">CHF 2'780'000</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 303 — TVA collectée 8,1%</span><span class="calc-val">CHF 225'180</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 383 — Acquisitions étrangères (SaaS)</span><span class="calc-val">CHF 1'458</span></div>
-<div class="calc-row total"><span class="calc-label">Total TVA due — TVA collectée totale</span><span class="calc-val">CHF 226'638</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 400 — IP brut (matières + loyer)</span><span class="calc-val">CHF 151'720</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 420 — Réduction DIP subvention (3,77%)</span><span class="calc-val">− CHF 5'720</span></div>
-<div class="calc-row"><span class="calc-label">Ch. 400/405 — IP acquisition, si déductible</span><span class="calc-val">CHF 1'458</span></div>
-<div class="calc-row total"><span class="calc-label">Ch. 479 — IP net déductible</span><span class="calc-val">CHF 147'458</span></div>
-<div class="calc-row highlight"><span class="calc-label">Ch. 500 — TVA nette due à l'AFC</span><span class="calc-val">CHF 79'180</span></div>
+<div class="calc-title">📊 Industries Romandes SA — état provisoire avant art. 33</div>
+<div class="calc-row"><span class="calc-label">Ch. 200 — total contre-prestations</span><span class="calc-val">CHF 3'700'000</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 220 — exportations art. 23</span><span class="calc-val">CHF 920'000</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 235 — escomptes sur ventes suisses</span><span class="calc-val">CHF 38'000</span></div>
+<div class="calc-row"><span class="calc-label">Base suisse 8,1% après escomptes</span><span class="calc-val">CHF 2'742'000</span></div>
+<div class="calc-row"><span class="calc-label">TVA sur ventes</span><span class="calc-val">CHF 222'102</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 383 — SaaS étranger</span><span class="calc-val">CHF 1'458</span></div>
+<div class="calc-row"><span class="calc-label">DIP avant art. 33</span><span class="calc-val">CHF 153'178</span></div>
+<div class="calc-row"><span class="calc-label">Ch. 420 — réduction liée à la subvention</span><span class="calc-val">à déterminer après affectation</span></div>
+<div class="calc-row highlight"><span class="calc-label">Net provisoire avant ch. 420</span><span class="calc-val">CHF 70'382</span></div>
 </div>
-<div class="box afc" style="margin-top:16px">
-<div class="box-icon">🏛️</div>
-<div class="box-body">
-<div class="box-title">Vision AFC — Évaluation dossier Industries Romandes SA</div>
-<p>Dossier professionnel correctement structuré : (1) <strong>Concordance parfaite</strong> (écart 0) — signal de qualité, (2) <strong>Acquisitions étrangères</strong> correctement auto-imposées au ch. 383, (3) <strong>Subvention</strong> isolée comptablement, suivie hors contre-prestation (900/910) avec réduction DIP art. 33 au ch. 420, (4) <strong>Exports</strong> documentés (preuves OFDF). Le dossier présente des facteurs de risque réduits, sans que cela exclue un contrôle AFC. <strong>Stratégie de documentation :</strong> conserver pendant 10 ans (art. 70 LTVA) l'ensemble du dossier : décomptes, concordances, preuves douanières exports, documentation subvention Innosuisse, paramétrage Abacus, journaux complets.</p>
-</div>
-</div>
-</div>
+<div class="box afc" style="margin-top:16px"><div class="box-icon">🏛️</div><div class="box-body"><div class="box-title">Dossier encore incomplet — c'est le bon diagnostic</div><p>La concordance du chiffre d'affaires, les exportations, les escomptes et le SaaS peuvent être contrôlés. En revanche, la réduction du DIP liée à la subvention Innosuisse ne doit pas être inventée à partir d'un ratio de chiffre d'affaires. Il faut obtenir la convention/décision de financement, identifier le projet et les coûts financés, puis documenter la méthode de réduction retenue.</p></div></div>
 </div>
 </div>
 <div class="section-nav">
@@ -1980,46 +1924,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <!-- ERREUR 2 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">02</div>
-<div class="error-title">Omission de l'auto-imposition art. 45 (SaaS étranger)</div>
-<div class="error-impact">Impact : correction déclarative + risque pénal à analyser</div>
-</div>
+<div class="error-head"><div class="error-num">02</div><div class="error-title">Acquisition étrangère comptabilisée sans qualification TVA</div><div class="error-impact">Impact : déclaration inexacte / DIP erroné</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">Achat AWS / Adobe / Stripe / Notion comptabilisé uniquement en charges (compte 4500) sans écriture d’auto-imposition ch. 383 et sans analyse du DIP via 400/405. Effet financier souvent neutre si activité 100% imposable, mais correction déclarative obligatoire. Le risque pénal dépend de la faute, de l’avantage fiscal et des circonstances.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 45 LTVA — impôt sur les acquisitions (auto-imposition). Art. 8 al. 1 (lieu de la prestation = siège destinataire). Art. 96 LTVA à analyser selon circonstances.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">(1) Passer l'écriture complète : D 4500 HT + D 1170 TVA / C 2000 HT + C 2202 TVA. (2) Déclarer rétroactivement via concordance annuelle / décompte rectificatif art. 72 pour les exercices ouverts. (3) <strong>Dénonciation spontanée art. 102</strong> à envisager seulement si les conditions sont réunies et avant tout contrôle annoncé.</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">Toutes les factures étrangères (AWS, Adobe, Stripe, Notion, conseil, finance, etc.) sont envoyées automatiquement au ch. 383 avec 8,1%, ou au contraire aucune n'est analysée.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 8 et 45 LTVA. L'impôt sur les acquisitions suppose une prestation entrant dans son champ; une prestation exclue ou exonérée n'est pas imposée au titre de l'art. 45.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Qualifier le type de prestation, son lieu, le statut du fournisseur et les éventuelles exclusions/exonérations; seulement ensuite calculer le ch. 383. Examiner séparément le droit au DIP. En cas d'erreur passée, corriger la période concernée via le Portail AFC selon les règles de rectification/finalisation applicables.</div></div>
 </div>
 </div>
 <!-- ERREUR 3 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">03</div>
-<div class="error-title">Concordance annuelle non déposée (concordance annuelle)</div>
-<div class="error-impact">Impact : risque de contrôle accru</div>
-</div>
+<div class="error-head"><div class="error-num">03</div><div class="error-title">Finalisation annuelle mal comprise</div><div class="error-impact">Impact : écarts non corrigés dans le bon délai</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">La fiduciaire dépose les 4 décomptes trimestriels mais omet de déposer le <strong>concordance annuelle / décompte rectificatif art. 72</strong> (concordance annuelle) dans les 240 jours suivant la clôture. Si aucune erreur n’est constatée, le formulaire n’est pas nécessaire. Si des écarts existent et ne sont pas corrigés, le dossier devient plus difficile à défendre lors d’un contrôle AFC.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 72 LTVA — obligation de concordance annuelle dans les 240 jours après fin de l'exercice. ATF 140 II 202 — au-delà du délai, les décomptes périodiques sont présumés définitifs.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">Déposer le concordance annuelle même tardivement (mieux vaut tard que jamais). Documenter par écrit le motif du retard. Pour les exercices ouverts (5 ans), procéder à la concordance rétroactive systématique. Mettre en place une procédure interne fiduciaire de suivi.</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">La fiduciaire pense devoir envoyer chaque année un « formulaire de concordance » même sans erreur, ou mémorise uniquement un délai de 240 jours sans rattacher la correction à la période de décompte prévue par l'art. 72.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 72 LTVA : les différences constatées lors de la concordance annuelle doivent être corrigées au plus tard dans le décompte de la période pendant laquelle tombe le <strong>180e jour</strong> suivant la fin de l'exercice. Si aucune erreur n'est constatée, aucun décompte rectificatif n'est requis.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Conserver le tableau de concordance dans le dossier de clôture. Pour chaque écart, identifier la période d'origine et utiliser la correction appropriée sur le Portail AFC; documenter le contrôle même lorsque l'écart final est nul.</div></div>
 </div>
 </div>
 <!-- ERREUR 4 -->
@@ -2040,96 +1958,44 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 </div>
 <div class="error-section">
 <div class="error-section-title">Correction</div>
-<div class="error-text">Régulariser dans le décompte courant en saisissant les diminutions de contre-prestation au ch. 235 (réducteur). Pour les exercices clos : concordance annuelle / décompte rectificatif art. 72. Vérifier le paramétrage ERP : Bexio/Abacus doivent lier automatiquement le compte 3800 au ch. 235. <strong>Récupération possible</strong> de la TVA versée en trop.</div>
+<div class="error-text">Régulariser dans le décompte courant en saisissant les diminutions de contre-prestation au ch. 235 (réducteur). Pour les exercices clos : concordance annuelle / décompte rectificatif art. 72. Vérifier le paramétrage ERP : la réduction de contre-prestation doit être mappée correctement vers le décompte; le nom du compte ou du code dépend du logiciel. <strong>Récupération possible</strong> de la TVA versée en trop.</div>
 </div>
 </div>
 </div>
 <!-- ERREUR 5 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">05</div>
-<div class="error-title">Solde compte 2200 incohérent au bilan</div>
-<div class="error-impact">Impact : signal rouge AFC</div>
-</div>
+<div class="error-head"><div class="error-num">05</div><div class="error-title">Solde TVA au bilan non rapproché</div><div class="error-impact">Impact : piste d'audit incomplète</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">Au 31.12, le compte 2200 (TVA collectée) affiche un solde anormalement élevé (&gt; 1 trimestre normal). Cause typique : (a) factures émises non déclarées dans le décompte, (b) écritures TVA passées sans contrepartie 2201 lors du solde trimestriel, (c) erreur de paramétrage ERP.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 958 OR — image fidèle. Art. 959a OR — structure du bilan. Art. 71 LTVA — décompte conforme aux opérations effectives.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">(1) <strong>Analyse</strong> : extraire le grand-livre 2200 sur 12 mois et identifier les écritures non normales. (2) <strong>Solde de référence</strong> : le solde 2200 au 31.12 doit correspondre à la TVA collectée du Q4 uniquement (ou Q4 + corrections de concordance). (3) Si écart : enquête + correction via concordance annuelle / décompte rectificatif art. 72. Documenter en annexe aux comptes annuels.</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">Un compte technique TVA affiche un solde important ou inhabituel à la date de clôture sans tableau expliquant les périodes non encore décomptées, paiements/remboursements en transit, corrections ou écritures de régularisation.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 957a CO : comptabilité complète, fidèle, systématique et justifiée. Art. 958 CO : les comptes doivent permettre à un tiers de se faire une opinion fondée sur la situation économique. Art. 70-72 LTVA : traçabilité entre livres et décomptes.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Rapprocher chaque compte TVA avec les décomptes, les périodes ouvertes et les mouvements AFC. Un solde inhabituel déclenche une investigation; il n'existe pas de règle universelle selon laquelle le 2200 doit « contenir Q4 uniquement ». Une mention en annexe n'est nécessaire que si les règles comptables l'exigent ou si l'information est significative.</div></div>
 </div>
 </div>
 <!-- ERREUR 6 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">06</div>
-<div class="error-title">Archivage électronique non conforme OLICO</div>
-<div class="error-impact">Impact : fixation par voie d’estimation potentielle</div>
-</div>
+<div class="error-head"><div class="error-num">06</div><div class="error-title">Archivage électronique sans dispositif probant</div><div class="error-impact">Impact : preuve difficile à reconstituer</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">Factures stockées en simple PDF sur un disque dur partagé sans système de gestion d'archivage : pas d'horodatage, pas de garantie d'intégrité, format propriétaire fermé. En cas de contrôle AFC, force probante contestée → risque fixation par voie d’estimation.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">OLICO (RS 221.431) — conditions de l'archivage électronique : intégrité, disponibilité, lisibilité, migration. Art. 958f OR (10 ans). Art. 70 al. 2-3 LTVA (10 ans, 20 ans pour immobilier). ATAF A-3098/2020 (fixation par voie d’estimation).</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">(1) Migration vers un système d'archivage certifié : services cloud Bexio Document, Abacus Cloud, ou solutions tierces type DocBoxQ ou Adcubum. (2) <strong>Politique d'archivage écrite</strong> : durée, format (PDF/A), responsabilité, lieu. (3) Tests réguliers de récupération. (4) Conservation papier en parallèle pour les pièces critiques (comptes signés).</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">Les factures existent dans un cloud, un disque partagé ou un ERP, mais personne ne peut expliquer les droits d'accès, la traçabilité des modifications, la politique de conservation, les sauvegardes ni la manière de retrouver une pièce depuis une écriture TVA.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 958f CO, art. 70 LTVA et OLICO. La conformité ne se déduit ni du nom d'un fournisseur cloud ni d'un format de fichier unique; elle dépend du dispositif concret de conservation et de vérifiabilité.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Documenter les supports utilisés, droits et changements, sauvegardes, durées, procédures de migration et tests de restauration/recherche. Vérifier qu'un tiers peut suivre la piste <strong>pièce → comptabilité → décompte TVA</strong> et inversement pendant la durée de conservation applicable.</div></div>
 </div>
 </div>
 <!-- ERREUR 7 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">07</div>
-<div class="error-title">Confusion compte 1170 (achats) ↔ 1171 (investissements)</div>
-<div class="error-impact">Impact : reporting fiscal flou</div>
-</div>
+<div class="error-head"><div class="error-num">07</div><div class="error-title">Investissements sans registre de suivi TVA</div><div class="error-impact">Impact : corrections d'affectation difficiles</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">Toutes les TVA déductibles sont enregistrées en compte 1170, y compris les acquisitions d'investissements (machines, véhicules, immeubles). Pas de séparation 1170 (achats courants) vs 1171 (investissements). Conséquence : difficulté à appliquer les <strong>corrections d'affectation art. 32 LTVA</strong> en cas de changement d'usage (20 ans pour immeubles, 5 ans pour mobilier).</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 32 LTVA — corrections d'affectation pour biens d'investissement. Art. 70 al. 3 LTVA — conservation 20 ans pour biens immobiliers. Plan comptable PME (veb.ch).</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">(1) <strong>Refonte du plan comptable</strong> : séparer 1170 (TVA achats biens et prestations) et 1171 (TVA achats investissements). (2) <strong>Reclasser</strong> les écritures historiques par échantillonnage. (3) <strong>Documenter</strong> chaque acquisition d'investissement avec date, montant, IP déduit, usage prévu. (4) Mettre en place un tableau de suivi des biens d'investissement (date acquisition, valeur, IP, durée correction).</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">Les acquisitions d'investissement ne sont pas identifiables séparément des charges courantes, de sorte que la date, le DIP initial et les changements d'utilisation ne peuvent plus être reconstitués.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 31-32 LTVA pour les corrections liées à l'affectation, complétés par les obligations générales de tenue et conservation. Les numéros de comptes 1170/1171 ne sont pas imposés par la loi.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Mettre en place un registre des investissements avec date, base, TVA, droit au DIP, affectation et changements ultérieurs. Un sous-compte distinct (p. ex. 1171) peut être utile, mais un registre auxiliaire fiable peut remplir la même fonction de contrôle.</div></div>
 </div>
 </div>
 <!-- ERREUR 8 -->
 <div class="error-block">
-<div class="error-head">
-<div class="error-num">08</div>
-<div class="error-title">Méthode TVA changée sans dossier de clôture TVA</div>
-<div class="error-impact">Impact : comparabilité et justification fiscale affaiblies</div>
-</div>
+<div class="error-head"><div class="error-num">08</div><div class="error-title">Changement TDFN ↔ effective sans dossier de transition</div><div class="error-impact">Impact : valeur résiduelle et premier décompte erronés</div></div>
 <div class="error-body">
-<div class="error-section">
-<div class="error-section-title">Symptôme</div>
-<div class="error-text">L'entreprise passe de méthode TDFN à effective (ou inversement) au 01.01.2026, mais aucun dossier interne ne documente la décision, les corrections d'entrée/sortie, les écritures TVA et l'impact éventuel sur les comptes. Si l'impact est significatif, l'absence d'information utile dans l'annexe peut aussi poser un problème de présentation et de comparabilité.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Base légale</div>
-<div class="error-text">Art. 958c OR — comparabilité dans le temps ; art. 959c OR — informations en annexe si elles sont nécessaires ou significatives ; art. 961a-b OR — exigences supplémentaires pour les grandes entreprises. Art. 39-40 LTVA — choix de méthode et engagement minimum. <strong>Art. 79 OTVA</strong> : engagement de 1 an minimum en TDFN avant passage à effective. <strong>Art. 81 OTVA</strong> : engagement de 3 ans minimum en effective avant retour à TDFN.</div>
-</div>
-<div class="error-section">
-<div class="error-section-title">Correction</div>
-<div class="error-text">(1) <strong>Documentation obligatoire dans le dossier de clôture ; mention en annexe si requise ou significative</strong> : "À compter du 01.01.2026, la société est passée de la méthode TDFN à la méthode effective. Cette modification a entraîné une correction d'entrée de CHF X au 01.01.2026 conformément aux art. 32 LTVA et 81 OTVA." (2) <strong>Engagement minimum</strong> : <strong>3 ans en effective</strong> avant possibilité de retour à TDFN (art. 81 al. 3 OTVA — règle de l'engagement triennal). (3) <strong>Documentation interne</strong> : note justifiant le changement (avantage économique, croissance, complexification activité). (4) Si comptes déjà signés sans mention : rectification + republication dans la mesure du possible.</div>
-</div>
+<div class="error-section"><div class="error-section-title">Symptôme</div><div class="error-text">L'entreprise change de méthode de décompte, mais aucun inventaire ne documente les biens et prestations encore présents, leur valeur résiduelle, le traitement du dernier/premier décompte et la date d'effet du changement.</div></div>
+<div class="error-section"><div class="error-section-title">Base légale</div><div class="error-text">Art. 37 LTVA, OTVA et pratique AFC applicables aux TDFN. Depuis 2025, les changements entre méthode effective et TDFN entraînent des corrections sur la <strong>valeur résiduelle</strong>; l'ancienne règle pédagogique « trois ans en effective avant retour » ne doit plus être utilisée comme réflexe. Le changement peut intervenir après une période fiscale complète, sous réserve des conditions et délais applicables.</div></div>
+<div class="error-section"><div class="error-section-title">Correction</div><div class="error-text">Conserver la demande/validation ou modalité du Portail AFC, l'inventaire de transition et le calcul de valeur résiduelle. Lors du passage effective → TDFN, contrôler la correction dans le dernier décompte effectif; lors du passage TDFN → effective, contrôler le dégrèvement admissible dans le premier décompte effectif (notamment ch. 410 selon la pratique actuelle). Mention en annexe seulement si les règles comptables l'exigent ou si l'information est significative.</div></div>
 </div>
 </div>
 <div class="section-nav">
