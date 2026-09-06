@@ -1,0 +1,55 @@
+name: Add author credits
+
+on:
+  push:
+    paths:
+      - '.author-credit-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add author credits
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # README
+          p = Path('README.md')
+          t = p.read_text(encoding='utf-8')
+          top = "\n**Conception : [Mariia Lobur](https://www.linkedin.com/in/mariia-lobur/) · [LinkedIn](https://www.linkedin.com/in/mariia-lobur/) · [GitHub](https://github.com/mariialobur)**\n"
+          marker = "## 👉 [Ouvrir la formation](https://mariialobur.github.io/TVA/)\n"
+          if top.strip() not in t:
+              t = t.replace(marker, marker + top, 1)
+          author = """\n---\n\n## 👤 Conception du projet\n\n**Mariia Lobur**  \nConception, structuration pédagogique et développement de la formation.\n\n[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mariia%20Lobur-0A66C2?logo=linkedin&logoColor=white&style=flat-square)](https://www.linkedin.com/in/mariia-lobur/)\n[![GitHub](https://img.shields.io/badge/GitHub-mariialobur-181717?logo=github&logoColor=white&style=flat-square)](https://github.com/mariialobur)\n\nProjet pédagogique indépendant consacré à l’apprentissage pratique de la TVA suisse.\n\n"""
+          if '## 👤 Conception du projet' not in t:
+              pos = t.rfind('<div align="center">')
+              if pos != -1:
+                  t = t[:pos] + author + t[pos:]
+              else:
+                  t += author
+          p.write_text(t, encoding='utf-8')
+
+          # Dashboard
+          p = Path('index.html')
+          t = p.read_text(encoding='utf-8')
+          if '.author-panel{' not in t:
+              t = t.replace('</style>', '.author-panel{margin-top:24px;background:var(--navy);color:white;border-radius:18px;padding:20px;text-align:center}.author-panel strong{color:var(--gold)}.author-panel a{color:var(--gold);font-weight:700;text-decoration:none}.author-panel a:hover{text-decoration:underline}.author-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}\n</style>', 1)
+          block = '''<section class="author-panel"><div><strong>Conception : Mariia Lobur</strong></div><div class="author-links"><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>\n'''
+          if 'Conception : Mariia Lobur' not in t:
+              t = t.replace('</main>', block + '</main>', 1)
+          p.write_text(t, encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add Mariia Lobur author credits and profile links"
+          git push
