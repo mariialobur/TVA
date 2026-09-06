@@ -1243,13 +1243,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="step-question"><span class="step-q-num">Q1</span>Régime TVA des exportations UE (CHF 270'000) — quelle qualification ?</div>
 <div class="step-options">
 <button class="step-opt" onclick="caseAnswer('c3s1',this,false)">A) Imposable 8,1% — vente vers UE</button>
-<button class="step-opt" onclick="caseAnswer('c3s1',this,true)">B) Exonérée art. 23 ch. 1 — DIP en principe conservé, preuve douanière requise</button>
+<button class="step-opt" onclick="caseAnswer('c3s1',this,true)">B) Exonérée art. 23 al. 2 ch. 1 — DIP en principe conservé si les conditions sont remplies et l’exportation suffisamment prouvée</button>
 <button class="step-opt" onclick="caseAnswer('c3s1',this,false)">C) Exclue art. 21 — hors champ suisse</button>
 <button class="step-opt" onclick="caseAnswer('c3s1',this,false)">D) Hors champ — pas de contre-prestation</button>
 </div>
 <div class="step-explanation" id="c3s1-expl">
-            Les exportations sont exonérées avec DIP en principe conservé (art. 23 al. 2 let. a LTVA). Conditions : (1) preuve d'exportation documentée (déclaration douanière OFDF, CMR), (2) bien transporté ou expédié à l'étranger. Différence clé avec exclu : ici, DIP potentiellement déductible selon affectation.
-            <div class="art-ref">📋 art. 23 al. 2 let. a LTVA</div>
+            Les exportations sont exonérées avec DIP en principe conservé (art. 23 al. 2 ch. 1 LTVA). Conditions : (1) exportation suffisamment documentée par les pièces disponibles, notamment douanières et de transport selon le cas, (2) bien transporté ou expédié à l’étranger. Différence clé avec exclu : ici, DIP potentiellement déductible selon affectation.
+            <div class="art-ref">📋 art. 23 al. 2 ch. 1 LTVA</div>
 </div>
 </div>
 <div class="case-step" id="c3s2">
@@ -2128,7 +2128,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="vocab-card">
 <div class="vc-fr">Exportation directe</div>
 <div class="vc-de">Direkte Ausfuhr</div>
-<div class="vc-art">art. 23 al. 2 let. a LTVA · MWSTG</div>
+<div class="vc-art">art. 23 al. 2 ch. 1 LTVA · MWSTG</div>
 <div class="vc-use">Livraison de biens expédiés ou transportés à l'étranger. Exonérée avec DIP. Preuve douanière obligatoire (10 ans).</div>
 </div>
 <div class="vocab-card">
@@ -2338,7 +2338,7 @@ const QCM = [
     expl:'Les prestations de restauration (consommation sur place avec service) sont imposables au taux normal 8,1%. Distinction critique avec les denrées à emporter (2,6%).'},
   {id:'m02-q10', diff:'easy', q:'L\'exportation de marchandises vers l\'UE est :',
     opts:['Imposable 8,1%','Exclue art. 21','Exonérée art. 23 ch. 1 avec DIP en principe conservé','Hors champ'],
-    correct:2, art:'art. 23 al. 2 let. a LTVA',
+    correct:2, art:'art. 23 al. 2 ch. 1 LTVA',
     expl:'Les exportations sont exonérées selon l’art. 23 si les conditions sont remplies. Le dossier doit apporter une preuve suffisante; documents douaniers et de transport sont importants, sans transformer M02 en liste fermée de pièces admises.'},
   {id:'m02-q11', diff:'easy', q:'Comment l’option art. 22 s’exerce-t-elle en pratique ?',
     opts:['Par une autorisation préalable obligatoire de l’AFC','Par une mention claire de la TVA ou par déclaration dans le décompte','Uniquement par courrier recommandé','Automatiquement dès qu’il existe du DIP'],
