@@ -22,13 +22,24 @@ jobs:
           ! grep -q "IP récupérable sur les stocks : CHF 65'000" m03-decomptes-methodes-tva.html
           ! grep -q "1 ou 2 max." m03-decomptes-methodes-tva.html
           ! grep -q "Prorata = Subventions" m03-decomptes-methodes-tva.html
+          ! grep -q "Récupération TVA art. 27 si créance irrécouvrable" m03-decomptes-methodes-tva.html
+          ! grep -q "Droit contrôle AFC</strong> : 5 ans, étendu à 10 ans" m03-decomptes-methodes-tva.html
           python3 - <<'PY'
           from pathlib import Path
           import re
           t=Path('m03-decomptes-methodes-tva.html').read_text(encoding='utf-8')
+          assert 'M03 v5.0' in t
+          assert 'Portail AFC · Décompte TVA pro' in t
+          assert 'Périodicité ordinaire</td><td>Semestrielle</td><td>Trimestrielle' in t
+          assert 'trois périodes fiscales consécutives' in t
+          assert 'actuellement au <strong>ch. 410</strong>' in t
+          assert 'art. 41 LTVA' in t
+          assert 'Aucun prorata universel' in t or 'aucun prorata universel' in t
           scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
           Path('/tmp/m03.js').write_text('\n'.join(scripts),encoding='utf-8')
-          print('scripts',len(scripts),'case steps',len(re.findall(r'class="case-step"',t)),'QCM',len(re.findall(r"id:'m03-q",t)))
+          qcm=len(re.findall(r"id:'m03-q",t))
+          print('scripts',len(scripts),'case steps',len(re.findall(r'class="case-step"',t)),'QCM',qcm)
+          assert qcm == 35
           PY
           node --check /tmp/m03.js
       - name: Commit M03
@@ -37,5 +48,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add m03-decomptes-methodes-tva.html
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "Audit M03 methods returns transitions and compliance"
+          git commit -m "Finalize M03 against current AFC practice"
           git push
