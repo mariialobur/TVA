@@ -1,0 +1,68 @@
+name: M06 professional audit
+
+on:
+  push:
+    paths:
+      - '.m06-professional-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply M06 professional patch
+        run: python3 tools/m06_professional_patch.py
+      - name: Validate M06
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('m06-territorialite-tva-internationale.html').read_text(encoding='utf-8')
+          forbidden=[
+            'Campione',
+            'ATF 138 II 465',
+            'ATF 140 II 202',
+            '10-50% de la matière des contrôles internationaux',
+            'Solidairement responsable',
+            'Procédure centralisée de dédouanement',
+            'preuve OFDF e-dec OBLIGATOIRE',
+            'Dossier expert 10/10',
+          ]
+          for s in forbidden:
+              assert s not in t, 'forbidden: '+s
+          required=[
+            'Objectifs professionnels de M06',
+            'Samnaun / Sampuoir',
+            'Liberté des moyens de preuve',
+            'DTe',
+            'Passar',
+            'procédure centralisée de décompte',
+            "d.M06='done'",
+            'm07-holdings-groupes-tva.html',
+            'Continuer avec M07',
+          ]
+          for s in required:
+              assert s in t, 'required: '+s
+          q=len(re.findall(r'"id": "m06-q\d+"',t))
+          cases=len(re.findall(r'class="case-step"',t))
+          print('M06 bytes',len(t.encode()),'QCM',q,'case-steps',cases,'h1',t.count('<h1'))
+          assert q>=30
+          assert cases>=20
+          assert t.count('<h1')==1
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
+          assert scripts
+          Path('/tmp/m06.js').write_text('\n'.join(scripts),encoding='utf-8')
+          PY
+          node --check /tmp/m06.js
+      - name: Commit M06
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m06-territorialite-tva-internationale.html
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Finalize M06 territoriality professional audit"
+          git push
