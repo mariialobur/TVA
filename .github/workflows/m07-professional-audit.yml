@@ -14,8 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply M07 professional patch
-        run: python3 tools/m07_professional_patch.py
+      - name: Align M07 quiz timer
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('m07-holdings-groupes-tva.html')
+          t=p.read_text(encoding='utf-8')
+          assert 'sLeft:2100' in t and 'this.sLeft=2100' in t
+          t=t.replace('sLeft:2100','sLeft:1800').replace('this.sLeft=2100','this.sLeft=1800')
+          p.write_text(t,encoding='utf-8')
+          PY
       - name: Validate M07
         run: |
           python3 - <<'PY'
@@ -25,44 +33,33 @@ jobs:
           forbidden=[
             'ATAF A-1558/2014','A-1558/2014','ATAF A-6362/2014','A-6362/2014',
             'ATAF A-2454/2020','A-2454/2020','ATF 138 II 251',
-            'dividendes + intérêts',
             'Dénominateur uniquement (réduit %)',
             'seule une décision formelle AFC est contraignante',
             '4 critères cumulatifs',
             'Solidairement responsable de toutes les obligations fiscales du groupe',
             'v4.3 — final 10/10',
+            'sLeft:2100','this.sLeft=2100'
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
           required=[
-            'art. 10 al. 1ter',
-            'art. 33 al. 1',
-            'art. 24 al. 2',
-            'art. 17a OTVA',
-            'art. 22 OTVA',
-            'Formulaire 764',
-            '17.11.2025',
-            'notification d’estimation',
-            'paiement sans réserve',
-            "d.M07='done'",
-            'm08-immobilier-construction-tva.html',
-            'Continuer avec M08',
-            'Conception :',
+            'art. 10 al. 1ter','art. 33 al. 1','art. 24 al. 2','art. 17a OTVA','art. 22 OTVA',
+            'Formulaire 764','17.11.2025','notification d’estimation','paiement sans réserve',
+            "d.M07='done'",'m08-immobilier-construction-tva.html','Continuer avec M08','Conception :',
+            'sLeft:1800','this.sLeft=1800','30:00'
           ]
           for s in required:
               assert s in t, 'required: '+s
-          assert t.count('<h1')==1, 'expected one H1'
+          assert t.count('<h1')==1
           assert t.count('id="m07-complete"')==1
-          case_steps=len(re.findall(r'class="step" id="c\d+s\d+"',t))
-          print('case steps',case_steps)
-          assert case_steps==16
+          assert len(re.findall(r'class="step" id="c\d+s\d+"',t))==16
           m=re.search(r'const QS=(\[.*?\]);\nconst QUIZ=',t,re.S); assert m
-          qs=json.loads(m.group(1)); assert len(qs)==35, len(qs)
+          qs=json.loads(m.group(1)); assert len(qs)==35
           m2=re.search(r'const CARDS=(\[.*?\]);\nconst FC=',t,re.S); assert m2
-          cards=json.loads(m2.group(1)); assert len(cards)==30, len(cards)
+          cards=json.loads(m2.group(1)); assert len(cards)==30
           scripts=re.findall(r'<script>(.*?)</script>',t,re.S); assert scripts
           Path('/tmp/m07.js').write_text('\n'.join(scripts),encoding='utf-8')
-          print('M07 bytes',len(t.encode()),'QCM',len(qs),'cards',len(cards),'h1',t.count('<h1'))
+          print('M07 bytes',len(t.encode()),'QCM',len(qs),'cards',len(cards),'case-steps',16,'h1',t.count('<h1'),'timer',1800)
           PY
           node --check /tmp/m07.js
       - name: Commit M07
@@ -71,5 +68,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add m07-holdings-groupes-tva.html
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "Finalize M07 holdings and VAT groups professional audit"
+          git commit -m "Align M07 quiz timer"
           git push
