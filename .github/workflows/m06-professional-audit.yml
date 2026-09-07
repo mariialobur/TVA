@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply M06 professional patch
-        run: python3 tools/m06_professional_patch.py
+        run: |
+          python3 tools/m06_professional_patch.py
+          python3 tools/m06_final_cleanup.py
       - name: Validate M06
         run: |
           python3 - <<'PY'
@@ -28,9 +30,12 @@ jobs:
             'ATF 140 II 202',
             '10-50% de la matière des contrôles internationaux',
             'Solidairement responsable',
+            'solidairement responsable',
             'Procédure centralisée de dédouanement',
+            'procédure centralisée de dédouanement',
             'preuve OFDF e-dec OBLIGATOIRE',
             'Dossier expert 10/10',
+            'Microsoft Ireland pas inscrite au registre AFC',
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
@@ -41,6 +46,7 @@ jobs:
             'DTe',
             'Passar',
             'procédure centralisée de décompte',
+            'Matrice de qualification — 20 flux',
             "d.M06='done'",
             'm07-holdings-groupes-tva.html',
             'Continuer avec M07',
@@ -49,10 +55,13 @@ jobs:
               assert s in t, 'required: '+s
           q=len(re.findall(r'"id": "m06-q\d+"',t))
           cases=len(re.findall(r'class="case-step"',t))
-          print('M06 bytes',len(t.encode()),'QCM',q,'case-steps',cases,'h1',t.count('<h1'))
+          flows=len(re.findall(r'<tr><td>\d+</td><td>',t))
+          print('M06 bytes',len(t.encode()),'QCM',q,'case-steps',cases,'flows',flows,'h1',t.count('<h1'))
           assert q>=30
           assert cases>=20
+          assert flows>=20
           assert t.count('<h1')==1
+          assert t.count('id="m06-flow-matrix"')==1
           scripts=re.findall(r'<script>(.*?)</script>',t,re.S)
           assert scripts
           Path('/tmp/m06.js').write_text('\n'.join(scripts),encoding='utf-8')
