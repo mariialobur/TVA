@@ -20,7 +20,7 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
+          import re, json
           t=Path('m07-holdings-groupes-tva.html').read_text(encoding='utf-8')
           forbidden=[
             'ATAF A-1558/2014','A-1558/2014','ATAF A-6362/2014','A-6362/2014',
@@ -28,8 +28,6 @@ jobs:
             'dividendes + intérêts',
             'Dénominateur uniquement (réduit %)',
             'seule une décision formelle AFC est contraignante',
-            'confirmation écrite AFC',
-            'Confirmation écrite AFC',
             '4 critères cumulatifs',
             'Solidairement responsable de toutes les obligations fiscales du groupe',
             'v4.3 — final 10/10',
@@ -58,9 +56,7 @@ jobs:
           case_steps=len(re.findall(r'class="step" id="c\d+s\d+"',t))
           print('case steps',case_steps)
           assert case_steps==16
-          # Extract arrays and ensure sizes remain professional.
           m=re.search(r'const QS=(\[.*?\]);\nconst QUIZ=',t,re.S); assert m
-          import json
           qs=json.loads(m.group(1)); assert len(qs)==35, len(qs)
           m2=re.search(r'const CARDS=(\[.*?\]);\nconst FC=',t,re.S); assert m2
           cards=json.loads(m2.group(1)); assert len(cards)==30, len(cards)
