@@ -34,7 +34,7 @@ jobs:
             'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)',
             'Cle prioritaire','Toutes les 25 cartes vues','informer AFC => correction affectation possible',
             "CHF 3\\'000 d\\'interets supplementaires","L\\'acheteur exerce l\\'option art. 22",
-            'Le TF confirme : la répartition DIP','Les deux methodes sont validees par l\\'AFC',
+            'Le TF confirme : la répartition DIP',"Les deux methodes sont validees par l\\'AFC",
             'rappel de DIP sur toute la période non prescrite (5 ans)'
           ]
           for s in forbidden:
