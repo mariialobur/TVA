@@ -18,6 +18,7 @@ jobs:
         run: |
           python3 tools/m08_professional_patch.py
           python3 tools/m08_quiz_fix.py
+          python3 tools/m08_final_quality.py
       - name: Validate M08
         run: |
           python3 - <<'PY'
@@ -29,7 +30,9 @@ jobs:
             "L'AFC reçoit les avis des autorités du registre foncier pour chaque mutation immobilière",
             '3 critères cumulatifs','v4.3 — final 10/10 immobilier','dossier premium','Risque Noir',
             'TVA Sectorielle III (SaaS, e-commerce, Transport)',
-            'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)'
+            'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)',
+            'Cle prioritaire','Toutes les 25 cartes vues','informer AFC => correction affectation possible',
+            'CHF 3\\'000 d\\'interets supplementaires','L\'acheteur exerce l\'option art. 22'
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
@@ -41,7 +44,11 @@ jobs:
             'art. 69 OTVA',"5% de la valeur d'assurance",'1/20 par année écoulée',
             'valeur du sol','Hiérarchie des sources',"impôt à l'importation",
             "d.M08='done'",'m09-secteurs-sensibles-tva.html','Continuer avec M09',
-            'id="m08-complete"','Tableau de bord','M08-AUDIT-Q35'
+            'id="m08-complete"','Tableau de bord','M08-AUDIT-Q35',
+            "c:0,e:'Art. 30 LTVA : commencer par l’affectation directe",
+            'Toutes les 30 cartes vues !',
+            "if(state.completed){",
+            'Le promoteur, en tant que vendeur assujetti, exerce clairement l\'option art. 22'
           ]
           for s in required:
               assert s in t, 'required: '+s
@@ -67,5 +74,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add m08-immobilier-construction-tva.html
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "Finalize M08 real estate and construction VAT audit"
+          git commit -m "Polish M08 real estate VAT quality"
           git push
