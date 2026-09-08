@@ -32,7 +32,7 @@ jobs:
             'TVA Sectorielle III (SaaS, e-commerce, Transport)',
             'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)',
             'Cle prioritaire','Toutes les 25 cartes vues','informer AFC => correction affectation possible',
-            'CHF 3\\'000 d\\'interets supplementaires','L\'acheteur exerce l\'option art. 22'
+            "CHF 3\\'000 d\\'interets supplementaires","L\\'acheteur exerce l\\'option art. 22"
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
@@ -48,7 +48,7 @@ jobs:
             "c:0,e:'Art. 30 LTVA : commencer par l’affectation directe",
             'Toutes les 30 cartes vues !',
             "if(state.completed){",
-            'Le promoteur, en tant que vendeur assujetti, exerce clairement l\'option art. 22'
+            "Le promoteur, en tant que vendeur assujetti, exerce clairement l'option art. 22"
           ]
           for s in required:
               assert s in t, 'required: '+s
