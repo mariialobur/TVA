@@ -43,19 +43,22 @@ jobs:
           ]
           for s in required:
               assert s in t, 'required: '+s
-          assert t.count('<h1')==1, t.count('<h1')
-          assert t.count('id="m08-complete"')==1
+          h1=t.count('<h1'); complete=t.count('id="m08-complete"')
           steps=len(re.findall(r'class="step" id="c\d+s\d+"',t))
-          assert steps==17, steps
-          m=re.search(r'var QS=(\[.*?\]);\nvar QUIZ=',t,re.S); assert m
+          m=re.search(r'var\s+QS\s*=\s*(\[.*?\]);\s*var\s+QUIZ\s*=',t,re.S)
+          assert m, 'QS block not found'
           qs=len(re.findall(r"\{a:'",m.group(1)))
-          assert qs==35, qs
-          m2=re.search(r'var CARDS=(\[.*?\]);\n\nvar FC=',t,re.S); assert m2
+          m2=re.search(r'var\s+CARDS\s*=\s*(\[.*?\]);\s*var\s+FC\s*=',t,re.S)
+          assert m2, 'CARDS block not found'
           cards=len(re.findall(r"\{cat:'|\{\"cat\":",m2.group(1)))
+          print('M08 bytes',len(t.encode()),'QCM',qs,'cards',cards,'case-steps',steps,'h1',h1,'complete',complete)
+          assert h1==1, h1
+          assert complete==1, complete
+          assert steps==17, steps
+          assert qs==35, qs
           assert cards==30, cards
           scripts=re.findall(r'<script>(.*?)</script>',t,re.S); assert scripts
           Path('/tmp/m08.js').write_text('\n'.join(scripts),encoding='utf-8')
-          print('M08 bytes',len(t.encode()),'QCM',qs,'cards',cards,'case-steps',steps,'h1',t.count('<h1'))
           PY
           node --check /tmp/m08.js
       - name: Commit M08
