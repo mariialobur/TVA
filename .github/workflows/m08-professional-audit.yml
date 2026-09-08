@@ -1,0 +1,71 @@
+name: M08 professional audit
+
+on:
+  push:
+    paths:
+      - '.m08-professional-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply M08 professional patch
+        run: python3 tools/m08_professional_patch.py
+      - name: Validate M08
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+          t=Path('m08-immobilier-construction-tva.html').read_text(encoding='utf-8')
+          forbidden=[
+            'ATF 140 II 88','ATAF A-2454/2020','ATF 138 II 239','ATF 126 II 249','ATAF A-5106/2020',
+            "L'AFC reçoit les avis des autorités du registre foncier pour chaque mutation immobilière",
+            '3 critères cumulatifs','v4.3 — final 10/10 immobilier','dossier premium','Risque Noir',
+            'TVA Sectorielle III (SaaS, e-commerce, Transport)',
+            'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)'
+          ]
+          for s in forbidden:
+              assert s not in t, 'forbidden: '+s
+          required=[
+            '<h1 class="hero-h">TVA Immobilier &amp; Construction</h1>',
+            'indication claire de la TVA sur la facture/quittance',
+            "déclaration de l'imposition dans le décompte TVA",
+            "Place de parc privée indépendante",
+            "Imposable de plein droit au taux normal",
+            'art. 69 OTVA','5% de la valeur d\'assurance','1/20 par année écoulée',
+            'valeur du sol','Hiérarchie des sources',
+            'impôt à l’importation' if False else 'impôt à l\'importation',
+            "d.M08='done'",'m09-secteurs-sensibles-tva.html','Continuer avec M09',
+            'id="m08-complete"','Tableau de bord'
+          ]
+          for s in required:
+              assert s in t, 'required: '+s
+          assert t.count('<h1')==1, t.count('<h1')
+          assert t.count('id="m08-complete"')==1
+          steps=len(re.findall(r'class="step" id="c\d+s\d+"',t))
+          assert steps==18, steps
+          m=re.search(r'var QS=(\[.*?\]);\nvar QUIZ=',t,re.S); assert m
+          # JS object literals use single quotes, so count top-level question markers instead of json parsing.
+          qs=len(re.findall(r"\{a:'",m.group(1)))
+          assert qs==35, qs
+          m2=re.search(r'var CARDS=(\[.*?\]);\n\nvar FC=',t,re.S); assert m2
+          cards=len(re.findall(r"\{cat:'|\{\"cat\":",m2.group(1)))
+          assert cards==30, cards
+          scripts=re.findall(r'<script>(.*?)</script>',t,re.S); assert scripts
+          Path('/tmp/m08.js').write_text('\n'.join(scripts),encoding='utf-8')
+          print('M08 bytes',len(t.encode()),'QCM',qs,'cards',cards,'case-steps',steps,'h1',t.count('<h1'))
+          PY
+          node --check /tmp/m08.js
+      - name: Commit M08
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m08-immobilier-construction-tva.html
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Finalize M08 real estate and construction VAT audit"
+          git push
