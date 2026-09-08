@@ -20,6 +20,7 @@ jobs:
           python3 tools/m08_quiz_fix.py
           python3 tools/m08_final_quality.py
           python3 tools/m08_legal_cleanup2.py
+          python3 tools/m08_final_cleanup3.py
       - name: Validate M08
         run: |
           python3 - <<'PY'
@@ -27,15 +28,14 @@ jobs:
           import re
           t=Path('m08-immobilier-construction-tva.html').read_text(encoding='utf-8')
           forbidden=[
-            'ATF 140 II 88','ATAF A-2454/2020','ATF 138 II 239','ATF 126 II 249','ATAF A-5106/2020','ATF 145 II 130',
+            'ATF 140 II 88','140 II 88','ATAF A-2454/2020','ATF 138 II 239','ATF 126 II 249','ATAF A-5106/2020','ATF 145 II 130',
             "L'AFC reçoit les avis des autorités du registre foncier pour chaque mutation immobilière",
             '3 critères cumulatifs','v4.3 — final 10/10 immobilier','dossier premium','Risque Noir',
             'TVA Sectorielle III (SaaS, e-commerce, Transport)',
             'TVA 8,1% sur coût de revient (MO + matériaux, sans marge)',
-            'Cle prioritaire','Toutes les 25 cartes vues','informer AFC => correction affectation possible',
-            "CHF 3\\'000 d\\'interets supplementaires","L\\'acheteur exerce l\\'option art. 22",
-            'Le TF confirme : la répartition DIP',"Les deux methodes sont validees par l\\'AFC",
-            'rappel de DIP sur toute la période non prescrite (5 ans)'
+            'Cle prioritaire','Toutes les 25 cartes vues','25 flashcards Immo/Construction','23/30','Question 1 / 30',
+            'Le TF confirme : la répartition DIP','rappel de DIP sur toute la période non prescrite (5 ans)',
+            "L'AFC croise les virements à l'étranger",'Notification formelle AFC','TVA sur la valeur totale du transfert. Sur immeuble commercial'
           ]
           for s in forbidden:
               assert s not in t, 'forbidden: '+s
@@ -48,12 +48,10 @@ jobs:
             'valeur du sol','Hiérarchie des sources',"impôt à l'importation",
             "d.M08='done'",'m09-secteurs-sensibles-tva.html','Continuer avec M09',
             'id="m08-complete"','Tableau de bord','M08-AUDIT-Q35',
-            "c:0,e:'Art. 30 LTVA : commencer par l’affectation directe",
-            'Toutes les 30 cartes vues !',"if(state.completed){",
-            "Le promoteur, en tant que vendeur assujetti, exerce clairement l'option art. 22",
+            'Toutes les 30 cartes vues !','35 questions · Format examen professionnel · Timer 25 min','75% (27/35)',
+            '30 flashcards Immo/Construction — 5 catégories · SM-2','Jurisprudence — méthode de vérification',
             "L'art. 30 LTVA impose une correction en fonction de l'utilisation",
-            'Une fois la qualification art. 45 établie',
-            'Dénonciation spontanée — immobilier'
+            'Une fois la qualification art. 45 établie','Dénonciation spontanée — immobilier'
           ]
           for s in required:
               assert s in t, 'required: '+s
@@ -79,5 +77,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add m08-immobilier-construction-tva.html
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "Finalize M08 legal precision"
+          git commit -m "Finalize M08 immobilier VAT audit"
           git push
