@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply M08 professional patch
-        run: python3 tools/m08_professional_patch.py
+        run: |
+          python3 tools/m08_professional_patch.py
+          python3 tools/m08_quiz_fix.py
       - name: Validate M08
         run: |
           python3 - <<'PY'
@@ -39,17 +41,15 @@ jobs:
             'art. 69 OTVA',"5% de la valeur d'assurance",'1/20 par année écoulée',
             'valeur du sol','Hiérarchie des sources',"impôt à l'importation",
             "d.M08='done'",'m09-secteurs-sensibles-tva.html','Continuer avec M09',
-            'id="m08-complete"','Tableau de bord'
+            'id="m08-complete"','Tableau de bord','M08-AUDIT-Q35'
           ]
           for s in required:
               assert s in t, 'required: '+s
           h1=t.count('<h1'); complete=t.count('id="m08-complete"')
           steps=len(re.findall(r'class="step" id="c\d+s\d+"',t))
-          m=re.search(r'var\s+QS\s*=\s*(\[.*?\]);\s*var\s+QUIZ\s*=',t,re.S)
-          assert m, 'QS block not found'
+          m=re.search(r'var\s+QS\s*=\s*(\[.*?\]);\s*var\s+QUIZ\s*=',t,re.S); assert m, 'QS block not found'
           qs=len(re.findall(r"\{a:'",m.group(1)))
-          m2=re.search(r'var\s+CARDS\s*=\s*(\[.*?\]);\s*var\s+FC\s*=',t,re.S)
-          assert m2, 'CARDS block not found'
+          m2=re.search(r'var\s+CARDS\s*=\s*(\[.*?\]);\s*var\s+FC\s*=',t,re.S); assert m2, 'CARDS block not found'
           cards=len(re.findall(r"\{cat:'|\{\"cat\":",m2.group(1)))
           print('M08 bytes',len(t.encode()),'QCM',qs,'cards',cards,'case-steps',steps,'h1',h1,'complete',complete)
           assert h1==1, h1
