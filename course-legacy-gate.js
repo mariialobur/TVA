@@ -93,6 +93,7 @@
       if(nv!==v)n.nodeValue=nv;
     }
   }
+  function setText(el,text){if(el&&el.textContent.trim()!==text.trim())el.textContent=text}
   function legalPatch(d){
     if(cfg.module==='M01'){
       d.querySelectorAll('.vocab-card').forEach(c=>{
@@ -113,10 +114,38 @@
         ['Taux hébergement 2024','Taux hébergement actuel (depuis 01.01.2024)']
       ]);
     }
+    if(cfg.module==='M02'){
+      applyTextReplacements(d,[
+        ["Une cotisation statutaire d'association sans but lucratif est :","Une cotisation d’un organisme sans but lucratif, fixée conformément aux statuts et réellement versée en qualité de membre, est en principe :"],
+        ["Les cotisations de membres d'organismes sans but lucratif sont exclues art. 21 al. 2 ch. 13. Condition : la cotisation doit donner accès aux prestations communes (statut homogène). Si paiement de prestation spécifique → imposable.","L’art. 21 al. 2 ch. 13 peut exclure les prestations fournies aux membres contre une cotisation fixée conformément aux statuts. La pratique AFC adaptée le 26.05.2026 impose d’examiner concrètement la catégorie de membre, les droits attachés à cette qualité, la règle de fixation de la cotisation et les prestations liées; une prestation individualisée, publicité ou sponsoring se qualifie séparément."],
+        ["Cotisations statutaires des membres (CHF 45'000) — quel régime ?","Cotisations des membres (CHF 45'000) — si elles sont fixées conformément aux statuts et rémunèrent réellement la qualité de membre selon la pratique AFC 2026, quel régime ?"],
+        ["Les cotisations fixées statutairement par des organismes sans but lucratif sont exclues selon l'art. 21 al. 2 ch. 13 LTVA lorsqu'elles rémunèrent la qualité de membre et les prestations communes de l'association.","Les cotisations d’un organisme sans but lucratif peuvent être exclues selon l’art. 21 al. 2 ch. 13 LTVA lorsqu’elles sont fixées conformément aux statuts et rémunèrent réellement la qualité de membre. Depuis l’adaptation de pratique publiée le 26.05.2026, il faut notamment documenter catégorie de membre, droits de membre, règle de fixation de la cotisation et prestations liées avant de conclure."]
+      ]);
+    }
     if(cfg.module==='M03'){
       applyTextReplacements(d,[
         ['Engagement minimum 1 an','Changement de méthode : possible après une période fiscale complète, sous réserve des délais et conditions applicables'],
         ["Dépassement de seuil = passage à effective dès l'exercice suivant + notification 30 jours + correction d'entrée stocks (art. 32).",'Dépassement des limites : appliquer les règles actuelles de sortie de la méthode TDFN. Depuis 2025, tout changement de méthode exige aussi d’analyser les corrections sur la valeur résiduelle des biens et prestations.']
+      ]);
+    }
+    if(cfg.module==='M05'){
+      d.querySelectorAll('tr').forEach(r=>{
+        const cells=r.querySelectorAll('td');if(!cells.length)return;
+        if(cells[0].textContent.trim()==='Impôt suisse facturé par un autre assujetti'){
+          setText(cells[0],'Impôt grevant les opérations réalisées sur le territoire suisse et facturé au destinataire');
+          if(cells[2])setText(cells[2],'Vérifier art. 28–33 et, en cas de mention indue/inexacte, art. 27; l’absence d’inscription du fournisseur n’entraîne pas à elle seule un refus automatique du DIP.');
+        }
+      });
+      const c=d.getElementById('m5c2s3');
+      if(c){const opts=c.querySelectorAll('.step-opt');if(opts[1])setText(opts[1],"B) Ne pas refuser automatiquement le DIP : analyser art. 27–28, réalité de la prestation, paiement et affectation; demander clarification/correction au fournisseur");const ex=d.getElementById('m5c2s3-expl');if(ex&&!ex.dataset.legalPatched){ex.innerHTML='L’absence du fournisseur dans le registre TVA est un <strong>signal de contrôle</strong>, mais elle ne permet pas à elle seule de conclure «DIP impossible». L’art. 27 al. 2 prévoit que celui qui fait figurer indûment la TVA est en principe redevable de l’impôt, sauf correction ou preuve de l’absence de préjudice; l’art. 28 al. 1 let. a permet au destinataire assujetti de déduire l’impôt facturé dans le cadre de son activité entrepreneuriale, sous réserve des art. 29 et 33 et des autres conditions (notamment preuve/paiement). Il faut donc vérifier la réalité du flux, la période, le statut du fournisseur à la date pertinente et demander une correction si nécessaire. Si la facture est ensuite corrigée et la TVA annulée, le destinataire corrige son DIP correspondant.<div class="art-ref">📋 art. 27 + 28–33 LTVA · pratique AFC</div>';ex.dataset.legalPatched='1'}}
+      const c10=d.getElementById('m5c10s1');
+      if(c10){const opts=c10.querySelectorAll('.step-opt');if(opts[1])setText(opts[1],'B) Reconstituer la preuve matérielle et, si nécessaire, obtenir des pièces rectificatives; le droit au DIP dépend des art. 27–33 et des faits de la période, pas du seul statut actuel du fournisseur');const ex=d.getElementById('m5c10s1-expl');if(ex&&!ex.dataset.legalPatched){ex.innerHTML='<strong>Défense fondée sur les faits et la preuve libre :</strong> reconstituer pour chaque achat le fournisseur, la prestation, la période, le paiement, l’impôt facturé et l’affectation. Une facture rectificative peut sécuriser le dossier, mais le statut TVA <em>actuel</em> du fournisseur ne décide pas à lui seul du droit historique au DIP. En cas de TVA indiquée indûment, intégrer l’art. 27; en cas de correction ultérieure de la facture, adapter le DIP correspondant. Factures fictives ou opérations non prouvées restent exclues.<div class="art-ref">📋 art. 27–33 + art. 81 al. 3 LTVA</div>';ex.dataset.legalPatched='1'}}
+      applyTextReplacements(d,[["(CA < CHF 100'000 ou exonération volontaire)","(par ex. en raison de la libération de l’assujettissement; situation à vérifier pour la période concernée)"]]);
+    }
+    if(cfg.module==='M06'){
+      applyTextReplacements(d,[
+        ['Preuve manquante → reprise TVA comme livraison suisse','Preuve insuffisante → risque de reprise comme livraison suisse; sécuriser le fait d’exportation avec les moyens de preuve disponibles'],
+        ['Confusion avec ch. 383 ; DIP refusé si décision OFDF absente','Confusion avec ch. 383; risque de refus du DIP si l’impôt à l’importation, l’importateur et les conditions de l’art. 28 ne sont pas suffisamment prouvés']
       ]);
     }
     if(cfg.module==='M08'){
