@@ -1,0 +1,33 @@
+name: Course QA
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  course-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static course QA
+        run: node tools/course-qa.mjs
+      - name: Install browser runtime
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local course server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/tva-course-http.log 2>&1 &
+          sleep 2
+      - name: Browser completion and navigation QA
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node tools/course-browser-qa.mjs
