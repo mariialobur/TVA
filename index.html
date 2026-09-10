@@ -1,162 +1,44 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Formation de spécialiste TVA suisse</title>
 <style>
-:root{--navy:#0B2545;--navy2:#07182e;--gold:#C9A84C;--cream:#F8F5EE;--paper:#fffdf8;--line:#e5dfd2;--ink:#172033;--muted:#667085;--green:#2A6B48;--amber:#7A5200;--red:#A0341A;--r:18px}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,Segoe UI,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}a{color:inherit}.hero{background:linear-gradient(135deg,var(--navy2),var(--navy));color:white;padding:42px 24px 34px;border-bottom:1px solid rgba(201,168,76,.45)}.hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:end}.kicker{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:10px}h1{font-size:clamp(28px,4vw,48px);line-height:1.05;margin-bottom:12px}.lead{color:rgba(255,255,255,.78);max-width:760px}.notice{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:18px}.notice strong{color:var(--gold)}.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 48px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.smallbtn{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 13px;text-decoration:none;font-weight:700;font-size:13px;cursor:pointer}.smallbtn:hover{border-color:var(--gold)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 14px 36px rgba(11,37,69,.07)}.card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.mid{background:var(--navy);color:var(--gold);border-radius:999px;padding:4px 10px;font-weight:800;font-size:12px;letter-spacing:.05em}.status{font-size:12px;color:var(--muted);background:#f1ede3;border-radius:999px;padding:4px 8px;white-space:nowrap}.status.done{background:#E3F2EA;color:var(--green);font-weight:700}.status.progress{background:#FEF3D8;color:var(--amber);font-weight:700}h2{font-size:18px;line-height:1.25;margin-bottom:8px}p{color:var(--muted);font-size:14px;min-height:44px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:800;font-size:13px;text-decoration:none;cursor:pointer}.btn.primary{background:var(--navy);color:white;border-color:var(--navy)}.btn.ghost{background:white;color:var(--ink)}.panel{margin-top:24px;background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.panel h3{font-size:17px;margin-bottom:8px}.panel ul{margin-left:20px;color:var(--muted)}.panel li{margin:5px 0}@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.grid{grid-template-columns:1fr}.wrap{padding:18px 14px 36px}.hero{padding:30px 16px}}
-.author-panel{margin-top:24px;background:var(--navy);color:white;border-radius:18px;padding:20px;text-align:center}.author-panel strong{color:var(--gold)}.author-panel a{color:var(--gold);font-weight:700;text-decoration:none}.author-panel a:hover{text-decoration:underline}.author-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+:root{--navy:#0B2545;--navy2:#07182e;--gold:#C9A84C;--cream:#F8F5EE;--paper:#fffdf8;--line:#e5dfd2;--ink:#172033;--muted:#667085;--green:#2A6B48;--amber:#7A5200;--r:18px}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}a{color:inherit}.hero{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:42px 24px 34px;border-bottom:1px solid rgba(201,168,76,.45)}.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:end}.kicker{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:10px}h1{font-size:clamp(28px,4vw,48px);line-height:1.05;margin:0 0 12px}.lead{color:rgba(255,255,255,.78);max-width:760px;margin:0}.notice{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:18px;font-size:14px}.notice strong{color:var(--gold)}.wrap{max-width:1180px;margin:auto;padding:26px 24px 48px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.smallbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;text-decoration:none;font-weight:700;font-size:13px;cursor:pointer}.smallbtn:hover{border-color:var(--gold)}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}.sum{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}.sum b{display:block;font-size:22px;color:var(--navy)}.sum span{font-size:12px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 14px 36px rgba(11,37,69,.07)}.card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.mid{background:var(--navy);color:var(--gold);border-radius:999px;padding:4px 10px;font-weight:800;font-size:12px}.status{font-size:12px;color:var(--muted);background:#f1ede3;border-radius:999px;padding:4px 8px;white-space:nowrap}.status.done{background:#E3F2EA;color:var(--green);font-weight:700}.status.progress{background:#FEF3D8;color:var(--amber);font-weight:700}.card h2{font-size:18px;line-height:1.25;margin:0 0 8px}.card p{color:var(--muted);font-size:14px;min-height:44px;margin:0}.actions{margin-top:16px}.btn{display:inline-block;border:1px solid var(--navy);border-radius:12px;padding:10px 12px;font-weight:800;font-size:13px;text-decoration:none;background:var(--navy);color:#fff}.gate-note{margin-top:9px;font-size:11px;color:var(--muted)}.panel{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.panel h3{font-size:17px;margin:0 0 8px}.panel ul{margin:0 0 0 20px;color:var(--muted)}.panel li{margin:5px 0}.author{margin-top:24px;background:var(--navy);color:#fff;border-radius:18px;padding:20px;text-align:center}.author strong,.author a{color:var(--gold)}.author a{font-weight:700;text-decoration:none;margin:0 7px}@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.grid,.summary{grid-template-columns:1fr}.wrap{padding:18px 14px 36px}.hero{padding:30px 16px}}
 </style>
 </head>
 <body>
-<header class="hero"><div class="hero-inner"><div><div class="kicker">Cours de formation · 14 modules</div><h1>Formation de spécialiste TVA suisse</h1><p class="lead">Un parcours structuré de la qualification des opérations jusqu’au contrôle AFC, à la jurisprudence et à l’examen blanc. La progression du dashboard est enregistrée localement dans votre navigateur.</p></div><div class="notice"><strong>Parcours de travail</strong><br/>Ouvrez un module, travaillez les cas et autotests, puis marquez-le comme terminé. Pour les sujets sensibles ou évolutifs, vérifiez les références légales et la pratique AFC avant utilisation professionnelle.</div></div></header>
+<header class="hero"><div class="hero-inner"><div><div class="kicker">Cours indépendant · 14 modules · Legal QA 2026</div><h1>Formation de spécialiste TVA suisse</h1><p class="lead">Parcours pratique de la qualification des opérations au contrôle AFC, à la jurisprudence, à la communication cabinet et à l’examen final.</p></div><div class="notice"><strong>Progression protégée</strong><br>Le dashboard ne peut plus déclarer un module «terminé». Le statut <em>Terminé</em> est écrit uniquement par le module lui-même après son propre gate (sections, QCM et/ou capstones selon le module). Ouvrir un module depuis ici le place seulement «En cours».</div></div></header>
 <main class="wrap">
-<div class="toolbar">
-<a class="smallbtn" href="legal-qa-checklist.html">Legal QA checklist</a>
-<a class="smallbtn" href="manifest.json">Manifest JSON</a>
-
-<button class="smallbtn" onclick="resetProgress()">Réinitialiser le progrès dashboard</button>
-</div>
-<section class="grid"><article class="card" data-id="m01">
-<div class="card-top"><span class="mid">M01</span><span class="status" id="s-M01">Non ouvert</span></div>
-<h2>Introduction TVA suisse</h2>
-<p>Fondations · taux · assujettissement</p>
-<div class="actions">
-<a class="btn primary" href="m01-introduction-tva-suisse.html" onclick="markOpen('M01')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M01')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m02">
-<div class="card-top"><span class="mid">M02</span><span class="status" id="s-M02">Non ouvert</span></div>
-<h2>Qualification des opérations TVA</h2>
-<p>Qualification · preuves · décompte</p>
-<div class="actions">
-<a class="btn primary" href="m02-qualification-operations.html" onclick="markOpen('M02')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M02')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m03">
-<div class="card-top"><span class="mid">M03</span><span class="status" id="s-M03">Non ouvert</span></div>
-<h2>Décomptes TVA &amp; méthodes</h2>
-<p>Effective · TDFN · concordance</p>
-<div class="actions">
-<a class="btn primary" href="m03-decomptes-methodes-tva.html" onclick="markOpen('M03')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M03')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m04">
-<div class="card-top"><span class="mid">M04</span><span class="status" id="s-M04">Non ouvert</span></div>
-<h2>TVA &amp; comptabilité suisse</h2>
-<p>Écritures · ERP · contrôle</p>
-<div class="actions">
-<a class="btn primary" href="m04-tva-comptabilite-suisse.html" onclick="markOpen('M04')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M04')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m05">
-<div class="card-top"><span class="mid">M05</span><span class="status" id="s-M05">Non ouvert</span></div>
-<h2>Déduction de l’impôt préalable</h2>
-<p>DIP · affectation · corrections</p>
-<div class="actions">
-<a class="btn primary" href="m05-deduction-impot-prealable-dip.html" onclick="markOpen('M05')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M05')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m06">
-<div class="card-top"><span class="mid">M06</span><span class="status" id="s-M06">Non ouvert</span></div>
-<h2>Territorialité &amp; TVA internationale</h2>
-<p>Art. 7/8 · import · export</p>
-<div class="actions">
-<a class="btn primary" href="m06-territorialite-tva-internationale.html" onclick="markOpen('M06')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M06')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m07">
-<div class="card-top"><span class="mid">M07</span><span class="status" id="s-M07">Non ouvert</span></div>
-<h2>Holdings &amp; groupes TVA</h2>
-<p>Holdings · refacturations · groupe</p>
-<div class="actions">
-<a class="btn primary" href="m07-holdings-groupes-tva.html" onclick="markOpen('M07')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M07')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m08">
-<div class="card-top"><span class="mid">M08</span><span class="status" id="s-M08">Non ouvert</span></div>
-<h2>Immobilier &amp; construction</h2>
-<p>Option · immeuble · travaux</p>
-<div class="actions">
-<a class="btn primary" href="m08-immobilier-construction-tva.html" onclick="markOpen('M08')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M08')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m09">
-<div class="card-top"><span class="mid">M09</span><span class="status" id="s-M09">Non ouvert</span></div>
-<h2>Secteurs sensibles</h2>
-<p>Santé · formation · finance · NPO</p>
-<div class="actions">
-<a class="btn primary" href="m09-secteurs-sensibles-tva.html" onclick="markOpen('M09')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M09')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m10">
-<div class="card-top"><span class="mid">M10</span><span class="status" id="s-M10">Non ouvert</span></div>
-<h2>Digital, plateformes &amp; e-commerce</h2>
-<p>SaaS · marketplace · art. 20a</p>
-<div class="actions">
-<a class="btn primary" href="m10-digital-plateformes-ecommerce.html" onclick="markOpen('M10')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M10')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m11">
-<div class="card-top"><span class="mid">M11</span><span class="status" id="s-M11">Non ouvert</span></div>
-<h2>Contrôle AFC</h2>
-<p>Contrôle · estimation · défense</p>
-<div class="actions">
-<a class="btn primary" href="m11-controle-afc-tva.html" onclick="markOpen('M11')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M11')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m12">
-<div class="card-top"><span class="mid">M12</span><span class="status" id="s-M12">Non ouvert</span></div>
-<h2>Jurisprudence Lab TVA</h2>
-<p>Arrêts · doctrine · raisonnement</p>
-<div class="actions">
-<a class="btn primary" href="m12-jurisprudence-lab-tva.html" onclick="markOpen('M12')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M12')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m13">
-<div class="card-top"><span class="mid">M13</span><span class="status" id="s-M13">Non ouvert</span></div>
-<h2>Communication fiscale &amp; cabinet</h2>
-<p>Emails · clients · AFC</p>
-<div class="actions">
-<a class="btn primary" href="m13-communication-fiscale-cabinet.html" onclick="markOpen('M13')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M13')">Marquer terminé</button>
-</div>
-</article>
-<article class="card" data-id="m14">
-<div class="card-top"><span class="mid">M14</span><span class="status" id="s-M14">Non ouvert</span></div>
-<h2>Examen blanc &amp; synthèse finale</h2>
-<p>Diagnostic · QCM · remediation</p>
-<div class="actions">
-<a class="btn primary" href="m14-examen-blanc-synthese-finale.html" onclick="markOpen('M14')">Ouvrir le module</a>
-<button class="btn ghost" onclick="markDone('M14')">Marquer terminé</button>
-</div>
-</article></section>
-<section class="panel"><h3>Utilisation recommandée</h3><ul><li>Ouvrir les modules depuis ce dashboard afin de conserver une navigation stable.</li><li>La progression affichée ici est locale au navigateur et ne constitue pas un suivi certifié.</li><li>Utiliser la Legal QA checklist pour les zones TVA susceptibles d’évoluer.</li><li>Avant toute utilisation professionnelle, confronter les points sensibles à la LTVA, à l’OTVA et à la pratique AFC en vigueur.</li></ul></section>
-<section class="author-panel"><div><strong>Conception : Mariia Lobur</strong></div><div class="author-links"><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
+<div class="toolbar"><a class="smallbtn" href="legal-qa-checklist.html">Legal QA checklist</a><a class="smallbtn" href="manifest.json">Manifest JSON</a><button class="smallbtn" onclick="resetDashboard()">Réinitialiser l’affichage dashboard</button></div>
+<div class="summary"><div class="sum"><b id="doneCount">0/14</b><span>modules validés par leurs gates</span></div><div class="sum"><b id="progressCount">0</b><span>modules en cours</span></div><div class="sum"><b id="pct">0%</b><span>progression validée</span></div></div>
+<section class="grid" id="grid"></section>
+<section class="panel"><h3>Règles du parcours</h3><ul><li>Le statut affiché est local à ce navigateur; il ne constitue ni certification officielle ni dossier de formation certifié.</li><li>«En cours» signifie uniquement que le module a été ouvert. «Terminé» vient du gate interne du module.</li><li>Réinitialiser l’affichage dashboard efface seulement la clé commune du tableau de bord; les états pédagogiques internes de certains modules peuvent rester enregistrés localement.</li><li>Avant toute utilisation professionnelle, vérifier LTVA, OTVA, pratique AFC/OFDF et jurisprudence à la date du dossier.</li></ul></section>
+<section class="author"><strong>Conception : Mariia Lobur</strong><div><a href="https://www.linkedin.com/in/mariia-lobur/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/mariialobur" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></section>
 </main>
 <script>
 const KEY='tvaSpecialisteTvaDashboardV1';
+const MODS=[
+['M01','Introduction TVA suisse','Fondations · taux · assujettissement','m01-introduction-tva-suisse.html'],
+['M02','Qualification des opérations TVA','Qualification · contre-prestation · exclusions','m02-qualification-operations.html'],
+['M03','Décomptes TVA & méthodes','Effective · TDFN/TaF · concordance','m03-decomptes-methodes-tva.html'],
+['M04','TVA & comptabilité suisse','Écritures · ERP · contrôle','m04-tva-comptabilite-suisse.html'],
+['M05','Déduction de l’impôt préalable','DIP · affectation · corrections','m05-deduction-impot-prealable-dip.html'],
+['M06','Territorialité & TVA internationale','Art. 7/8 · import · export · acquisitions','m06-territorialite-tva-internationale.html'],
+['M07','Holdings & groupes TVA','Participations · refacturations · groupe','m07-holdings-groupes-tva.html'],
+['M08','Immobilier & construction','Option · affectation · travaux','m08-immobilier-construction-tva.html'],
+['M09','Secteurs sensibles','Santé · formation · culture · NPO','m09-secteurs-sensibles-tva.html'],
+['M10','Digital, plateformes & e-commerce','SaaS · marketplace · art. 20a','m10-digital-plateformes-ecommerce.html'],
+['M11','Contrôle AFC','Estimation · procédure · art. 102','m11-controle-afc-tva.html'],
+['M12','Jurisprudence Lab TVA','Sources · temporal gate · reasoning','m12-jurisprudence-lab-tva.html'],
+['M13','Communication fiscale & cabinet','Art. 69 · client · AFC · confidentialité','m13-communication-fiscale-cabinet.html'],
+['M14','Examen blanc & synthèse finale','130 QCM · 4 capstones · Final Pro','m14-examen-blanc-synthese-finale.html']];
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
-function markOpen(id){const d=load(); if(!d[id]||d[id]!=='done') d[id]='progress'; save(d); render();}
-function markDone(id){const d=load(); d[id]='done'; save(d); render();}
-function resetProgress(){if(confirm('Réinitialiser le progrès affiché dans le dashboard ?')){localStorage.removeItem(KEY); render();}}
-function render(){const d=load(); ["M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10", "M11", "M12", "M13", "M14"].forEach(id=>{const el=document.getElementById('s-'+id); if(!el)return; el.className='status'; if(d[id]==='done'){el.textContent='Terminé'; el.classList.add('done')} else if(d[id]==='progress'){el.textContent='En cours'; el.classList.add('progress')} else {el.textContent='Non ouvert'} })}
+function markOpen(id){const d=load();if(d[id]!=='done')d[id]='progress';save(d)}
+function render(){const d=load();let done=0,prog=0;$grid=document.getElementById('grid');$grid.innerHTML=MODS.map(m=>{const s=d[m[0]]||'',cl=s==='done'?'done':s==='progress'?'progress':'',label=s==='done'?'Terminé':s==='progress'?'En cours':'Non ouvert';if(s==='done')done++;else if(s==='progress')prog++;return `<article class="card"><div class="card-top"><span class="mid">${m[0]}</span><span class="status ${cl}">${label}</span></div><h2>${m[1]}</h2><p>${m[2]}</p><div class="actions"><a class="btn" href="${m[3]}" onclick="markOpen('${m[0]}')">Ouvrir le module</a></div><div class="gate-note">La validation finale se fait dans le module, pas depuis le dashboard.</div></article>`}).join('');document.getElementById('doneCount').textContent=done+'/14';document.getElementById('progressCount').textContent=prog;document.getElementById('pct').textContent=Math.round(done/14*100)+'%'}
+function resetDashboard(){if(confirm('Effacer uniquement les statuts du dashboard ? Les états internes des modules ne seront pas forcément supprimés.')){localStorage.removeItem(KEY);render()}}
 render();
 </script>
 </body>
