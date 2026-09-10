@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>M08 — Immobilier & construction · Formation de spécialiste TVA suisse</title>
+<style>
+:root{
+  --navy:#0B2545;--navy2:#163A6E;--navy3:#1F4D8C;
+  --gold:#C9A84C;--gold2:#F0D988;
+  --cream:#F8F5EE;--cream2:#EDE8DC;
+  --rust:#A0341A;--rust2:#FAE8E3;
+  --sage:#2A6B48;--sage2:#E3F2EA;
+  --amber:#7A5200;--amber2:#FEF3D8;
+  --teal:#0F766E;--teal2:#CCFBF1;
+  --ink:#1A1A2E;--muted:#6B7280;
+  --border:#E5E0D4;--sidebar:260px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--ink);display:flex;min-height:100vh}
+#sidebar{width:var(--sidebar);background:var(--navy);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-header{padding:18px 16px 14px;border-bottom:1px solid rgba(201,168,76,.2)}
+.sb-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.sb-title{color:#fff;font-size:13.5px;font-weight:600;line-height:1.3;margin-bottom:2px}
+.sb-sub{color:rgba(255,255,255,.4);font-size:11px}
+.sb-prog{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sb-prog-row{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px}
+.sb-bar{background:rgba(255,255,255,.1);border-radius:3px;height:3px}
+.sb-fill{background:var(--gold);height:3px;border-radius:3px;transition:width .4s;width:0%}
+.sb-nav{flex:1;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.sb-cat{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:8px 6px 3px}
+.sb-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;cursor:pointer;color:rgba(255,255,255,.55);font-size:12.5px;transition:all .15s;border:none;background:transparent;width:100%;text-align:left}
+.sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-item.active{background:rgba(201,168,76,.15);color:var(--gold)}
+.sb-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;transition:background .2s}
+.sb-item.active .sb-dot{background:var(--gold)}
+.sb-item.visited .sb-dot{background:var(--sage)}
+.sb-chip{font-size:9px;padding:1px 5px;border-radius:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);margin-left:auto;white-space:nowrap}
+.sb-foot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.06)}
+#main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-left{display:flex;align-items:center;gap:8px}
+.tb-mod{font-family:monospace;background:var(--navy);color:var(--gold);font-size:11px;padding:2px 8px;border-radius:3px}
+.tb-name{font-size:13px;font-weight:500;color:var(--ink)}
+.tb-right{display:flex;align-items:center;gap:8px}
+.tb-badge{font-size:11px;padding:3px 9px;border-radius:4px}
+.tb-time{background:var(--amber2);color:var(--amber)}
+.tb-level{background:var(--rust2);color:var(--rust);font-weight:600}
+.tb-ver{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);font-size:10px}
+.content{padding:24px 28px;max-width:820px}
+.section{display:none}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:10px;padding:24px 28px;margin-bottom:22px}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.hero-h{color:#fff;font-size:22px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.hero-p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.65;margin-bottom:14px}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:11px;padding:4px 10px;border-radius:14px}
+.block{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:14px}
+.block-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bnum{width:24px;height:24px;background:var(--navy);color:var(--gold);font-size:11px;font-family:monospace;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.block-h h3{font-size:16px;font-weight:600;color:var(--navy)}
+.prose{font-size:13.5px;color:#2C2C3E;line-height:1.75;margin-bottom:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0}
+.tbl th{background:var(--navy);color:var(--gold);padding:8px 12px;text-align:left;font-weight:500;font-size:11.5px}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:#2C2C3E;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:var(--cream)}
+.box{display:flex;gap:12px;border-radius:7px;padding:12px 16px;margin:12px 0;align-items:flex-start}
+.box-icon{font-size:17px;flex-shrink:0;margin-top:1px}
+.box-body{flex:1;font-size:13px;color:#2C2C3E;line-height:1.65}
+.box-title{font-weight:600;font-size:13px;margin-bottom:4px;color:var(--navy)}
+.box.ok{background:var(--sage2);border-left:3px solid var(--sage)}
+.box.info{background:#EFF4FB;border-left:3px solid var(--navy3)}
+.box.warn{background:var(--amber2);border-left:3px solid var(--amber)}
+.box.danger{background:var(--rust2);border-left:3px solid var(--rust)}
+.box.gold{background:rgba(201,168,76,.08);border-left:3px solid var(--gold)}
+.box.afc{background:var(--navy);border-left:3px solid var(--gold)}
+.box.afc .box-title{color:var(--gold)}
+.box.afc .box-body{color:rgba(255,255,255,.75)}
+.box.fidu{background:#F0EDF8;border-left:3px solid #6D28D9}
+.box.fidu .box-title{color:#4C1D95}
+.box.fidu .box-body{color:#3B1F6B}
+.risk{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:600}
+.risk-g{background:#e8f5e9;color:#1a6b2e}
+.risk-o{background:#fff3e0;color:#7a4a00}
+.risk-r{background:var(--rust2);color:var(--rust)}
+.risk-n{background:#e8e8e8;color:#222}
+.dtree{font-family:monospace;font-size:12px;background:var(--navy);color:rgba(255,255,255,.8);padding:16px 18px;border-radius:8px;margin:12px 0;line-height:2;white-space:pre-wrap}
+.leg-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:10px;display:flex;gap:14px}
+.leg-icon{width:38px;height:38px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.li-blue{background:#EFF4FB}.li-green{background:var(--sage2)}.li-gold{background:var(--amber2)}.li-red{background:var(--rust2)}
+.leg-ref{font-family:monospace;font-size:10.5px;color:var(--muted);margin-bottom:2px}
+.leg-title{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.leg-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:8px}
+.leg-links{display:flex;gap:6px;flex-wrap:wrap}
+.leg-link{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--navy3);text-decoration:none;border:1px solid rgba(31,77,140,.25);border-radius:4px;padding:3px 8px;transition:all .15s}
+.leg-link:hover{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+.jur-card{background:#fff;border-left:3px solid var(--teal);border-radius:0 7px 7px 0;padding:11px 14px;margin:8px 0;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.jur-ref{font-family:monospace;font-size:10px;color:var(--teal);font-weight:700;margin-bottom:3px}
+.jur-titre{font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.jur-principe{font-size:12px;color:#2C2C3E;line-height:1.6}
+.case-card{background:#fff;border:1px solid var(--border);border-radius:8px;margin-bottom:14px;overflow:hidden}
+.case-head{background:var(--navy);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.case-n{width:30px;height:30px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:13px;color:var(--gold);flex-shrink:0}
+.case-meta{flex:1}
+.case-title{color:#fff;font-size:13.5px;font-weight:600;margin-bottom:2px}
+.case-sub{color:rgba(255,255,255,.5);font-size:11.5px}
+.case-body{padding:18px 20px}
+.scenario{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.75;color:#2C2C3E;margin-bottom:14px}
+.step{border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:12px}
+.step-q{background:var(--cream);padding:11px 14px;font-size:13px;font-weight:500;color:var(--navy);display:flex;align-items:flex-start;gap:8px}
+.step-qn{background:var(--navy);color:var(--gold);font-family:monospace;font-size:9.5px;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:1px}
+.step-opts{padding:10px 12px;display:flex;flex-direction:column;gap:5px}
+.opt{text-align:left;padding:8px 12px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:12.5px;cursor:pointer;transition:all .15s;color:var(--ink);font-family:inherit;width:100%}
+.opt:hover{border-color:var(--navy);background:var(--cream)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--sage2);border-color:var(--sage);color:var(--sage)}
+.opt.wrong{background:var(--rust2);border-color:var(--rust);color:var(--rust)}
+.step-expl{display:none;background:#fff;border-top:1px solid var(--border);padding:12px 14px;font-size:12.5px;line-height:1.7;color:#2C2C3E}
+.step-expl.show{display:block}
+.art-tag{display:inline-block;font-family:monospace;font-size:10.5px;background:var(--navy);color:var(--gold);padding:2px 8px;border-radius:3px;margin-top:8px}
+.calc{background:var(--navy);border-radius:8px;padding:16px 18px;margin-top:12px}
+.calc-title{color:var(--gold);font-family:monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px}
+.calc-row:last-child{border-bottom:none}
+.calc-label{color:rgba(255,255,255,.6)}
+.calc-val{font-family:monospace;color:#fff}
+.calc-row.total .calc-label{color:rgba(255,255,255,.85);font-weight:600}
+.calc-row.total .calc-val{color:var(--gold2);font-size:14px}
+.calc-row.hl{border-top:1px solid rgba(201,168,76,.3);margin-top:4px;padding-top:8px}
+.calc-row.hl .calc-label{color:var(--gold)}
+.calc-row.hl .calc-val{color:var(--gold2);font-weight:700}
+.calc-row.danger .calc-val{color:#f87171}
+.err-block{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.err-head{background:var(--rust);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.err-icon{font-size:18px}
+.err-htitle{color:#fff;font-size:13.5px;font-weight:600}
+.err-hsub{color:rgba(255,255,255,.6);font-size:11.5px}
+.err-body{padding:16px 18px}
+.err-wrong{background:var(--rust2);border-radius:5px;padding:9px 12px;font-size:13px;color:var(--rust);margin-bottom:8px;display:flex;gap:7px}
+.err-right{background:var(--sage2);border-radius:5px;padding:9px 12px;font-size:13px;color:var(--sage);display:flex;gap:7px}
+.err-afc{margin-top:8px;background:var(--cream);border-left:3px solid var(--gold);padding:9px 12px;font-size:12px;color:#2C2C3E;border-radius:4px}
+.quiz-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.q-count{font-family:monospace;font-size:12.5px;color:var(--muted)}
+.q-timer{font-family:monospace;font-size:15px;font-weight:700;color:var(--navy)}
+.q-timer.urgent{color:var(--rust)}
+.q-bar{height:3px;background:var(--border);border-radius:3px;margin-bottom:18px}
+.q-fill{height:3px;background:var(--gold);border-radius:3px;transition:width .3s}
+.q-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:22px 26px}
+.q-art{font-family:monospace;font-size:10.5px;background:var(--navy);color:var(--gold);display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:12px}
+.q-text{font-size:15px;font-weight:500;color:var(--navy);line-height:1.5;margin-bottom:16px}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.q-opt{text-align:left;padding:10px 14px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:13px;cursor:pointer;transition:all .15s;color:var(--ink);font-family:inherit;display:flex;gap:8px;align-items:flex-start;width:100%}
+.q-opt:hover{border-color:var(--navy);background:var(--cream)}
+.q-opt:disabled{cursor:default}
+.q-opt.correct{background:var(--sage2);border-color:var(--sage);color:var(--sage)}
+.q-opt.wrong{background:var(--rust2);border-color:var(--rust);color:var(--rust)}
+.opt-ltr{font-family:monospace;font-size:10.5px;background:var(--border);color:var(--muted);padding:1px 5px;border-radius:2px;flex-shrink:0;margin-top:1px}
+.q-expl{display:none;margin-top:16px;padding:12px 14px;background:var(--cream);border-radius:7px;border-left:3px solid var(--gold)}
+.q-expl.show{display:block}
+.q-expl-title{font-weight:600;font-size:12.5px;margin-bottom:5px}
+.q-expl-title.ok{color:var(--sage)}.q-expl-title.bad{color:var(--rust)}
+.sm2-row{display:flex;gap:7px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+.sm2-lbl{font-size:11.5px;color:var(--muted)}
+.sm2-btn{padding:5px 10px;border-radius:5px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:11.5px;font-family:inherit;transition:all .15s}
+.sm2-btn:hover{border-color:var(--navy)}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.q-skip{font-size:12px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit}
+.q-skip:hover{color:var(--navy)}
+.q-results{display:none;text-align:center;padding:24px}
+.res-score{font-size:64px;font-weight:700;color:var(--navy);line-height:1}
+.res-pct{font-size:32px;color:var(--gold)}
+.res-label{font-size:14px;color:var(--muted);margin-bottom:22px}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px;text-align:left}
+.res-chip{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px}
+.res-chip .rc-n{font-size:22px;font-weight:700;color:var(--navy)}
+.res-chip .rc-l{font-size:11.5px;color:var(--muted);margin-top:2px}
+.fc-wrap{display:flex;flex-direction:column;align-items:center;padding:8px 0}
+.fc-cat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.fc-ctr{font-family:monospace;color:var(--muted);font-size:12.5px;margin-bottom:16px}
+.fc-outer{width:100%;max-width:480px;height:220px;perspective:1000px;cursor:pointer;margin-bottom:16px}
+.fc{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s ease}
+.fc.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fc-front{background:var(--navy);border:1px solid rgba(201,168,76,.2)}
+.fc-back{background:#fff;border:1px solid var(--border);transform:rotateY(180deg)}
+.fc-lbl{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.fc-front .fc-lbl{color:var(--gold)}.fc-back .fc-lbl{color:var(--sage)}
+.fc-cat{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.fc-term{font-size:16px;font-weight:700;color:#fff;line-height:1.3}
+.fc-def{font-size:12px;color:#2C2C3E;line-height:1.6}
+.fc-artag{font-family:monospace;font-size:10px;color:var(--gold);background:var(--navy);padding:1px 7px;border-radius:3px;margin-top:8px;display:inline-block}
+.fc-hint{font-size:10.5px;color:rgba(255,255,255,.3);margin-top:10px}
+.fc-btns{display:flex;gap:8px;margin-bottom:20px}
+.fc-btn{padding:7px 14px;border-radius:6px;font-size:12.5px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .2s}
+.fc-bad{background:var(--rust2);color:var(--rust)}
+.fc-ok{background:var(--amber2);color:var(--amber)}
+.fc-good{background:var(--sage);color:#fff}
+.fc-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.fc-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .3s}
+.fc-dot.seen{background:var(--sage)}.fc-dot.current{background:var(--gold);transform:scale(1.3)}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.vocab-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px}
+.vfr{font-weight:600;font-size:13px;color:var(--navy);margin-bottom:2px}
+.vde{font-size:10.5px;color:var(--muted);font-style:italic;margin-bottom:5px}
+.vdef{font-size:11.5px;color:#2C2C3E;line-height:1.55}
+.vart{font-family:monospace;font-size:9.5px;color:var(--gold);background:var(--navy);display:inline-block;padding:1px 6px;border-radius:3px;margin-top:5px}
+.cheat-block{background:#fff;border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin-bottom:12px}
+.cheat-title{font-family:monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:var(--navy);display:inline-block;padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.cheat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ci{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);gap:8px;font-size:12.5px}
+.ci:last-child{border-bottom:none}
+.ci-l{color:var(--muted);flex:1}
+.ci-v{font-family:monospace;color:var(--navy);font-weight:500;white-space:nowrap}
+.ci-v.r{color:var(--rust)}.ci-v.g{color:var(--sage)}.ci-v.o{color:var(--amber)}
+.sec-nav{display:flex;justify-content:space-between;margin-top:26px;padding-top:18px;border-top:1px solid var(--border)}
+.btn{padding:9px 18px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+.btn-p{background:var(--navy);color:#fff}.btn-p:hover{background:var(--navy2)}
+.btn-g{background:transparent;border:1px solid var(--border);color:var(--muted)}.btn-g:hover{border-color:var(--navy);color:var(--navy)}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:600}.btn-gold:hover{background:var(--gold2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.finish-box{display:none;margin-top:16px;padding:16px 18px;border-radius:8px;background:var(--sage2);border:1px solid rgba(42,107,72,.25);align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.finish-copy strong{display:block;color:var(--sage);font-size:14px;margin-bottom:4px}.finish-copy span{font-size:12.5px;color:#2C2C3E}.finish-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:768px){#sidebar{transform:translateX(-100%)}#main{margin-left:0}.content{padding:16px 14px}.vocab-grid,.cheat-grid{grid-template-columns:1fr}.res-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<nav id="sidebar">
+<div class="sb-header">
+<div class="sb-badge">MODULE 08</div>
+<div class="sb-title">TVA Immobilier &amp; Construction</div>
+<div class="sb-sub">~6h · Avancé ⬛ Risque élevé · fiscalité immobilière</div>
+</div>
+<div class="sb-prog">
+<div class="sb-prog-row"><span>Progression</span><span id="prog-pct">0%</span></div>
+<div class="sb-bar"><div class="sb-fill" id="prog-fill"></div></div>
+</div>
+<div class="sb-nav">
+<div class="sb-cat">Théorie</div>
+<button class="sb-item active" data-sec="theory" onclick="NAV.go('theory')"><div class="sb-dot"></div>Théorie Immo &amp; Construction<span class="sb-chip">12 blocs</span></button>
+<button class="sb-item" data-sec="legis" onclick="NAV.go('legis')"><div class="sb-dot"></div>Législation &amp; Sources<span class="sb-chip">NOUVEAU</span></button>
+<div class="sb-cat">Pratique</div>
+<button class="sb-item" data-sec="cases" onclick="NAV.go('cases')"><div class="sb-dot"></div>Cas pratiques<span class="sb-chip">9 cas</span></button>
+<button class="sb-item" data-sec="errors" onclick="NAV.go('errors')"><div class="sb-dot"></div>Erreurs fréquentes<span class="sb-chip">8 err.</span></button>
+<div class="sb-cat">Évaluation</div>
+<button class="sb-item" data-sec="quiz" onclick="NAV.go('quiz')"><div class="sb-dot"></div>Autotest QCM<span class="sb-chip">35 Q</span></button>
+<button class="sb-item" data-sec="memo" onclick="NAV.go('memo')"><div class="sb-dot"></div>Mémo-fiches<span class="sb-chip">30 cartes</span></button>
+<div class="sb-cat">Référence</div>
+<button class="sb-item" data-sec="vocab" onclick="NAV.go('vocab')"><div class="sb-dot"></div>Vocabulaire pro<span class="sb-chip">FR / DE</span></button>
+<button class="sb-item" data-sec="cheat" onclick="NAV.go('cheat')"><div class="sb-dot"></div>Cheatsheet AFC<span class="sb-chip">NOUVEAU</span></button>
+</div>
+<div class="sb-foot"><a href="index.html" style="display:block;color:var(--gold);text-decoration:none;text-align:center;font-size:11px;font-weight:600;margin-bottom:7px">← Tableau de bord</a><div style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">Formation de spécialiste TVA suisse · M08</div></div>
+</nav>
+<div id="main">
+<div class="topbar">
+<div class="tb-left">
+<span class="tb-mod">M08</span>
+<span style="color:var(--muted)">·</span>
+<span class="tb-name">TVA Immobilier &amp; Construction</span>
+</div>
+<div class="tb-right">
+<span class="tb-badge tb-ver">Immobilier & construction · édition professionnelle</span>
+<span class="tb-badge tb-time">⏱ ~6 heures</span>
+<span class="tb-badge tb-level">⬛ Avancé</span>
+</div>
+</div>
+<div class="content">
+<!-- ══════════════════════════════════════════
+     SECTION A — THÉORIE
+══════════════════════════════════════════ -->
+<div class="section" id="sec-theory">
+<div class="hero">
+<div class="hero-eye">Section A · Théorie fondamentale</div>
+<h1 class="hero-h">TVA Immobilier &amp; Construction</h1>
+<div class="hero-p">12 blocs couvrant la vente et la location d'immeubles, l'option art. 22, les immeubles mixtes, la promotion immobilière, les travaux de construction, les sous-traitants étrangers, les changements d'affectation et le dossier de preuve immobilier.</div>
+<div class="hero-chips">
+<span class="chip">📖 12 blocs · dossier fiduciaire</span><span class="chip">⚠️ Risque fiscal élevé</span>
+<span class="chip">🏛 LTVA · OTVA · pratique AFC</span><span class="chip">💼 Réalité fiduciaire</span><span class="chip">🕐 ~2h</span>
+</div>
+</div>
+<div class="box gold" style="margin-bottom:16px">
+<div class="box-icon">⏱</div>
+<div class="box-body">
+<div class="box-title">Durée réaliste par section</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;font-size:12px">
+<div><strong>Théorie</strong><br/>~2h</div><div><strong>Législation</strong><br/>~30 min</div>
+<div><strong>9 cas pratiques</strong><br/>~1h30</div><div><strong>Quiz + Fiches</strong><br/>~1h</div>
+</div>
+</div>
+</div>
+<!-- B1 -->
+<div class="block">
+<div class="block-h"><span class="bnum">1</span><h3>Principe général — Vente d'immeubles : exclusion de principe</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>La première question à poser lors d'une transaction immobilière : l'objet est-il destiné exclusivement à l'habitation ou à un usage commercial/entrepreneurial ? L'option art. 22 est impossible si le destinataire utilise ou compte utiliser l'objet exclusivement à des fins d'habitation. Le notaire ne sécurise pas automatiquement le traitement TVA — c'est votre rôle.</div></div>
+<p class="prose">Le transfert et la constitution de droits réels sur des immeubles sont en principe <strong>exclus du champ TVA</strong> (art. 21 al. 2 ch. 20 LTVA). La location ou mise à disposition d'immeubles relève en principe de l'art. 21 al. 2 ch. 21 LTVA. La valeur du sol doit être traitée séparément. Conséquence : pas de TVA facturée ET pas de DIP récupérable sur les charges liées. C'est le point de départ absolu — toute exception doit être justifiée.</p>
+<table class="tbl">
+<thead><tr><th>Type de bien</th><th>Régime TVA de base</th><th>Option art. 22 possible ?</th></tr></thead>
+<tbody>
+<tr><td>Terrain / valeur du sol</td><td>Part de contre-prestation afférente au sol exclue de la base de calcul (art. 24 al. 6 let. c)</td><td style="color:var(--amber);font-weight:600">Ne pas taxer la valeur du sol ; analyser bâtiment/droit séparément</td></tr>
+<tr><td>Bâtiment résidentiel</td><td>Exclu art. 21 al. 2 ch. 20</td><td style="color:var(--rust);font-weight:600">Non — usage résidentiel bloque l'option</td></tr>
+<tr><td>Immeuble commercial</td><td>Exclu — optionnable</td><td style="color:var(--sage);font-weight:600">Oui — si usage non exclusivement résidentiel et option claire</td></tr>
+<tr><td>PPE résidentielle</td><td>Exclu art. 21 al. 2 ch. 20/21</td><td style="color:var(--amber);font-weight:600">Partiel — uniquement si usage commercial</td></tr>
+<tr><td>Droit de superficie (DDP)</td><td>Assimilé location → exclu</td><td style="color:var(--amber);font-weight:600">Cas par cas — doctrine AFC</td></tr>
+</tbody>
+</table>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">DIP perdu lors d'une vente sans option</div>Si un vendeur a déduit le DIP sur des travaux/rénovations et vend ensuite l'immeuble sans option TVA → il doit rembourser le DIP proportionnellement à la durée d'utilisation non écoulée (art. 31 LTVA — changement d'affectation). Sur un bien rénové récemment, le montant peut être très élevé.</div></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Contrôle des mutations immobilières</div>Lors d'un contrôle, l'AFC peut demander les actes, l'historique du bien, les factures de travaux et le registre de l'impôt préalable. Une vente sans option après une période d'utilisation ouvrant droit au DIP impose donc de tester immédiatement l'art. 31 et la valeur résiduelle.</div></div>
+</div>
+<!-- B2 -->
+<div class="block">
+<div class="block-h"><span class="bnum">2</span><h3>Option d'imposition art. 22 LTVA — Transformer l'exclu en imposable</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>L'option n'est pas un automatisme : elle doit être claire, cohérente avec l'usage réel et documentée pendant la durée du contrat. Avant de la recommander : (1) Identifier le destinataire et l’intérêt économique de l’option, (2) confirmer que le destinataire n’affecte pas et ne compte pas affecter l’objet exclusivement à l’habitation, (3) Calculer le DIP récupérable vs la TVA à collecter, (4) Rédiger la clause d'option dans le contrat. L'oublier = DIP perdu.</div></div>
+<div class="box info"><div class="box-icon">📋</div><div class="box-body"><div class="box-title">Option art. 22 — règle légale et dossier de preuve</div>
+    <strong>Règle :</strong> l'assujetti peut opter pour une prestation exclue lorsque l'art. 22 le permet. En immobilier, l'option est bloquée si le destinataire affecte ou compte affecter l'objet <strong>exclusivement à des fins d'habitation</strong>.<br/>
+    <strong>Exercice de l'option :</strong> indication claire de la TVA sur la facture/quittance <em>ou</em> déclaration de l'imposition dans le décompte TVA.<br/>
+    <strong>Preuve recommandée :</strong> bail/acte, clause TVA, usage prévu et réel, ventilation des surfaces et piste comptable. Ces pièces sécurisent le dossier mais ne constituent pas un « troisième critère légal cumulatif » inventé.
+    </div></div>
+<p class="prose">Avec une option valable : le bailleur/vendeur soumet la partie optionnée à la TVA et peut déduire le DIP selon l'affectation réelle. Sans option : les prestations exclues ne donnent en principe pas droit au DIP. En cas d'immeuble mixte, la déduction reste partielle.</p>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Cohérence de l’option et changement d’usage</div>Art. 22 LTVA : l'option doit être exercée clairement et rester cohérente avec l'usage effectif. Si l'usage devient exclusivement résidentiel ou ne donne plus droit à déduction, une correction d'affectation art. 31 peut intervenir. L'AFC vérifie la cohérence entre le contrat, l'usage réel, la facturation et le DIP déduit.</div></div>
+</div>
+<!-- B3 -->
+<div class="block">
+<div class="block-h"><span class="bnum">3</span><h3>Location immobilière — Régimes et options</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>Les clients confondent souvent location résidentielle et commerciale. Un propriétaire qui loue son immeuble à usage mixte (appart. au 1er + bureaux au RDC) doit ventiler précisément. Chaque contrat de bail doit être analysé individuellement. Une place de parc privée indépendante est en principe imposable de plein droit ; vérifier seulement si elle est l’accessoire d’une location immobilière exclue.</div></div>
+<table class="tbl">
+<thead><tr><th>Type de location</th><th>Régime TVA</th><th>DIP propriétaire</th><th>Option ?</th></tr></thead>
+<tbody>
+<tr><td>Appartement résidentiel</td><td style="color:var(--rust)">Exclu art. 21 al. 2 ch. 21</td><td style="color:var(--rust)">NON</td><td style="color:var(--rust)">Jamais</td></tr>
+<tr><td>Bureaux / locaux commerciaux</td><td style="color:var(--amber)">Exclu — optionnable</td><td style="color:var(--sage)">Oui si option exercée</td><td style="color:var(--sage)">Oui si option valable ; intérêt économique si locataire récupère la TVA</td></tr>
+<tr><td>Place de parc privée indépendante</td><td style="color:var(--sage)">Imposable de plein droit au taux normal</td><td style="color:var(--sage)">Selon affectation</td><td>Pas d'option nécessaire</td></tr>
+<tr><td>Parking annexé à résidentiel</td><td style="color:var(--rust)">Exclu (accessoire)</td><td style="color:var(--rust)">NON</td><td style="color:var(--rust)">Non</td></tr>
+<tr><td>Location meublée courte durée (services)</td><td style="color:var(--sage)">Imposable (hébergement)</td><td style="color:var(--sage)">OUI — intégral</td><td>N/A — déjà imposable</td></tr>
+<tr><td>Hôtel / B&amp;B</td><td style="color:var(--sage)">Imposable 3,8% hébergement</td><td style="color:var(--sage)">OUI — intégral</td><td>N/A</td></tr>
+</tbody>
+</table>
+<div class="box warn"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Piège — Parking résidentiel</div>Une place de parc n'appartenant pas au domaine public est en principe imposable au taux normal. Exception : lorsqu'elle constitue une prestation accessoire à une location immobilière exclue (par ex. appartement avec place liée), elle suit le traitement de la location principale.</div></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Cohérence bail et décompte TVA</div>L'AFC demande les baux lors d'un contrôle et les compare avec les déclarations TVA. Un loyer commercial déclaré sans option = exclu non imposé (normal). Mais si le propriétaire a déduit du DIP sur des travaux liés à un bail exclu non optionné, il faut reconstituer le droit à déduction, tester une éventuelle correction d'affectation et appliquer les règles de prescription effectivement pertinentes au dossier.</div></div>
+</div>
+<!-- B4 -->
+<div class="block">
+<div class="block-h"><span class="bnum">4</span><h3>Immeuble mixte — Clé de répartition DIP (art. 30 LTVA · pratique AFC)</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>Vous traitez un immeuble mixte : préparez systématiquement un tableau annexe au décompte TVA avec le plan des surfaces, la liste des locataires, la clé de répartition choisie et le calcul. L'AFC peut demander ce tableau lors d'un contrôle. Sans documentation, la clé peut être contestée et remplacée par une méthode plus prudente.</div></div>
+<div class="box danger"><div class="box-icon">⛔</div><div class="box-body"><div class="box-title">art. 30 LTVA · pratique AFC — Clé objective à vérifier</div>L'art. 30 LTVA impose une correction en fonction de l'utilisation. Après l'affectation directe, une clé appliquée aux coûts réellement communs doit donc être <strong>objective et économiquement appropriée</strong>. Surface, recettes ou une autre clé peuvent convenir selon les faits ; la méthode doit être justifiée et documentée.</div></div>
+<table class="tbl">
+<thead><tr><th>Méthode clé</th><th>Calcul</th><th>Acceptation AFC</th></tr></thead>
+<tbody>
+<tr><td>Clé surface (m²)</td><td>Surface imposable / Surface totale × DIP commun</td><td style="color:var(--sage)">✅ Possible si elle reflète l’utilisation réelle</td></tr>
+<tr><td>Clé recettes</td><td>Recettes pertinentes / recettes totales × DIP commun</td><td style="color:var(--sage)">✅ Possible si elle est économiquement représentative</td></tr>
+<tr><td>Affectation directe + clé résiduelle</td><td>Charges directes d’abord ; clé seulement pour les vrais coûts communs</td><td style="color:var(--sage)">✅ Réflexe professionnel</td></tr>
+<tr><td>Clé arbitraire favorable</td><td>Maximise la déduction sans base économique</td><td style="color:var(--rust)">❌ Refusée — art. 30 LTVA · pratique AFC</td></tr>
+</tbody>
+</table>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Immeuble mixte = zone de contrôle à risque</div>L'immobilier mixte est une zone de contrôle sensible en matière de DIP. L'AFC peut vérifier : (1) la clé utilisée est-elle stable et documentée ? (2) les surfaces correspondent-elles au plan ? (3) le taux de déductibilité a-t-il varié sans justification ? (4) des travaux spécifiques ont-ils été mis à 100% alors qu'ils concernent aussi la partie résidentielle ?</div></div>
+</div>
+<!-- B5 -->
+<div class="block">
+<div class="block-h"><span class="bnum">5</span><h3>Promotion immobilière — Régimes TVA selon destination</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>Avant tout projet de promotion : analysez la destination prévue. Si résidentiel pur → aucun DIP sur construction récupérable. Si commercial → option possible → DIP récupérable. Sur un projet de CHF 5M de construction, l'enjeu DIP peut atteindre CHF 405'000. Le choix de la destination conditionne la rentabilité du projet.</div></div>
+<table class="tbl">
+<thead><tr><th>Situation promoteur</th><th>TVA vente</th><th>DIP construction</th></tr></thead>
+<tbody>
+<tr><td>Vend logements résidentiels à particuliers</td><td style="color:var(--rust)">Exclu — pas de TVA</td><td style="color:var(--rust)">NON — DIP intégralement perdu</td></tr>
+<tr><td>Vend immeubles commerciaux avec option documentée</td><td style="color:var(--sage)">8,1% (option art. 22)</td><td style="color:var(--sage)">OUI — DIP intégral récupérable</td></tr>
+<tr><td>Construit pour louer résidentiel</td><td style="color:var(--rust)">Exclus — loyers hors TVA</td><td style="color:var(--rust)">NON — DIP perdu = coût du projet</td></tr>
+<tr><td>Construit pour louer commercial (option)</td><td style="color:var(--sage)">8,1% loyers (option)</td><td style="color:var(--sage)">OUI — DIP récupérable</td></tr>
+<tr><td>Immeuble mixte (résid. + commercial)</td><td style="color:var(--amber)">Partiel — option sur partie commerciale</td><td style="color:var(--amber)">Clé de répartition surface</td></tr>
+</tbody>
+</table>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Vigilance sur la destination déclarée</div>L'AFC peut vérifier que la destination déclarée lors de la déduction du DIP correspond à l'usage réel. Un promoteur qui déduit le DIP sur un projet "commercial" puis vend en résidentiel → correction d'affectation massive (art. 31 LTVA). Les permis, plans et actes peuvent constituer des pièces utiles pour documenter la destination prévue et l'usage réel de l'immeuble.</div></div>
+</div>
+<!-- B6 -->
+<div class="block">
+<div class="block-h"><span class="bnum">6</span><h3>Travaux de construction — Taux, lieu et sous-traitants suisses</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>En construction, le DIP sur les travaux suit automatiquement la destination de l'immeuble. Avant de saisir une facture de travaux : demandez "à quel immeuble appartient ce chantier ?" et "quelle est la destination de cet immeuble ?" Un DIP déduit sur un chantier résidentiel = erreur classique à CHF 10'000+.</div></div>
+<div class="box info"><div class="box-icon">📋</div><div class="box-body"><div class="box-title">Règles TVA travaux de construction</div>
+<strong>Taux :</strong> art. 25 al.1 LTVA → 8,1% sur tous les travaux (construction neuve, rénovation, entretien)<br/>
+<strong>Lieu :</strong> art. 8 al. 2 let. f LTVA → lieu de l'immeuble (même si entrepreneur vient d'ailleurs)<br/>
+<strong>DIP client :</strong> déductible uniquement si immeuble à usage imposable ou optionné<br/>
+<strong>Justificatif :</strong> art. 26 LTVA → vérifier les éléments de la facture et le statut TVA du fournisseur ; si un élément manque, obtenir une correction et conserver aussi la preuve matérielle de la prestation et de son affectation
+    </div></div>
+<table class="tbl">
+<thead><tr><th>Flux</th><th>TVA</th><th>DIP maître d'ouvrage</th></tr></thead>
+<tbody>
+<tr><td>EG facture au maître d'ouvrage (usage commercial)</td><td style="color:var(--sage)">8,1%</td><td style="color:var(--sage)">OUI — si assujetti</td></tr>
+<tr><td>EG facture — usage résidentiel</td><td style="color:var(--sage)">8,1%</td><td style="color:var(--rust)">NON — exclu art. 21</td></tr>
+<tr><td>Sous-traitant suisse facture à l'EG</td><td style="color:var(--sage)">8,1% — facture conforme</td><td style="color:var(--sage)">Oui (EG déduit)</td></tr>
+<tr><td>Architecte / ingénieur lié à un immeuble suisse</td><td style="color:var(--sage)">8,1% — lieu de l’immeuble (art. 8 al. 2 let. f)</td><td style="color:var(--sage)">Oui si usage imposable / optionné</td></tr>
+</tbody>
+</table>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Contrôle des chantiers et permis</div>Lors d'un contrôle, l'AFC peut croiser les demandes de DIP sur les travaux avec les permis de construire et les actes notariés. Un DIP déduit sur des travaux de rénovation d'un appartement résidentiel est fortement exposé à un redressement. La destination effective ou objectivement prévue de l'immeuble doit être documentée ; une destination future seulement hypothétique ne suffit pas à justifier le DIP.</div></div>
+</div>
+<!-- B7 -->
+<div class="block">
+<div class="block-h"><span class="bnum">7</span><h3>Sous-traitants étrangers &amp; travaux propres — acquisitions et corrections DIP</h3></div>
+<div class="box fidu"><div class="box-icon">💼</div><div class="box-body"><div class="box-title">Réalité fiduciaire</div>En construction, deux réflexes doivent être séparés : (1) une facture étrangère pour des travaux liés à un immeuble suisse peut déclencher l'impôt sur les acquisitions ; (2) des travaux réalisés avec ses propres équipes pour un immeuble résidentiel ne créent pas automatiquement une TVA sur le salaire interne, mais ils imposent une analyse de l'affectation et du DIP selon art. 31/32 LTVA.</div></div>
+<div class="box info"><div class="box-icon">📋</div><div class="box-body"><div class="box-title">Art. 45 LTVA — vérifier l'impôt sur les acquisitions / l'inscription du prestataire étranger</div>
+    Les prestations en relation étroite avec un immeuble sont localisées au lieu de l'immeuble (<strong>art. 8 al. 2 let. f LTVA</strong>). Si l'immeuble est en Suisse et le prestataire étranger n'est pas inscrit, le destinataire assujetti doit vérifier si l'impôt sur les acquisitions est applicable :<br/>
+    → déclaration au <strong>ch. 383</strong> du décompte ;<br/>
+    → DIP éventuel via <strong>ch. 400/405</strong> selon l'affectation ;<br/>
+    → impact net nul seulement si l'utilisation donne droit au DIP intégral.
+    </div></div>
+<div class="box warn"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Travaux propres — ne pas appliquer l'ancien réflexe art. 31</div>Dans la LTVA actuelle, le réflexe professionnel n'est pas de taxer mécaniquement la main-d'œuvre interne au coût de revient. Il faut documenter les achats grevés de TVA, l'utilisation de l'immeuble et corriger l'impôt préalable si les biens ou prestations sont affectés à une activité exclue. Pour un immeuble résidentiel, le DIP sur matériaux, mandataires ou frais généraux liés doit être exclu ou corrigé au <strong>ch. 415</strong> selon art. 31 LTVA.</div></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Vision AFC — Flux étrangers et affectation résidentielle</div>Dans un contrôle, les contrats, factures étrangères, documents douaniers, preuves de paiement et registre des immobilisations doivent permettre de reconstituer le traitement TVA. Le risque principal n'est pas seulement l'oubli du ch. 383 : c'est aussi la déduction d'un DIP alors que l'immeuble sert à des prestations exclues sans option.</div></div>
+</div>
+<!-- B8 -->
+<div class="block">
+<div class="block-h"><span class="bnum">8</span><h3>Hiérarchie des sources — ne pas inventer une jurisprudence « de référence »</h3></div>
+<div class="box fidu"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Méthode juridique</div>Pour chaque dossier : <strong>LTVA → OTVA → pratique AFC en vigueur → jurisprudence réellement pertinente et vérifiée</strong>. Un numéro d'arrêt ne doit apparaître dans le cours que si son objet et son considérant soutiennent précisément la règle enseignée.</div></div>
+<table class="tbl"><thead><tr><th>Niveau</th><th>Usage dans M08</th></tr></thead><tbody>
+<tr><td>LTVA</td><td>Art. 21–22 : exclusion/option ; art. 24 al. 6 let. c : valeur du sol ; art. 28–32 : DIP et changements d'affectation ; art. 38 : procédure de déclaration ; art. 45 : acquisitions.</td></tr>
+<tr><td>OTVA</td><td>Art. 69–74 : correction/dégrèvement, valeur résiduelle, biens fabriqués par l'assujetti et rénovations importantes.</td></tr>
+<tr><td>Pratique AFC</td><td>Info TVA 17 Immeubles, Info TVA 09/10 sur le DIP, Info TVA 11 procédure de déclaration, Info TVA 14 impôt sur les acquisitions.</td></tr>
+<tr><td>Jurisprudence</td><td>À utiliser seulement après vérification du texte de l'arrêt et de sa pertinence pour le cas concret.</td></tr>
+</tbody></table>
+<div class="box ok"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Compétence visée</div>L'apprenant doit pouvoir défendre la qualification avec la norme correcte, sans transformer une pratique administrative ou un simple outil de preuve en condition légale.</div></div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">9</span><h3>Atelier dossier immobilier — article, ligne décompte, preuve</h3></div>
+<div class="box gold"><div class="box-icon">🗂</div><div class="box-body"><div class="box-title">Méthode de travail fiduciaire</div>Chaque flux immobilier doit être classé avec la même chaîne : <strong>qualification → article LTVA → ligne de décompte → DIP → preuve</strong>. Ce tableau sert de mini-dossier de défense en cas de contrôle AFC.</div></div>
+<table class="tbl">
+<thead><tr><th>Flux immobilier</th><th>Qualification TVA</th><th>Décompte</th><th>Preuve à conserver</th></tr></thead>
+<tbody>
+<tr><td>Vente immeuble sans option</td><td>Exclu art. 21 al. 2 ch. 20</td><td>ch. 230 si dans le décompte ; surveiller ch. 415</td><td>Acte notarié, ventilation sol/bâtiment, historique DIP 20 ans</td></tr>
+<tr><td>Location commerciale avec option</td><td>Option art. 22</td><td>ch. 303 pour TVA collectée ; DIP 400/405</td><td>Bail avec clause TVA, usage commercial, ventilation charges</td></tr>
+<tr><td>Location résidentielle</td><td>Exclue art. 21 al. 2 ch. 21</td><td>ch. 230 ; pas de DIP</td><td>Baux, plans, affectation des surfaces, tableau DIP</td></tr>
+<tr><td>Travaux communs immeuble mixte</td><td>Double affectation</td><td>DIP 400/405 puis correction selon clé ; ch. 415 si changement</td><td>Plan m², clé objective, factures, tableau annuel</td></tr>
+<tr><td>Sous-traitant étranger sur immeuble CH</td><td>Acquisition art. 45, lieu art. 8 al. 2 let. f</td><td>ch. 383 + DIP 400/405 selon affectation</td><td>Facture étrangère, contrat chantier, preuve immeuble CH, affectation</td></tr>
+<tr><td>Changement commercial → résidentiel</td><td>Prestation à soi-même / correction DIP art. 31</td><td>ch. 415</td><td>Registre immobilisations, calcul résiduel 20 ans, acte/bail</td></tr>
+<tr><td>Changement résidentiel → commercial optionné</td><td>Dégrèvement ultérieur art. 32</td><td>ch. 410</td><td>Justificatifs DIP historique, calcul valeur résiduelle, nouvelle option</td></tr>
+<tr><td>Facture de travaux non conforme</td><td>DIP contestable tant que la facture n'est pas corrigée</td><td>ch. 400/405 seulement si preuve suffisante</td><td>Facture corrigée, contrat, paiement, preuve de prestation, lien avec activité imposable</td></tr>
+<tr><td>Architecte pour immeuble étranger</td><td>Lieu de l'immeuble hors Suisse</td><td>hors TVA CH / ch. 221 selon présentation</td><td>Adresse de l'immeuble, contrat, plans, preuve de localisation</td></tr>
+<tr><td>Transfert de patrimoine immobilier</td><td>Procédure de déclaration art. 38 si conditions</td><td>ch. 225 / formulaire dédié selon cas</td><td>Contrat, inventaire, historique DIP, accord parties, notification AFC</td></tr>
+</tbody>
+</table>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">10</span><h3>Dossier immobilier professionnel — pièces à classer avant déduction ou option</h3></div>
+<div class="box gold"><div class="box-icon">📁</div><div class="box-body"><div class="box-title">Dossier de défense AFC</div>Pour un immeuble, le bon réflexe n'est pas seulement de calculer un prorata. Il faut construire un dossier qui relie chaque pièce à une qualification TVA, à une ligne du décompte et à un droit ou non-droit au DIP.</div></div>
+<table class="tbl">
+<thead><tr><th>Pièce du dossier</th><th>Ce qu'elle prouve</th><th>Risque si absente</th></tr></thead>
+<tbody>
+<tr><td>Acte notarié / projet de contrat</td><td>Objet transféré, valeur du sol, bâtiment, option éventuelle, transfert de patrimoine</td><td>Confusion vente exclue / option / art. 38</td></tr>
+<tr><td>Bail optionné + avenants</td><td>Option claire, usage prévu, surfaces, charges refacturées</td><td>TVA facturée sans base défendable ou DIP contesté</td></tr>
+<tr><td>Tableau des surfaces</td><td>Répartition résidentiel / commercial / communs</td><td>Clé DIP rejetée ou recalculée</td></tr>
+<tr><td>Registre immobilisations TVA 20 ans</td><td>DIP historique, année de mise en service, valeur résiduelle</td><td>Erreur ch. 410 / ch. 415 en cas de changement</td></tr>
+<tr><td>Factures entrepreneurs / mandataires</td><td>Nature des travaux, taux, facture conforme, affectation</td><td>DIP 400/405 contestable</td></tr>
+<tr><td>Facture prestataire étranger</td><td>Acquisition éventuelle ch. 383 et affectation du DIP</td><td>Oubli acquisition ou DIP indu</td></tr>
+<tr><td>Formulaire / dossier art. 38</td><td>Procédure de déclaration et reprise historique TVA</td><td>Mauvais traitement du transfert de patrimoine</td></tr>
+<tr><td>Note senior TVA</td><td>Décision finale : option, clé, correction, preuves et risques</td><td>Dossier difficile à défendre en contrôle</td></tr>
+</tbody>
+</table>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">11</span><h3>Registre DIP 20 ans — calcul ch. 410 / ch. 415 sans se tromper</h3></div>
+<div class="box info"><div class="box-icon">🧮</div><div class="box-body"><div class="box-title">Méthode de calcul</div>Pour les immeubles, la valeur résiduelle de l'impôt préalable se réduit linéairement sur 20 ans. Le sens du changement décide de la ligne : usage imposable → usage exclu = correction au ch. 415 ; usage exclu → usage imposable/optionné = dégrèvement ultérieur au ch. 410.</div></div>
+<div class="calc">
+<div class="calc-title">Exemple pédagogique — rénovation commercial → résidentiel</div>
+<div class="calc-row"><span class="calc-label">DIP déduit sur rénovation 2022</span><span class="calc-val">CHF 162'000</span></div>
+<div class="calc-row"><span class="calc-label">Changement d'affectation au 01.01.2026</span><span class="calc-val">4 années écoulées</span></div>
+<div class="calc-row"><span class="calc-label">Durée résiduelle immobilier</span><span class="calc-val">16 / 20</span></div>
+<div class="calc-row hl"><span class="calc-label">Correction à déclarer</span><span class="calc-val">CHF 162'000 × 16/20 = CHF 129'600 au ch. 415</span></div>
+</div>
+<div class="box warn"><div class="box-icon">⚠️</div><div class="box-body"><div class="box-title">Valeur résiduelle et grosses rénovations</div>Pour les immeubles, art. 31 et 32 appliquent une réduction linéaire de <strong>1/20 par année écoulée</strong>. Selon l'OTVA, la valeur du sol est exclue du calcul de la valeur résiduelle. Si les coûts d'une phase de rénovation dépassent <strong>5% de la valeur d'assurance du bâtiment avant rénovation</strong>, les règles des art. 71/74 OTVA imposent une analyse sur l'ensemble des coûts de la phase, y compris les dépenses de maintien de valeur.</div></div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">12</span><h3>Contrôle qualité final — dossier immobilier défendable</h3></div>
+<div class="box afc"><div class="box-icon">🏛</div><div class="box-body"><div class="box-title">Question senior avant validation du décompte</div>Peut-on expliquer en 5 minutes à l'AFC pourquoi chaque franc de DIP immobilier a été déduit, corrigé ou refusé ? Si la réponse est non, le dossier n'est pas prêt.</div></div>
+<table class="tbl">
+<thead><tr><th>Contrôle</th><th>Oui / Non</th><th>Action si non</th></tr></thead>
+<tbody>
+<tr><td>Option art. 22 clairement exercée et compatible avec l'usage ?</td><td>□</td><td>Corriger bail / facture / note TVA</td></tr>
+<tr><td>Valeur du sol séparée de la base imposable ?</td><td>□</td><td>Reprendre acte et ventilation</td></tr>
+<tr><td>Surface commerciale / résidentielle documentée ?</td><td>□</td><td>Annexer plans et tableau m²</td></tr>
+<tr><td>Charges directes séparées des charges communes ?</td><td>□</td><td>Reclasser factures par affectation</td></tr>
+<tr><td>Registre DIP 20 ans à jour ?</td><td>□</td><td>Compléter année, montant, affectation, solde</td></tr>
+<tr><td>Prestataires étrangers analysés ch. 383 / 400 / 405 ?</td><td>□</td><td>Corriger acquisitions et DIP selon affectation</td></tr>
+<tr><td>Art. 38 vérifié en cas de transfert de patrimoine ?</td><td>□</td><td>Préparer formulaire/dossier art. 38</td></tr>
+<tr><td>Concordance annuelle et rectificatif seulement si écart ?</td><td>□</td><td>Documenter concordance ; corriger les différences</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" disabled="">← Début</button>
+<button class="btn btn-p" onclick="NAV.go('legis')">Législation &amp; Sources →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION B — LÉGISLATION
+══════════════════════════════════════════ -->
+<div class="section" id="sec-legis">
+<div class="hero">
+<div class="hero-eye">Section B · Législation &amp; Sources</div>
+<div class="hero-h">Textes légaux, doctrine AFC &amp; jurisprudence Immo/Construction</div>
+<div class="hero-p">Toutes les sources à connaître pour argumenter, rédiger et défendre un dossier TVA immobilier. Sources juridiques à vérifier dans leur version en vigueur ; audit du module effectué le 08.09.2026.</div>
+<div class="hero-chips"><span class="chip">📜 LTVA + OTVA</span><span class="chip">📋 Publication AFC immobilier</span><span class="chip">⚖️ Jurisprudence vérifiée</span><span class="chip">🕐 ~30 min</span></div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">1</span><h3>Articles LTVA essentiels — Immobilier &amp; Construction</h3></div>
+<div class="leg-card">
+<div class="leg-icon li-blue">📘</div>
+<div>
+<div class="leg-ref">RS 641.20 — LTVA · Articles Immobilier/Construction</div>
+<div class="leg-title">Loi fédérale régissant la TVA — Articles clés</div>
+<div class="leg-desc">Art. 21 al. 2 ch. 20 (transfert droits réels immobiliers) · Art. 21 al. 2 ch. 21 (location/mise à disposition) · Art. 22 (option) · Art. 8 al. 2 let. f (lieu immeuble) · Art. 30-32 (DIP, changement d'affectation, dégrèvement ultérieur) · Art. 38 (procédure de déclaration) · Art. 45 (impôt sur acquisitions)</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr" rel="noopener noreferrer" target="_blank">📄 LTVA complète (FR)</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_21" rel="noopener noreferrer" target="_blank">⚡ Art. 21 Exclusions</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_22" rel="noopener noreferrer" target="_blank">⚡ Art. 22 Option</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/615/fr#art_38" rel="noopener noreferrer" target="_blank">⚡ Art. 38 Transfert</a>
+</div>
+</div>
+</div>
+<div class="leg-card">
+<div class="leg-icon li-blue">📗</div>
+<div>
+<div class="leg-ref">RS 641.201 — OTVA · Dispositions Immobilier</div>
+<div class="leg-title">Ordonnance TVA — Articles immobilier et DIP</div>
+<div class="leg-desc">OTVA : méthodes de correction DIP, double affectation, prestations à soi-même et dégrèvement ultérieur ; consulter la version en vigueur pour les articles applicables</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr" rel="noopener noreferrer" target="_blank">📄 OTVA complète (FR)</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr#art_27" rel="noopener noreferrer" target="_blank">⚡ Art. 27-29 Option</a>
+<a class="leg-link" href="https://www.fedlex.admin.ch/eli/cc/2009/828/fr#art_65" rel="noopener noreferrer" target="_blank">⚡ Art. 65-66 DIP mixte</a>
+</div>
+</div>
+</div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">2</span><h3>Doctrine AFC — Info TVA Immobilier</h3></div>
+<div class="leg-card">
+<div class="leg-icon li-green">🏛</div>
+<div>
+<div class="leg-ref">Publication AFC — Administration, location et vente d’immeubles</div>
+<div class="leg-title">Publication officielle AFC — La référence immobilier TVA</div>
+<div class="leg-desc">La pratique AFC actuelle doit être consultée pour tout dossier immobilier. Couvre notamment : vente/location, option art. 22, immeubles mixtes, promotion immobilière, DIP et corrections. À consulter dans les publications AFC actuelles lors d'un contrôle.</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.estv.admin.ch/fr/publications-concernant-la-pratique-tva" rel="noopener noreferrer" target="_blank">📋 Publication AFC immobilier Immeubles (FR)</a>
+<a class="leg-link" href="https://www.estv.admin.ch/estv/fr/home/mehrwertsteuer.html" rel="noopener noreferrer" target="_blank">🔗 AFC Portail TVA</a>
+<a class="leg-link" href="https://eportal.admin.ch" rel="noopener noreferrer" target="_blank">💻 ePortal AFC</a>
+</div>
+</div>
+</div>
+<div class="leg-card">
+<div class="leg-icon li-green">🏗</div>
+<div>
+<div class="leg-ref">Publications AFC — Construction et travaux</div>
+<div class="leg-title">Publication AFC — TVA secteur construction</div>
+<div class="leg-desc">Couvre : TDFN spécifique construction, taux par type de travaux, sous-traitants, travaux immobiliers, acquisitions art. 45, corrections art. 31/32. À lire en complément de la publication AFC immobilier pour les dossiers promotion/construction.</div>
+<div class="leg-links">
+<a class="leg-link" href="https://www.estv.admin.ch/estv/fr/home/mehrwertsteuer/fachinformationen/mwst-info.html" rel="noopener noreferrer" target="_blank">📋 Liste Info TVA AFC</a>
+</div>
+</div>
+</div>
+</div>
+<div class="block">
+<div class="block-h"><span class="bnum">3</span><h3>Jurisprudence — méthode de vérification</h3></div>
+<div class="box info"><div class="box-icon">⚖️</div><div class="box-body"><div class="box-title">Ne pas mémoriser un numéro d’arrêt sans son considérant</div>Dans M08, une jurisprudence n’est citée que si le texte de l’arrêt a été vérifié et soutient précisément la règle enseignée. Pour un dossier réel : partir de la LTVA et de l’OTVA, vérifier la pratique AFC en vigueur, puis rechercher au besoin la jurisprudence TF/TAF pertinente.</div></div>
+<div class="leg-card"><div class="leg-icon li-gold">⚖️</div><div><div class="leg-ref">Tribunal fédéral / Tribunal administratif fédéral</div><div class="leg-title">Recherche ciblée par question juridique</div><div class="leg-desc">Rechercher par article et par problème concret : option art. 22, double affectation art. 30, correction art. 31–32, procédure de déclaration art. 38, impôt sur les acquisitions art. 45. Lire les considérants avant de reprendre une règle.</div><div class="leg-links"><a class="leg-link" href="https://www.bger.ch/fr/home.html" rel="noopener noreferrer" target="_blank">🔍 Tribunal fédéral</a><a class="leg-link" href="https://www.bvger.ch/fr/jurisprudence" rel="noopener noreferrer" target="_blank">🔍 Tribunal administratif fédéral</a></div></div></div>
+<div class="box info"><div class="box-icon">📌</div><div class="box-body"><div class="box-title">Registre foncier comme pièce du dossier</div>Le registre foncier cantonal peut servir à vérifier propriétaire, droits réels, servitudes, droit de superficie et caractéristiques du bien. Il s’agit d’une source factuelle du dossier, pas d’une présomption de contrôle automatique de l’AFC.</div></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('theory')">← Théorie</button>
+<button class="btn btn-p" onclick="NAV.go('cases')">Cas pratiques →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION C — CAS PRATIQUES
+══════════════════════════════════════════ -->
+<div class="section" id="sec-cases">
+<div class="hero">
+<div class="hero-eye">Section C · Cas pratiques</div>
+<div class="hero-h">9 cas progressifs — Simple → Format examen professionnel</div>
+<div class="hero-p">Chaque cas applique un aspect de la théorie immobilier/construction. Les cas 5-9 combinent plusieurs modules et correspondent au niveau d’un examen professionnel.</div>
+<div class="hero-chips"><span class="chip">🟢 Cas 1–3 · Qualification</span><span class="chip">🟡 Cas 4–6 · Calculs DIP</span><span class="chip">🔴 Cas 7–9 · Complexe</span></div>
+</div>
+<!-- CAS 1 -->
+<div class="case-card"><div class="case-head"><div class="case-n">1</div><div class="case-meta"><div class="case-title">Villa privée — DIP déduit à tort dès l'origine</div><div class="case-sub">Art. 28–29 LTVA · affectation privée/exclue</div></div><span class="risk risk-g">🟢 Qualification</span></div><div class="case-body">
+<div class="scenario">M. Rochat exploite une entreprise de maçonnerie assujettie. Il rénove sa villa utilisée exclusivement à titre privé et fait comptabiliser CHF 18'200 de TVA comme DIP de l'entreprise.</div>
+<div class="step" id="c1s1"><div class="step-q"><span class="step-qn">Q1</span> Le DIP est-il déductible ?</div><div class="step-opts"><button class="opt" onclick="CASES.answer('c1s1',this,true,'Correct. L’affectation privée ne donne pas droit au DIP de l’entreprise.')">A) Non, l'affectation privée ne donne pas droit au DIP</button><button class="opt" onclick="CASES.answer('c1s1',this,false,'Non. L’assujettissement de l’entreprise ne transforme pas une dépense privée en input déductible.')">B) Oui, car M. Rochat est assujetti</button></div><div class="step-expl" id="c1s1-expl">Le problème existe dès la déduction initiale : il ne faut pas créer artificiellement un « changement d'affectation » deux ans plus tard alors que la villa était privée dès le début.<span class="art-tag">art. 28–29 LTVA</span></div></div>
+<div class="step" id="c1s2"><div class="step-q"><span class="step-qn">Q2</span> Quel réflexe de correction ?</div><div class="step-opts"><button class="opt" onclick="CASES.answer('c1s2',this,true,'Correct. Corriger le DIP indûment revendiqué dans la période pertinente et traiter intérêts/procédure selon le dossier.')">A) Corriger la déduction indue ; documenter période et intérêts</button><button class="opt" onclick="CASES.answer('c1s2',this,false,'Non. La règle 1/20 vise la valeur résiduelle lorsqu’un droit au DIP cesse après une utilisation antérieure ouvrant droit.')">B) Appliquer automatiquement 18/20 parce que la rénovation date de deux ans</button></div><div class="step-expl" id="c1s2-expl">La règle de valeur résiduelle art. 31 n'est pas un moyen de légitimer une déduction initiale qui n'avait jamais de base entrepreneuriale donnant droit au DIP.<span class="art-tag">art. 28–31 LTVA</span></div></div>
+</div></div>
+<!-- CAS 2 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">2</div><div class="case-meta"><div class="case-title">M. Roux — Bail commercial avec option art. 22</div><div class="case-sub">Art. 22 LTVA · DIP récupérable · Loyer TTC</div></div><span class="risk risk-g">🟢 Simple</span></div>
+<div class="case-body">
+<div class="scenario">M. Roux loue ses locaux commerciaux CHF 4'500 HT/mois à une SA de conseil assujettie TVA. Il exerce l'option art. 22. Il vient d'effectuer des travaux de rénovation : CHF 95'000 HT facturés par un entrepreneur suisse.</div>
+<div class="step" id="c2s1">
+<div class="step-q"><span class="step-qn">Q1</span> Loyer mensuel TTC avec option (4'500 × 1,081) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. CHF 4\'500 est le loyer HT. TTC = 4\'500 × 1,081.')">A) CHF 4'500 — le loyer HT</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,true,'Correct. CHF 4\'500 × 1,081 = CHF 4\'864,50. Le locataire (assujetti) déduit la TVA = CHF 364,50 comme DIP → loyer économique net = CHF 4\'500.')">B) CHF 4'864,50 (4'500 × 1,081)</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. Ce calcul est incorrect.')">C) CHF 4'617 (4'500 × 1,026)</button>
+<button class="opt" onclick="CASES.answer('c2s1',this,false,'Non. L\'option rend le loyer imposable 8,1%, pas exonéré.')">D) CHF 4'500 — option = exonération loyer</button>
+</div>
+<div class="step-expl" id="c2s1-expl">CHF 4'500 × 1,081 = <strong>CHF 4'864,50 TTC</strong>. Le locataire assujetti récupère CHF 364,50 de DIP mensuel → loyer net = CHF 4'500 HT (neutre pour lui).<span class="art-tag">art. 22 LTVA</span></div>
+</div>
+<div class="step" id="c2s2">
+<div class="step-q"><span class="step-qn">Q2</span> DIP récupérable sur travaux de rénovation (CHF 95'000 × 8,1%) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. Sans option, pas de DIP. Avec option art. 22, le DIP est intégralement récupérable.')">A) CHF 0 — immeuble locatif</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,true,'Correct. CHF 95\'000 × 8,1% = CHF 7\'695 de DIP récupérable grâce à l\'option art. 22. C\'est l\'avantage principal de l\'option.')">B) CHF 7'695 (95'000 × 8,1%)</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. L\'option donne droit au DIP intégral, pas partiel.')">C) CHF 3'848 (50% seulement)</button>
+<button class="opt" onclick="CASES.answer('c2s2',this,false,'Non. Le DIP est lié aux travaux de rénovation du bien optionné.')">D) CHF 0 — DIP uniquement sur le loyer</button>
+</div>
+<div class="step-expl" id="c2s2-expl">CHF 95'000 × 8,1% = <strong>CHF 7'695</strong> DIP récupérable grâce à l'option. C'est l'avantage financier concret de l'option art. 22.<span class="art-tag">art. 22 + 28 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Bilan option art. 22 — M. Roux</div>
+<div class="calc-row"><span class="calc-label">TVA collectée annuelle (4'500 × 8,1% × 12)</span><span class="calc-val">+ CHF 4'374</span></div>
+<div class="calc-row"><span class="calc-label">DIP travaux rénovation (95'000 × 8,1%)</span><span class="calc-val">− CHF 7'695</span></div>
+<div class="calc-row total"><span class="calc-label">Crédit AFC 1ère année</span><span class="calc-val">CHF 3'321 remboursé</span></div>
+<div class="calc-row hl"><span class="calc-label">Avantage net option</span><span class="calc-val">DIP travaux récupéré !</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 3 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">3</div><div class="case-meta"><div class="case-title">Immeuble Rue du Lac — Clé DIP mixte par surface</div><div class="case-sub">Art. 30 LTVA · art. 30 LTVA · pratique AFC · Ventilation m²</div></div><span class="risk risk-g">🟢 Simple</span></div>
+<div class="case-body">
+<div class="scenario">Immeuble mixte : RDC commercial 180 m² (bail avec option art. 22) + 3 appartements résidentiels 420 m². Surface totale : 600 m². Travaux toiture CHF 280'000 HT (TVA : CHF 22'680). Entretien commun CHF 35'000 HT (TVA : CHF 2'835).</div>
+<div class="step" id="c3s1">
+<div class="step-q"><span class="step-qn">Q1</span> Clé DIP par surface (commercial/total) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. 180 m² commercial / 600 m² total = 30%, pas 50%.')">A) 50% (forfait)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,true,'Correct. 180 m² / 600 m² = 30% de déductibilité DIP. Clé objective conforme art. 30 LTVA · pratique AFC.')">B) 30% (180 m² / 600 m²)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. La clé surface utilise les m² réels, pas les étages.')">C) 25% (1 RDC sur 4 niveaux)</button>
+<button class="opt" onclick="CASES.answer('c3s1',this,false,'Non. La clé ne peut pas être 100% même si le RDC génère le DIP.')">D) 100% — seul le RDC paie le DIP</button>
+</div>
+<div class="step-expl" id="c3s1-expl">Clé surface : 180 m² / 600 m² = <strong>30%</strong>. DIP déductible sur travaux toiture : CHF 22'680 × 30% = CHF 6'804. DIP perdu : CHF 15'876 (partie résidentielle).<span class="art-tag">art. 30 LTVA · art. 30 LTVA · pratique AFC</span></div>
+</div>
+<div class="step" id="c3s2">
+<div class="step-q"><span class="step-qn">Q2</span> Quelle documentation doit accompagner ce calcul dans le dossier TVA ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. Le permis de construire ne suffit pas — il faut documenter la ventilation des surfaces et des charges.')">A) Le permis de construire cantonal suffit</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. L\'accord préalable de l\'AFC n\'est pas requis — mais la documentation doit être disponible lors du contrôle.')">B) Un accord préalable de l'AFC sur la clé choisie</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,true,'Correct. art. 30 LTVA · pratique AFC + doctrine AFC : plan avec m² par affectation, tableau clé annuelle, liste des charges ventilées. Sans doc = l\'AFC applique sa propre clé (défavorable). Dossier à préparer systématiquement.')">C) Plan surfaces avec m² par affectation + tableau clé + liste charges ventilées</button>
+<button class="opt" onclick="CASES.answer('c3s2',this,false,'Non. Une simple note interne ne suffit pas — le dossier doit être complet et vérifiable.')">D) Une note interne estimant la clé de répartition</button>
+</div>
+<div class="step-expl" id="c3s2-expl">Documentation à vérifier (art. 30 LTVA · pratique AFC) : (1) Plan de l'immeuble avec m² par affectation, (2) Tableau annuel de la clé retenue, (3) Liste des charges avec colonne commerciale / résidentielle / commune. Sans ces éléments, l'AFC applique sa propre clé lors du contrôle — généralement défavorable.<span class="art-tag">art. 30 LTVA · pratique AFC · art. 30 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">DIP immeuble mixte — Rue du Lac</div>
+<div class="calc-row"><span class="calc-label">Clé surface commerciale</span><span class="calc-val">30% (180/600 m²)</span></div>
+<div class="calc-row"><span class="calc-label">DIP toiture (22'680 × 30%)</span><span class="calc-val">CHF 6'804</span></div>
+<div class="calc-row"><span class="calc-label">DIP entretien (2'835 × 30%)</span><span class="calc-val">CHF 851</span></div>
+<div class="calc-row total"><span class="calc-label">DIP total déductible</span><span class="calc-val">CHF 7'655</span></div>
+<div class="calc-row danger"><span class="calc-label">DIP perdu (partie résidentielle 70%)</span><span class="calc-val">CHF 17'860</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 4 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">4</div><div class="case-meta"><div class="case-title">Promoteur Dubois — Immeuble bureaux avec option</div><div class="case-sub">Art. 22 · DIP construction · Avantage B2B</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div>
+<div class="case-body">
+<div class="scenario">Promoteur Dubois SA construit un immeuble de bureaux pour CHF 4'200'000 HT (TVA : CHF 340'200). Revente prévue à une SA assujettie pour CHF 6'000'000 HT. Le promoteur, en tant que vendeur assujetti, exerce clairement l'option art. 22. L'acheteur prévoit un usage de bureaux, donc non exclusivement d'habitation.</div>
+<div class="step" id="c4s1">
+<div class="step-q"><span class="step-qn">Q1</span> DIP récupérable sur construction si option exercée à la vente ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. Avec option valide, le DIP sur construction est intégralement récupérable.')">A) CHF 0 — immeuble = exclu par principe</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,true,'Correct. Option art. 22 clairement exercée par le vendeur et usage non exclusivement d'habitation → les coûts de construction affectés à cette vente imposée peuvent ouvrir le droit au DIP selon les conditions générales. Dans le cas simplifié, CHF 340'200 sont déductibles. Le statut TVA de l'acheteur influence surtout la neutralité économique pour lui, pas la condition légale de l'option.')">B) CHF 340'200 — DIP intégral (option valide)</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. Ce n\'est pas la moitié — le DIP est intégral avec option valide.')">C) CHF 170'100 (50% forfait)</button>
+<button class="opt" onclick="CASES.answer('c4s1',this,false,'Non. Le DIP est sur la construction, pas sur la TVA de vente.')">D) CHF 486'000 (6'000'000 × 8,1%)</button>
+</div>
+<div class="step-expl" id="c4s1-expl">Dans ce cas simplifié, l'option transforme la vente en opération imposée et les coûts de construction qui lui sont directement affectés ouvrent le droit au DIP. TVA de vente : CHF 486'000 ; DIP de construction : CHF 340'200, sous réserve des conditions générales de déduction. L'acheteur ne peut déduire la TVA que dans la mesure de son propre droit au DIP.<span class="art-tag">art. 22 + 28 LTVA</span></div>
+</div>
+<div class="step" id="c4s2">
+<div class="step-q"><span class="step-qn">Q2</span> Si Dubois vendait le même immeuble SANS option, la vente restant exclue, quel serait le traitement du DIP directement lié à cette opération dans ce cas simplifié ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. Sans option, la vente reste exclue même si le promoteur est assujetti.')">A) CHF 340'200 — le promoteur est assujetti TVA</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. Il n\'y a pas de DIP partiel sur une vente résidentielle — c\'est 0% intégral.')">B) CHF 170'100 (50% forfait résidentiel)</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,true,'Correct. Sans option, la vente immobilière reste exclue selon l'art. 21 al. 2 ch. 20 ; les coûts directement affectés à cette opération exclue n'ouvrent pas le droit au DIP dans ce cas simplifié. Les CHF 340\'200 de TVA sur la construction sont un coût définitif intégré au prix de revient. Sur un projet de CHF 4,2M, c\'est CHF 340\'200 perdus.')">C) CHF 0 — vente résidentielle exclue, DIP non déductible / coût du projet si aucune option ou affectation imposable n’est possible</button>
+<button class="opt" onclick="CASES.answer('c4s2',this,false,'Non. La TVA sur la vente et le DIP sont deux éléments distincts. Sans option = pas de TVA collectée ET pas de DIP.')">D) CHF 340'200 − TVA vente = crédit DIP</button>
+</div>
+<div class="step-expl" id="c4s2-expl">Sans option : vente immobilière exclue selon l'art. 21 al. 2 ch. 20. Dans ce cas simplifié, le DIP directement lié à la construction destinée à cette vente n'est pas déductible. Les CHF 340'200 de TVA payée à l'entrepreneur = coût définitif du projet. Intégré dans le prix de revient et répercuté dans le prix de vente. C'est pourquoi l'analyse de la destination et de l'option est critique avant tout projet de promotion.<span class="art-tag">art. 21 al. 2 ch. 20/21 + art. 28 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Bilan TVA promoteur Dubois SA</div>
+<div class="calc-row"><span class="calc-label">TVA collectée vente (6'000'000 × 8,1%)</span><span class="calc-val">+ CHF 486'000</span></div>
+<div class="calc-row"><span class="calc-label">DIP construction (4'200'000 × 8,1%)</span><span class="calc-val">− CHF 340'200</span></div>
+<div class="calc-row total"><span class="calc-label">Dette nette AFC</span><span class="calc-val">CHF 145'800</span></div>
+<div class="calc-row hl"><span class="calc-label">DIP récupéré grâce à l'option</span><span class="calc-val">CHF 340'200 ✅</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 5 -->
+<div class="case-card"><div class="case-head"><div class="case-n">5</div><div class="case-meta"><div class="case-title">Sous-traitant étranger — importation, inscription ou impôt sur les acquisitions ?</div><div class="case-sub">Art. 45 LTVA · entreprise étrangère · douane</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div><div class="case-body">
+<div class="scenario">Construction SA mandate une entreprise polonaise non inscrite au registre TVA suisse pour des travaux sur un chantier genevois. Le dossier ne précise pas encore si l'entreprise étrangère apporte ses propres matériaux.</div>
+<div class="step" id="c5s1"><div class="step-q"><span class="step-qn">Q1</span> Peut-on conclure immédiatement « acquisition art. 45 » ?</div><div class="step-opts"><button class="opt" onclick="CASES.answer('c5s1',this,false,'Non. Il faut d’abord qualifier le contrat, le matériel importé et l’assujettissement éventuel du fournisseur étranger.')">A) Oui, toute facture étrangère de chantier est une acquisition art. 45</button><button class="opt" onclick="CASES.answer('c5s1',this,true,'Correct. Le traitement dépend notamment du matériel importé, du statut TVA du fournisseur et de la nature de la prestation.')">B) Non, appliquer un arbre de décision</button></div><div class="step-expl" id="c5s1-expl">Si l'entreprise étrangère importe du matériel pour exécuter les travaux, l'impôt à l'importation peut porter sur la valeur totale de la prestation. Si aucun matériel n'est importé ou qu'il est fourni par le destinataire suisse, l'impôt sur les acquisitions peut être dû sous conditions. Il faut en parallèle tester l'assujettissement suisse du fournisseur étranger.<span class="art-tag">art. 45 LTVA · pratique AFC</span></div></div>
+<div class="step" id="c5s2"><div class="step-q"><span class="step-qn">Q2</span> Une fois l'impôt correct identifié, le DIP est-il automatiquement intégral ?</div><div class="step-opts"><button class="opt" onclick="CASES.answer('c5s2',this,false,'Non. Le DIP dépend de l’affectation de l’immeuble.')">A) Oui, toujours</button><button class="opt" onclick="CASES.answer('c5s2',this,true,'Correct. L’affectation imposable/optionnée, exclue ou mixte détermine la déduction.')">B) Non, la déduction suit l'affectation</button></div><div class="step-expl" id="c5s2-expl">Un chantier résidentiel exclu peut conduire à un coût TVA définitif, alors qu'un chantier entièrement affecté à des prestations donnant droit au DIP peut permettre une déduction correspondante.<span class="art-tag">art. 28–30 LTVA</span></div></div>
+</div></div>
+<!-- CAS 6 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">6</div><div class="case-meta"><div class="case-title">Peinture Martin SA — Travaux propres et correction DIP</div><div class="case-sub">Art. 31 LTVA · ch. 415 · Usage résidentiel exclu</div></div><span class="risk risk-o">🟡 Intermédiaire</span></div>
+<div class="case-body">
+<div class="scenario">Peinture Martin SA (assujettie) rénove avec ses propres ouvriers un appartement résidentiel qu'elle détient. Achats de matériaux : CHF 12'000 HT + TVA CHF 972. Main-d'œuvre interne : CHF 28'000. Aucun loyer optionné, usage résidentiel exclu.</div>
+<div class="step" id="c6s1">
+<div class="step-q"><span class="step-qn">Q1</span> Quel est le bon réflexe TVA ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. Le problème principal n est pas une facture externe manquante, mais le droit au DIP et l affectation résidentielle.')">A) Aucune TVA à analyser car il n'y a pas de facture externe</button>
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. Ancien réflexe dangereux. On ne taxe pas mécaniquement toute main-d œuvre interne au coût de revient dans ce module actuel.')">B) TVA 8,1% sur CHF 40'000 de coût de revient</button>
+<button class="opt" onclick="CASES.answer('c6s1',this,true,'Correct. Usage résidentiel exclu : le DIP sur les matériaux et frais liés n est pas déductible ou doit être corrigé selon art. 31. La trace attendue est une exclusion/correction DIP, pas une taxation automatique des salaires internes.')">C) Exclure ou corriger le DIP lié aux matériaux et frais affectés au résidentiel</button>
+<button class="opt" onclick="CASES.answer('c6s1',this,false,'Non. Le taux réduit ne concerne pas les travaux de peinture.')">D) Déclarer uniquement 2,6% sur les matériaux</button>
+</div>
+<div class="step-expl" id="c6s1-expl">Pour un immeuble résidentiel exclu, Peinture Martin SA ne peut pas déduire le DIP des achats liés à cet usage. Si CHF 972 de DIP sur matériaux a été déduit, il doit être exclu ou corrigé au <strong>ch. 415</strong> selon art. 31 LTVA. La main-d'œuvre interne doit être documentée pour le coût du projet, mais la priorité TVA actuelle est la correction de l'impôt préalable.<span class="art-tag">art. 31 LTVA · ch. 415</span></div>
+</div>
+<div class="step" id="c6s2">
+<div class="step-q"><span class="step-qn">Q2</span> Si Peinture Martin SA rénovait son local commercial optionné, que se passerait-il ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. La destination optionnée donne droit au DIP selon les conditions habituelles.')">A) Le DIP serait toujours refusé</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,true,'Correct. Local commercial optionné : les achats grevés de TVA liés au local peuvent donner droit au DIP. Il faut conserver factures, affectation et lien avec la partie optionnée.')">B) DIP sur matériaux/frais déductible selon affectation commerciale optionnée</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. Ce n est pas une acquisition étrangère.')">C) Acquisition art. 45 à vérifier</button>
+<button class="opt" onclick="CASES.answer('c6s2',this,false,'Non. Les travaux de rénovation sont au taux normal si facturés par un prestataire.')">D) TVA 2,6% sur les matériaux</button>
+</div>
+<div class="step-expl" id="c6s2-expl">Local commercial avec option : l'affectation donne droit au DIP sur les achats liés, sous réserve d'une facture conforme et d'une documentation claire. La différence entre résidentiel et commercial n'est pas le type de travaux, mais l'affectation TVA de l'immeuble.<span class="art-tag">art. 22 + art. 28 + art. 31 LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Travaux propres — Peinture Martin SA</div>
+<div class="calc-row"><span class="calc-label">Matériaux achetés</span><span class="calc-val">CHF 12'000 HT</span></div>
+<div class="calc-row"><span class="calc-label">TVA sur matériaux</span><span class="calc-val">CHF 972</span></div>
+<div class="calc-row"><span class="calc-label">Usage de l'objet</span><span class="calc-val">Résidentiel exclu</span></div>
+<div class="calc-row total"><span class="calc-label">DIP admis</span><span class="calc-val">CHF 0</span></div>
+<div class="calc-row hl"><span class="calc-label">Correction si DIP déjà déduit</span><span class="calc-val">ch. 415</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 7 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">7</div><div class="case-meta"><div class="case-title">Immeuble Lamartine — Cas intégré complet (format examen professionnel)</div><div class="case-sub">Option · DIP mixte · Acquisition · Correction affectation · ⬛ Risque critique</div></div><span class="risk risk-r">🔴 Complexe</span></div>
+<div class="case-body">
+<div class="scenario">Immobilier Lamartine SA (assujettie) possède un immeuble de 800 m² : RDC CHF 200 m² loué à une SA de design assujettie (option art. 22 exercée, loyer CHF 6'000 HT/mois) + 3 étages résidentiels 600 m².
+Travaux entretien annuels : CHF 80'000 HT (TVA : CHF 6'480). Clé surface : 25% commercial.
+Travaux rénovation RDC uniquement : CHF 45'000 HT (TVA : CHF 3'645).
+Sous-traitant peinture allemand (non inscrit CH) pour travaux communs : CHF 28'000 HT.</div>
+<div class="step" id="c7s1"><div class="step-q"><span class="step-qn">Q1</span> DIP sur travaux communs (CHF 6'480 × clé 25%) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. Clé surface 25% s\'applique aux charges communes.')">A) CHF 6'480 (100%)</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,true,'Correct. CHF 6\'480 × 25% = CHF 1\'620 DIP déductible sur travaux communs (clé surface 200/800).')">B) CHF 1'620 (6'480 × 25%)</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. La clé est 25%, pas 50%.')">C) CHF 3'240 (50%)</button>
+<button class="opt" onclick="CASES.answer('c7s1',this,false,'Non. Lamartine SA est assujettie et a optionné le RDC.')">D) CHF 0</button>
+</div>
+<div class="step-expl" id="c7s1-expl">Charges communes → clé surface : 200 m² / 800 m² = 25%. DIP = CHF 6'480 × 25% = <strong>CHF 1'620</strong>.<span class="art-tag">art. 30 LTVA</span></div>
+</div>
+<div class="step" id="c7s2"><div class="step-q"><span class="step-qn">Q2</span> DIP sur travaux RDC uniquement (CHF 3'645) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s2',this,true,'Correct. Travaux directement liés au RDC commercial optionné → DIP intégral 100% = CHF 3\'645. Pas de prorata car charge directement affectée à l\'usage imposable.')">A) CHF 3'645 (100% — charge directe RDC commercial)</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. Les travaux sont spécifiques au RDC commercial → 100% déductible.')">B) CHF 911 (25% prorata)</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. Charge directe = pas de prorata.')">C) CHF 1'822 (50%)</button>
+<button class="opt" onclick="CASES.answer('c7s2',this,false,'Non. L\'option est valide et le RDC commercial donne droit au DIP.')">D) CHF 0</button>
+</div>
+<div class="step-expl" id="c7s2-expl">Charge directement affectée au RDC commercial optionné → DIP direct <strong>100% = CHF 3'645</strong>. Pas de prorata sur les charges directes.<span class="art-tag">art. 28 + 30 LTVA</span></div>
+</div>
+<div class="step" id="c7s3"><div class="step-q"><span class="step-qn">Q3</span> Acquisition à vérifier sur peintre allemand (CHF 28'000 HT) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. L\'acquisition est à vérifier dès que le sous-traitant n\'est pas inscrit en Suisse.')">A) Non — travaux sur sol suisse = TVA allemande</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,true,'Correct. Art. 45 : lieu = Suisse (art. 8 al. 2 let. f). Peintre allemand non inscrit CH → Lamartine SA déclare 28\'000 × 8,1% = CHF 2\'268 en acquisition, puis déduit selon clé 25% = CHF 567.')">B) Oui — CHF 2'268 (28'000 × 8,1%) déclaré + CHF 567 déduit (25%)</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. La franchise ne s\'applique pas aux acquisitions.')">C) Non — &lt; CHF 100'000 de seuil acquisition</button>
+<button class="opt" onclick="CASES.answer('c7s3',this,false,'Non. TVA suisse s\'applique car le lieu de la prestation est en Suisse.')">D) Non — entrepreneur UE = TVA UE</button>
+</div>
+<div class="step-expl" id="c7s3-expl">Art. 45 LTVA : si l'impôt sur les acquisitions s'applique, CHF 28'000 × 8,1% = CHF 2'268 à déclarer. DIP (travaux communs → clé 25%) : CHF 2'268 × 25% = CHF 567. Net AFC = CHF 1'701 (partie résidentielle).<span class="art-tag">art. 45 + art. 8 al. 2 let. f LTVA</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Décompte TVA annuel — Lamartine SA</div>
+<div class="calc-row"><span class="calc-label">TVA collectée loyers RDC (6'000 × 8,1% × 12)</span><span class="calc-val">+ CHF 5'832</span></div>
+<div class="calc-row"><span class="calc-label">Acquisition peintre DE (28'000 × 8,1%)</span><span class="calc-val">+ CHF 2'268</span></div>
+<div class="calc-row"><span class="calc-label">DIP charges communes (6'480 × 25%)</span><span class="calc-val">− CHF 1'620</span></div>
+<div class="calc-row"><span class="calc-label">DIP travaux RDC (100%)</span><span class="calc-val">− CHF 3'645</span></div>
+<div class="calc-row"><span class="calc-label">DIP acquisition DE (2'268 × 25%)</span><span class="calc-val">− CHF 567</span></div>
+<div class="calc-row total"><span class="calc-label">Dette nette AFC</span><span class="calc-val">CHF 2'268</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 8 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">8</div><div class="case-meta"><div class="case-title">Fiduciaire Moreau — Simulation contrôle AFC immobilier</div><div class="case-sub">Art. 78-80 LTVA · DIP indu · Rappel + intérêts</div></div><span class="risk risk-r">🔴 Contrôle AFC</span></div>
+<div class="case-body">
+<div class="scenario">L'AFC contrôle la SCI Horizon (3 ans de décomptes). Constat : SCI Horizon a déduit 100% du DIP sur CHF 220'000 HT de travaux pour un immeuble mixte (40% commercial avec option, 60% résidentiel). DIP total déduit : CHF 17'820. La clé de surface réelle = 40%.</div>
+<div class="step" id="c8s1"><div class="step-q"><span class="step-qn">Q1</span> DIP réellement déductible (CHF 17'820 × 40%) ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. Il faut appliquer la clé 40%.')">A) CHF 17'820 (100% déjà déduit)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,true,'Correct. CHF 17\'820 × 40% = CHF 7\'128 déductible. DIP indu = CHF 10\'692 à rembourser.')">B) CHF 7'128 (17'820 × 40%)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. La clé est 40%, pas 50%.')">C) CHF 8'910 (50%)</button>
+<button class="opt" onclick="CASES.answer('c8s1',this,false,'Non. SCI Horizon est assujettie avec option sur 40% commercial.')">D) CHF 0</button>
+</div>
+<div class="step-expl" id="c8s1-expl">DIP correct : CHF 17'820 × 40% = <strong>CHF 7'128</strong>. DIP indu = CHF 10'692. Sur 3 ans, le redressement comprend le rappel du DIP indu et les intérêts moratoires selon le taux DFF applicable à la période concernée.<span class="art-tag">art. 30 LTVA + art. 30 LTVA · pratique AFC</span></div>
+</div>
+<div class="step" id="c8s2">
+<div class="step-q"><span class="step-qn">Q2</span> Si SCI Horizon avait détecté l'erreur elle-même AVANT l'annonce du contrôle AFC, quelle était la meilleure stratégie ?</div>
+<div class="step-opts">
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. Attendre le contrôle sans agir = intérêts qui continuent à courir. Et le contrôle peut déboucher sur des pénalités supplémentaires.')">A) Attendre le contrôle AFC et gérer à ce moment</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. La correction discrète sans notification ne supprime pas les intérêts moratoires ni la responsabilité sur les décomptes antérieurs.')">B) Corriger discrètement les prochains décomptes</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,true,'Correct. Art. 102 LTVA — dénonciation spontanée AVANT tout contrôle annoncé = effet pénal favorable possible si les conditions art. 102 sont remplies. SCI Horizon corrige les décomptes, paie les CHF 10\'692 + intérêts, mais évite les sanctions pénales. art. 42 LTVA · prescription : la dénonciation doit être spontanée et complète.')">C) Dénonciation spontanée art. 102 — payer le rappel + intérêts, demander le traitement selon art. 102 si les conditions sont remplies</button>
+<button class="opt" onclick="CASES.answer('c8s2',this,false,'Non. Une demande de remise n\'est possible que sur décision formelle de rappel, pas avant le contrôle.')">D) Demander une remise de dette à l'AFC</button>
+</div>
+<div class="step-expl" id="c8s2-expl">Art. 102 LTVA : une dénonciation spontanée avant contrôle annoncé peut produire un effet pénal favorable si toutes les conditions sont remplies. SCI Horizon aurait dû : (1) calculer le DIP indu de CHF 10'692 et les intérêts selon le taux DFF applicable, (2) déposer une correction avec lettre explicative, (3) payer le rappel et les intérêts. Bénéfice : effet pénal favorable possible selon art. 102 LTVA, sans automatisme.<span class="art-tag">art. 102 LTVA · art. 42 LTVA · prescription</span></div>
+</div>
+<div class="calc">
+<div class="calc-title">Redressement AFC — SCI Horizon</div>
+<div class="calc-row"><span class="calc-label">DIP déduit à tort (17'820 × 60%)</span><span class="calc-val">CHF 10'692</span></div>
+<div class="calc-row danger"><span class="calc-label">Intérêts moratoires</span><span class="calc-val">à recalculer selon taux DFF et période</span></div>
+<div class="calc-row hl"><span class="calc-label">Redressement total AFC</span><span class="calc-val">CHF 10'692 + intérêts</span></div>
+<div class="calc-row"><span class="calc-label">Leçon : clé documentée dès le 1er jour</span><span class="calc-val">→ rappel évitable</span></div>
+</div>
+</div>
+</div>
+<!-- CAS 9 -->
+<div class="case-card">
+<div class="case-head"><div class="case-n">9</div><div class="case-meta"><div class="case-title">Atelier final — 20 flux immobiliers à classifier</div><div class="case-sub">Article · Ligne décompte · DIP · Preuve</div></div><span class="risk risk-r">🔴 Synthèse 10/10</span></div>
+<div class="case-body">
+<div class="scenario">Objectif : classer rapidement 20 flux fréquents en fiduciaire. Pour chaque ligne, l'apprenant doit identifier la qualification TVA, la ligne du décompte, le droit au DIP et la preuve principale.</div>
+<table class="tbl">
+<thead><tr><th>#</th><th>Flux</th><th>Qualification attendue</th><th>Ligne / DIP / preuve</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Vente appartement résidentiel</td><td>Exclu art. 21 ch. 20 ; option bloquée si habitation</td><td>ch. 230 ; pas de DIP ; acte + usage</td></tr>
+<tr><td>2</td><td>Location bureaux avec option</td><td>Option art. 22 si usage non résidentiel et option claire</td><td>ch. 303 ; DIP 400/405 ; bail + clause TVA</td></tr>
+<tr><td>3</td><td>Valeur du sol dans vente optionnée</td><td>À ventiler séparément ; ne pas taxer comme bâtiment</td><td>Acte notarié + ventilation sol/bâtiment</td></tr>
+<tr><td>4</td><td>Travaux toiture immeuble mixte</td><td>Charge commune</td><td>DIP selon clé ; tableau m² / recettes</td></tr>
+<tr><td>5</td><td>Travaux uniquement commerce optionné</td><td>Affectation directe imposable</td><td>DIP 100% ; facture + localisation</td></tr>
+<tr><td>6</td><td>Travaux uniquement appartements</td><td>Affectation directe exclue</td><td>DIP 0% ; intégrer au coût</td></tr>
+<tr><td>7</td><td>Architecte français pour immeuble suisse</td><td>Lieu immeuble CH ; acquisition à vérifier</td><td>ch. 383 + DIP selon usage ; contrat + facture</td></tr>
+<tr><td>8</td><td>Architecte suisse pour immeuble en France</td><td>Lieu immeuble étranger</td><td>hors TVA CH / ch. 221 ; preuve localisation</td></tr>
+<tr><td>9</td><td>Parking loué avec appartement</td><td>Accessoire résidentiel</td><td>exclu ; pas d'option ; bail</td></tr>
+<tr><td>10</td><td>Parking commercial indépendant</td><td>Option possible selon usage</td><td>ch. 303 si option ; bail séparé</td></tr>
+<tr><td>11</td><td>Hôtel / hébergement</td><td>Imposable de plein droit</td><td>taux spécial hébergement ; DIP selon activité</td></tr>
+<tr><td>12</td><td>Bail commercial sans clause TVA</td><td>Exclu non optionné</td><td>ch. 230 ; DIP à exclure/corriger</td></tr>
+<tr><td>13</td><td>Changement bureaux optionnés → logements</td><td>Correction d'affectation art. 31</td><td>ch. 415 ; registre 20 ans</td></tr>
+<tr><td>14</td><td>Changement logements → bureaux optionnés</td><td>Dégrèvement ultérieur art. 32</td><td>ch. 410 ; preuves DIP historique</td></tr>
+<tr><td>15</td><td>Apport immeuble commercial à société sœur</td><td>Art. 38 à vérifier</td><td>ch. 225 / formulaire ; historique DIP</td></tr>
+<tr><td>16</td><td>Facture entrepreneur sans n° TVA</td><td>DIP à documenter ; demander une facture corrigée et conserver la preuve matérielle</td><td>demander facture corrigée</td></tr>
+<tr><td>17</td><td>Subvention rénovation énergétique</td><td>Autre mouvement de fonds selon qualification</td><td>ch. 900/910 + impact DIP ch. 420 à analyser</td></tr>
+<tr><td>18</td><td>Redevance DDP commerciale</td><td>Assimilable à loyer ; option possible selon usage</td><td>bail/DDP + usage + option</td></tr>
+<tr><td>19</td><td>Vente immeuble sans option après gros travaux récents</td><td>Changement d'affectation possible</td><td>ch. 415 ; registre 20 ans</td></tr>
+<tr><td>20</td><td>Concordance annuelle sans écart</td><td>Aucun rectificatif nécessaire</td><td>conserver tableau interne ; 240 jours</td></tr>
+</tbody>
+</table>
+<div class="box ok"><div class="box-icon">✅</div><div class="box-body"><div class="box-title">Résultat attendu</div>L'apprenant doit être capable de justifier chaque ligne par une chaîne complète : flux → article → ligne décompte → DIP → preuve → risque AFC.</div></div>
+</div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('legis')">← Législation</button>
+<button class="btn btn-p" onclick="NAV.go('errors')">Erreurs fréquentes →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION D — ERREURS FRÉQUENTES
+══════════════════════════════════════════ -->
+<div class="section" id="sec-errors">
+<div class="hero">
+<div class="hero-eye">Section D · Erreurs fréquentes</div>
+<div class="hero-h">8 erreurs critiques — Pratique immobilier &amp; AFC</div>
+<div class="hero-p">Chaque erreur est reliée à son risque fiscal, à la méthode de correction et aux pièces à reconstituer. Les connaître est aussi important que la théorie.</div>
+<div class="hero-chips"><span class="chip">⚠️ 8 erreurs</span><span class="chip">🏛 Risque & correction</span><span class="chip">⬛ Risque critique dominant</span></div>
+</div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🏠</div><div><div class="err-htitle">1 — DIP à 100% sur immeuble mixte sans clé de répartition</div><div class="err-hsub">Très fréquent · art. 30 LTVA · pratique AFC · <span style="color:var(--gold2)">⬛ Risque critique</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Déduire 100% du DIP sur tous les travaux d'un immeuble mixte car "une partie est optionnée donc tout est déductible".</div><div class="err-right">✅ Art. 30 LTVA : affecter d’abord directement les charges identifiables. Pour les coûts réellement communs, appliquer une clé objective et économiquement appropriée (surface, recettes ou autre critère pertinent) et documenter la méthode.</div><div class="err-afc"><strong>Impact :</strong> Une déduction trop élevée doit être recalculée selon l’affectation correcte, avec intérêts selon le taux DFF applicable. Le montant et la période doivent être reconstitués à partir des factures et des règles de prescription applicables.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">📝</div><div><div class="err-htitle">2 — Option art. 22 exercée sans vérifier l’usage réel et la documentation</div><div class="err-hsub">Élevé · DIP à risque / correction possible · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Exercer l’option simplement parce que le local est “commercial”, sans vérifier l’usage réel, la clause TVA, la ventilation et l’intérêt économique du dossier.</div><div class="err-right">✅ Vérifier d’abord l’usage : l’option est exclue si l’objet est utilisé exclusivement à des fins d’habitation. Le n° TVA du locataire n’est pas une condition légale générale, mais il reste important pour l’intérêt économique et la récupération de la TVA côté locataire.</div><div class="err-afc"><strong>Impact AFC :</strong> Si l’option n’est pas défendable ou si l’usage réel ne correspond pas au dossier, le DIP lié peut être corrigé avec intérêts selon le taux DFF applicable.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🔄</div><div><div class="err-htitle">3 — Oublier la correction d'affectation art. 31 lors de la vente</div><div class="err-hsub">Très grave · Correction proportionnelle à vérifier · <span style="color:var(--gold2)">⬛ Risque critique</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Vendre un immeuble sans option après avoir déduit du DIP sur des rénovations récentes. "Le DIP est acquis — on l'a déduit légalement."</div><div class="err-right">✅ Art. 31 LTVA : changement d'affectation = correction DIP à vérifier proportionnellement à la durée restante (période de correction de 20 ans pour les biens immobiliers).</div><div class="err-afc"><strong>Impact AFC :</strong> Rénovation CHF 500'000 HT il y a 2 ans, DIP CHF 40'500. Vente sans option 2 ans après → correction 18/20 = CHF 36'450 à rembourser + intérêts.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🌍</div><div><div class="err-htitle">4 — Prestataire étranger mal qualifié</div><div class="err-hsub">Très fréquent en construction · Art. 45 / importation / assujettissement · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Payer un sous-traitant portugais CHF 180'000 pour des travaux de maçonnerie sur un chantier genevois sans déclarer l'acquisition. "Il facture sans TVA suisse — c'est son affaire."</div><div class="err-right">✅ Avant de conclure à l’art. 45, vérifier la nature du contrat, l’assujettissement suisse du fournisseur étranger et l’importation éventuelle de matériel. Selon la configuration, le dossier peut relever de l’impôt à l’importation, de l’impôt sur les acquisitions ou de l’inscription TVA du fournisseur. Le DIP suit ensuite l’affectation.</div><div class="err-afc"><strong>Impact :</strong> Une mauvaise qualification peut produire un impôt non déclaré, une déduction erronée ou une obligation d’immatriculation omise. Reconstituer le traitement avant de chiffrer rappel, intérêts ou éventuelle sanction.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🏗</div><div><div class="err-htitle">5 — DIP sur travaux résidentiels déduit à tort</div><div class="err-hsub">Très fréquent · DIP non admis si usage exclu · <span style="color:var(--gold2)">⬛ Risque critique</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Un promoteur assujetti déduit le DIP sur la construction d'appartements résidentiels car "il est assujetti TVA". La destination de l'immeuble est ignorée.</div><div class="err-right">✅ Le DIP suit la destination de l'immeuble. Résidentiel = exclu → 0% DIP sur les travaux. Sur CHF 3M de construction résidentielle, CHF 243'000 de DIP non déductible / coût du projet si aucune option ou affectation imposable n’est possible = à intégrer dans le prix de revient.</div><div class="err-afc"><strong>Impact AFC :</strong> Rappel intégral du DIP déduit, augmenté des intérêts moratoires selon le taux DFF applicable à la période concernée. Le montant doit être recalculé précisément dossier par dossier.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🔧</div><div><div class="err-htitle">6 — Travaux propres / correction DIP non déclarés</div><div class="err-hsub">Fréquent entreprises du bâtiment · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Une entreprise de peinture utilise ses ouvriers pour rénover son propre appartement résidentiel sans déclarer la TVA sur le coût de revient. "Pas de facturation externe = pas de TVA."</div><div class="err-right">✅ Art. 31 LTVA ne signifie pas une taxation mécanique de toute main-d'œuvre interne au coût de revient. Pour les biens fabriqués par l'assujetti, l'art. 69 OTVA prévoit notamment une correction fondée sur l'impôt préalable grevant les matériaux et travaux de tiers, avec supplément forfaitaire de 33% pour l'utilisation de l'infrastructure, sous réserve de la preuve effective.</div><div class="err-afc"><strong>Impact AFC :</strong> Recalculer l'impôt préalable effectivement concerné selon art. 31 LTVA et art. 69 OTVA ; ne pas appliquer 8,1% à toute la masse salariale interne.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">📐</div><div><div class="err-htitle">7 — Clé de répartition DIP non documentée et instable</div><div class="err-hsub">art. 30 LTVA · pratique AFC · <span style="color:var(--rust)">🔴 Risque Élevé</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Changer de méthode de clé chaque année (surface en N-1, recettes en N, ad hoc en N+1) sans justification, toujours au maximum de la déductibilité.</div><div class="err-right">✅ Art. 30 LTVA : la méthode doit représenter l’utilisation des inputs. Une modification de clé est possible si les faits ou la pertinence économique changent, mais elle doit être documentée et reproductible.</div><div class="err-afc"><strong>Impact :</strong> Une méthode non défendable peut être corrigée pour les périodes concernées selon les règles de procédure et de prescription applicables. D’où l’importance d’un dossier permettant de reproduire chaque calcul.</div></div></div>
+<div class="err-block"><div class="err-head"><div class="err-icon">🔗</div><div><div class="err-htitle">8 — Transfert d'immeuble sans analyse de l'art. 38</div><div class="err-hsub">Très grave · Procédure et valeurs historiques à sécuriser · <span style="color:var(--gold2)">⬛ Risque critique</span></div></div></div><div class="err-body"><div class="err-wrong">❌ Apporter un immeuble commercial (stocks locatifs, contrats de bail) dans une holding sans déclarer la procédure art. 38 LTVA à l'AFC. "Le notaire a tout géré."</div><div class="err-right">✅ Art. 38 LTVA : tester si la procédure de déclaration est obligatoire ou facultative, documenter les valeurs transférées et utiliser le formulaire 764 selon la pratique AFC en vigueur. L’acquéreur reprend notamment la base de calcul et le coefficient de déduction pour les valeurs transférées selon l’art. 38 al. 4.</div><div class="err-afc"><strong>Impact :</strong> Une mauvaise application de l’art. 38 peut fausser la taxation du transfert et les valeurs historiques reprises. Les conséquences doivent être déterminées selon le traitement réellement appliqué, pas par une pénalité chiffrée automatique.</div></div></div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('cases')">← Cas pratiques</button>
+<button class="btn btn-p" onclick="NAV.go('quiz')">Autotest QCM →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION E — QUIZ 35 QUESTIONS
+══════════════════════════════════════════ -->
+<div class="section" id="sec-quiz">
+<div class="hero">
+<div class="hero-eye">Section E · Autotest QCM</div>
+<div class="hero-h">35 questions · Format examen professionnel · Timer 25 min</div>
+<div class="hero-p">Répondez sans notes. Seuil de validation : 75% (27/35). Auto-submit à 0:00.</div>
+<div class="hero-chips"><span class="chip">⏱ 25 min</span><span class="chip">🎯 75% requis</span><span class="chip">🔁 SM-2</span></div>
+</div>
+<div id="quiz-area">
+<div class="quiz-hdr">
+<div class="q-count" id="q-cnt">Question 1 / 35</div>
+<div class="q-timer" id="q-tmr">25:00</div>
+</div>
+<div class="q-bar"><div class="q-fill" id="q-fill" style="width:0%"></div></div>
+<div class="q-card">
+<div class="q-art" id="q-art"></div>
+<div class="q-text" id="q-txt"></div>
+<div class="q-opts" id="q-opts"></div>
+<div class="q-expl" id="q-expl">
+<div class="q-expl-title" id="q-expl-t"></div>
+<div id="q-expl-b" style="font-size:12.5px;line-height:1.65;margin-top:4px"></div>
+<div class="sm2-row"><span class="sm2-lbl">Aisance ?</span>
+<button class="sm2-btn" onclick="QUIZ.sm2(0)">❌ Pas su</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(3)">😐 Difficile</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(4)">🙂 Bien</button>
+<button class="sm2-btn" onclick="QUIZ.sm2(5)">⭐ Facile</button>
+</div>
+</div>
+</div>
+<div class="q-nav">
+<button class="q-skip" onclick="QUIZ.skip()">Passer →</button>
+<button class="btn btn-p" id="q-next" onclick="QUIZ.next()" style="display:none">Question suivante →</button>
+</div>
+</div>
+<div class="q-results" id="quiz-results">
+<div class="res-score"><span id="r-score">0</span><span class="res-pct">%</span></div>
+<div class="res-label" id="r-label">Résultat M08</div>
+<div class="res-grid">
+<div class="res-chip"><div class="rc-n" id="r-ok">0</div><div class="rc-l">Correctes</div></div>
+<div class="res-chip"><div class="rc-n" id="r-ko">0</div><div class="rc-l">Incorrectes</div></div>
+<div class="res-chip"><div class="rc-n" id="r-min">0</div><div class="rc-l">Minutes</div></div>
+</div>
+<div id="r-msg" style="font-size:13px;color:var(--muted);margin-bottom:16px"></div>
+<div style="display:flex;gap:10px;justify-content:center">
+<button class="btn btn-g" onclick="QUIZ.restart()">Recommencer</button>
+<button class="btn btn-p" onclick="NAV.go('memo')">Mémo-fiches →</button>
+</div>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION F — FLASHCARDS
+══════════════════════════════════════════ -->
+<div class="section" id="sec-memo">
+<div class="hero">
+<div class="hero-eye">Section F · Mémo-fiches</div>
+<div class="hero-h">30 flashcards Immo/Construction — 5 catégories · SM-2</div>
+<div class="hero-p">Cliquez pour retourner. Évaluez pour programmer la prochaine révision.</div>
+<div class="hero-chips"><span class="chip">🃏 30 cartes</span><span class="chip">📚 5 catégories</span><span class="chip">🔁 SM-2</span></div>
+</div>
+<div class="fc-wrap">
+<div class="fc-cat-lbl" id="fc-cat-lbl">Catégorie</div>
+<div class="fc-ctr" id="fc-ctr">Carte 1 / 30</div>
+<div class="fc-outer" onclick="FC.flip()">
+<div class="fc" id="fc">
+<div class="fc-front">
+<div class="fc-lbl">Terme — cliquer pour révéler</div>
+<div class="fc-cat" id="fc-cat-disp"></div>
+<div class="fc-term" id="fc-term"></div>
+<div class="fc-hint">👆 Cliquez pour la définition</div>
+</div>
+<div class="fc-back">
+<div class="fc-lbl">Définition</div>
+<div class="fc-def" id="fc-def"></div>
+<div class="fc-artag" id="fc-art"></div>
+</div>
+</div>
+</div>
+<div class="fc-btns">
+<button class="fc-btn fc-bad" onclick="FC.rate(0)">À revoir</button>
+<button class="fc-btn fc-ok" onclick="FC.rate(3)">Moyen</button>
+<button class="fc-btn fc-good" onclick="FC.rate(5)">Connu</button>
+</div>
+<div class="fc-dots" id="fc-dots"></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('quiz')">← Autotest</button>
+<button class="btn btn-p" onclick="NAV.go('vocab')">Vocabulaire →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION G — VOCABULAIRE
+══════════════════════════════════════════ -->
+<div class="section" id="sec-vocab">
+<div class="hero">
+<div class="hero-eye">Section G · Vocabulaire professionnel</div>
+<div class="hero-h">Terminologie TVA Immobilier — FR / Deutsch</div>
+<div class="hero-p">Termes indispensables pour les dossiers AFC bilingues et la pratique fiduciaire immobilière.</div>
+</div>
+<div class="vocab-grid">
+<div class="vocab-card"><div class="vfr">Exclusion immeuble</div><div class="vde">Steuerausnahme Grundstücke</div><div class="vdef">Vente et location d'immeubles = exclues par principe art. 21 al. 2 ch. 20/21 LTVA. Ni TVA facturée ni DIP récupérable. Exception : option art. 22.</div><div class="vart">art. 21 al. 2 ch. 20/21 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Option d'imposition immobilière</div><div class="vde">Steueroption Liegenschaft</div><div class="vdef">Droit de soumettre volontairement une opération exclue à la TVA (art. 22). Conditions : usage non exclusivement résidentiel + option claire. Irrévocable pour la durée du contrat.</div><div class="vart">art. 22 LTVA · OTVA art. 27-29</div></div>
+<div class="vocab-card"><div class="vfr">Immeuble mixte</div><div class="vde">Gemischte Liegenschaft</div><div class="vdef">Immeuble à usage partiellement commercial (imposable) et partiellement résidentiel (exclu). DIP selon clé de répartition objective (surface ou recettes). art. 30 LTVA · pratique AFC.</div><div class="vart">art. 30 LTVA · art. 30 LTVA · pratique AFC</div></div>
+<div class="vocab-card"><div class="vfr">Clé de répartition DIP</div><div class="vde">Vorsteueraufteilungsschlüssel</div><div class="vdef">Méthode objective pour ventiler le DIP d'un immeuble mixte entre partie imposable (déductible) et partie exclue (non déductible). Surface (m²) ou recettes. Stable dans le temps.</div><div class="vart">art. 30 LTVA · OTVA art. 65</div></div>
+<div class="vocab-card"><div class="vfr">Changement d'affectation</div><div class="vde">Nutzungsänderung</div><div class="vdef">Passage d'un usage imposable à exclu (ou inversement). Déclenche une correction du DIP précédemment déduit (art. 31) proportionnellement à la durée restante d'utilisation.</div><div class="vart">art. 31 LTVA · OTVA art. 72</div></div>
+<div class="vocab-card"><div class="vfr">Travaux de construction / rénovation</div><div class="vde">Bauleistungen / Renovationsarbeiten</div><div class="vdef">Imposables 8,1% (art. 25 al.1). Lieu = lieu de l'immeuble (art. 8 al. 2 let. f). DIP déductible selon destination de l'immeuble. Facture conforme art. 26 à vérifier.</div><div class="vart">art. 8 al. 2 let. f + 25 al.1 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Imposition à l'acquisition (travaux)</div><div class="vde">Bezugsteuer Bauleistungen</div><div class="vdef">Auto-taxation sur travaux réalisés par un entrepreneur étranger non inscrit en Suisse. Lieu = Suisse (art. 8 al. 2 let. f). Déclaré + déduit dans le décompte selon destination.</div><div class="vart">art. 45 + art. 8 al. 2 let. f LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Travaux propres / changement d’affectation</div><div class="vde">Eigenleistungen / Nutzungsänderung</div><div class="vdef">Utilisation de ressources propres ou d’achats grevés de TVA pour un bien à usage exclu. Réflexe actuel : documenter les achats, l’affectation et corriger/exclure le DIP selon art. 31, sans automatisme de TVA sur toute la main-d’œuvre interne.</div><div class="vart">art. 31 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Promotion immobilière</div><div class="vde">Liegenschaftsentwicklung / Projektentwicklung</div><div class="vdef">Construction de biens immobiliers pour vente ou location. La destination détermine le régime TVA : commercial + option = DIP récupérable. Résidentiel = DIP perdu intégralement.</div><div class="vart">art. 21-22 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Droit de superficie (DDP)</div><div class="vde">Baurecht / Baurechtsvertrag</div><div class="vdef">Droit réel permettant de construire sur le fonds d'autrui. La redevance périodique = assimilée à un loyer → exclu avec option possible si superficiaire assujetti.</div><div class="vart">art. 21 al. 2 ch. 20/21 LTVA · CC art. 779</div></div>
+<div class="vocab-card"><div class="vfr">Transfert en marche (immeuble)</div><div class="vde">Übertragung im Meldeverfahren</div><div class="vdef">Apport d'immeuble commercial dans une holding = procédure art. 38 à appliquer si les conditions sont remplies si conditions réunies. Pas de TVA entre parties. Cessionnaire reprend tous droits et obligations TVA.</div><div class="vart">art. 38 LTVA · art. 38 LTVA · Info TVA 11</div></div>
+<div class="vocab-card"><div class="vfr">Concordance CA construction</div><div class="vde">Umsatzabstimmung Baubereich</div><div class="vdef">Réconciliation entre CA comptable (avancement chantiers, acomptes, retenues) et CA TVA déclaré. Première vérification AFC lors d'un contrôle d'entreprise de construction.</div><div class="vart">art. 71-72 LTVA · art. 70–72 LTVA · concordance</div></div>
+<div class="vocab-card"><div class="vfr">Entrepreneur général (EG)</div><div class="vde">Generalunternehmer (GU)</div><div class="vdef">Assujetti qui coordonne et sous-traite tous les corps de métier. Facture au maître d'ouvrage le prix global 8,1%. Déduit le DIP sur ses sous-traitants suisses. Déclare les acquisitions sur sous-traitants étrangers.</div><div class="vart">art. 45 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Registre foncier (RF)</div><div class="vde">Grundbuch</div><div class="vdef">Registre officiel des droits réels immobiliers (propriété, servitudes, hypothèques). Consulté par l'AFC pour vérifier les mutations et croiser avec les déclarations TVA.</div><div class="vart">CC art. 3142 ss</div></div>
+<div class="vocab-card"><div class="vfr">Part privée et copropriété (PPE)</div><div class="vde">Stockwerkeigentum (StWE)</div><div class="vdef">Part exclusive de propriété dans un immeuble en copropriété. Vente/location d'une PPE résidentielle = exclu. PPE commerciale utilisée à des fins non résidentielles = option possible.</div><div class="vart">art. 21 al. 2 ch. 20/21 · art. 22 LTVA</div></div>
+<div class="vocab-card"><div class="vfr">Décision formelle AFC</div><div class="vde">Formelle Verfügung ESTV</div><div class="vdef">Décision motivée de l'AFC (rappel, redressement). Délai de réclamation en principe 30 jours. Vérifier la voie de droit et les délais indiqués dans la décision. TF = dernière instance.</div><div class="vart">art. 82-85 LTVA · art. 313 LTVA</div></div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('memo')">← Mémo-fiches</button>
+<button class="btn btn-p" onclick="NAV.go('cheat')">Cheatsheet AFC →</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════
+     SECTION H — CHEATSHEET
+══════════════════════════════════════════ -->
+<div class="section" id="sec-cheat">
+<div class="hero">
+<div class="hero-eye">Section H · Cheatsheet AFC</div>
+<div class="hero-h">Mémo praticien Immo/Construction — Décisions rapides</div>
+<div class="hero-p">À imprimer et garder dans votre dossier immobilier. Mis à jour au 17.05.2026.</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Vente / Location — Décision rapide</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Vente immeuble résidentiel</span><span class="ci-v r">Exclu — 0% TVA — 0 DIP</span></div>
+<div class="ci"><span class="ci-l">Vente immeuble commercial (option)</span><span class="ci-v g">8,1% TVA — DIP intégral</span></div>
+<div class="ci"><span class="ci-l">Location résidentielle</span><span class="ci-v r">Exclue — jamais d'option</span></div>
+<div class="ci"><span class="ci-l">Location commerciale (option)</span><span class="ci-v g">8,1% si option clairement exercée ; DIP locataire seulement s’il y a droit</span></div>
+<div class="ci"><span class="ci-l">Hôtel / hébergement court terme</span><span class="ci-v g">3,8% imposable — DIP intégral</span></div>
+<div class="ci"><span class="ci-l">Droit de superficie (DDP)</span><span class="ci-v o">Exclu — option possible si usage non exclusivement résidentiel</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">DIP immeuble mixte — Formule</div>
+<div style="background:var(--navy);border-radius:7px;padding:14px 18px;font-family:monospace;font-size:12.5px;color:var(--gold2);line-height:2.2;margin-bottom:12px">
+      Clé surface = m² imposable / m² total<br/>
+      DIP commun = DIP × clé surface<br/>
+      DIP direct (seul usage imposable) = 100%<br/>
+      DIP direct (seul usage exclu) = 0%<br/>
+      art. 30 LTVA · pratique AFC : clé stable + documentée à vérifier
+    </div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Travaux — Décision TVA rapide</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Travaux — taux</span><span class="ci-v">8,1% (art. 25 al.1)</span></div>
+<div class="ci"><span class="ci-l">Lieu des travaux</span><span class="ci-v">Lieu de l'immeuble (art. 8 al. 2 let. f)</span></div>
+<div class="ci"><span class="ci-l">DIP travaux immeuble commercial</span><span class="ci-v g">OUI — 100%</span></div>
+<div class="ci"><span class="ci-l">DIP travaux immeuble résidentiel</span><span class="ci-v r">NON — 0%</span></div>
+<div class="ci"><span class="ci-l">Sous-traitant étranger non inscrit CH</span><span class="ci-v r">Acquisition art. 45 à appliquer si les conditions sont remplies</span></div>
+<div class="ci"><span class="ci-l">Travaux propres usage exclu</span><span class="ci-v r">Art. 31 — correction/exclusion DIP, pas automatisme coût de revient</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Seuils &amp; Délais critiques — Immobilier</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Seuil assujettissement TVA</span><span class="ci-v">CHF 100'000 HT/an</span></div>
+<div class="ci"><span class="ci-l">Prescription TVA (rappel AFC)</span><span class="ci-v">5 ans (art. 42 LTVA)</span></div>
+<div class="ci"><span class="ci-l">Décompte périodique</span><span class="ci-v">60 jours après fin de période ; concordance annuelle 240 jours si correction nécessaire</span></div>
+<div class="ci"><span class="ci-l">Réclamation vs décision AFC</span><span class="ci-v">30 jours (délai de rigueur)</span></div>
+<div class="ci"><span class="ci-l">Durée correction DIP immeuble</span><span class="ci-v">20 ans (art. 31/32 LTVA)</span></div>
+<div class="ci"><span class="ci-l">Archivage documents TVA</span><span class="ci-v">10 ans en général ; 20 ans pour pièces liées aux immeubles</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Intérêts &amp; Sanctions — Immobilier TVA</div>
+<div class="cheat-grid">
+<div class="ci"><span class="ci-l">Intérêts moratoires AFC</span><span class="ci-v r">taux DFF applicable ; seuil de perception à vérifier selon période</span></div>
+<div class="ci"><span class="ci-l">Dénonciation spontanée (art. 102)</span><span class="ci-v g">Effet pénal possible si les conditions art. 102 sont remplies</span></div>
+<div class="ci"><span class="ci-l">Soustraction TVA (art. 96 LTVA)</span><span class="ci-v r">Sanction selon faute, avantage fiscal et circonstances</span></div>
+<div class="ci"><span class="ci-l">Infractions TVA graves — à qualifier selon dossier</span><span class="ci-v r">Risque pénal à analyser ; ne pas automatiser</span></div>
+<div class="ci"><span class="ci-l">Rappel DIP indu</span><span class="ci-v r">Remboursement + taux DFF applicable depuis échéance</span></div>
+<div class="ci"><span class="ci-l">Estimation AFC (art. 79)</span><span class="ci-v r">Si concordance impossible → AFC estime</span></div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Articles clés — M08 Immobilier &amp; Construction</div>
+<div style="font-size:12.5px;line-height:2.1;color:#2C2C3E">
+<div><strong>Art. 21 al. 2 ch. 20/21 LTVA</strong> — Vente et location immeubles = exclues (base absolue)</div>
+<div><strong>Art. 22 LTVA</strong> — Option d'imposition (usage non exclusivement résidentiel + option claire)</div>
+<div><strong>Art. 8 al. 2 let. f LTVA</strong> — Lieu travaux = lieu de l'immeuble (même si entrepreneur étranger)</div>
+<div><strong>Art. 31 LTVA</strong> — Travaux propres : corriger/exclure le DIP lié à l'usage exclu</div>
+<div><strong>Art. 30 LTVA</strong> — Double affectation : clé de répartition DIP immeuble mixte</div>
+<div><strong>Art. 31 LTVA</strong> — Changement d'affectation : correction DIP proportionnelle</div>
+<div><strong>Art. 38 LTVA</strong> — Transfert immeuble en marche : procédure à appliquer si les conditions sont remplies</div>
+<div><strong>Art. 45 LTVA</strong> — Acquisition travaux par entrepreneur étranger non inscrit CH</div>
+<div><strong>Art. 87 LTVA</strong> — Intérêts moratoires taux DFF applicable sans franchise</div>
+<div><strong>art. 30 LTVA · pratique AFC</strong> — Immeuble mixte : clé DIP objective à vérifier</div>
+<div><strong>art. 38 LTVA · Info TVA 11</strong> — Art. 38 : procédure à appliquer si les conditions sont remplies (pas optionnelle)</div>
+<div><strong>principe de substance économique et interdiction de l’abus</strong> — Évasion fiscale : option artificielle contestable</div>
+<div><strong>art. 70–72 LTVA · concordance</strong> — Concordance CA : fardeau preuve sur l'assujetti</div>
+<div><strong>Publication AFC immobilier</strong> — Doctrine immeubles (estv.admin.ch)</div>
+<div><strong>Publication AFC construction / travaux</strong> — Doctrine construction et travaux</div>
+</div>
+</div>
+<div class="cheat-block">
+<div class="cheat-title">Checklist pré-vente / pré-bail immobilier</div>
+<div style="font-size:12.5px;line-height:2.3;color:#2C2C3E">
+<div>□ <strong>Vérifier le n° TVA</strong> de l'acheteur/locataire (estv.admin.ch/uid)</div>
+<div>□ <strong>Confirmer usage commercial</strong> prévu (pas résidentiel, même partiel)</div>
+<div>□ <strong>Calculer DIP récupérable</strong> vs TVA à collecter sur la durée</div>
+<div>□ <strong>Rédiger clause option</strong> art. 22 dans le contrat de bail/vente</div>
+<div>□ <strong>Préparer clé de répartition</strong> DIP si immeuble mixte (plan + tableau)</div>
+<div>□ <strong>Vérifier correction affectation</strong> art. 31 si DIP déduit précédemment</div>
+<div>□ <strong>Vérifier art. 38</strong> si transfert d'immeuble dans une structure</div>
+</div>
+</div>
+<div class="sec-nav">
+<button class="btn btn-g" onclick="NAV.go('vocab')">← Vocabulaire</button>
+<button class="btn btn-gold" onclick="PROG.finish()">✓ Terminer M08</button>
+</div>
+<div class="finish-box" id="m08-complete"><div class="finish-copy"><strong>✅ M08 terminé</strong><span>Votre progression est enregistrée. Étape suivante : M09 — Secteurs sensibles.</span></div><div class="finish-actions"><a class="btn btn-g" href="index.html" style="text-decoration:none">← Tableau de bord</a><button class="btn btn-p" onclick="goNextModule()">Continuer avec M09 →</button></div></div>
+</div>
+</div>
+</div>
+<script>
+const SECS=['theory','legis','cases','errors','quiz','memo','vocab','cheat'];
+const STORE='tva_m08_v4_3';
+const state=JSON.parse(localStorage.getItem(STORE)||'{}');
+
+const NAV={
+  go(sec){
+    SECS.forEach(function(s){
+      const el=document.getElementById('sec-'+s);if(el)el.style.display='none';
+      const btn=document.querySelector('.sb-item[data-sec="'+s+'"]');if(btn)btn.classList.remove('active');
+    });
+    const t=document.getElementById('sec-'+sec);if(t)t.style.display='block';
+    const nb=document.querySelector('.sb-item[data-sec="'+sec+'"]');if(nb)nb.classList.add('active');
+    if(!state[sec]){state[sec]=1;PROG.save();}
+    PROG.update();
+    if(sec==='quiz'&&!QUIZ.started)QUIZ.init();
+    if(sec==='memo')FC.init();
+    window.scrollTo(0,0);
+  }
+};
+const PROG={
+  save(){localStorage.setItem(STORE,JSON.stringify(state));},
+  update(){
+    const n=SECS.filter(function(s){return state[s];}).length;
+    const pct=state.completed?100:Math.round(n/SECS.length*100);
+    document.getElementById('prog-pct').textContent=pct+'%';
+    document.getElementById('prog-fill').style.width=pct+'%';
+    SECS.forEach(function(s){const btn=document.querySelector('.sb-item[data-sec="'+s+'"]');if(btn&&state[s])btn.classList.add('visited');});
+  },
+  finish(){state.completed=1;SECS.forEach(function(s){state[s]=1;});PROG.save();syncDashboardDone();const box=document.getElementById('m08-complete');if(box)box.style.display='flex';PROG.update();}
+};
+function syncDashboardDone(){try{const k='tvaSpecialisteTvaDashboardV1';const d=JSON.parse(localStorage.getItem(k)||'{}');d.M08='done';localStorage.setItem(k,JSON.stringify(d));}catch(e){}}
+function goNextModule(){PROG.finish();window.location.href='m09-secteurs-sensibles-tva.html';}
+
+const CASES={
+  answer(stepId,btn,correct,expl){
+    const step=document.getElementById(stepId);if(!step)return;
+    step.querySelectorAll('.opt').forEach(function(o){
+      o.disabled=true;
+      if(o.getAttribute('onclick')&&o.getAttribute('onclick').indexOf(',true,')>-1)o.classList.add('correct');
+    });
+    if(!correct)btn.classList.add('wrong');
+    const ex=document.getElementById(stepId+'-expl');if(ex)ex.classList.add('show');
+  }
+};
+
+// QUIZ 35 questions
+var QS=[
+  {a:'art. 21 al. 2 ch. 20/21 LTVA',q:'La vente d\'un appartement residentiel est :',o:['Imposable 8,1%','Exclue - pas de TVA, pas de DIP','Exoneree avec DIP art. 23','Imposable 2,6% taux reduit'],c:1,e:'Art. 21 al. 2 ch. 20/21 LTVA : vente de tout immeuble = exclue par principe. Ni TVA ni DIP. Usage residentiel interdit l\'option art. 22.'},
+  {a:'art. 22 LTVA',q:'L\'option art. 22 pour une location commerciale est possible si :',o:['Le propriétaire est assujetti et l option est exercée clairement ; l objet n est pas utilisé exclusivement pour l habitation','Le locataire est obligatoirement assujetti TVA','L immeuble est en zone commerciale','Loyer > CHF 2\'000/mois'],c:0,e:'Art. 22 LTVA : l option doit être exercée clairement par l assujetti ; en immobilier, elle est exclue si le destinataire utilise ou compte utiliser l objet exclusivement à des fins d habitation. L usage réel et l’intérêt économique n est pas une condition légale générale, même s il est déterminant pour l intérêt économique du DIP.'},
+  {a:'art. 30 LTVA',q:'Des travaux réellement communs concernent un immeuble dont 40% des surfaces servent à une activité optionnée et 60% à des logements. Si la surface reflète correctement l’utilisation, quelle part du DIP commun est déductible ?',o:['100%','40%','50% forfaitaire','0%'],c:1,e:'Après affectation directe des coûts spécifiques, une clé de surface peut être utilisée pour les coûts réellement communs lorsqu’elle reflète l’utilisation. Ici, la part déductible du DIP commun est 40%.'},
+  {a:'art. 8 al. 2 let. f LTVA',q:'Un entrepreneur espagnol travaille sur un chantier a Lausanne. Lieu de la prestation TVA ?',o:['Espagne - siege de l\'entrepreneur','Lausanne - lieu de l\'immeuble (art. 8 al. 2 let. f)','Berne - siege AFC','Au choix des parties'],c:1,e:'Art. 8 al. 2 let. f LTVA : pour les travaux sur biens immeubles, le lieu = lieu de situation du bien. Peu importe la nationalite de l\'entrepreneur.'},
+  {a:'art. 45 LTVA · pratique AFC',q:'Entreprise étrangère sur un chantier suisse : quel est le premier réflexe ?',o:['Déclarer automatiquement l’impôt sur les acquisitions','Qualifier le contrat, vérifier l’assujettissement suisse du fournisseur et l’importation éventuelle de matériel','Ignorer la TVA si la facture est sans TVA suisse','Retenir 8,1% sur le paiement'],c:1,e:'Avant tout calcul, vérifier le statut TVA du fournisseur étranger, la nature de la prestation et le matériel importé. L’impôt à l’importation ou l’impôt sur les acquisitions dépend de cette qualification.'},
+  {a:'art. 31 LTVA',q:'Une entreprise renove avec ses propres ouvriers son immeuble residentiel et a deduit la TVA sur les materiaux. Bon traitement ?',o:['Aucune analyse - pas de facture externe','Correction/exclusion du DIP lie a l usage residentiel','2,6% sur les materiaux uniquement','TVA uniquement si > CHF 50\'000'],c:1,e:'Usage residentiel exclu : le DIP sur materiaux et frais lies n est pas deductible ou doit etre corrige selon art. 31, generalement au ch. 415. Ne pas appliquer l ancien reflexe de taxation automatique de la main-d oeuvre interne.'},
+  {a:'art. 31 LTVA',q:'Un promoteur a deduit CHF 30\'000 de DIP sur des renovations il y a 3 ans. Il vend sans option. Correction DIP immeuble (periode 20 ans) ?',o:['CHF 0 - DIP acquis definitivevement','CHF 25\'500 (30\'000 x 17/20 = 85%)','CHF 9\'000 (30\'000 x 3/10)','CHF 30\'000 - remboursement integral'],c:1,e:'Art. 31 LTVA : changement d\'affectation. Correction = DIP x (duree restante / duree totale). 20 ans - 3 ans = 17 ans restants. Correction = CHF 30\'000 x 17/20 = CHF 25\'500.'},
+  {a:'art. 38 LTVA + art. 38 LTVA · Info TVA 11',q:'Un apport d\'immeuble commercial dans une holding. Procedure art. 38 est :',o:['Optionnelle au choix','Obligatoire si conditions reunies','Seulement pour les fusions','Optionnelle si < CHF 1M'],c:1,e:'La procédure de déclaration doit être examinée et appliquée lorsqu’elle est obligatoire selon l’art. 38. Le dossier doit vérifier les conditions légales, la qualité des parties, l’objet transféré et le formulaire 764 ; les conséquences d’une erreur dépendent du traitement effectivement appliqué.'},
+  {a:'art. 21 al. 2 ch. 20/21 LTVA',q:'La location d\'un appartement a un particulier :',o:['Imposable 8,1%','Exclue - pas de TVA, option impossible','Imposable 3,8% (hebergement)','Exoneree avec DIP'],c:1,e:'Location residentielle = exclue art. 21 al. 2 ch. 20/21. L\'option art. 22 est impossible pour tout immeuble a usage residentiel quel que soit le locataire.'},
+  {a:'art. 22 LTVA',q:'Pour une option art. 22 dans un bail immobilier, le contrôle senior porte surtout sur :',o:['Une durée fixe de 3 ans','La clarté de l option, l usage effectif et la cohérence facture/bail/décompte','Le canton de situation de l immeuble','Le montant du loyer uniquement'],c:1,e:'L option immobilière doit être claire et cohérente avec l usage effectif. En cas de changement d usage, il faut analyser la suite du traitement TVA et une éventuelle correction art. 31.'},
+  {a:'art. 25 al.1 LTVA',q:'Quel taux TVA s\'applique aux travaux de renovation d\'un immeuble commercial ?',o:['0% - immeuble exclu','2,6% taux reduit','8,1% taux normal','3,8% secteur batiment'],c:2,e:'Art. 25 al.1 LTVA : les travaux de construction et renovation sont soumis au taux normal 8,1%, quelle que soit la destination de l\'immeuble. La destination determine le DIP, pas le taux.'},
+  {a:'art. 30 LTVA',q:'Immeuble mixte : 300 m2 commercial optionné + 700 m2 résidentiel. Pour des travaux réellement communs, la clé de surface est ici documentée et appropriée. TVA CHF 4\'050 : DIP déductible ?',o:['CHF 4\'050 (100%)','CHF 1\'215 (4\'050 x 30%)','CHF 2\'025 (50%)','CHF 0'],c:1,e:'Dans ce cas où la clé de surface est justifiée : 300/1000 = 30%. DIP déductible sur le coût commun = CHF 4\'050 × 30% = CHF 1\'215.'},
+  {a:'art. 22 + art. 31 LTVA',q:'Un propriétaire a valablement opté pour la location de bureaux. Le locataire transforme ensuite réellement les locaux en logement utilisé exclusivement à l’habitation. Bon réflexe ?',o:['Rien - l option reste toujours acquise','Réexaminer immédiatement l option, la facturation et les éventuelles conséquences sur le DIP du bailleur','Conserver la TVA uniquement parce que le locataire était auparavant une entreprise','Appliquer automatiquement le taux hôtelier'],c:1,e:'En immobilier, l’affectation exclusive à l’habitation bloque l’option. Le changement d’usage doit donc être documenté et ses conséquences sur la facturation et l’impôt préalable du bailleur analysées. Le simple statut TVA du locataire n’est pas le critère légal.'},
+  {a:'art. 45 LTVA · pratique AFC',q:'Un prestataire étranger facture CHF 120\'000 pour un chantier résidentiel suisse. Avant de calculer une acquisition, que faut-il faire ?',o:['Appliquer automatiquement 8,1%','Qualifier le contrat, vérifier l’assujettissement suisse du fournisseur, le matériel importé et le régime applicable','Ignorer la TVA parce que le chantier est résidentiel','Appliquer un seuil de CHF 200\'000'],c:1,e:'La qualité étrangère du fournisseur ne suffit pas. Il faut d’abord déterminer s’il doit être immatriculé en Suisse et si le flux relève de l’impôt à l’importation ou de l’impôt sur les acquisitions. Si un impôt est dû, le droit au DIP dépend ensuite de l’affectation.'},
+  {a:'art. 30 LTVA · pratique AFC',q:'Pour un immeuble à usage mixte, quel ordre est le plus professionnel pour traiter le DIP ?',o:['Affecter directement les charges identifiables puis appliquer une clé objective aux vrais coûts communs','Appliquer automatiquement un prorata de surface à toutes les factures','Déduire 100% dès qu’une partie est optionnée','Refuser tout DIP dès qu’une partie est résidentielle'],c:0,e:'Art. 30 LTVA : commencer par l’affectation directe. Une clé objective n’intervient que pour les coûts réellement communs et doit refléter l’utilisation.'},
+  {a:'art. 22 LTVA',q:'Un promoteur assujetti vend pour CHF 5\'000\'000 un immeuble de bureaux que l’acheteur destine à un usage non résidentiel. Le vendeur exerce clairement l’option. TVA au taux normal ?',o:['CHF 0 - vente toujours exclue','CHF 405\'000 (5\'000\'000 x 8,1%)','CHF 130\'000 (5\'000\'000 x 2,6%)','TVA sur la plus-value uniquement'],c:1,e:'Dans ce cas simplifié, l’option est exercée par le vendeur et l’usage n’est pas exclusivement d’habitation. TVA : CHF 5\'000\'000 × 8,1% = CHF 405\'000. L’acheteur ne déduit cette TVA que dans la mesure de son propre droit au DIP.'},
+  {a:'art. 31 LTVA',q:'Travaux propres sur immeuble residentiel : quel est le risque TVA principal ?',o:['Taxer automatiquement toute main-d oeuvre interne','Deduire a tort le DIP sur achats affectes a une activite exclue','Appliquer le taux reduit 2,6%','Declarer au ch. 303 comme loyer'],c:1,e:'Le risque principal est le DIP indu. Les achats et frais affectes a une activite residentielle exclue ne donnent pas droit au DIP ou appellent une correction art. 31 au ch. 415.'},
+  {a:'art. 31 LTVA',q:'Sigma SA a optionne son bureau commercial et deduit CHF 25\'000 HT de DIP renovation. Apres 1 an, elle transforme le bureau en appartement residentiel. Correction DIP immeuble (20 ans) ?',o:['CHF 0','CHF 23\'750 (25\'000 x 19/20)','CHF 1\'250 (25\'000 x 1/20)' ,'CHF 25\'000 integral'],c:1,e:'Art. 31 : changement d\'affectation commercial -> residentiel. Duree utilisee : 1 an. Correction = CHF 25\'000 x (20-1)/20 = CHF 25\'000 x 95% = CHF 23\'750 a rembourser a l\'AFC.'},
+  {a:'art. 8 al. 2 let. f LTVA',q:'Un architecte etabli a Paris realise les plans d un immeuble situe a Geneve pour un client assujetti suisse. Lieu de la prestation ?',o:['Paris - siege de l architecte','Geneve - lieu de l immeuble','France - nationalite de l architecte','Au choix des parties'],c:1,e:'Les prestations de services en relation etroite avec un immeuble sont localisees au lieu de situation de l immeuble. Ici : Geneve, donc Suisse. Il faut ensuite verifier facturation / inscription / acquisition selon la configuration.'},
+  {a:'art. 26 + art. 28 LTVA',q:'Pour deduire le DIP sur des travaux de construction, le dossier doit contenir :',o:['Le nom du maitre d ouvrage uniquement','Une facture conforme ou corrigee avec les elements essentiels, y compris le numero TVA si le fournisseur est inscrit','Le numero de chantier cantonal seulement','Le permis de construire en annexe seulement'],c:1,e:'Une facture non conforme rend le DIP contestable. En pratique, demander une facture corrigee et conserver contrat, preuve de paiement, nature des travaux et affectation imposable/optionnee.'},
+  {a:'art. 30 LTVA',q:'Pour des coûts réellement communs d’un immeuble mixte, quand une clé fondée sur les recettes peut-elle être retenue ?',o:['Jamais','Lorsqu’elle reflète de manière appropriée l’utilisation des coûts concernés et que la méthode est documentée','Toujours à la place de la surface','Uniquement sur autorisation préalable de l’AFC'],c:1,e:'Aucune clé n’est universelle. Les recettes peuvent servir d’indicateur si elles représentent l’utilisation des inputs concernés ; la justification économique et la documentation de la méthode sont déterminantes.'},
+  {a:'art. 45 LTVA · art. 28 LTVA',q:'Après vérification du statut du fournisseur, du matériel importé et du contrat, une prestation étrangère de CHF 45\'000 est effectivement soumise à l’impôt sur les acquisitions à 8,1%. Elle sert exclusivement à une activité donnant droit au DIP. Impact TVA net, sous réserve des conditions de déduction ?',o:['CHF 3\'645 de coût TVA','CHF 0 : CHF 3\'645 d’impôt sur les acquisitions et DIP correspondant de CHF 3\'645','CHF 1\'822,50','Aucun montant à déclarer'],c:1,e:'Une fois la qualification art. 45 établie, CHF 45\'000 × 8,1% = CHF 3\'645 sont déclarés. Si les conditions du DIP sont intégralement remplies, le même montant est déductible ; l’impact net est alors nul mais l’obligation déclarative subsiste.'},
+  {a:'art. 21 al. 2 ch. 20/21 + art. 22 LTVA',q:'Une place de parc est louée avec l’appartement du même locataire et constitue l’accessoire de cette location résidentielle exclue. Quel traitement ?',o:['Imposable 8,1%','Exclue - accessoire residentiel, option impossible','Exclue mais option possible si locataire assujetti','Imposable 3,8%'],c:1,e:'Parking accessoire a un usage residentiel (sous-sol immeuble d\'habitation, loue aux locataires) = exclu comme l\'appartement. Pas d\'option possible meme si le locataire serait assujetti. Le caractere accessoire est determinant.'},
+  {a:'art. 38 LTVA',q:'Lors d\'un transfert art. 38 LTVA valide, le cessionnaire reprend :',o:['Uniquement les actifs et passifs comptables','Tous les droits et obligations TVA du cedant','Seulement les decomptes TVA futurs','Rien - le transfert efface l\'historique TVA'],c:1,e:'Art. 38 LTVA : le cessionnaire reprend INTEGRALLEMENT les droits et obligations TVA du cedant : DIP deja deduits, corrections d\'affectation potentielles, obligations d\'archivage sur 10 ans, decomptes ouverts.'},
+  {a:'art. 30 LTVA',q:'Immeuble Laval : 500 m2 commercial (option, loyer CHF 8\'000 HT/mois) + 500 m2 residentiel (loyer CHF 4\'000/mois). Quelle cle DIP reflete mieux la realite ?',o:['50% (cle surface egale)','67% recettes (8\'000/12\'000) - representatif car loyers tres differents','100% - commercial predominant economiquement','0% - residentiel domine'],c:1,e:'Cle recettes = CHF 8\'000 / (CHF 8\'000 + CHF 4\'000) = 67%. Plus representative que la cle surface (50%) car le loyer commercial est disproportionnellement eleve. L\'AFC accepte la methode la plus representative de l\'usage economique reel.'},
+  {a:'principe de substance économique et interdiction de l’abus',q:'Un investisseur exerce l\'option art. 22 pour louer un immeuble a sa propre SA sans activite reelle, dans le seul but de deduire le DIP. Risque AFC ?',o:['Aucun - option valide sans autre analyse','Evasion fiscale TVA (principe de substance économique et interdiction de l’abus) - option contestable','TVA reduite a 2,6%','Obligation de constituer un groupe TVA'],c:1,e:'principe de substance économique et interdiction de l’abus : forme insolite + motivation exclusivement fiscale + resultat insatisfaisant si admis = evasion fiscale. L\'AFC peut requalifier une option exercee uniquement pour optimiser le DIP sans activite commerciale reelle. La substance economique doit justifier l\'option.'},
+  {a:'art. 31 LTVA',q:'Entreprise Batilux construit avec ses equipes propres un immeuble residentiel locatif et deduit la TVA sur les achats du chantier. Obligation TVA ?',o:['Aucune - chantier residentiel hors champ','Corriger/exclure le DIP lie au residentiel selon art. 31','TVA seulement sur les materiaux a 2,6%','TVA sur la plus-value locative'],c:1,e:'L usage locatif residentiel est exclu. Le point fiscal est la non-deduction ou correction du DIP sur les achats/frais lies, et non une taxation automatique de toute la main-d oeuvre interne.'},
+  {a:'art. 26 + art. 28 LTVA',q:'Un maitre d ouvrage recoit une facture de travaux sans le numero TVA de l entrepreneur. Bon reflexe ?',o:['Deduire sans autre car le montant TVA est indique','Renoncer definitivement au DIP','Demander une facture corrigee et documenter la prestation avant de revendiquer le DIP','Deduire si le contrat de chantier est en annexe'],c:2,e:'La facture non conforme ne cree pas automatiquement une perte definitive, mais le DIP est a risque tant que le dossier n est pas corrige. Il faut obtenir une facture conforme/corrigee et documenter prestation, paiement et affectation.'},
+  {a:'art. 31 + art. 22 LTVA',q:'M. Brule a optionne son local commercial, deduit CHF 15\'000 de DIP sur 5 ans. Il revend maintenant avec option (acheteur assujetti). Correction d\'affectation due ?',o:['Oui - tout DIP doit etre corrige a la vente','Non - vente avec option = pas de correction d\'affectation','Oui - 50% du DIP','Seulement si la vente est > CHF 1\'000\'000'],c:1,e:'Vente avec option valide (usage non résidentiel, option claire) = pas de changement d\'affectation. La chaine imposable reste ininterrompue. Pas de correction art. 31. L\'acheteur reprend le droit de continuer a deduire le DIP sur les futurs travaux.'},
+  {a:'art. 30 + art. 31 LTVA',q:'Alfa SA (immeuble mixte 60% commercial / 40% residentiel) utilise ses propres ouvriers pour renover la partie residentielle et des parties communes. Quel reflexe senior ?',o:['Taxer automatiquement toute la main-d oeuvre interne','Identifier les achats/frais greves de TVA et corriger ou exclure le DIP selon l affectation residentielle et commune','Appliquer le taux reduit 2,6%','Declarer le cout de main-d oeuvre au ch. 303'],c:1,e:'Le point fiscal central est le DIP : partie residentielle = pas de DIP ; partie commune = DIP selon cle. La main-d oeuvre interne est documentee pour le cout du projet, mais on evite le reflexe automatique de TVA sur tout le cout de revient.'}
+,
+  {"a": "art. 22 LTVA", "q": "Pour une location commerciale, l'assujettissement TVA du locataire est :", "o": ["Une condition légale absolue de l'option", "Pas une condition légale générale ; le point clé est l'usage non exclusivement résidentiel et l'option claire", "Toujours inutile à vérifier", "Remplacé par le permis de construire"], "c": 1, "e": "Art. 22 : l'option doit être exercée clairement et ne doit pas porter sur un objet utilisé exclusivement à des fins d'habitation. L'usage réel et l’intérêt économique influence surtout l'intérêt économique et le DIP du locataire, mais ce n'est pas la condition légale générale à mémoriser."},
+  {"a": "art. 24 al. 6 + art. 21/22 LTVA", "q": "Dans une vente immobilière optionnée, la valeur du sol doit être :", "o": ["Taxée à 8,1% comme le bâtiment", "Ventilée séparément et exclue de la base de calcul de l'impôt", "Déclarée au ch. 383", "Toujours soumise au taux réduit"], "c": 1, "e": "La valeur du sol doit être séparée de la base TVA. Le dossier doit donc contenir une ventilation sol/bâtiment cohérente avec l'acte et la comptabilité."},
+  {"a": "art. 31/32 LTVA", "q": "Un immeuble passe d'un usage résidentiel exclu à une location commerciale optionnée. Ligne principale à analyser pour récupérer du DIP historique ?", "o": ["ch. 415 correction DIP", "ch. 410 dégrèvement ultérieur", "ch. 383 impôt sur acquisitions", "ch. 230 prestations exclues"], "c": 1, "e": "Résidentiel -> commercial optionné : on analyse le dégrèvement ultérieur de l'impôt préalable au ch. 410. L'inverse, commercial optionné -> résidentiel, se traite plutôt au ch. 415."},
+  {"a": "art. 38 LTVA", "q": "Un transfert d'immeuble commercial avec historique DIP dans une restructuration doit toujours déclencher quel réflexe ?", "o": ["Ignorer la TVA car immeuble = exclu", "Vérifier la procédure de déclaration art. 38 et l'historique DIP repris", "Déclarer uniquement le prix au ch. 303", "Clore le registre DIP à zéro"], "c": 1, "e": "En restructuration / transfert de patrimoine, art. 38 doit être vérifié. Le repreneur peut reprendre des droits et obligations TVA, notamment l'historique DIP 20 ans."},
+  {"a": "art. 72 LTVA + pratique AFC", "q": "Concordance annuelle TVA : si aucun écart n'est trouvé dans le dossier immobilier, que faut-il faire ?", "o": ["Déposer un rectificatif à zéro", "Conserver le tableau de concordance interne ; rectificatif seulement si différence", "Déclarer les loyers exclus au ch. 303", "Corriger automatiquement ch. 415"], "c": 1, "e": "Si aucun écart n'est constaté, il n'est pas nécessaire de déposer un décompte rectificatif. Il faut conserver la concordance interne et corriger seulement les différences dans le délai applicable."},
+  {a:'M08-AUDIT-Q31 · art. 21 al. 2 ch. 21 let. c LTVA',q:'Une place de parc privée est louée indépendamment de tout appartement ou local exclu. Quel traitement de principe ?',o:['Exclue et optionnable','Imposable au taux normal','Toujours exonérée','Hors champ TVA'],c:1,e:'La location de places de parc ne relevant pas du domaine public est imposable de plein droit. Elle peut suivre une location immobilière exclue seulement lorsqu’elle en constitue une prestation accessoire.'},
+  {a:'M08-AUDIT-Q32 · art. 22 LTVA',q:'Comment l’assujetti peut-il exercer l’option pour une prestation immobilière optionnable ?',o:['Uniquement par clause notariale','Uniquement après autorisation AFC','Par indication claire de la TVA sur la facture/quittance ou par déclaration de l’imposition dans le décompte TVA','Uniquement si le destinataire possède un numéro TVA'],c:2,e:'L’option s’exerce par une manifestation claire : TVA indiquée sur la facture/quittance ou imposition déclarée dans le décompte. Pour l’immobilier, l’usage exclusivement d’habitation bloque l’option.'},
+  {a:'M08-AUDIT-Q33 · pratique AFC · art. 45 LTVA',q:'Une entreprise étrangère non inscrite en Suisse apporte ses propres matériaux pour exécuter des travaux sur un immeuble suisse. Quel réflexe est correct ?',o:['Acquisition art. 45 automatique dans tous les cas','Vérifier notamment l’assujettissement suisse du fournisseur et l’impôt à l’importation sur la prestation avant de conclure à une acquisition','Aucune TVA suisse possible','Le client retient automatiquement 8,1%'],c:1,e:'Lorsque le fournisseur étranger importe du matériel pour exécuter les travaux, l’impôt à l’importation peut porter sur la valeur totale de la prestation. Il faut aussi tester son éventuel assujettissement suisse.'},
+  {a:'M08-AUDIT-Q34 · art. 71 OTVA',q:'Une phase de rénovation dépasse 5% de la valeur d’assurance du bâtiment avant rénovation. Quelle conséquence méthodologique ?',o:['Seules les dépenses augmentant la valeur comptent','L’analyse de correction porte sur l’ensemble des coûts de la phase selon les règles OTVA, y compris les dépenses de maintien de valeur','Aucune conséquence TVA','La période résiduelle passe de 20 à 10 ans'],c:1,e:'Le seuil de 5% déclenche l’application de la règle OTVA à l’ensemble des coûts de la phase de rénovation, sans limiter l’analyse aux seules dépenses augmentant la valeur.'},
+  {a:'M08-AUDIT-Q35 · art. 24 al. 6 let. c LTVA',q:'Dans la contre-prestation d’une livraison immobilière, comment traiter la part afférente à la valeur du sol ?',o:['La taxer toujours à 8,1%','L’exclure de la base de calcul de la TVA et la ventiler séparément','Appliquer 2,6%','La traiter comme un subside'],c:1,e:'La part de la contre-prestation afférente à la valeur du sol n’entre pas dans la base de calcul de la TVA. Le dossier doit donc permettre une ventilation défendable sol/bâtiment.'}
+];
+
+var QUIZ={
+  started:false,idx:0,ok:0,ko:0,timerID:null,sLeft:1500,
+  init:function(){
+    this.started=true;this.idx=0;this.ok=0;this.ko=0;this.sLeft=1500;
+    document.getElementById('quiz-area').style.display='block';
+    document.getElementById('quiz-results').style.display='none';
+    this.startTimer();this.render();
+  },
+  startTimer:function(){
+    var self=this;clearInterval(this.timerID);
+    this.timerID=setInterval(function(){
+      self.sLeft--;
+      var m=Math.floor(self.sLeft/60),s=self.sLeft%60;
+      var el=document.getElementById('q-tmr');
+      if(el){el.textContent=m+':'+(s<10?'0':'')+s;el.className='q-timer'+(self.sLeft<120?' urgent':'');}
+      if(self.sLeft<=0){clearInterval(self.timerID);self.finish();}
+    },1000);
+  },
+  render:function(){
+    if(this.idx>=QS.length){this.finish();return;}
+    var q=QS[this.idx];
+    document.getElementById('q-cnt').textContent='Question '+(this.idx+1)+' / '+QS.length;
+    document.getElementById('q-fill').style.width=(this.idx/QS.length*100)+'%';
+    document.getElementById('q-art').textContent=q.a;
+    document.getElementById('q-txt').textContent=q.q;
+    var ltrs=['A','B','C','D'];
+    document.getElementById('q-opts').innerHTML=q.o.map(function(o,i){
+      return '<button class="q-opt" onclick="QUIZ.ans('+i+')"><span class="opt-ltr">'+ltrs[i]+'</span>'+o+'</button>';
+    }).join('');
+    document.getElementById('q-expl').classList.remove('show');
+    document.getElementById('q-next').style.display='none';
+  },
+  ans:function(i){
+    var q=QS[this.idx];var correct=i===q.c;
+    if(correct)this.ok++;else this.ko++;
+    document.querySelectorAll('.q-opt').forEach(function(b,j){
+      b.disabled=true;
+      if(j===q.c)b.classList.add('correct');
+      else if(j===i&&!correct)b.classList.add('wrong');
+    });
+    var et=document.getElementById('q-expl-t');
+    et.textContent=correct?'Correct !':'Incorrect';
+    et.className='q-expl-title '+(correct?'ok':'bad');
+    document.getElementById('q-expl-b').textContent=q.e;
+    document.getElementById('q-expl').classList.add('show');
+    document.getElementById('q-next').style.display='inline-flex';
+  },
+  sm2:function(q){document.getElementById('q-next').style.display='inline-flex';},
+  next:function(){this.idx++;this.render();},
+  skip:function(){this.idx++;this.render();},
+  finish:function(){
+    clearInterval(this.timerID);
+    var pct=Math.round(this.ok/QS.length*100);
+    var min=Math.round((1500-this.sLeft)/60);
+    document.getElementById('quiz-area').style.display='none';
+    document.getElementById('quiz-results').style.display='block';
+    document.getElementById('r-score').textContent=pct;
+    document.getElementById('r-ok').textContent=this.ok;
+    document.getElementById('r-ko').textContent=this.ko;
+    document.getElementById('r-min').textContent=min;
+    var pass=pct>=75;
+    document.getElementById('r-label').textContent=pass?'Module M08 Immobilier valide !':'Resultat M08';
+    document.getElementById('r-msg').textContent=pass?pct+'% - Excellent ! M08 valide. Passez au M09.':pct+'% (seuil 75%). Revoyez la theorie et recommencez.';
+    if(pass){state.quiz_passed=1;state.quiz_score=pct;PROG.save();}
+  },
+  restart:function(){this.started=false;this.init();}
+};
+
+// FLASHCARDS - 30 cartes / 5 categories
+var CARDS=[
+  // Cat 1 - Vente & Location (7)
+  {cat:'Vente & Location',t:'Exclusion immobiliere (principe)',d:'Vente et location de tout immeuble = exclues art. 21 al. 2 ch. 20/21 LTVA. Ni TVA ni DIP. Regle de base, sous reserve des exceptions et de l option art. 22. Exception : option art. 22.',a:'art. 21 al. 2 ch. 20/21 LTVA'},
+  {cat:'Vente & Location',t:'Option art. 22 — exercice et limite habitation',d:'L’option doit porter sur une prestation optionnable et être exercée clairement, par indication de la TVA sur la facture/quittance ou par déclaration dans le décompte. En immobilier, elle est exclue lorsque le destinataire affecte ou compte affecter l’objet exclusivement à l’habitation. Bail, usage et piste comptable servent de preuves.',a:'art. 22 LTVA'},
+  {cat:'Vente & Location',t:'Option location — suivre l’usage réel',d:'Le statut TVA du locataire n’est pas la condition légale générale de l’option. Surveiller surtout l’usage : si l’objet devient affecté exclusivement à l’habitation ou si l’affectation du bailleur change, réexaminer l’option et les éventuelles corrections d’impôt préalable.',a:'art. 22 + art. 31 LTVA'},
+  {cat:'Vente & Location',t:'Location residentielle',d:'Location residentielle : exclue art. 21 al. 2 ch. 21 ; option impossible si usage exclusivement residentiel. Parking accessoire au logement suit en principe le regime residentiel, sauf analyse particuliere.',a:'art. 21 al. 2 ch. 20/21 LTVA'},
+  {cat:'Vente & Location',t:'Hotel / hebergement court terme',d:'Imposable de plein droit : 3,8% (taux hebergement art. 25 al.4). Pas besoin d\'option. DIP integral sur toutes les charges liees. Nuitees, camping, auberges.',a:'art. 25 al.4 LTVA'},
+  {cat:'Vente & Location',t:'Droit de superficie (DDP)',d:'Qualifier séparément la constitution/transmission du droit, la redevance périodique et l’usage immobilier. Une option éventuelle dépend des conditions de l’art. 22, notamment de l’absence d’affectation exclusive à l’habitation, et non du seul statut TVA du superficiaire.',a:'art. 21–22 LTVA · pratique AFC immobilier'},
+  {cat:'Vente & Location',t:'Promotion immobiliere - destination',d:'La destination (commercial vs residentiel) determine le DIP sur la construction. Commercial + option = DIP integral. Residentiel = DIP non deductible / coût du projet si aucune option ou affectation imposable n est possible. Analyser avant le projet.',a:'art. 21-22 + art. 28 LTVA'},
+  // Cat 2 - DIP Immeuble Mixte (6)
+  {cat:'DIP Immeuble Mixte',t:'Clé de surface — quand l’utiliser',d:'La surface n’est pas une clé obligatoire ni automatiquement prioritaire. Après affectation directe, elle peut convenir aux coûts communs si elle reflète l’utilisation réelle. Documenter plans, surfaces et justification de la méthode.',a:'art. 30 LTVA · pratique AFC'},
+  {cat:'DIP Immeuble Mixte',t:'Immeuble mixte — méthode DIP',d:'Affecter d’abord directement les charges aux activités concernées. Pour les coûts réellement communs, utiliser une clé objective et économiquement appropriée, documentée et cohérente.',a:'art. 30 LTVA · pratique AFC + art. 30 LTVA'},
+  {cat:'DIP Immeuble Mixte',t:'DIP charge directe vs commune',d:'Une charge directement affectée à une activité donnant droit au DIP suit cette affectation ; une charge directement liée à une activité exclue n’ouvre pas le même droit. Pour un vrai coût commun, appliquer une méthode objective représentant l’utilisation — pas automatiquement la surface.',a:'art. 28–30 LTVA'},
+  {cat:'DIP Immeuble Mixte',t:'Changement d\'affectation art. 31',d:'Passage d\'usage imposable a exclu (ou inverse) = correction DIP proportionnelle a la duree restante. Formule : DIP x (duree restante / duree totale). Duree totale = 20 ans pour biens immobiliers et 5 ans pour biens mobiliers/prestations de services.',a:'art. 31 LTVA + OTVA art. 72'},
+  {cat:'DIP Immeuble Mixte',t:'Documentation DIP immeuble mixte',d:'Conserver plans, surfaces/affectations, factures ventilées, calcul de la méthode et justification de sa pertinence. Lors d’un contrôle, le dossier doit permettre de reconstituer le droit au DIP et toute correction.',a:'art. 30 LTVA · pratique AFC'},
+  {cat:'DIP Immeuble Mixte',t:'Recettes vs surface',d:'Ni la surface ni les recettes ne sont universelles. Choisir une clé seulement pour les coûts communs et seulement si elle restitue l’utilisation de manière appropriée ; documenter pourquoi cette clé est pertinente pour le poste concerné.',a:'art. 30 LTVA · pratique AFC'},
+  // Cat 3 - Construction & Travaux (6)
+  {cat:'Construction & Travaux',t:'Travaux - taux et lieu',d:'Tous travaux de construction/renovation = taux normal 8,1% (art. 25 al.1). Lieu = lieu de l\'immeuble (art. 8 al. 2 let. f) quelque soit la nationalite de l\'entrepreneur.',a:'art. 25 al.1 + art. 8 al. 2 let. f LTVA'},
+  {cat:'Construction & Travaux',t:'Entreprise étrangère sur chantier suisse',d:'Arbre de décision : 1) tester l’assujettissement suisse du fournisseur ; 2) vérifier si du matériel est importé et l’impôt à l’importation ; 3) tester l’impôt sur les acquisitions lorsque ses conditions sont remplies ; 4) déterminer le DIP selon l’affectation.',a:'art. 45 LTVA · pratique AFC'},
+  {cat:'Construction & Travaux',t:'Travaux propres et DIP',d:'Utilisation de ses propres ressources pour un bien residentiel exclu : analyser surtout les achats greves de TVA et corriger/exclure le DIP selon art. 31. Ne pas appliquer l ancien reflexe de taxation automatique de la main-d oeuvre interne.',a:'art. 31 LTVA · ch. 415'},
+  {cat:'Construction & Travaux',t:'DIP travaux residentiel',d:'Travaux sur immeuble residentiel = exclu => DIP = 0%. Le taux de TVA sur la facture entrepreneur reste 8,1%, mais le maitre d\'ouvrage ne peut pas le deduire. A integrer dans le prix de revient.',a:'art. 21 al. 2 ch. 20/21 + art. 28/29 LTVA'},
+  {cat:'Construction & Travaux',t:'Facture conforme - travaux',d:'Art. 26 : numero TVA de l\'entrepreneur à vérifier pour deduire le DIP. Sans correction = DIP contestable. Elements requis : nom+adresse, date, description, HT, taux, TVA, n° TVA fournisseur.',a:'art. 26 LTVA'},
+  {cat:'Construction & Travaux',t:'Concordance du chiffre d’affaires',d:'Réconcilier la comptabilité et les décomptes TVA, notamment acomptes, factures partielles, avoirs et régularisations. La documentation doit permettre d’expliquer les écarts ; ne pas attribuer cette règle à une jurisprudence non vérifiée.',a:'art. 70–72 LTVA'},
+  // Cat 4 - Restructurations & Procédures (6)
+  {cat:'Restructurations',t:'Art. 38 LTVA - transfert immeuble',d:'Apport d\'immeuble commercial dans une holding ou autre entite = procedure de declaration à appliquer si les conditions sont remplies. Pas de TVA entre parties. Cessionnaire reprend tous droits et obligations TVA.',a:'art. 38 LTVA + art. 38 LTVA · Info TVA 11'},
+  {cat:'Restructurations',t:'Option et substance du dossier',d:'Une option doit correspondre à une opération réellement optionnable et à l’usage documenté. Éviter les montages artificiels et séparer la règle légale de l’art. 22 d’une éventuelle analyse d’abus fondée sur les faits et la jurisprudence pertinente.',a:'art. 22 LTVA · principe d’interdiction de l’abus'},
+  {cat:'Restructurations',t:'Droit de superficie — qualification',d:'Analyser le contrat DDP, la redevance et l’usage du bien selon art. 21–22 et la pratique AFC en vigueur. Le statut TVA de l’autre partie peut influencer l’intérêt économique, mais ne remplace pas les conditions légales de l’option.',a:'art. 21–22 LTVA · pratique AFC immobilier'},
+  {cat:'Restructurations',t:'Dénonciation spontanée — immobilier',d:'Une correction spontanée peut avoir des effets sur la sanction seulement si les conditions de l’art. 102 LTVA sont effectivement remplies. L’impôt dû et les intérêts applicables ne disparaissent pas pour autant. Vérifier la procédure et les faits avant toute promesse au client.',a:'art. 102 LTVA'},
+  {cat:'Restructurations',t:'Intérêts moratoires AFC',d:'Appliquer le taux fixé par le DFF pour la période concernée et les règles d’exigibilité applicables. Un support evergreen ne doit pas convertir automatiquement un rappel en un montant d’intérêts avec un taux historique supposé.',a:'art. 87 LTVA · taux DFF applicable'},
+  {cat:'Restructurations',t:'Publication AFC immobilier - Reference immobilier',d:'Les publications AFC sur les immeubles sont une base pratique importante. Les utiliser avec la LTVA/OTVA, le dossier factuel, les preuves et la jurisprudence pertinente.',a:'Publication AFC immobilier + AFC/ESTV'}
+,
+  {"cat": "Dossier professionnel", "t": "Option art. 22 — vraie condition immobilière", "d": "L'option doit être clairement exercée et l'objet ne doit pas être utilisé exclusivement à des fins d'habitation. L'usage réel et l’intérêt économique n'est pas la condition légale générale, mais il influence l'intérêt économique et le DIP du locataire.", "a": "art. 22 LTVA"},
+  {"cat": "Dossier professionnel", "t": "Valeur du sol", "d": "Dans une livraison immobilière, la valeur du sol doit être ventilée séparément et ne se traite pas comme le bâtiment. Toujours conserver acte notarié, ventilation sol/bâtiment et justification comptable.", "a": "art. 24 al. 6 LTVA"},
+  {"cat": "Dossier professionnel", "t": "Registre DIP 20 ans", "d": "Le registre doit suivre : date de mise en service, DIP initial, affectation, années écoulées, solde résiduel et corrections ch. 410/415. Indispensable en vente, changement d'usage ou art. 38.", "a": "art. 31/32 LTVA"},
+  {"cat": "Dossier professionnel", "t": "410 vs 415 immobilier", "d": "Usage exclu -> usage imposable/optionné : ch. 410 dégrèvement ultérieur. Usage imposable/optionné -> usage exclu : ch. 415 correction/prestation à soi-même. Ne jamais inverser.", "a": "Formulaire AFC · art. 31/32 LTVA"},
+  {"cat": "Dossier professionnel", "t": "Dossier de défense AFC", "d": "Chaîne minimale : acte/bail -> usage -> option -> surfaces -> factures -> registre DIP -> ligne décompte -> note senior. Si une étape manque, le DIP immobilier devient difficile à défendre.", "a": "Méthode de contrôle M08"}
+];
+
+var FC={
+  idx:0,flipped:false,
+  srs:JSON.parse(localStorage.getItem('tva_m08_srs')||'{}'),
+  init:function(){
+    var d=document.getElementById('fc-dots');if(!d)return;
+    d.innerHTML=CARDS.map(function(c,i){return '<div class="fc-dot'+(i===0?' current':'')+'" id="fcd'+i+'"></div>';}).join('');
+    this.show(0);
+  },
+  show:function(i){
+    this.idx=i;this.flipped=false;
+    var c=CARDS[i];
+    var el=document.getElementById('fc-term');if(el)el.textContent=c.t;
+    var def=document.getElementById('fc-def');if(def)def.textContent=c.d;
+    var art=document.getElementById('fc-art');if(art)art.textContent=c.a;
+    var cat=document.getElementById('fc-cat-disp');if(cat)cat.textContent=c.cat;
+    var catL=document.getElementById('fc-cat-lbl');if(catL)catL.textContent=c.cat;
+    var inn=document.getElementById('fc');if(inn)inn.classList.remove('flipped');
+    var ctr=document.getElementById('fc-ctr');if(ctr)ctr.textContent='Carte '+(i+1)+' / '+CARDS.length;
+    CARDS.forEach(function(x,j){
+      var dot=document.getElementById('fcd'+j);if(!dot)return;
+      dot.className='fc-dot'+(j<i?' seen':j===i?' current':'');
+    });
+  },
+  flip:function(){this.flipped=!this.flipped;var el=document.getElementById('fc');if(el)el.classList.toggle('flipped',this.flipped);},
+  rate:function(q){
+    var key='c'+this.idx;
+    var card=this.srs[key]||{interval:1,ef:2.5,reps:0};
+    if(q<3){card.interval=1;card.reps=0;}
+    else{if(card.reps===0)card.interval=1;else if(card.reps===1)card.interval=6;else card.interval=Math.round(card.interval*card.ef);card.reps++;}
+    card.ef=Math.max(1.3,card.ef+0.1-(5-q)*(0.08+(5-q)*0.02));
+    card.interval=Math.min(card.interval,60);
+    this.srs[key]=card;
+    localStorage.setItem('tva_m08_srs',JSON.stringify(this.srs));
+    if(this.idx<CARDS.length-1){this.show(this.idx+1);}
+    else{
+      var ctr=document.getElementById('fc-ctr');if(ctr)ctr.textContent='Toutes les 30 cartes vues !';
+      var catL=document.getElementById('fc-cat-lbl');if(catL)catL.textContent='Termine';
+      state.memo_done=1;PROG.save();PROG.update();
+    }
+  }
+};
+
+document.addEventListener('DOMContentLoaded',function(){
+  SECS.forEach(function(s){var el=document.getElementById('sec-'+s);if(el)el.style.display=s==='theory'?'block':'none';});
+  PROG.update();
+  if(state.completed){
+    const box=document.getElementById('m08-complete');
+    if(box)box.style.display='flex';
+    syncDashboardDone();
+  }
+});
+</script>
+</body>
+</html>
