@@ -33,3 +33,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173/
         run: node tools/course-browser-qa.mjs
+      - name: M02 section visibility regression QA
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node tools/m02-navigation-qa.mjs
