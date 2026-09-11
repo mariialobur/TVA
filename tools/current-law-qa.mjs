@@ -11,6 +11,13 @@ for(const n of ['≤ CHF 5','n’excédant pas CHF 5'])if(!m10p.includes(n))fail
 if(m10p.includes("['actuellement <5 CHF','actuellement <5 CHF']"))fail('M10 CHF 5 patch is a no-op');
 ok('M10 small-consignment cutoff sentinel evaluated');
 
+const m11=read('m11-controle-afc-tva.html'),m11p=read('m11-current-law-2026.js');
+if(!m11.includes('m11-controle-afc-tva-core.html')||!m11.includes('m11-current-law-2026.js'))fail('M11 wrapper/core/current-law contract missing');else ok('M11 wrapper loads core + current-law patch');
+try{new Function(m11p);ok('M11 current-law patch parses')}catch(e){fail('M11 current-law patch syntax: '+e.message)}
+for(const n of ['Après interruption par l’assujetti','Nouveau délai de 5 ans (art. 42 al. 2)','interruption par l’AFC/recours → nouveau délai 2 ans'])if(!m11p.includes(n))fail('M11 art. 42 interruption branch missing: '+n);
+if(!m11p.includes('10 ans'))fail('M11 absolute prescription guard missing');
+else ok('M11 art. 42 taxpayer/AFC interruption branches hardened');
+
 const q4a=read('m14-q4a.js');
 if(!q4a.includes('inférieur ou égal à CHF 5')||!q4a.includes("n’excède pas CHF 5"))fail('M14 Q95 does not teach inclusive CHF 5 cutoff');
 if(q4a.includes('un montant d’impôt à l’importation inférieur à CHF 5\"'))fail('M14 Q95 regressed to exclusive < CHF 5');
