@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /*-base.html
+Disallow: /*-core.html
 
 # Public course entry point and module wrappers remain crawlable.
