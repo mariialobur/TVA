@@ -1,7 +1,69 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>M02 — Qualification des opérations TVA · Formation de spécialiste TVA suisse</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>html,body,#module{width:100%;height:100%;margin:0;border:0;overflow:hidden;background:#F8F5EE}#module{display:block}</style></head>
 <body><iframe id="module" src="m02-qualification-operations-base.html" title="M02 — Qualification des opérations TVA" allow="clipboard-write"></iframe>
 <script>window.COURSE_GATE_CONFIG={module:'M02',src:'m02-qualification-operations-base.html',next:'m03-decomptes-methodes-tva.html',sections:['theory','legis','cases','errors','quiz','memo','vocab','cheat'],storagePrefixes:['tva_m02']};</script>
-<script src="course-current-law-2026.js"></script><script src="course-legacy-gate.js"></script><script src="course-public-ui.js"></script></body></html>
+<script src="course-current-law-2026.js"></script><script src="course-legacy-gate.js"></script><script src="course-public-ui.js?v=20260911-2342"></script>
+<script>
+(()=>{
+  const frame=document.getElementById('module');
+  function installMemoPortal(){
+    try{
+      const d=frame.contentDocument,w=frame.contentWindow;
+      if(!d?.body||!w||d.documentElement.dataset.m02MemoPortal==='1')return;
+      const memo=d.getElementById('sec-memo'),main=d.getElementById('main');
+      if(!memo||!main||typeof w.goto!=='function')return;
+      const originalContent=memo.parentElement;
+      if(!originalContent?.classList.contains('content'))return;
+
+      d.documentElement.dataset.m02MemoPortal='1';
+      const portal=d.createElement('div');
+      portal.id='m02-memo-portal';
+      portal.className='content';
+      portal.style.display='none';
+      main.appendChild(portal);
+      portal.appendChild(memo);
+
+      const style=d.createElement('style');
+      style.id='m02-memo-portal-style';
+      style.textContent=`
+        #m02-memo-portal{max-width:900px;padding:28px 32px;}
+        #m02-memo-portal #sec-memo{position:relative!important;visibility:visible!important;opacity:1!important;}
+        #m02-memo-portal #fc-card{position:relative!important;overflow:visible!important;background:#fff!important;}
+        #m02-memo-portal #fc-card>.fc-front,
+        #m02-memo-portal #fc-card>.fc-back{position:static!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;transform:none!important;backface-visibility:visible!important;-webkit-backface-visibility:visible!important;align-items:stretch!important;justify-content:flex-start!important;text-align:left!important;}
+        #m02-memo-portal #fc-card>.fc-front{display:block;}
+        #m02-memo-portal #fc-card>.fc-back{display:none;}
+        @media(max-width:768px){#m02-memo-portal{padding:20px 16px;}}
+      `;
+      d.head.appendChild(style);
+
+      const nativeGoto=w.goto.bind(w);
+      const sync=sec=>{
+        const memoOn=sec==='memo';
+        originalContent.style.display=memoOn?'none':'block';
+        portal.style.display=memoOn?'block':'none';
+        if(memoOn){
+          memo.classList.add('active');
+          memo.style.setProperty('display','block','important');
+          memo.style.setProperty('visibility','visible','important');
+          memo.style.setProperty('opacity','1','important');
+        }
+      };
+      w.goto=function(sec){
+        sync(sec);
+        nativeGoto(sec);
+        sync(sec);
+        if(sec==='memo')w.scrollTo({top:0,behavior:'auto'});
+      };
+
+      const active=d.querySelector('.nav-item.active[data-section]')?.dataset.section || 'theory';
+      sync(active);
+    }catch(e){console.warn('M02 memo portal',e)}
+  }
+  frame.addEventListener('load',()=>setTimeout(installMemoPortal,0));
+  setTimeout(installMemoPortal,0);
+})();
+</script></body></html>
