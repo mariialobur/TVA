@@ -39,6 +39,15 @@
     });
   }
 
+  function removeDeveloperLinks(doc){
+    if(!doc)return;
+    doc.querySelectorAll('a[href]').forEach(a=>{
+      const href=(a.getAttribute('href')||'').trim();
+      const text=(a.textContent||'').trim();
+      if(/github\.com/i.test(href)||/^github\b/i.test(text))a.remove();
+    });
+  }
+
   function normalizeHomeLinks(doc){
     if(!doc)return;
     doc.querySelectorAll('a[href="index.html"],a.home,a.btn-home').forEach(a=>{
@@ -54,6 +63,7 @@
   function clean(doc,addFloating){
     if(!doc||!doc.body)return;
     removeEstimatedDurations(doc);
+    removeDeveloperLinks(doc);
     normalizeHomeLinks(doc);
     if(addFloating)addHomeButton(doc,true);
   }
