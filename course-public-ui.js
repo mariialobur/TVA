@@ -3,6 +3,18 @@
   const HOME='index.html';
   const TIME_RE=/(?:[~≈]\s*)?\d+(?:[.,]\d+)?\s*(?:[-–—]\s*\d+(?:[.,]\d+)?)?\s*(?:h(?:eures?)?|heures?|min(?:utes?)?)(?:\s*\d+\s*min)?/i;
 
+  function ensureFavicon(doc){
+    if(!doc?.head)return;
+    let link=doc.querySelector('link[rel~="icon"]');
+    if(!link){
+      link=doc.createElement('link');
+      link.rel='icon';
+      link.type='image/svg+xml';
+      doc.head.appendChild(link);
+    }
+    link.href='favicon.svg';
+  }
+
   function addHomeButton(doc,targetTop=true){
     if(!doc||!doc.body||doc.getElementById('course-home-fixed'))return;
     const a=doc.createElement('a');
@@ -88,6 +100,7 @@
 
   function clean(doc,addFloating){
     if(!doc||!doc.body)return;
+    ensureFavicon(doc);
     fixM02Flashcards(doc);
     removeEstimatedDurations(doc);
     removeDeveloperLinks(doc);
@@ -96,6 +109,7 @@
   }
 
   function init(){
+    ensureFavicon(document);
     const frame=document.getElementById('module');
     if(frame){
       addHomeButton(document,false);
