@@ -68,40 +68,9 @@
     });
   }
 
-  function fixM02Flashcards(doc){
-    if(!doc?.body||!doc.getElementById('sec-memo')||!doc.getElementById('fc-card')||doc.getElementById('m02-flashcard-css-fix'))return;
-    const style=doc.createElement('style');
-    style.id='m02-flashcard-css-fix';
-    style.textContent=`
-      #fc-card{position:relative!important;overflow:visible!important;background:#fff!important;}
-      #fc-card > .fc-front,
-      #fc-card > .fc-back{
-        position:static!important;
-        inset:auto!important;
-        width:auto!important;
-        height:auto!important;
-        min-height:0!important;
-        border:0!important;
-        border-radius:0!important;
-        padding:0!important;
-        background:transparent!important;
-        transform:none!important;
-        backface-visibility:visible!important;
-        -webkit-backface-visibility:visible!important;
-        align-items:stretch!important;
-        justify-content:flex-start!important;
-        text-align:left!important;
-      }
-      #fc-card > .fc-front{display:block;}
-      #fc-card > .fc-back{display:none;}
-    `;
-    doc.head.appendChild(style);
-  }
-
   function clean(doc,addFloating){
     if(!doc||!doc.body)return;
     ensureFavicon(doc);
-    fixM02Flashcards(doc);
     removeEstimatedDurations(doc);
     removeDeveloperLinks(doc);
     normalizeHomeLinks(doc);
