@@ -5,43 +5,43 @@
 <style>html,body,#module{width:100%;height:100%;margin:0;border:0;overflow:hidden;background:#F8F5EE}#module{display:block}</style></head>
 <body><iframe id="module" src="m02-qualification-operations-base.html" title="M02 — Qualification des opérations TVA" allow="clipboard-write"></iframe>
 <script>window.COURSE_GATE_CONFIG={module:'M02',src:'m02-qualification-operations-base.html',next:'m03-decomptes-methodes-tva.html',sections:['theory','legis','cases','errors','quiz','memo','vocab','cheat'],storagePrefixes:['tva_m02']};</script>
-<script src="course-current-law-2026.js"></script><script src="course-legacy-gate.js"></script><script src="course-public-ui.js?v=20260911-2356"></script>
+<script src="course-current-law-2026.js"></script><script src="course-legacy-gate.js"></script><script src="course-public-ui.js?v=20260912-0014"></script>
 <script>
 (()=>{
   const frame=document.getElementById('module');
-  function rebuildMemo(){
+  function installStableMemo(){
     try{
       const d=frame.contentDocument,w=frame.contentWindow;
-      if(!d?.body||!w||d.documentElement.dataset.m02MemoRebuilt==='1')return;
+      if(!d?.body||!w||d.documentElement.dataset.m02StableMemo==='1')return;
       const memo=d.getElementById('sec-memo');
-      if(!memo||typeof w.goto!=='function'||typeof w.initCards!=='function')return;
-      d.documentElement.dataset.m02MemoRebuilt='1';
+      if(!memo||typeof w.goto!=='function')return;
+      let cards=[];
+      try{cards=w.eval('FLASHCARDS.map(c=>({id:c.id,cat:c.cat,term:c.term,art:c.art,def:c.def}))')}catch(e){}
+      if(!Array.isArray(cards)||!cards.length)return;
+      d.documentElement.dataset.m02StableMemo='1';
 
       const style=d.createElement('style');
-      style.id='m02-memo-isolated-style';
+      style.id='m02-stable-memo-style';
       style.textContent=`
         #sec-memo.active{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;}
-        #sec-memo .m02m-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
-        #sec-memo .m02m-filter .memo-cat{padding:8px 14px;font-size:12px;border:1px solid var(--cream-dark);background:#fff;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);}
-        #sec-memo .m02m-filter .memo-cat.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
-        #sec-memo .m02m-progress{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
-        #sec-memo .m02m-progress-text{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);}
-        #sec-memo .m02m-progress-bar{height:4px;background:var(--cream-dark);border-radius:4px;overflow:hidden;}
-        #sec-memo #fc-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .3s ease;width:0%;}
-        #sec-memo #fc-card{position:relative!important;display:block!important;background:#fff!important;border:1px solid var(--cream-dark)!important;border-radius:12px!important;padding:28px!important;min-height:280px!important;margin:0 0 14px!important;overflow:visible!important;transform:none!important;perspective:none!important;cursor:pointer!important;}
-        #sec-memo #fc-card>.m02m-face{position:static!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;transform:none!important;backface-visibility:visible!important;-webkit-backface-visibility:visible!important;display:block;align-items:initial!important;justify-content:initial!important;text-align:left!important;}
-        #sec-memo #fc-card>.m02m-face[style*="display:none"]{display:none!important;}
-        #sec-memo .m02m-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
-        #sec-memo #fc-cat{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:var(--navy);padding:3px 10px;border-radius:4px;margin-bottom:18px;}
-        #sec-memo #fc-term{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--navy)!important;line-height:1.35;margin-bottom:14px;text-align:left!important;}
-        #sec-memo #fc-def{font-size:13.5px;color:#2C2C3E!important;line-height:1.7;margin-bottom:14px;text-align:left!important;}
-        #sec-memo #fc-art,#sec-memo #fc-art-back{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold)!important;background:var(--navy)!important;padding:3px 10px;border-radius:4px;}
-        #sec-memo .m02m-rate{margin-top:18px;padding-top:16px;border-top:1px dashed var(--cream-dark);}
-        #sec-memo .m02m-rate p{font-size:12px;color:var(--muted);margin-bottom:8px;}
-        #sec-memo .m02m-rate-buttons{display:flex;gap:6px;flex-wrap:wrap;}
-        #sec-memo .m02m-rate-buttons button{padding:7px 12px;font-size:12px;border:1px solid var(--cream-dark);border-radius:5px;background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;}
-        #sec-memo .m02m-nav{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:10px;}
-        @media(max-width:768px){#sec-memo #fc-card{padding:20px 18px!important;}}
+        #sec-memo .m02s-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+        #sec-memo .m02s-filter button{padding:8px 14px;font-size:12px;border:1px solid var(--cream-dark);background:#fff;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted)}
+        #sec-memo .m02s-filter button.active{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+        #sec-memo .m02s-progress{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:8px}
+        #sec-memo .m02s-bar{height:4px;background:var(--cream-dark);border-radius:4px;overflow:hidden;margin-bottom:18px}
+        #sec-memo .m02s-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .2s}
+        #sec-memo .m02s-card{display:block!important;position:relative!important;background:#fff!important;border:1px solid var(--cream-dark)!important;border-radius:12px!important;padding:28px!important;min-height:260px!important;margin-bottom:14px!important;overflow:visible!important;transform:none!important;perspective:none!important;cursor:pointer!important;color:var(--ink)!important}
+        #sec-memo .m02s-cat{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:var(--navy);padding:3px 10px;border-radius:4px;margin-bottom:18px}
+        #sec-memo .m02s-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+        #sec-memo .m02s-term{font-family:'Libre Baskerville',serif;font-size:22px;line-height:1.35;color:var(--navy);margin-bottom:14px}
+        #sec-memo .m02s-def{font-size:14px;line-height:1.75;color:#2C2C3E;margin-bottom:16px}
+        #sec-memo .m02s-art{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:var(--navy);padding:3px 10px;border-radius:4px}
+        #sec-memo .m02s-rate{margin-top:20px;padding-top:16px;border-top:1px dashed var(--cream-dark)}
+        #sec-memo .m02s-rate p{font-size:12px;color:var(--muted);margin:0 0 8px}
+        #sec-memo .m02s-rate-buttons{display:flex;gap:6px;flex-wrap:wrap}
+        #sec-memo .m02s-rate-buttons button,#sec-memo .m02s-nav button{padding:8px 12px;font-size:12px;border:1px solid var(--cream-dark);border-radius:6px;background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--ink)}
+        #sec-memo .m02s-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:12px 0 18px}
+        @media(max-width:768px){#sec-memo .m02s-card{padding:20px 18px!important}.m02s-filter{gap:5px!important}}
       `;
       d.head.appendChild(style);
 
@@ -49,40 +49,50 @@
         <div class="section-hero">
           <div class="hero-eyebrow">Section F — Mémo-fiches</div>
           <div class="hero-title">25 flashcards classées par catégorie</div>
-          <div class="hero-desc">Révisez les notions clés du module et notez votre niveau de confiance après chaque carte.</div>
-          <div class="hero-meta"><div class="meta-chip"><span class="ic">🃏</span>25 flashcards</div><div class="meta-chip"><span class="ic">📚</span>4 catégories</div><div class="meta-chip"><span class="ic">🧠</span>Répétition espacée</div></div>
+          <div class="hero-desc">Révisez les notions clés du module. Cliquez sur la carte pour afficher la réponse, puis évaluez votre niveau de maîtrise.</div>
+          <div class="hero-meta"><div class="meta-chip"><span class="ic">🃏</span>25 flashcards</div><div class="meta-chip"><span class="ic">📚</span>4 catégories</div></div>
         </div>
-        <div class="m02m-filter">
-          <button class="memo-cat active" onclick="filterCards('all',this)">📦 Toutes (25)</button>
-          <button class="memo-cat" onclick="filterCards('fond',this)">🔹 Fondamentaux (7)</button>
-          <button class="memo-cat" onclick="filterCards('art21',this)">🚫 Art. 21 (7)</button>
-          <button class="memo-cat" onclick="filterCards('opt23',this)">⭐ Option / exonération (5)</button>
-          <button class="memo-cat" onclick="filterCards('prat',this)">🎯 Pratique / décompte (6)</button>
+        <div class="m02s-filter">
+          <button data-cat="all" class="active">📦 Toutes (25)</button>
+          <button data-cat="fond">🔹 Fondamentaux (7)</button>
+          <button data-cat="art21">🚫 Art. 21 (7)</button>
+          <button data-cat="opt23">⭐ Option / exonération (5)</button>
+          <button data-cat="prat">🎯 Pratique / décompte (6)</button>
         </div>
-        <div class="m02m-progress"><div class="m02m-progress-text">Carte <span id="fc-current">1</span> / <span id="fc-total">25</span></div><div class="m02m-progress-bar"><div id="fc-fill"></div></div></div>
-        <div id="fc-card" onclick="flipCard()">
-          <div id="fc-cat">Catégorie</div>
-          <div id="fc-front" class="m02m-face">
-            <div class="m02m-label">Recto · cliquez pour retourner</div>
-            <div id="fc-term">Terme</div>
-            <div id="fc-art">Art.</div>
-          </div>
-          <div id="fc-back" class="m02m-face" style="display:none">
-            <div class="m02m-label">Verso</div>
-            <div id="fc-def">Définition</div>
-            <div id="fc-art-back"></div>
-            <div class="m02m-rate"><p>Difficulté ressentie :</p><div class="m02m-rate-buttons">
-              <button onclick="event.stopPropagation();fcRate(1)">😰 Oublié</button>
-              <button onclick="event.stopPropagation();fcRate(2)">😕 Difficile</button>
-              <button onclick="event.stopPropagation();fcRate(4)">🙂 Bien</button>
-              <button onclick="event.stopPropagation();fcRate(5)">😎 Facile</button>
-            </div></div>
-          </div>
-        </div>
-        <div class="m02m-nav"><button class="btn btn-ghost" onclick="prevCard()">← Précédente</button><button class="btn btn-ghost" onclick="nextCard()">Suivante →</button></div>
+        <div class="m02s-progress">Carte <span id="m02s-current">1</span> / <span id="m02s-total">25</span></div>
+        <div class="m02s-bar"><div class="m02s-fill" id="m02s-fill"></div></div>
+        <div class="m02s-card" id="m02s-card" tabindex="0" role="button" aria-label="Retourner la flashcard"></div>
+        <div class="m02s-nav"><button id="m02s-prev">← Précédente</button><button id="m02s-next">Suivante →</button></div>
         <div class="section-nav"><button class="btn btn-ghost" onclick="goto('quiz')">← Quiz</button><button class="btn btn-primary" onclick="goto('vocab')">Vocabulaire FR/DE →</button></div>`;
 
-      w._cardsInit=false;
+      let filtered=cards.slice(),idx=0,flipped=false;
+      const catNames={fond:'Fondamentaux',art21:'Art. 21 · Exclusions',opt23:'Option / exonération',prat:'Pratique / décompte'};
+      const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const cardEl=d.getElementById('m02s-card');
+      const render=()=>{
+        if(!filtered.length){cardEl.innerHTML='<div class="m02s-def">Aucune carte dans cette catégorie.</div>';return}
+        const c=filtered[idx];
+        d.getElementById('m02s-current').textContent=String(idx+1);
+        d.getElementById('m02s-total').textContent=String(filtered.length);
+        d.getElementById('m02s-fill').style.width=((idx+1)/filtered.length*100)+'%';
+        if(!flipped){
+          cardEl.innerHTML=`<div class="m02s-cat">${esc(catNames[c.cat]||c.cat)}</div><div class="m02s-label">Recto · cliquez pour retourner</div><div class="m02s-term">${esc(c.term)}</div><div class="m02s-art">${esc(c.art)}</div>`;
+        }else{
+          cardEl.innerHTML=`<div class="m02s-cat">${esc(catNames[c.cat]||c.cat)}</div><div class="m02s-label">Verso</div><div class="m02s-def">${esc(c.def)}</div><div class="m02s-art">${esc(c.art)}</div><div class="m02s-rate"><p>Difficulté ressentie :</p><div class="m02s-rate-buttons"><button data-rate="1">😰 Oublié</button><button data-rate="2">😕 Difficile</button><button data-rate="4">🙂 Bien</button><button data-rate="5">😎 Facile</button></div></div>`;
+          cardEl.querySelectorAll('[data-rate]').forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();try{w.eval(`srs[${JSON.stringify(c.id)}]={...(srs[${JSON.stringify(c.id)}]||{}),quality:${Number(b.dataset.rate)},lastReviewed:new Date().toISOString()};saveSRS();`)}catch(e){};next()}));
+        }
+      };
+      const next=()=>{if(filtered.length){idx=(idx+1)%filtered.length;flipped=false;render()}};
+      const prev=()=>{if(filtered.length){idx=(idx-1+filtered.length)%filtered.length;flipped=false;render()}};
+      cardEl.addEventListener('click',()=>{flipped=!flipped;render()});
+      cardEl.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flipped=!flipped;render()}});
+      d.getElementById('m02s-next').addEventListener('click',next);
+      d.getElementById('m02s-prev').addEventListener('click',prev);
+      memo.querySelectorAll('[data-cat]').forEach(btn=>btn.addEventListener('click',()=>{
+        memo.querySelectorAll('[data-cat]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+        const cat=btn.dataset.cat;filtered=cat==='all'?cards.slice():cards.filter(c=>c.cat===cat);idx=0;flipped=false;render();
+      }));
+
       const nativeGoto=w.goto.bind(w);
       w.goto=function(sec){
         nativeGoto(sec);
@@ -91,21 +101,14 @@
           memo.style.setProperty('display','block','important');
           memo.style.setProperty('visibility','visible','important');
           memo.style.setProperty('opacity','1','important');
-          w.initCards();
-          w._cardsInit=true;
+          render();
         }
       };
-
-      const active=d.querySelector('.nav-item.active[data-section]')?.dataset.section;
-      if(active==='memo'||memo.classList.contains('active')){
-        memo.classList.add('active');
-        memo.style.setProperty('display','block','important');
-        w.initCards();
-        w._cardsInit=true;
-      }
-    }catch(e){console.warn('M02 memo rebuild',e)}
+      const stored=(()=>{try{return JSON.parse(localStorage.getItem('tva_m02_v4_7')||'{}').section}catch(e){return null}})();
+      if(stored==='memo'||memo.classList.contains('active')){memo.classList.add('active');memo.style.setProperty('display','block','important');render()}
+    }catch(e){console.warn('M02 stable memo',e)}
   }
-  frame.addEventListener('load',()=>setTimeout(rebuildMemo,0));
-  setTimeout(rebuildMemo,250);
+  frame.addEventListener('load',()=>setTimeout(installStableMemo,0));
+  setTimeout(installStableMemo,250);
 })();
 </script></body></html>
