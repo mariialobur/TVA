@@ -11,8 +11,21 @@
     d.querySelectorAll('a[href*="eportal.admin.ch"]').forEach(a=>{a.href='https://www.estv.admin.ch/fr/services-en-ligne-afc';if(/ePortal/i.test(a.textContent||''))a.textContent='Portail AFC ↗'});
   }
   function patchM01(d){
-    d.querySelectorAll('.vocab-card').forEach(c=>{const k=c.querySelector('.vfr')?.textContent.trim(),def=c.querySelector('.vdef');if(k==='Décompte TVA'&&def)setText(def,'Déclaration TVA selon la période applicable. Depuis le 11.05.2026, la remise se fait dans Décompte TVA pro sur le Portail AFC; le délai ordinaire de remise et paiement reste de 60 jours après la fin de la période de décompte.')});
-    replaceText(d,[['Via ePortal dans les 60 jours','Via Décompte TVA pro sur le Portail AFC, dans le délai applicable'],['via ePortal AFC','via le Portail AFC'],['Via ePortal AFC','Via le Portail AFC'],['Via ePortal','Via le Portail AFC'],['formulaires, ePortal et jurisprudence','formulaires, Portail AFC / Décompte TVA pro et jurisprudence']]);portalLinks(d);
+    d.querySelectorAll('.vocab-card').forEach(c=>{
+      const k=c.querySelector('.vfr')?.textContent.trim(),def=c.querySelector('.vdef');if(!def)return;
+      if(k==='TVA / Taxe sur la valeur ajoutée')setText(def,'Impôt indirect fédéral sur la consommation. La neutralité pour l’entreprise n’est réalisée que dans la mesure où un droit à la déduction de l’impôt préalable est ouvert.');
+      if(k==='Impôt préalable (DIP)')setText(def,'Impôt préalable supporté sur des acquisitions/importations visées par la LTVA. La déduction n’est admise que si les conditions matérielles, l’affectation et la preuve sont réunies.');
+      if(k==='Opération exclue')setText(def,'Prestation exclue de l’impôt selon l’art. 21 : pas d’impôt grevant l’opération et, en principe, pas de DIP sur les coûts directement liés, sous réserve notamment d’une option valable ou d’une règle spéciale. Ne pas confondre «exclue» avec une opération située hors du territoire suisse ou hors contre-prestation.');
+      if(k==='Opération exonérée (avec DIP)')setText(def,'Prestation exonérée selon l’art. 23 : aucune TVA suisse facturée sur l’opération, avec maintien du droit au DIP dans la mesure où les conditions légales sont remplies.');
+      if(k==='Décompte TVA')setText(def,'Déclaration TVA selon la période de décompte applicable. Depuis le 11.05.2026, la remise se fait dans Décompte TVA pro sur le Portail AFC; le délai ordinaire de remise et paiement reste de 60 jours après la fin de la période de décompte.');
+      if(k==='Méthode effective')setText(def,'Méthode dans laquelle l’impôt dû sur les opérations est confronté à l’impôt préalable effectivement déductible. La fréquence de décompte se détermine séparément selon le régime applicable; elle ne doit pas être confondue avec la méthode de calcul.');
+    });
+    replaceText(d,[
+      ['Via ePortal dans les 60 jours','Via Décompte TVA pro sur le Portail AFC, dans le délai applicable'],['via ePortal AFC','via le Portail AFC'],['Via ePortal AFC','Via le Portail AFC'],['Via ePortal','Via le Portail AFC'],['formulaires, ePortal et jurisprudence','formulaires, Portail AFC / Décompte TVA pro et jurisprudence'],
+      ['Les opérations exclues sont hors champ.','Les prestations exclues selon l’art. 21 ne comptent pas dans ce chiffre d’affaires déterminant; ne pas confondre cette catégorie avec une opération hors territoire ou hors contre-prestation.'],
+      ['Exclu (art. 21) = pas de TVA facturée et, sans option valable, pas de DIP sur les achats liés.','Exclu (art. 21) = prestation exclue de l’impôt; pas de TVA facturée sur l’opération et, en principe, pas de DIP sur les achats directement liés, sous réserve notamment d’une option valable ou d’une règle spéciale.'],
+      ['Ex. médecine, loyers, enseignement.','Ex. certaines prestations de santé, de formation et certaines opérations immobilières lorsque les conditions de l’art. 21 sont remplies.']
+    ]);portalLinks(d);
   }
   function patchM02(d){
     replaceText(d,[["Hiérarchie : Loi (LTVA) > Ordonnance (OTVA) > Jurisprudence TF/TAF > Doctrine AFC. Lors d'un litige, invoquer la jurisprudence prévaut sur la doctrine AFC.","Méthode des sources : partir de la LTVA et de l’OTVA applicables, puis vérifier la jurisprudence pertinente qui interprète ces normes. La pratique publiée de l’AFC est essentielle pour comprendre l’application administrative, mais elle n’est pas une source législative et ne lie pas les tribunaux comme une loi. En cas de litige, ne pas réciter une hiérarchie mécanique : confronter texte légal, ordonnance, jurisprudence et pratique AFC aux faits du dossier."]]);
