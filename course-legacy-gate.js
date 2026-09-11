@@ -1,132 +1,188 @@
 'use strict';
 (()=>{
-  const cfg=window.COURSE_GATE_CONFIG||{},frame=document.getElementById('module');
+  const cfg=window.COURSE_GATE_CONFIG||{};
+  const frame=document.getElementById('module');
   if(!frame||!cfg.module||!cfg.src)return;
-  const DASH='tvaSpecialisteTvaDashboardV1',GKEY='tva_course_gate_'+cfg.module+'_v2';
+  const DASH='tvaSpecialisteTvaDashboardV1';
+  const GKEY='tva_course_gate_'+cfg.module+'_v2';
   const required=cfg.sections||['theory','legis','cases','errors','quiz','memo','vocab','cheat'];
   let gate={visited:{theory:true},quizPassed:false,quizScore:0,done:false};
   try{gate=Object.assign(gate,JSON.parse(localStorage.getItem(GKEY)||'{}'));gate.visited=Object.assign({theory:true},gate.visited||{})}catch(e){}
   const save=()=>{try{localStorage.setItem(GKEY,JSON.stringify(gate))}catch(e){}};
-  const mark=s=>{if(required.includes(s)){gate.visited[s]=true;save()}};
-  const setText=(el,text)=>{if(el&&el.textContent.trim()!==text.trim())el.textContent=text};
+  const esc=s=>String(s||'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  function mark(s){if(required.includes(s)){gate.visited[s]=true;save()}}
   function inferObject(o){
     if(!o||typeof o!=='object')return;
-    required.forEach(s=>{if(o[s]===1||o[s]===true)gate.visited[s]=true;if(o.done&&(o.done[s]===1||o.done[s]===true))gate.visited[s]=true;if(o.visited&&(o.visited[s]===1||o.visited[s]===true))gate.visited[s]=true});
+    required.forEach(s=>{
+      if(o[s]===1||o[s]===true)gate.visited[s]=true;
+      if(o.done&&(o.done[s]===1||o.done[s]===true))gate.visited[s]=true;
+      if(o.visited&&(o.visited[s]===1||o.visited[s]===true))gate.visited[s]=true;
+    });
     if(required.includes(o.section))gate.visited[o.section]=true;
     const pass=o.quiz_passed===1||o.quiz_passed===true||o.quizPassed===1||o.quizPassed===true;
     const scores=[o.quiz_score,o.quizScore,o.quiz_best,o.quizBest,o.bestScore,o.lastScore,o.quiz&&o.quiz.score,o.quiz&&o.quiz.best];
     const score=Math.max(0,...scores.map(Number).filter(Number.isFinite));
     if(pass||score>=75){gate.quizPassed=true;gate.quizScore=Math.max(gate.quizScore||0,score||75)}
   }
-  function inferStorage(){for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i)||'';if(!cfg.storagePrefixes?.some(p=>k.startsWith(p)))continue;try{inferObject(JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){}}save()}
+  function inferStorage(){
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i)||'';
+      if(!cfg.storagePrefixes?.some(p=>k.startsWith(p)))continue;
+      try{inferObject(JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){}
+    }
+    save();
+  }
   function scoreFromDom(d){
-    let best=gate.quizScore||0;const view=d.defaultView||window;
-    ['#r-pct','#score','#result-score','#quiz-score','.results-score','.score'].forEach(sel=>d.querySelectorAll(sel).forEach(el=>{const style=view.getComputedStyle(el);if(style.display==='none'||style.visibility==='hidden')return;const m=(el.textContent||'').match(/(\d{1,3})(?:\s*%|$)/);if(m)best=Math.max(best,Number(m[1]))}));
+    const sels=['#r-pct','#score','#result-score','#quiz-score','.results-score','.score'];
+    let best=gate.quizScore||0;
+    sels.forEach(sel=>d.querySelectorAll(sel).forEach(el=>{
+      const style=getComputedStyle(el);
+      if(style.display==='none'||style.visibility==='hidden')return;
+      const m=(el.textContent||'').match(/(\d{1,3})(?:\s*%|$)/);
+      if(m)best=Math.max(best,Number(m[1]));
+    }));
     if(best>=75){gate.quizPassed=true;gate.quizScore=best;save()}
   }
-  function activeSection(d){const view=d.defaultView||window;required.forEach(s=>{const el=d.getElementById('sec-'+s);if(!el)return;const cs=view.getComputedStyle(el);if(el.classList.contains('active')||(cs.display!=='none'&&cs.visibility!=='hidden'))mark(s)})}
-  function sectionFromTarget(t){const h=t.closest('[data-sec],[data-s],[data-section]');if(h)return h.dataset.sec||h.dataset.s||h.dataset.section||'';const oc=t.getAttribute?.('onclick')||'',m=oc.match(/(?:NAV\.)?(?:go|goto)\(\s*['"]([^'"]+)['"]/);return m?m[1]:''}
-  function completionTarget(t){const oc=t.getAttribute?.('onclick')||'',txt=(t.textContent||'').trim();return /(?:finishModule|PROG\.finish|PROG\.goNext|goNextModule)\s*\(/.test(oc)||/(?:Terminer|Marquer)/i.test(txt)&&txt.includes(cfg.module)}
-  function wantsNext(t){const oc=t.getAttribute?.('onclick')||'',txt=(t.textContent||'').trim();return /(?:goNextModule|PROG\.goNext)\s*\(/.test(oc)||/^Continuer\b/i.test(txt)||/Module suivant/i.test(txt)}
-  function gateStatus(){inferStorage();const d=frame.contentDocument;if(d){activeSection(d);scoreFromDom(d)}const missing=required.filter(s=>!gate.visited[s]);return{ok:missing.length===0&&gate.quizPassed,missing}}
-  function toast(d,msg,ok){let x=d.getElementById('course-gate-toast');if(!x){x=d.createElement('div');x.id='course-gate-toast';x.style.cssText='position:fixed;right:16px;bottom:16px;z-index:99999;max-width:520px;padding:13px 16px;border-radius:9px;font:13px/1.5 system-ui,sans-serif;box-shadow:0 8px 28px #0003';d.body.appendChild(x)}x.style.background=ok?'#E7F5EC':'#FEF3D8';x.style.color=ok?'#1f5d3b':'#684600';x.style.border='1px solid '+(ok?'#8DC7A2':'#dfbf70');x.textContent=msg;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),7000)}
-  function finalize(d,next){gate.done=true;save();try{const x=JSON.parse(localStorage.getItem(DASH)||'{}');x[cfg.module]='done';localStorage.setItem(DASH,JSON.stringify(x))}catch(e){}toast(d,cfg.module+' valid√© : toutes les sections ont √©t√© parcourues et le QCM a atteint au moins 75 %.',true);if(next&&cfg.next)setTimeout(()=>{window.top.location.href=cfg.next},250)}
-  function replaceText(d,repls){const w=d.createTreeWalker(d.body,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){let v=n.nodeValue||'',nv=v;for(const [a,b] of repls)if(nv.includes(a))nv=nv.split(a).join(b);if(nv!==v)n.nodeValue=nv}}
-  function patchPortalLinks(d){d.querySelectorAll('a[href*="eportal.admin.ch"]').forEach(a=>{a.href='https://www.estv.admin.ch/fr/services-en-ligne-afc';if(/ePortal/i.test(a.textContent||''))a.textContent='Portail AFC ‚Üó'})}
+  function activeSection(d){
+    required.forEach(s=>{
+      const el=d.getElementById('sec-'+s);
+      if(!el)return;
+      const cs=getComputedStyle(el);
+      if(el.classList.contains('active')||(cs.display!=='none'&&cs.visibility!=='hidden'))mark(s);
+    });
+  }
+  function sectionFromTarget(t){
+    const holder=t.closest('[data-sec],[data-s],[data-section]');
+    if(holder)return holder.dataset.sec||holder.dataset.s||holder.dataset.section||'';
+    const oc=t.getAttribute?.('onclick')||'';
+    const m=oc.match(/(?:NAV\.)?(?:go|goto)\(\s*['"]([^'"]+)['"]/);
+    return m?m[1]:'';
+  }
+  function completionTarget(t){
+    const oc=t.getAttribute?.('onclick')||'',txt=(t.textContent||'').trim();
+    return /(?:finishModule|PROG\.finish|PROG\.goNext|goNextModule)\s*\(/.test(oc) ||
+      new RegExp('(?:Terminer|Marquer)[^\\n]{0,40}'+esc(cfg.module),'i').test(txt);
+  }
+  function wantsNext(t){
+    const oc=t.getAttribute?.('onclick')||'',txt=(t.textContent||'').trim();
+    return /(?:goNextModule|PROG\.goNext)\s*\(/.test(oc)||/^Continuer\b/i.test(txt)||/Module suivant/i.test(txt);
+  }
+  function gateStatus(){
+    inferStorage();
+    const d=frame.contentDocument;if(d){activeSection(d);scoreFromDom(d)}
+    const missing=required.filter(s=>!gate.visited[s]);
+    return {ok:missing.length===0&&gate.quizPassed,missing};
+  }
+  function toast(d,msg,ok){
+    let x=d.getElementById('course-gate-toast');
+    if(!x){x=d.createElement('div');x.id='course-gate-toast';x.style.cssText='position:fixed;right:16px;bottom:16px;z-index:99999;max-width:520px;padding:13px 16px;border-radius:9px;font:13px/1.5 system-ui,sans-serif;box-shadow:0 8px 28px #0003';d.body.appendChild(x)}
+    x.style.background=ok?'#E7F5EC':'#FEF3D8';x.style.color=ok?'#1f5d3b':'#684600';x.style.border='1px solid '+(ok?'#8DC7A2':'#dfbf70');x.textContent=msg;
+    clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),7000);
+  }
+  function finalize(d,next){
+    gate.done=true;save();
+    try{const x=JSON.parse(localStorage.getItem(DASH)||'{}');x[cfg.module]='done';localStorage.setItem(DASH,JSON.stringify(x))}catch(e){}
+    toast(d,cfg.module+' valid√© : toutes les sections ont √©t√© parcourues et le QCM a atteint au moins 75 %.',true);
+    if(next&&cfg.next)setTimeout(()=>{window.top.location.href=cfg.next},250);
+  }
+  function applyTextReplacements(d,repls){
+    const walker=d.createTreeWalker(d.body,NodeFilter.SHOW_TEXT);
+    let n;while((n=walker.nextNode())){
+      let v=n.nodeValue||'',nv=v;
+      repls.forEach(([a,b])=>{if(nv.includes(a))nv=nv.split(a).join(b)});
+      if(nv!==v)n.nodeValue=nv;
+    }
+  }
+  function setText(el,text){if(el&&el.textContent.trim()!==text.trim())el.textContent=text}
   function legalPatch(d){
     if(cfg.module==='M01'){
-      d.querySelectorAll('.vocab-card').forEach(c=>{const k=c.querySelector('.vfr')?.textContent.trim(),def=c.querySelector('.vdef');if(!def)return;if(k==='TVA / Taxe sur la valeur ajout√©e')def.textContent='Imp√¥t f√©d√©ral g√©n√©ral sur la consommation. Le syst√®me vise la neutralit√© pour l‚Äôentreprise dans la mesure o√π elle dispose effectivement du droit √† la d√©duction de l‚Äôimp√¥t pr√©alable.';if(k==='Imp√¥t pr√©alable (DIP)')def.textContent='TVA grevant certaines acquisitions, d√©ductible dans la mesure o√π les conditions des art. 28 ss LTVA sont remplies et selon l‚Äôaffectation.';if(k==='Op√©ration exclue')def.textContent='Prestation exclue de l‚Äôimp√¥t selon l‚Äôart. 21 LTVA. √Ä distinguer d‚Äôune prestation localis√©e hors de Suisse. Sans option ou droit sp√©cial, pas de TVA de sortie et pas de DIP sur les co√ªts directement affect√©s.';if(k==='D√©compte TVA')def.textContent='D√©claration TVA selon la p√©riode de d√©compte applicable : en principe trimestrielle (effective/TaF) ou semestrielle (TDFN), avec d√©compte annuel possible sur demande sous les conditions de l‚Äôart. 35a LTVA. La remise se fait dans D√©compte TVA pro sur le Portail AFC.';if(k==='M√©thode effective')def.textContent='TVA due r√©elle moins DIP d√©ductible r√©el. P√©riode de d√©compte en principe trimestrielle; d√©compte annuel possible sur demande si les conditions l√©gales sont r√©unies.';if(k==='TDFN / Taux de la dette fiscale nette')def.textContent='M√©thode simplifi√©e : TDFN appliqu√© au chiffre d‚Äôaffaires d√©terminant TVA comprise, sous les limites actuelles. D√©compte en principe semestriel; d√©compte annuel possible sur demande sous conditions.'});
-      replaceText(d,[['Les op√©rations exclues sont hors champ.','Les prestations exclues selon l‚Äôart. 21 ne sont pas comprises dans le chiffre d‚Äôaffaires d√©terminant de l‚Äôart. 10; elles ne doivent pas √™tre confondues avec des prestations localis√©es hors de Suisse.'],['Hors champ/exclu =','Prestation exclue art. 21 ='],['Taux normal 2024','Taux normal actuel (depuis 01.01.2024)'],['Taux r√©duit 2024','Taux r√©duit actuel (depuis 01.01.2024)'],['Taux h√©bergement 2024','Taux h√©bergement actuel (depuis 01.01.2024)'],['via ePortal AFC','via le Portail AFC'],['Via ePortal AFC','Via le Portail AFC'],['Via ePortal','Via le Portail AFC'],['formulaires, ePortal et jurisprudence','formulaires, Portail AFC / D√©compte TVA pro et jurisprudence']]);patchPortalLinks(d);
+      d.querySelectorAll('.vocab-card').forEach(c=>{
+        const k=c.querySelector('.vfr')?.textContent.trim(),def=c.querySelector('.vdef');
+        if(!def)return;
+        if(k==='TVA / Taxe sur la valeur ajout√©e')def.textContent='Imp√¥t f√©d√©ral g√©n√©ral sur la consommation. Le syst√®me vise la neutralit√© pour l‚Äôentreprise dans la mesure o√π elle dispose effectivement du droit √† la d√©duction de l‚Äôimp√¥t pr√©alable.';
+        if(k==='Imp√¥t pr√©alable (DIP)')def.textContent='TVA grevant certaines acquisitions, d√©ductible dans la mesure o√π les conditions des art. 28 ss LTVA sont remplies et selon l‚Äôaffectation.';
+        if(k==='Op√©ration exclue')def.textContent='Prestation exclue de l‚Äôimp√¥t selon l‚Äôart. 21 LTVA. √Ä distinguer d‚Äôune prestation localis√©e hors de Suisse. Sans option ou droit sp√©cial, pas de TVA de sortie et pas de DIP sur les co√ªts directement affect√©s.';
+        if(k==='D√©compte TVA')def.textContent='D√©claration TVA selon la p√©riode de d√©compte applicable : en principe trimestrielle (effective/TaF) ou semestrielle (TDFN), avec d√©compte annuel possible sur demande sous les conditions de l‚Äôart. 35a LTVA.';
+        if(k==='M√©thode effective')def.textContent='TVA due r√©elle moins DIP d√©ductible r√©el. P√©riode de d√©compte en principe trimestrielle; d√©compte annuel possible sur demande si les conditions l√©gales sont r√©unies.';
+        if(k==='TDFN / Taux de la dette fiscale nette')def.textContent='M√©thode simplifi√©e : TDFN appliqu√© au chiffre d‚Äôaffaires d√©terminant TVA comprise, sous les limites actuelles. D√©compte en principe semestriel; d√©compte annuel possible sur demande sous conditions.';
+      });
+      applyTextReplacements(d,[
+        ['Les op√©rations exclues sont hors champ.','Les prestations exclues selon l‚Äôart. 21 ne sont pas comprises dans le chiffre d‚Äôaffaires d√©terminant de l‚Äôart. 10; elles ne doivent pas √™tre confondues avec des prestations localis√©es hors de Suisse.'],
+        ['Hors champ/exclu =','Prestation exclue art. 21 ='],
+        ['Taux normal 2024','Taux normal actuel (depuis 01.01.2024)'],
+        ['Taux r√©duit 2024','Taux r√©duit actuel (depuis 01.01.2024)'],
+        ['Taux h√©bergement 2024','Taux h√©bergement actuel (depuis 01.01.2024)']
+      ]);
     }
-    if(cfg.module==='M02')replaceText(d,[["Une cotisation statutaire d'association sans but lucratif est :","Une cotisation d‚Äôun organisme sans but lucratif, fix√©e conform√©ment aux statuts et r√©ellement vers√©e en qualit√© de membre, est en principe :"],["Les cotisations de membres d'organismes sans but lucratif sont exclues art. 21 al. 2 ch. 13. Condition : la cotisation doit donner acc√®s aux prestations communes (statut homog√®ne). Si paiement de prestation sp√©cifique ‚Üí imposable.","L‚Äôart. 21 al. 2 ch. 13 peut exclure les prestations fournies aux membres contre une cotisation fix√©e conform√©ment aux statuts. La pratique AFC adapt√©e le 26.05.2026 impose d‚Äôexaminer concr√®tement la cat√©gorie de membre, les droits attach√©s √† cette qualit√©, la r√®gle de fixation de la cotisation et les prestations li√©es; une prestation individualis√©e, publicit√© ou sponsoring se qualifie s√©par√©ment."],["Cotisations statutaires des membres (CHF 45'000) ‚Äî quel r√©gime ?","Cotisations des membres (CHF 45!,É“!ê „H]úòZ\€€à›Z\‹ŸN»ÍX›\ö\Ÿ\àHòZ]8†&Y^‹ù][€à]ôX»\»[ﬁY[ú»Hô]]ôH\‹€öXõ\…◊K…–€€ôù\⁄[€à]ôX»⁄àŒ»»TôYù\ÍH⁄H0ÍX⁄\⁄[€à—ëàXúŸ[ùIÀ	–€€ôù\⁄[€à]ôX»⁄àŒŒ»ö\‹]YHHôYù\»HT⁄H8†&Z[\0Ì0Ë8†&Z[\‹ù][€ã8†&Z[\‹ù]]\à]\»€€ô][€ú»H8†&X\ùàéôH€€ù\»›Yôö\ÿ[[Y[ùõ›]∞Í\…◊K…‹XõpÍ\»›\àT‹ù[Qê…À	‹XõpÍ\»\à8†&PQê…◊K…‹XõpÍH›\àT‹ù[Qê…À	‹XõpÍH\à8†&PQê…◊K…Ÿõ‹õ][Z\ôH[àY€ôH›\àT‹ù[Qê…À	⁄[úÿ‹ö\[€à[àY€ôHöXHH‹ùZ[Qê…◊WJN¬à€€ú›ÃOYôŸ][[Y[ùûRY
-	€MòÃL\ÃI Kõÿ⁄œ\ÃOÀò€‹Ÿ\›
-	Àòÿ\ŸKXõÿ⁄… N⁄Yäõÿ⁄ ^ÿ€€ú›ÿœXõÿ⁄Àú]Y\ûTŸ[X›‹îÿŸ[X›‹ê[
-	Àòÿ\ŸK\ÿŸ[ò\ö[… N⁄Yäÿ…âà\ÿÀô]\Ÿ]õYÿ[]⁄Y
-^‹ÿÀö[õô\íSIœ›õ€ôœê€€ù^Hè‹›õ€ôœà›\ù\X⁄–H
-]\ÿ[õôJH0Í[X\úôH€€àX›]ö]0ÍH[àåçãà]H[òŸ[Y[ù€€àù\⁄[ô\‹»[ã\»€€ùò]»0ÍZ∞Ë⁄Y€∞Í\»]€€à\[[ôHô[ô[ùÿöôX›]ô[Y[ù∞Í]ö\⁄XõH[à⁄YôúôH8†&XYôòZ\ô\»0Í]\õZ[ò[ù8†&Y[ùö\õ€à›õ€ôœê“àN	Ã›\à\»›^ôH[⁄\»›Z]ò[ùœ‹›õ€ôœàà“àçW	ÃHô\›][€ú»0Ë\»€Y[ù»›Z\‹Ÿ\À“à	ÃHŸ\ùöXŸ\»åêà0Ë\»€Y[ù»QK’T»]“àÕW	ÃHŸ\ùöXŸ\»åêà0Ë\»€Y[ù»\⁄X]\]Y\ÀàŸ\»ô\›][€ú»ôH€€ù\»^€Y\»]HŸ[ú»H8†&X\ùàåKàH\ôX›[€à[úŸH∞ÍX[õ[⁄[ú»]YHŸ][H–H›Z\‹ŸH€€\H›\àHŸ]Z[âŒ‹ÿÀô]\Ÿ]õYÿ[]⁄YIÃIﬂX€€ú›‹œ\ÃKú]Y\ûTŸ[X›‹ê[
-	Àú›\[‹	 N⁄Yä‹÷ÃWJ\Ÿ]^
-‹÷ÃWKêäH›ZH0Í»H0ÍXù]H8†&XX›]ö]0ÍHà\»⁄\ò€€ú›[òŸ\»ô[ô[ù∞Í]ö\⁄XõH[à–H[€ôX[0Í]\õZ[ò[ùà“àL	Ã›\à\»Là[⁄\»›Z]ò[ù»äNÿ€€ú›^YôŸ][[Y[ùûRY
-	€MòÃL\ÃKY^	 N⁄Yä^	âàY^ô]\Ÿ]õYÿ[]⁄Y
-^Ÿ^ö[õô\íSIœ›õ€ôœë]^0Í]\\»\›[ò›\Àè‹›õ€ôœàHŸ]Z[H“àL	ÃŸHY\›\ôH›\àH⁄YôúôH8†&XYôòZ\ô\»[€ôX[õ›ô[ò[ù\»›õ€ôœúô\›][€ú»]ZHôH€€ù\»^€Y\œ‹›õ€ôœàH⁄[\H8†&Z[\0Ì»\»Ÿ\ùöXŸ\»ÿÿ[\Í\»0Ë8†&pÍ]ò[ôŸ\àŸ[€à8†&X\ùà]]ô[ù€ò»€€\\ãà›\à[ôH[ùô\ö\ŸH›Z\‹ŸH]ZH›õ€ôœô0ÍXù]O‹›õ€ôœà€€àX›]ö]0ÍK8†&X\‹›Zô]\‹Ÿ[Y[ù€€[Y[òŸH0Í»H0ÍXù]‹ú‹]YH\»⁄\ò€€ú›[òŸ\»\õY][ùH∞Í]õ⁄\à]YHŸHŸ]Z[Ÿ\òH]Z[ù[ú»\»›^ôH[⁄\»›Z]ò[ùÀàX⁄K\»òZ]»Zõ›]0Í\»]Hÿ\»ô[ô[ùŸ]H∞Í]ö\⁄[€à›Yôö\ÿ[[Y[ù€€ò‹∞ÍKà0‡8†&Z[ùô\úŸK[ôH[ùô\ö\ŸH›Z\‹ŸH0ÍZ∞Ë^\›[ùH]ù\‹]x†&X[‹ú»X∞Í\∞ÍYHôH]öY[ù\»]]€X]\]Y[Y[ù\‹›Zô]YH]Hõ›\àÓH[Húò[ò⁄]L	Ãúò[ò‹»à⁄HHŸ]Z[∏†&pÍ]Z]\»0ÍZ∞Ë∞Í]ö\⁄XõHŸ[€à\»∞Í€\»\XÿXõ\À8†&X\‹›Zô]\‹Ÿ[Y[ùÿõYÿ]⁄\ôH[ù\ùöY[ù[àö[ò⁄\H0Ë8†&Y^\ò][€àH8†&Y^\ò⁄XŸH]H€›\ú»\]Y[HŸ]Z[H0Í]0ÍH]Z[ùè]à€\‹œHò\ù\ôYàèº'‰‚»\ùàL]MêH0≠»ò]\]YHQê»\‹›Zô]\‹Ÿ[Y[ùŸ]èâŒŸ^ô]\Ÿ]õYÿ[]⁄YIÃIﬂ_Bà€€ú›ÃœYôŸ][[Y[ùûRY
-	€MòÃL\Ã… N⁄YäÃ ^ÿ€€ú›‹œ\ÃÀú]Y\ûTŸ[X›‹ê[
-	Àú›\[‹	 N⁄Yä‹÷ÃWJ\Ÿ]^
-‹÷ÃWK	–äH¯†&X[õõ€òŸ\à[ú»\»Ãõ›\ú»0Í»H0ÍXù]H8†&X\‹›Zô]\‹Ÿ[Y[ù»0Í]\õZ[ô\à8†&XXõ‹ôŸ]H]HŸ[€à8†&X\ùàM]\»òZ]… Nÿ€€ú›^YôŸ][[Y[ùûRY
-	€MòÃL\ÃÀY^	 N⁄Yä^	âàY^ô]\Ÿ]õYÿ[]⁄Y
-^Ÿ^ö[õô\íSIœ›õ€ôœìH0Í[ZHHÃõ›\ú»€›\ù0Í»H0ÍXù]H8†&X\‹›Zô]\‹Ÿ[Y[ù‹›õ€ôœé»[ôH¯†&XY⁄]\»8†&][ôH∞Í€HÍ[∞Í\ò[H0™ÃÃõ›\ú»\∞Í»Húò[ò⁄\‹Ÿ[Y[ùHŸ]Z[0ÆÀà[ú»H∞Í\Ÿ[ùÿ\ÀZ\‹]YHHŸ]Z[0Í]Z]ÿöôX›]ô[Y[ù∞Í]ö\⁄XõH]H0Í[X\úòYŸK8†&X\‹›Zô]\‹Ÿ[Y[ù€€[Y[òŸH]H0ÍXù]H8†&XX›]ö]0ÍH]8†&X[õõ€òŸH⁄]›Z]úôH[ú»\»Ãõ›\úÀà›\à[ôH[ùô\ö\ŸH^\›[ùH]\\ò]ò[ùX∞Í\∞ÍYKH]HH0ÍXù]]]0ÍùôHYô∞Í\ô[ùH]⁄]0ÍùôH0Í]\õZ[∞ÍYH]ò[ùHÿ[›[\àH0Í[ZKà[àô]\ô]][ùòpÎõô\àò\[][ù0Í\∞Íù»]Ÿ[€à\»òZ]À[àö\‹]YH0Í[ò[à[ôH0Í[õ€ò⁄X][€à‹€ù[∞ÍYHôH›\ö[YH\»]]€X]\]Y[Y[ù8†&X[Y[ôHà8†&YYôô]0Í[ò[ò]õ‹òXõH0Í\[ôHô\‹X›H›]\»\»€€ô][€ú»H8†&X\ùàLã[ô\»]YH8†&Z[\0Ì]\»[ù0Í\∞Íù»ô\›[ù[àö[ò⁄\H\Àè]à€\‹œHò\ù\ôYàèº'‰‚»\ùàM0≠»çà0≠»»0≠»Mà0≠»LàêOŸ]èâŒŸ^ô]\Ÿ]õYÿ[]⁄YIÃIﬂ_Bà]⁄‹ù[[ö‹ 
-N¬àBàYäŸôÀõ[Ÿ[OOOI”L	 Yú]Y\ûTŸ[X›‹ê[
-	ÀùõÿÿXãXÿ\ô	 Kôõ‹ëXX⁄
-œOûÿ€€ú›œXÀú]Y\ûTŸ[X›‹îÿŸ[X›‹ê[
-	Àùôúâ OÀù^€€ù[ùùö[J
-KYèXÀú]Y\ûTŸ[X›‹îÿŸ[X›‹ê[
-	ÀùôYâ K\ùXÀú]Y\ûTŸ[X›‹ä	Àùò\ù	 N⁄YäYYä\ô]\õé⁄YäœOOHì‹[€à	⁄[\‹⁄][€à[[[ÿö[pÍôHüœOOI”‹[€à8†&Z[\‹⁄][€à[[[ÿö[pÍôI ^ŸYãù^€€ù[ùI—õ⁄]H€›[Y]ôHõ€€ùZ\ô[Y[ù[ôH‹0Í\ò][€à[[[ÿö[pÍôH^€YH0ËHêH‹ú‹]YH8†&X\ùàåàH\õY]à∞Í\öYöY\à8†&]\ÿYŸHHöY[ã\»^€\⁄[€ú»0Ë8†&[‹[€à]H[Ÿ[]0ÍK›[Z[ô»8†&Y^\ò⁄XŸN»[∏†&Y^\›H\»[ôH\ú∞Í]õÿÿXö[]0ÍHÍ[∞Í\ò[H›\à›]HH\∞ÍYHH€€ùò]âŒ⁄Yä\ù
-X\ùù^€€ù[ùIÿ\ùàåàêH0≠»\ùàŒH’êH0≠»ò]\]YHQê»[[[ÿö[Y\âﬂZYäœOOI“[[Y]XõHZ^I ^ŸYãù^€€ù[ùI“[[Y]XõHYôôX›0ÍH0Ë\»\ÿYŸ\»€õò[ù]ôH€õò[ù\»õ⁄]]HTàõÿÍY\à8†&XXõ‹ô0Ë8†&XYôôX›][€à\ôX›H\»€Ó›ÀZ\»\\]Y\à[ôH€0ÍHÿöôX›]ôH[ö\]Y[Y[ù]^úòZ\»€Ó›»€€[][úÀâŒ⁄Yä\ù
-X\ùù^€€ù[ùIÿ\ùàÃêH0≠»ò]\]YHQê…ﬂZYäœOOI–€0ÍHH∞Í\\ù][€àT	 ^ŸYãù^€€ù[ùI”pÍ]ŸHÿöôX›]ôH›\à\»€Ó›»∞ÍY[[Y[ù€€[][ú»\∞Í»YôôX›][€à\ôX›KàH€0ÍH⁄]ôYõ0Í]\à8†&]][\ÿ][€àYôôX›]ôN»›\ôòXŸKôXŸ]\»›H]]ôH‹ö]0ÍôHôH€€ù\»\»€0Í\»0ÍYÿ[\»[ö]ô\úŸ[\ÀâŒ⁄Yä\ù
-X\ùù^€€ù[ùIÿ\ùàÃêH0≠»pÍ]ŸHÿöôX›]ôHÿ›[Y[ù0ÍYIﬂZYäœOOHê⁄[ôŸ[Y[ù	ÿYôôX›][€àä^ŸYãù^€€ù[ùI‘\‹ÿYŸH8†&][à\ÿYŸH€õò[ùõ⁄]]HT0Ë[à\ÿYŸH∏†&^H€õò[ù\»õ⁄]›H[ùô\úŸ[Y[ùà[ò[\Ÿ\à€‹úôX›[€ãŸ0ÍY‹∞Íô[Y[ù›\àHò[]\à∞Í\⁄YY[N»›\à8†&Z[[[ÿö[Y\ãH0Í\∞ÍX⁄X][€àõ‹ôòZ]Z\ôH\›HH	H\à[õ∞ÍYH
-Ÿ⁄\]YHKÃå
-HŸ[€à\»€€ô][€ú»0ÍYÿ[\ÀâŒ⁄Yä\ù
-X\ùù^€€ù[ùIÿ\ùàÃx†$ÃÃàêH0≠»\ùàÃ8†$ÕÃ»’êIﬂZYäœOOHí[\‹⁄][€à0Ë	ÿX‹]Z\⁄][€à
-ò]ò]^
-Hä^ŸYãù^€€ù[ùI‘›\à[à[ùô\ô[ô]\à0Í]ò[ôŸ\à[ù\ùô[ò[ù›\à[à[[Y]XõH›Z\‹ŸK]X[YöY\à8†&XXõ‹ôHõ^]HY]KZ\»∞Í\öYöY\à€€à0Í]ô[ùY[HÿõYÿ][€à8†&Z[úÿ‹ö\[€à[à›Z\‹ŸK8†&Z[\‹ù]]\à]HêH0Ë8†&Z[\‹ù][€ãà8†&Z[\0Ì›\à\»X‹]Z\⁄][€ú»∏†&Z[ù\ùöY[ù]YH⁄H\»€€ô][€ú»H8†&X\ùàH€€ùô[\Y\ÀâŒ⁄Yä\ù
-X\ùù^€€ù[ùIÿ\ùà0≠»L0≠»H0≠»L‹»êIﬂ_JN¬àBàù[ò›[€à]X⁄
-
-^ÿ€€ú›Yúò[YKò€€ù[ùÿ›[Y[ù⁄YäY
-\ô]\õé⁄[ôô\î›‹òYŸJ
-NÿX›]ôTŸX›[€ä
-N€Yÿ[]⁄
-
-NŸú]Y\ûTŸ[X›‹ê[
-	ÿV⁄ôYóI Kôõ‹ëXX⁄
-OOûÿ€€ú›XKôŸ]]öXù]J	⁄ôYâ _	…Œ⁄Yä	âàZú›\ù’⁄]
-	»… IâàK◊öœŒã⁄Kù\›
-
-IâàZú›\ù’⁄]
-	⁄ò]ò\ÿ‹ö\â IâàZú›\ù’⁄]
-	€XZ[Œâ IâàZú›\ù’⁄]
-	›[â JXKù\ôŸ]I◊›‹	ﬂJNŸòY]ô[ù\›[ô\ä	ÿ€X⁄…ÀOOûÿ€€ú›YKù\ôŸ]ò€‹Ÿ\›
-	ÿù]€ãI N⁄Yä]
-\ô]\õéÿ€€ú›œ\ŸX›[€ëúõ€U\ôŸ]
-
-N⁄Yä [X\ö  N⁄Yä€€\][€ï\ôŸ]
-
-J^ŸKúô]ô[ùYò][
-
-NŸKú›‹[[YYX]Tõ‹Yÿ][€ä
-N‹Ÿ][Y[›]
-
-
-OOû€Yÿ[]⁄
-
-N‹ÿ€‹ôQúõ€Q€J
-Nÿ€€ú››Yÿ]T›]\ 
-N⁄Yä\›õ⁄ ^›ÿ\›
-	’ò[Y][€àôYù\ÍYHà	  ›õZ\‹⁄[ôÀõ[ô›…‹ŸX›[€ú»0Ë\ò€›\ö\àà	 ‹›õZ\‹⁄[ôÀöõ⁄[ä	À	 J…Àà	Œâ… J Yÿ]Kú]Z^î\‹ŸY…‘P”H8¢iHÕH	Hô\]Z\ÀâŒâ… Kò[ŸJN‹ô]\õüYö[ò[^ôJÿ[ù”ô^
-
-J_K
-_Y[ŸHŸ][Y[›]
-
-
-OOûÿX›]ôTŸX›[€ä
-N‹ÿ€‹ôQúõ€Q€J
-N€Yÿ[]⁄
-
-_K
-_KùYJNŸòY]ô[ù\›[ô\ä	ÿ⁄[ôŸIÀOOûÿ€€ú›èYKù\ôŸ]Àùò[YN⁄Yäô\]Z\ôYö[ò€Y\ äJ[X\ö äN‹Ÿ][Y[›]
-
-
-OOòX›]ôTŸX›[€ä
-K
-_KùYJNÿ€€ú›[œ[ô]»]]][€ìÿúŸ\ùô\ä
-
-OOûÿ€X\ï[Y[›]
-[Àó›
-N€[Àó›\Ÿ][Y[›]
-
-
-OOûÿX›]ôTŸX›[€ä
-N‹ÿ€‹ôQúõ€Q€J
-N€Yÿ[]⁄
-
-_K
-_JN€[ÀõÿúŸ\ùôJòõŸK‹›XùôYNùùYK⁄[\›ùùYK⁄\òX›\ë]NùùYK]öXù]\ŒùùYK]öXù]Qö[\éñ…ÿ€\‹…À	‹›[I◊_J_Bàúò[YKòY]ô[ù\›[ô\ä	€ÿY	À]X⁄
-NŸúò[YKú‹òœXŸôÀú‹òŒ¬üJJ
-N¬
+    if(cfg.module==='M02'){
+      applyTextReplacements(d,[
+        ["Une cotisation statutaire d'association sans but lucratif est :","Une cotisation d‚Äôun organisme sans but lucratif, fix√©e conform√©ment aux statuts et r√©ellement vers√©e en qualit√© de membre, est en principe :"],
+        ["Les cotisations de membres d'organismes sans but lucratif sont exclues art. 21 al. 2 ch. 13. Condition : la cotisation doit donner acc√®s aux prestations communes (statut homog√®ne). Si paiement de prestation sp√©cifique ‚Üí imposable.","L‚Äôart. 21 al. 2 ch. 13 peut exclure les prestations fournies aux membres contre une cotisation fix√©e conform√©ment aux statuts. La pratique AFC adapt√©e le 26.05.2026 impose d‚Äôexaminer concr√®tement la cat√©gorie de membre, les droits attach√©s √† cette qualit√©, la r√®gle de fixation de la cotisation et les prestations li√©es; une prestation individualis√©e, publicit√© ou sponsoring se qualifie s√©par√©ment."],
+        ["Cotisations statutaires des membres (CHF 45'000) ‚Äî quel r√©gime ?","Cotisations des membres (CHF 45'000) ‚Äî si elles sont fix√©es conform√©ment aux statuts et r√©mun√®rent r√©ellement la qualit√© de membre selon la pratique AFC 2026, quel r√©gime ?"],
+        ["Les cotisations fix√©es statutairement par des organismes sans but lucratif sont exclues selon l'art. 21 al. 2 ch. 13 LTVA lorsqu'elles r√©mun√®rent la qualit√© de membre et les prestations communes de l'association.","Les cotisations d‚Äôun organisme sans but lucratif peuvent √™tre exclues selon l‚Äôart. 21 al. 2 ch. 13 LTVA lorsqu‚Äôelles sont fix√©es conform√©ment aux statuts et r√©mun√®rent r√©ellement la qualit√© de membre. Depuis l‚Äôadaptation de pratique publi√©e le 26.05.2026, il faut notamment documenter cat√©gorie de membre, droits de membre, r√®gle de fixation de la cotisation et prestations li√©es avant de conclure."]
+      ]);
+    }
+    if(cfg.module==='M03'){
+      applyTextReplacements(d,[
+        ['Engagement minimum 1 an','Changement de m√©thode : possible apr√®s une p√©riode fiscale compl√®te, sous r√©serve des d√©lais et conditions applicables'],
+        ["D√©passement de seuil = passage √† effective d√®s l'exercice suivant + notification 30 jours + correction d'entr√©e stocks (art. 32).",'D√©passement des limites : appliquer les r√®gles actuelles de sortie de la m√©thode TDFN. Depuis 2025, tout changement de m√©thode exige aussi d‚Äôanalyser les corrections sur la valeur r√©siduelle des biens et prestations.']
+      ]);
+    }
+    if(cfg.module==='M05'){
+      d.querySelectorAll('tr').forEach(r=>{
+        const cells=r.querySelectorAll('td');if(!cells.length)return;
+        if(cells[0].textContent.trim()==='Imp√¥t suisse factur√© par un autre assujetti'){
+          setText(cells[0],'Imp√¥t grevant les op√©rations r√©alis√©es sur le territoire suisse et factur√© au destinataire');
+          if(cells[2])setText(cells[2],'V√©rifier art. 28‚Äì33 et, en cas de mention indue/inexacte, art. 27; l‚Äôabsence d‚Äôinscription du fournisseur n‚Äôentra√Æne pas √† elle seule un refus automatique du DIP.');
+        }
+      });
+      const c=d.getElementById('m5c2s3');
+      if(c){const opts=c.querySelectorAll('.step-opt');if(opts[1])setText(opts[1],"B) Ne pas refuser automatiquement le DIP : analyser art. 27‚Äì28, r√©alit√© de la prestation, paiement et affectation; demander clarification/correction au fournisseur");const ex=d.getElementById('m5c2s3-expl');if(ex&&!ex.dataset.legalPatched){ex.innerHTML='L‚Äôabsence du fournisseur dans le registre TVA est un <strong>signal de contr√¥le</strong>, mais elle ne permet pas √† elle seule de conclure ¬´DIP impossible¬ª. L‚Äôart. 27 al. 2 pr√©voit que celui qui fait figurer ind√ªment la TVA est en principe redevable de l‚Äôimp√¥t, sauf correction ou preuve de l‚Äôabsence de pr√©judice; l‚Äôart. 28 al. 1 let. a permet au destinataire assujetti de d√©duire l‚Äôimp√¥t factur√© dans le cadre de son activit√© entrepreneuriale, sous r√©serve des art. 29 et 33 et des autres conditions (notamment preuve/paiement). Il faut donc v√©rifier la r√©alit√© du flux, la p√©riode, le statut du fournisseur √† la date pertinente et demander une correction si n√©cessaire. Si la facture est ensuite corrig√©e et la TVA annul√©e, le destinataire corrige son DIP correspondant.<div class="art-ref">üìã art. 27 + 28‚Äì33 LTVA ¬∑ pratique AFC</div>';ex.dataset.legalPatched='1'}}
+      const c10=d.getElementById('m5c10s1');
+      if(c10){const opts=c10.querySelectorAll('.step-opt');if(opts[1])setText(opts[1],'B) Reconstituer la preuve mat√©rielle et, si n√©cessaire, obtenir des pi√®ces rectificatives; le droit au DIP d√©pend des art. 27‚Äì33 et des faits de la p√©riode, pas du seul statut actuel du fournisseur');const ex=d.getElementById('m5c10s1-expl');if(ex&&!ex.dataset.legalPatched){ex.innerHTML='<strong>D√©fense fond√©e sur les faits et la preuve libre :</strong> reconstituer pour chaque achat le fournisseur, la prestation, la p√©riode, le paiement, l‚Äôimp√¥t factur√© et l‚Äôaffectation. Une facture rectificative peut s√©curiser le dossier, mais le statut TVA <em>actuel</em> du fournisseur ne d√©cide pas √† lui seul du droit historique au DIP. En cas de TVA indiqu√©e ind√ªment, int√©grer l‚Äôart. 27; en cas de correction ult√©rieure de la facture, adapter le DIP correspondant. Factures fictives ou op√©rations non prouv√©es restent exclues.<div class="art-ref">üìã art. 27‚Äì33 + art. 81 al. 3 LTVA</div>';ex.dataset.legalPatched='1'}}
+      applyTextReplacements(d,[["(CA < CHF 100'000 ou exon√©ration volontaire)","(par ex. en raison de la lib√©ration de l‚Äôassujettissement; situation √† v√©rifier pour la p√©riode concern√©e)"]]);
+    }
+    if(cfg.module==='M06'){
+      applyTextReplacements(d,[
+        ['Preuve manquante ‚Üí reprise TVA comme livraison suisse','Preuve insuffisante ‚Üí risque de reprise comme livraison suisse; s√©curiser le fait d‚Äôexportation avec les moyens de preuve disponibles'],
+        ['Confusion avec ch. 383 ; DIP refus√© si d√©cision OFDF absente','Confusion avec ch. 383; risque de refus du DIP si l‚Äôimp√¥t √† l‚Äôimportation, l‚Äôimportateur et les conditions de l‚Äôart. 28 ne sont pas suffisamment prouv√©s']
+      ]);
+    }
+    if(cfg.module==='M08'){
+      d.querySelectorAll('.vocab-card').forEach(c=>{
+        const k=c.querySelector('.vfr')?.textContent.trim(),def=c.querySelector('.vdef'),art=c.querySelector('.vart');if(!def)return;
+        if(k==="Option d'imposition immobili√®re"||k==='Option d‚Äôimposition immobili√®re'){def.textContent='Droit de soumettre volontairement une op√©ration immobili√®re exclue √† la TVA lorsque l‚Äôart. 22 le permet. V√©rifier l‚Äôusage du bien, les exclusions √† l‚Äôoption et la modalit√©/timing d‚Äôexercice; il n‚Äôexiste pas une irr√©vocabilit√© g√©n√©rale pour toute la dur√©e du contrat.';if(art)art.textContent='art. 22 LTVA ¬∑ art. 39 OTVA ¬∑ pratique AFC Immobilier'}
+        if(k==='Immeuble mixte'){def.textContent='Immeuble affect√© √† des usages donnant et ne donnant pas droit au DIP. Proc√©der d‚Äôabord √† l‚Äôaffectation directe des co√ªts, puis appliquer une cl√© objective uniquement aux vrais co√ªts communs.';if(art)art.textContent='art. 30 LTVA ¬∑ pratique AFC'}
+        if(k==='Cl√© de r√©partition DIP'){def.textContent='M√©thode objective pour les co√ªts r√©ellement communs apr√®s affectation directe. La cl√© doit refl√©ter l‚Äôutilisation effective; surface, recettes ou autre crit√®re ne sont pas des cl√©s l√©gales universelles.';if(art)art.textContent='art. 30 LTVA ¬∑ m√©thode objective document√©e'}
+        if(k==="Changement d'affectation"){def.textContent='Passage d‚Äôun usage donnant droit au DIP √† un usage n‚Äôy donnant plus droit, ou inversement. Analyser correction/d√©gr√®vement sur la valeur r√©siduelle; pour l‚Äôimmobilier, la d√©pr√©ciation forfaitaire est de 5 % par ann√©e (logique 1/20) selon les conditions l√©gales.';if(art)art.textContent='art. 31‚Äì32 LTVA ¬∑ art. 70‚Äì73 OTVA'}
+        if(k==="Imposition √† l'acquisition (travaux)"){def.textContent='Pour un entrepreneur √©tranger intervenant sur un immeuble suisse, qualifier d‚Äôabord le flux et le lieu, puis v√©rifier son √©ventuelle obligation d‚Äôinscription en Suisse, l‚Äôimportateur et la TVA √† l‚Äôimportation. L‚Äôimp√¥t sur les acquisitions n‚Äôintervient que si les conditions de l‚Äôart. 45 sont remplies.';if(art)art.textContent='art. 8 ¬∑ 10 ¬∑ 45 ¬∑ 50 ss LTVA'}
+      });
+    }
+  }
+  function attach(){
+    const d=frame.contentDocument;if(!d)return;
+    inferStorage();activeSection(d);legalPatch(d);
+    d.querySelectorAll('a[href]').forEach(a=>{
+      const h=a.getAttribute('href')||'';
+      if(h&&!h.startsWith('#')&&!/^https?:/i.test(h)&&!h.startsWith('javascript:')&&!h.startsWith('mailto:')&&!h.startsWith('tel:'))a.target='_top';
+    });
+    d.addEventListener('click',e=>{
+      const t=e.target.closest('button,a');if(!t)return;
+      const s=sectionFromTarget(t);if(s)mark(s);
+      if(completionTarget(t)){
+        e.preventDefault();e.stopImmediatePropagation();
+        setTimeout(()=>{
+          legalPatch(d);scoreFromDom(d);
+          const st=gateStatus();
+          if(!st.ok){toast(d,'Validation refus√©e : '+(st.missing.length?'sections √† parcourir : '+st.missing.join(', ')+'. ':'')+(!gate.quizPassed?'QCM ‚â• 75 % requis.':''),false);return}
+          finalize(d,wantsNext(t));
+        },0);
+      }else setTimeout(()=>{activeSection(d);scoreFromDom(d);legalPatch(d)},0);
+    },true);
+    d.addEventListener('change',e=>{const v=e.target?.value;if(required.includes(v))mark(v);setTimeout(()=>activeSection(d),0)},true);
+    const mo=new MutationObserver(()=>{clearTimeout(mo._t);mo._t=setTimeout(()=>{activeSection(d);scoreFromDom(d);legalPatch(d)},80)});
+    mo.observe(d.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','style']});
+  }
+  frame.addEventListener('load',attach);
+  frame.src=cfg.src;
+})();
