@@ -19,6 +19,8 @@ jobs:
           node-version: '22'
       - name: Static course QA
         run: node tools/course-qa.mjs
+      - name: Current-law regression QA
+        run: node tools/current-law-qa.mjs
       - name: Install browser runtime
         run: |
           npm install --no-save playwright@1.55.0
