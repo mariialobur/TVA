@@ -1,0 +1,25 @@
+name: Enable written capstone dossiers
+on:
+  push:
+    paths:
+      - '.github/workflows/enable-capstone-dossiers.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply written capstone migration
+        run: python3 tools/enable-capstone-dossiers.py
+      - name: Commit capstone wiring
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m09-secteurs-sensibles-tva.html m10-digital-plateformes-ecommerce.html m11-controle-afc-tva.html m12-jurisprudence-lab-tva.html m13-communication-fiscale-cabinet.html course-practice-gates.js tools/course-qa.mjs
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Wire written capstone dossiers into M09-M13"
+            git push
+          fi
