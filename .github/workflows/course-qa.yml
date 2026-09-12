@@ -37,5 +37,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173/
         run: node tools/m02-navigation-qa.mjs
-
-# Manual regression rerun marker: 2026-09-12
+      - name: Learner-facing UI regression QA
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node tools/student-facing-qa.mjs
