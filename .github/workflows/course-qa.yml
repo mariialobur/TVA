@@ -41,3 +41,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173/
         run: node tools/student-facing-qa.mjs
+      - name: Practical mastery gate QA
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node tools/practice-gate-qa.mjs
