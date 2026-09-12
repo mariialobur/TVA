@@ -4,30 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>M14 — Examen blanc & synthèse finale · TVA suisse</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="m14-style.css">
 </head>
 <body>
 <aside>
-<div class="brand"><span class="badge">⬡ MODULE 14</span><h1>Examen blanc & synthèse</h1><p>Final Legal QA · 11.09.2026</p></div>
+<div class="brand"><span class="badge">⬡ MODULE 14</span><h1>Examen blanc & synthèse</h1><p>Droit vérifié au 11.09.2026</p></div>
 <div class="progress"><div class="pt"><span>Validation parcours</span><span id="coursePct">0%</span></div><div class="bar"><div class="fill" id="courseFill"></div></div></div>
-<div class="stats"><div><span>Pool</span><b id="poolCount">130 QCM</b></div><div><span>Best Final Pro</span><b id="bestFinal">—</b></div><div><span>Capstones</span><b id="capCount">0/4</b></div></div>
+<div class="stats"><div><span>Pool</span><b id="poolCount">130 QCM</b></div><div><span>Meilleur score final</span><b id="bestFinal">—</b></div><div><span>Dossiers</span><b id="capCount">0/4</b></div></div>
 <nav>
-<button data-s="intro" class="active" onclick="go('intro')">Cadre & current-law</button>
+<button data-s="intro" class="active" onclick="go('intro')">Cadre & droit en vigueur</button>
 <button data-s="modes" onclick="go('modes')">Examens</button>
-<button data-s="capstones" onclick="go('capstones')">Capstones · 4</button>
+<button data-s="capstones" onclick="go('capstones')">Dossiers de synthèse · 4</button>
 <button data-s="results" onclick="go('results')">Dernier résultat</button>
 <button data-s="history" onclick="go('history')">Historique</button>
 <button data-s="validation" onclick="go('validation')">Validation finale</button>
 </nav>
-<a class="home" href="index.html">← Tableau de bord</a>
+<a class="home" href="index.html">← Accueil du parcours</a>
 </aside>
 <main>
-<div class="top"><div><strong>M14 · Examen blanc & synthèse finale</strong><br><small>Évaluation pédagogique indépendante · M01–M13</small></div><select class="mobile" onchange="go(this.value)"><option value="intro">Cadre</option><option value="modes">Examens</option><option value="capstones">Capstones</option><option value="results">Résultat</option><option value="history">Historique</option><option value="validation">Validation</option></select><small>Snapshot droit: 11.09.2026</small></div>
+<div class="top"><div><strong>M14 · Examen blanc & synthèse finale</strong><br><small>Évaluation pédagogique indépendante · M01–M13</small></div><select class="mobile" onchange="go(this.value)"><option value="intro">Cadre</option><option value="modes">Examens</option><option value="capstones">Dossiers</option><option value="results">Résultat</option><option value="history">Historique</option><option value="validation">Validation</option></select><small>Droit vérifié : 11.09.2026</small></div>
 <div class="content">
 <section id="sec-intro" class="sec active">
-<div class="hero"><div class="eye">M14 · Final assessment</div><h2>Un examen de synthèse, pas un concours de mémoire</h2><p>Le but est de savoir qualifier, calculer, documenter et protéger une procédure. Le score mesure la maîtrise de ce parcours; il ne constitue ni une certification officielle ni un examen EXPERTsuisse.</p><div class="chips"><span class="chip">130 QCM</span><span class="chip">10 par module</span><span class="chip">4 capstones</span><span class="chip">Final Pro 52Q</span></div></div>
+<div class="hero"><div class="eye">M14 · Évaluation finale</div><h2>Un examen de synthèse, pas un concours de mémoire</h2><p>Le but est de savoir qualifier, calculer, documenter et protéger une procédure. Le score mesure la maîtrise de ce parcours; il ne constitue ni une certification officielle ni un examen EXPERTsuisse.</p><div class="chips"><span class="chip">130 QCM</span><span class="chip">10 par module</span><span class="chip">4 dossiers de synthèse</span><span class="chip">Final Pro 52Q</span></div></div>
 <div class="card danger"><h3>Limite d’usage</h3><p>Cette formation est un outil pédagogique indépendant. Elle ne délivre pas un titre professionnel protégé et ne prétend pas reproduire un examen officiel. En dossier réel, vérifier le droit et la pratique à la date de l’opération.</p></div>
-<div class="card truth"><h3>Current-law snapshot · 11.09.2026</h3><div class="snapshot">
+<div class="card truth"><h3>Repères juridiques au 11.09.2026</h3><div class="snapshot">
 <div class="snap"><b>Taux</b><span>8,1 % · 2,6 % · 3,8 %</span></div>
 <div class="snap"><b>Période fiscale</b><span>année civile; ne pas confondre avec période de décompte</span></div>
 <div class="snap"><b>Décompte annuel</b><span>sur demande, limite actuelle CHF 5'005'000; extension générale = projet</span></div>
@@ -38,19 +39,19 @@
 <div class="snap"><b>Contrôle AFC</b><span>pas de préavis légal universel 30–60 jours</span></div>
 <div class="snap"><b>Intérêt 2026</b><span>taux de principe 4,0 %</span></div>
 </div></div>
-<div class="card purple"><h3>Blueprint réel</h3><table><thead><tr><th>Mode</th><th>Questions</th><th>Couverture</th><th>Durée</th><th>But</th></tr></thead><tbody>
+<div class="card purple"><h3>Structure des examens</h3><table><thead><tr><th>Mode</th><th>Questions</th><th>Couverture</th><th>Durée</th><th>But</th></tr></thead><tbody>
 <tr><td>Diagnostic</td><td>26</td><td>2 × chaque M01–M13</td><td>45 min</td><td>repérer les lacunes</td></tr>
 <tr><td>Standard</td><td>39</td><td>F+M+D × chaque module</td><td>60 min</td><td>maîtrise transversale</td></tr>
 <tr><td>Senior</td><td>39</td><td>M+D+D × chaque module</td><td>70 min</td><td>raisonnement difficile</td></tr>
 <tr><td><b>Final Pro</b></td><td><b>52</b></td><td><b>F+M+M+D × chaque module</b></td><td><b>90 min</b></td><td><b>validation du parcours</b></td></tr>
 <tr><td>Random</td><td>30</td><td>tirage libre</td><td>60 min</td><td>entraînement</td></tr></tbody></table>
-<p class="note">Final Pro: réussite = score global ≥75 % ET aucun module &lt;50 %. La validation M14 exige aussi les 4 capstones travaillés.</p></div>
+<p class="note">Final Pro: réussite = score global ≥75 % ET aucun module &lt;50 %. La validation M14 exige aussi les 4 dossiers de synthèse travaillés.</p></div>
 <div class="card warn"><h3>Projet ≠ droit</h3><p>Au 11 septembre 2026, l’extension du décompte annuel à toutes les entreprises est encore en consultation (délai annoncé au 12.10.2026). De même, l’extension du fournisseur réputé aux prestations électroniques reste un projet législatif. Le QCM sanctionne précisément la confusion entre projet et droit en vigueur.</p></div>
 <div style="text-align:center;margin:20px"><button class="btn primary" onclick="go('modes')">Commencer →</button></div>
 </section>
 
 <section id="sec-modes" class="sec">
-<div class="hero"><div class="eye">Exam engine</div><h2>Choisir le niveau</h2><p>Les quatre modes structurés sont équilibrés par module avant d’être équilibrés par difficulté.</p></div>
+<div class="hero"><div class="eye">Modes d’examen</div><h2>Choisir le niveau</h2><p>Les quatre modes structurés sont équilibrés par module avant d’être équilibrés par difficulté.</p></div>
 <div id="modeCards" class="modes"></div>
 <div id="runtime" class="runtime">
 <div class="toolbar"><div><b id="examName"></b><br><span class="note"><span id="answeredCount">0</span>/<span id="totalCount">0</span> répondues</span></div><div id="timer" class="timer">00:00</div><button class="btn red" onclick="submitExam()">Terminer</button></div>
@@ -60,12 +61,12 @@
 </section>
 
 <section id="sec-capstones" class="sec">
-<div class="hero"><div class="eye">Open dossiers</div><h2>4 capstones à rédiger</h2><p>Le modèle reste caché jusqu’à ce qu’une réponse personnelle d’au moins 120 caractères soit enregistrée. Le but est de construire le raisonnement avant de comparer.</p></div>
+<div class="hero"><div class="eye">Dossiers de synthèse</div><h2>4 dossiers de synthèse à rédiger</h2><p>Le modèle reste caché jusqu’à ce qu’une réponse personnelle d’au moins 120 caractères soit enregistrée. Le but est de construire le raisonnement avant de comparer.</p></div>
 <div id="capstoneList"></div>
 </section>
 
 <section id="sec-results" class="sec">
-<div class="hero"><div class="eye">Debrief</div><h2>Dernier résultat</h2><p>Score global, module floor et correction ciblée.</p></div>
+<div class="hero"><div class="eye">Analyse du résultat</div><h2>Dernier résultat</h2><p>Score global, seuil minimal par module et correction ciblée.</p></div>
 <div id="resultsEmpty" class="card">Aucun examen terminé.</div>
 <div id="resultsContent" style="display:none">
 <div class="resultsHero"><div id="resultScore" class="score">0%</div><h2 id="resultTitle"></h2><p id="resultDetail"></p></div>
@@ -79,10 +80,10 @@
 </section>
 
 <section id="sec-validation" class="sec">
-<div class="hero"><div class="eye">Course gate</div><h2>Validation finale M14</h2><p>Deux portes: Final Pro + 4 dossiers ouverts.</p></div>
-<div class="gates"><div id="gateExam" class="gate no"><h3>Gate 1 · Final Pro</h3><p id="gateExamText"></p></div><div id="gateCaps" class="gate no"><h3>Gate 2 · Capstones</h3><p id="gateCapsText"></p></div></div>
+<div class="hero"><div class="eye">Conditions de validation</div><h2>Validation finale M14</h2><p>Deux conditions : examen final + 4 dossiers de synthèse.</p></div>
+<div class="gates"><div id="gateExam" class="gate no"><h3>Condition 1 · Examen final</h3><p id="gateExamText"></p></div><div id="gateCaps" class="gate no"><h3>Condition 2 · Dossiers de synthèse</h3><p id="gateCapsText"></p></div></div>
 <div class="card"><h3>Critère Final Pro</h3><p><b>≥75 % global</b> et <b>≥50 % dans chacun des 13 modules</b>. Le seuil par module évite qu’un excellent score sur quelques thèmes masque un trou critique.</p></div>
-<div class="bigfinish"><h3 id="finishTitle">Parcours non encore validé</h3><p id="finishText">Complétez les deux gates ci-dessus.</p><button id="finishBtn" class="btn gold" onclick="finishCourse()">✓ Valider M14 sur le dashboard</button></div>
+<div class="bigfinish"><h3 id="finishTitle">Parcours non encore validé</h3><p id="finishText">Remplissez les deux conditions ci-dessus.</p><button id="finishBtn" class="btn gold" onclick="finishCourse()">✓ Valider le parcours</button></div>
 </section>
 </div>
 </main>
