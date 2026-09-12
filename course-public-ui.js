@@ -47,6 +47,14 @@
     });
   }
 
+  function removeInternalVersions(doc){
+    if(!doc)return;
+    doc.querySelectorAll('.version-badge,.sidebar-version,.module-version,.version').forEach(el=>{
+      const t=(el.textContent||'').trim();
+      if(/^(?:M\d{2}\s*)?v?\d+(?:\.\d+){1,3}$/i.test(t)||/\bv\d+(?:\.\d+){1,3}\b/i.test(t))el.remove();
+    });
+  }
+
   function removeDeveloperLinks(doc){
     if(!doc)return;
     doc.querySelectorAll('a[href]').forEach(a=>{
@@ -72,6 +80,7 @@
     if(!doc||!doc.body)return;
     ensureFavicon(doc);
     removeEstimatedDurations(doc);
+    removeInternalVersions(doc);
     removeDeveloperLinks(doc);
     normalizeHomeLinks(doc);
     if(addFloating)addHomeButton(doc,true);
