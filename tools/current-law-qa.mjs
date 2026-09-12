@@ -29,7 +29,7 @@ if(!(m14.indexOf('m14-q4b.js')<m14.indexOf('m14-current-law-2026.js')&&m14.index
 if(!m14.includes('impôt à l’importation ≤ CHF 5'))fail('M14 snapshot does not show inclusive CHF 5 cutoff');
 try{new Function(m14p);ok('M14 current-law patch parses')}catch(e){fail('M14 current-law patch syntax: '+e.message)}
 for(const n of ['affecte ou compte affecter exclusivement à des fins d’habitation','Le critère actuel n’est plus formulé comme une utilisation exclusivement «privée»'])if(!m14p.includes(n))fail('M14 immobilier current-law wording missing: '+n);
-if(!m14.includes('Snapshot droit: 11.09.2026'))fail('M14 snapshot date not refreshed');
+if(!m14.includes('Droit vérifié : 11.09.2026')||!m14.includes('Repères juridiques au 11.09.2026'))fail('M14 public current-law date labels not refreshed');
 else ok('M14 current-law snapshot and art. 22 wording hardened');
 
 const m13entry=read('m13-communication-data.js'),m13p=read('m13-current-law-2026.js');
