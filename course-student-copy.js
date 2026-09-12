@@ -2,10 +2,13 @@
 (()=>{
   const PAIRS=[
     ['Red-team Legal QA · 09.09.2026','Droit vérifié au 09.09.2026'],
+    ['Red-team Legal QA · 11.09.2026','Droit vérifié au 11.09.2026'],
     ['Legal QA · version 09.09.2026','Droit vérifié au 09.09.2026'],
     ['M10 · Legal QA 09.09.2026','M10 · Repères juridiques au 09.09.2026'],
     ['M11 · Red-team Legal QA · 09.09.2026','M11 · Repères juridiques au 09.09.2026'],
+    ['M11 · Red-team Legal QA · 11.09.2026','M11 · Repères juridiques au 11.09.2026'],
     ['Audit juridique : 09.09.2026','Droit vérifié : 09.09.2026'],
+    ['Audit juridique : 11.09.2026','Droit vérifié : 11.09.2026'],
     ['Théorie & truth map','Théorie & méthode'],
     ['Truth map M10 — ordre de travail','Méthode de raisonnement — ordre de travail'],
     ['Truth map M11 — ordre professionnel','Méthode de travail — ordre professionnel'],
