@@ -113,6 +113,10 @@
         setTimeout(()=>record(doc,btn),0);
       },true);
     }
+    if(!doc.body.dataset.practiceGateCapstoneListener){
+      doc.body.dataset.practiceGateCapstoneListener='1';
+      doc.addEventListener('tva:capstone-complete',()=>decorate(doc));
+    }
     return true;
   }
 
