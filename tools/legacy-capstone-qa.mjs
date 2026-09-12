@@ -10,12 +10,17 @@ const mods=[
 const browser=await chromium.launch({headless:true});let failures=0;
 const fail=m=>{failures++;console.error('FAIL:',m)},pass=m=>console.log('OK:',m);
 async function work(p){const h=await p.waitForSelector('#module',{timeout:10000}),f=await h.contentFrame();if(!f)throw new Error('iframe unavailable');await f.waitForLoadState('load');return f}
+async function openCases(f){
+  const nav=f.locator('[data-section="cases"], [data-sec="cases"], [data-s="cases"]').first();
+  if(await nav.count())await nav.click();
+  else await f.evaluate(()=>{if(typeof goto==='function')goto('cases');else if(window.NAV&&typeof NAV.go==='function')NAV.go('cases')});
+  await f.locator('#sec-cases').waitFor({state:'visible',timeout:8000});
+}
 for(const [mod,file] of mods){
   const p=await browser.newPage();
   try{
-    await p.goto(base+file,{waitUntil:'domcontentloaded'});await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});const f=await work(p);await p.waitForTimeout(300);
-    try{await f.evaluate(()=>{if(typeof goto==='function')goto('cases')})}catch(e){}
-    const card=f.locator('#legacy-capstone-'+mod);await card.waitFor({timeout:8000});
+    await p.goto(base+file,{waitUntil:'domcontentloaded'});await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});const f=await work(p);await p.waitForTimeout(300);await openCases(f);
+    const card=f.locator('#legacy-capstone-'+mod);await card.waitFor({state:'visible',timeout:8000});
     if(await card.count()!==1)fail(mod+' written dossier missing');else pass(mod+' exposes one mandatory written dossier');
     const ta=card.locator('.legacy-capstone-draft'),btn=card.locator('.legacy-capstone-btn');
     if(!await btn.isDisabled())fail(mod+' model available before draft');
@@ -29,8 +34,8 @@ for(const [mod,file] of mods){
     if(!await card.locator('.legacy-capstone-model').isVisible())fail(mod+' model did not reveal');
     const st=await p.evaluate(m=>{try{return JSON.parse(localStorage.getItem('tvaLegacyCapstoneV1_'+m)||'{}')}catch(e){return {}}},mod);
     if(st.modelShown!==true||String(st.draft||'').length<500)fail(mod+' dossier completion not persisted');else pass(mod+' written dossier persists after comparison');
-    await p.reload({waitUntil:'domcontentloaded'});const f2=await work(p);await p.waitForTimeout(250);try{await f2.evaluate(()=>{if(typeof goto==='function')goto('cases')})}catch(e){}
-    const card2=f2.locator('#legacy-capstone-'+mod);await card2.waitFor({timeout:8000});if(!await card2.locator('.legacy-capstone-model').isVisible())fail(mod+' persisted model state lost after reload');else pass(mod+' persisted dossier survives reload');
+    await p.reload({waitUntil:'domcontentloaded'});const f2=await work(p);await p.waitForTimeout(250);await openCases(f2);
+    const card2=f2.locator('#legacy-capstone-'+mod);await card2.waitFor({state:'visible',timeout:8000});if(!await card2.locator('.legacy-capstone-model').isVisible())fail(mod+' persisted model state lost after reload');else pass(mod+' persisted dossier survives reload');
   }catch(e){fail(mod+' legacy capstone runtime: '+e.message)}
   await p.close();
 }
