@@ -1,6 +1,8 @@
 'use strict';
 import { chromium } from 'playwright';
 const base=process.env.BASE_URL||'http://127.0.0.1:4173/';
+const DASH='tvaSpecialisteTvaDashboardV1';
+const sections=['theory','legis','cases','errors','quiz','memo','vocab','cheat'];
 const mods=[
   ['M04','m04-tva-comptabilite-suisse.html'],
   ['M05','m05-deduction-impot-prealable-dip.html'],
@@ -25,6 +27,10 @@ async function clickRealFinish(f){
   if(!await b.count())throw new Error('real completion button not found');
   await b.dispatchEvent('click');
 }
+async function seedOtherGateRequirements(p,mod){
+  await p.evaluate(([m,secs])=>{const visited={};secs.forEach(s=>visited[s]=true);localStorage.setItem('tva_course_gate_'+m+'_v2',JSON.stringify({visited,quizPassed:true,quizScore:75,done:false}))},[mod,sections]);
+}
+async function dashboardState(p,mod){return p.evaluate(([k,m])=>{try{return JSON.parse(localStorage.getItem(k)||'{}')[m]||null}catch(e){return null}},[DASH,mod])}
 for(const [mod,file] of mods){
   const p=await browser.newPage();
   try{
@@ -36,9 +42,16 @@ for(const [mod,file] of mods){
     await ta.fill('Analyse trop courte.');if(!await btn.isDisabled())fail(mod+' accepts undersized draft');
     const text=('Qualification base juridique traitement TVA preuve risque action recommandée contrôle documentation. ').repeat(12);
     await ta.fill(text);if(await btn.isDisabled())fail(mod+' rejects substantive draft');else pass(mod+' requires 80 words / 500 characters before model');
-    await clickRealFinish(f);await p.waitForTimeout(80);
-    if(!await f.locator('#legacy-capstone-toast').count())fail(mod+' completion guard did not block unfinished dossier');else pass(mod+' blocks real module completion before dossier comparison');
-    await f.evaluate(()=>document.getElementById('legacy-capstone-toast')?.remove());
+
+    // Isolate the written dossier as the only unmet completion condition.
+    await seedOtherGateRequirements(p,mod);
+    await clickRealFinish(f);await p.waitForTimeout(120);
+    const done=await dashboardState(p,mod),toastText=await f.locator('#legacy-capstone-toast,#course-gate-toast').allTextContents();
+    if(done==='done')fail(mod+' completed while written dossier was still unfinished');
+    else if(!toastText.some(x=>/dossier professionnel|réponse libre|dossier/i.test(x)))fail(mod+' blocked completion but did not identify the missing written dossier');
+    else pass(mod+' blocks completion when dossier is the only unmet gate');
+    await f.evaluate(()=>{document.getElementById('legacy-capstone-toast')?.remove();document.getElementById('course-gate-toast')?.remove()});
+
     await btn.click();await p.waitForTimeout(100);
     if(!await card.locator('.legacy-capstone-model').isVisible())fail(mod+' model did not reveal');
     const st=await p.evaluate(m=>{try{return JSON.parse(localStorage.getItem('tvaLegacyCapstoneV1_'+m)||'{}')}catch(e){return {}}},mod);
