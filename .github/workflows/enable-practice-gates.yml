@@ -1,0 +1,25 @@
+name: Enable practical mastery gates
+on:
+  push:
+    paths:
+      - '.github/workflows/enable-practice-gates.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply practical mastery gate migration
+        run: python3 tools/enable-practice-gates.py
+      - name: Commit practice gate wiring
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m09-secteurs-sensibles-tva.html m12-jurisprudence-lab-tva.html m13-communication-fiscale-cabinet.html tools/course-browser-qa.mjs tools/course-qa.mjs
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Wire practical mastery gates into M09-M13"
+            git push
+          fi
