@@ -71,7 +71,11 @@
     inferStorage();
     const d=frame.contentDocument;if(d){activeSection(d);scoreFromDom(d)}
     const missing=required.filter(s=>!gate.visited[s]);
-    return {ok:missing.length===0&&gate.quizPassed,missing};
+    let capstoneOk=true;
+    if(cfg.capstone){
+      try{capstoneOk=JSON.parse(localStorage.getItem('tvaLegacyCapstoneV1_'+cfg.module)||'{}').modelShown===true}catch(e){capstoneOk=false}
+    }
+    return {ok:missing.length===0&&gate.quizPassed&&capstoneOk,missing,capstoneOk};
   }
   function toast(d,msg,ok){
     let x=d.getElementById('course-gate-toast');
@@ -174,7 +178,7 @@
         setTimeout(()=>{
           legalPatch(d);scoreFromDom(d);
           const st=gateStatus();
-          if(!st.ok){toast(d,'Validation refusée : '+(st.missing.length?'sections à parcourir : '+st.missing.join(', ')+'. ':'')+(!gate.quizPassed?'QCM ≥ 75 % requis.':''),false);return}
+          if(!st.ok){toast(d,'Validation refusée : '+(st.missing.length?'sections à parcourir : '+st.missing.join(', ')+'. ':'')+(!gate.quizPassed?'QCM ≥ 75 % requis. ':'')+(cfg.capstone&&!st.capstoneOk?'Dossier professionnel à réponse libre requis.':''),false);return}
           finalize(d,wantsNext(t));
         },0);
       }else setTimeout(()=>{activeSection(d);scoreFromDom(d);legalPatch(d)},0);
