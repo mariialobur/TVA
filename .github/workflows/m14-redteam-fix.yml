@@ -1,0 +1,24 @@
+name: M14 red-team remediation
+on:
+  push:
+    paths:
+      - '.github/workflows/m14-redteam-fix.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply M14 red-team remediation
+        run: node tools/m14-redteam-fix.mjs
+      - name: Commit M14 remediation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add m14-q1.js m14-q2.js m14-q3.js m14-q4a.js m14-q4b.js m14-engine.js
+          git commit -m "Red-team M14 exam bank and capstones" || exit 0
+          git push
