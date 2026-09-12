@@ -211,4 +211,4 @@ function aq(i){if(A[q]!=null)return;A[q]=i;rq()}function nextQ(){if(q<Q.length-1
 let fi=0,fl=0;function rf(){let c=F[fi];$('fccat').textContent=c[0];$('fcterm').textContent=c[1];$('fcdef').textContent=c[2];$('fcdef').style.display=fl?'block':'none';$('fchint').style.display=fl?'none':'block';$('fcnum').textContent=(fi+1)+' / '+F.length}function flipFC(){fl=!fl;rf()}function prevFC(e){e.stopPropagation();fi=(fi-1+F.length)%F.length;fl=0;rf()}function nextFC(e){e.stopPropagation();fi=(fi+1)%F.length;fl=0;rf()}
 function finishModule(){if(Z.some(x=>!st.visited[x])||!(st.quizScore>=75)){$('completeMsg').textContent='Validation refusée: 8 sections + 75% QCM.';return}st.completed=1;sv();try{let d=JSON.parse(localStorage.getItem(D)||'{}');d.M13='done';localStorage.setItem(D,JSON.stringify(d))}catch(e){}up();$('completeMsg').textContent='M13 validé · 100 %. Passez à M14.'}
 rc();re();up();rq();rf();
-</script></body></html>
+</script><script src="course-practice-gates.js"></script></body></html>
