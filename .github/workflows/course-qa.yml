@@ -39,6 +39,10 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173/
         run: node tools/m02-navigation-qa.mjs
+      - name: Legacy written dossier QA
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node tools/legacy-capstone-qa.mjs
       - name: Learner-facing UI regression QA
         env:
           BASE_URL: http://127.0.0.1:4173/
