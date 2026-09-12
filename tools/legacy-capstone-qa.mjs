@@ -14,7 +14,16 @@ async function openCases(f){
   const nav=f.locator('[data-section="cases"], [data-sec="cases"], [data-s="cases"]').first();
   if(await nav.count())await nav.click();
   else await f.evaluate(()=>{if(typeof goto==='function')goto('cases');else if(window.NAV&&typeof NAV.go==='function')NAV.go('cases')});
-  await f.locator('#sec-cases').waitFor({state:'visible',timeout:8000});
+  try{await f.locator('#sec-cases').waitFor({state:'visible',timeout:2500})}
+  catch(e){
+    const chain=await f.evaluate(()=>{let el=document.getElementById('sec-cases'),out=[];for(let i=0;el&&i<8;i++,el=el.parentElement){const cs=getComputedStyle(el);out.push({tag:el.tagName,id:el.id,cls:el.className,display:cs.display,visibility:cs.visibility,opacity:cs.opacity})}return out});
+    throw new Error('cases section remains hidden; ancestor chain='+JSON.stringify(chain));
+  }
+}
+async function clickRealFinish(f){
+  const b=f.locator('button[onclick*="finishModule"],button[onclick*="PROG.finish"],button[onclick*="goNextModule"],button[onclick*="PROG.goNext"]').last();
+  if(!await b.count())throw new Error('real completion button not found');
+  await b.dispatchEvent('click');
 }
 for(const [mod,file] of mods){
   const p=await browser.newPage();
@@ -27,8 +36,8 @@ for(const [mod,file] of mods){
     await ta.fill('Analyse trop courte.');if(!await btn.isDisabled())fail(mod+' accepts undersized draft');
     const text=('Qualification base juridique traitement TVA preuve risque action recommandée contrôle documentation. ').repeat(12);
     await ta.fill(text);if(await btn.isDisabled())fail(mod+' rejects substantive draft');else pass(mod+' requires 80 words / 500 characters before model');
-    await f.evaluate(()=>{const b=document.createElement('button');b.id='qa-finish-probe';b.textContent='Terminer '+(window.parent.COURSE_GATE_CONFIG?.module||'module');b.setAttribute('onclick','finishModule()');document.body.appendChild(b);b.click()});
-    await p.waitForTimeout(80);if(!await f.locator('#legacy-capstone-toast').count())fail(mod+' completion guard did not block unfinished dossier');else pass(mod+' blocks module completion before dossier comparison');
+    await clickRealFinish(f);await p.waitForTimeout(80);
+    if(!await f.locator('#legacy-capstone-toast').count())fail(mod+' completion guard did not block unfinished dossier');else pass(mod+' blocks real module completion before dossier comparison');
     await f.evaluate(()=>document.getElementById('legacy-capstone-toast')?.remove());
     await btn.click();await p.waitForTimeout(100);
     if(!await card.locator('.legacy-capstone-model').isVisible())fail(mod+' model did not reveal');
