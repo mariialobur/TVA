@@ -22,3 +22,4 @@ jobs:
           git add m14-q1.js m14-q2.js m14-q3.js m14-q4a.js m14-q4b.js m14-engine.js
           git commit -m "Red-team M14 exam bank and capstones" || exit 0
           git push
+# retry after QA wiring
