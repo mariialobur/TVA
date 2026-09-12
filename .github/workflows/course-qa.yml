@@ -21,6 +21,8 @@ jobs:
         run: node tools/course-qa.mjs
       - name: Current-law regression QA
         run: node tools/current-law-qa.mjs
+      - name: M14 red-team exam quality QA
+        run: node tools/m14-redteam-qa.mjs
       - name: Install browser runtime
         run: |
           npm install --no-save playwright@1.55.0
